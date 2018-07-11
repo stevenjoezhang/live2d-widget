@@ -1,8 +1,3 @@
-/*
- * https://imjad.cn/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02
- * https://www.fghrsh.net/post/123.html
- */
-
 String.prototype.render = function(context) {
 	var tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g,
 		strFlag = true,
@@ -26,7 +21,7 @@ String.prototype.render = function(context) {
 	return strFlag ? result : "";
 }
 
-$(window).on("load", function() {
+function initWidget(waifuPath, apiPath) {
 	if (sessionStorage.getItem("waifu-display") == "none") return;
 	sessionStorage.removeItem("waifu-text");
 	$("body").append('<div class="waifu">\
@@ -210,7 +205,7 @@ $(window).on("load", function() {
 		}
 	}
 
-	function initModel(waifuPath, apiPath) {
+	function initModel() {
 		if (waifuPath === undefined) waifuPath = "";
 		if (apiPath === undefined) apiPath = "";
 		apiURL = apiPath;
@@ -303,5 +298,5 @@ $(window).on("load", function() {
 			}
 		});
 	}
-	initModel("/lib/waifu/", "https://api.fghrsh.net/live2d");
-});
+	initModel();
+}
