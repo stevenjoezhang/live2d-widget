@@ -207,8 +207,7 @@ function initWidget(waifuPath, apiPath) {
 
 	function initModel() {
 		if (waifuPath === undefined) waifuPath = "";
-		if (apiPath === undefined) apiPath = "";
-		apiURL = apiPath;
+		apiURL = apiPath || "";
 		var modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
 		if (modelId == null) {
