@@ -206,7 +206,7 @@ function initWidget(waifuPath, apiPath) {
 	}
 
 	function initModel() {
-		if (waifuPath === undefined) waifuPath = "";
+		if (waifuPath === undefined) waifuPath = "waifu-tips.json";
 		apiURL = apiPath || "";
 		var modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
@@ -218,7 +218,7 @@ function initWidget(waifuPath, apiPath) {
 		loadModel(modelId, modelTexturesId);
 		$.ajax({
 			cache: true,
-			url: waifuPath + "waifu-tips.json",
+			url: waifuPath,
 			dataType: "json",
 			success: function(result) {
 				$.each(result.mouseover, function(index, tips) {

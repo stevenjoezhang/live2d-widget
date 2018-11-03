@@ -7,15 +7,14 @@
 在[米米的博客](https://zhangshuqiao.org)的左下角可查看效果
 
 ## 依赖
-需要jQuery和font-awesome  
-请确保它们已在页面中加载，例如在`<header>`中加入：
+需要jQuery和font-awesome支持，请确保它们已在页面中加载，例如在`<header>`中加入：
 ```
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 ```
 
 ## 使用
-请把整个项目克隆到服务器上，使之能够通过正常访问。修改autoload.js中的参数（具体参考该文件内的注释），这样，通过
+请把整个项目克隆到服务器上，使之能够正常访问。修改autoload.js中的参数（具体参考该文件内的注释），这样，通过
 ```
 <script src="/path/to/autoload.js"></script>
 ```
@@ -34,3 +33,7 @@ https://zhangshuqiao.org/2018-07/在网页中添加Live2D看板娘
 
 可以自行在后端api中增加模型：  
 https://github.com/xiazeyu/live2d-widget-models
+
+## 更新
+2018年10月31日，原API停用，请更新至新地址。参考文章：  
+https://www.fghrsh.net/post/170.html
