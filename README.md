@@ -9,8 +9,8 @@
 ## 依赖
 需要jQuery和font-awesome支持，请确保它们已在页面中加载，例如在`<header>`中加入：
 ```
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 ```
 
 ## 使用
@@ -31,9 +31,10 @@ https://www.fghrsh.net/post/123.html
 https://imjad.cn/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02  
 https://zhangshuqiao.org/2018-07/在网页中添加Live2D看板娘
 
-可以自行在后端api中增加模型：  
-https://github.com/xiazeyu/live2d-widget-models
+可以自行在后端api中增加模型（需要自行修改）：  
+https://github.com/xiazeyu/live2d-widget-models  
+https://github.com/xiaoski/live2d_models_collection
 
 ## 更新
-2018年10月31日，原API停用，请更新至新地址。参考文章：  
+2018年10月31日，由fghrsh提供的原API停用，请更新至新地址。参考文章：  
 https://www.fghrsh.net/post/170.html
