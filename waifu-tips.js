@@ -30,8 +30,8 @@ function initWidget(waifuPath, apiPath) {
 	if (screen.width <= 768) return;
 	if (sessionStorage.getItem("waifu-display")) {
 		if (new Date().getTime() - sessionStorage.getItem("waifu-display") <= 86400000) return;
-		else sessionStorage.removeItem("waifu-display");
 	}
+	sessionStorage.removeItem("waifu-display");
 	sessionStorage.removeItem("waifu-text");
 	$("body").append('<div id="waifu">\
 			<div id="waifu-tips"></div>\
@@ -108,7 +108,7 @@ function initWidget(waifuPath, apiPath) {
 		window.Live2D.captureFrame = true;
 	});
 	$("#waifu-tool .fa-info-circle").click(function() {
-		window.open("https://github.com/stevenjoezhang/live2d-widget/");
+		window.open("https://github.com/stevenjoezhang/live2d-widget");
 	});
 	$("#waifu-tool .fa-times").click(function() {
 		sessionStorage.setItem("waifu-display", new Date().getTime());
@@ -119,9 +119,9 @@ function initWidget(waifuPath, apiPath) {
 	});
 	(function() {
 		var text,
-			SiteIndexUrl = location.port ? location.protocol + "//" + location.hostname + ":" + location.port + "/" : location.protocol + "//" + location.hostname + "/"; // 自动获取主页
-		//var SiteIndexUrl = "https://www.fghrsh.net/"; // 手动指定主页
-		if (location.href == SiteIndexUrl) { // 如果是主页
+			SiteIndexUrl = location.port ? `${location.protocol}//${location.hostname}:${location.port}/` : `${location.protocol}//${location.hostname}/`; //自动获取主页
+		//var SiteIndexUrl = "https://www.fghrsh.net/"; //手动指定主页
+		if (location.href == SiteIndexUrl) { //如果是主页
 			var now = (new Date()).getHours();
 			if (now > 23 || now <= 5) {
 				text = "你是夜猫子呀？这么晚还不睡觉，明天起的来嘛";
@@ -164,11 +164,11 @@ function initWidget(waifuPath, apiPath) {
 		}
 		showMessage(text, 7000, 8);
 	})();
-	/* 检测用户活动状态，并在空闲时 定时显示一言 */
+	//检测用户活动状态，并在空闲时 定时显示一言
 	var getActed = false,
 		hitokotoTimer = null,
 		messageTimer = null,
-		messageArray = ["已经过了这么久了呀，日子过得好快呢", "使用Chrome可以获得最佳浏览体验哦", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口", "她性格之奇特，绝非偶然"],
+		messageArray = ["已经过了这么久了呀，日子过得好快呢", "使用Chrome可以获得最佳浏览体验哦", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口"],
 		apiURL = "";
 	if ($(".fa-share-alt").is(":hidden")) messageArray.push("记得把小家加入Adblock白名单哦");
 	$(document).mousemove(function() {
@@ -190,7 +190,7 @@ function initWidget(waifuPath, apiPath) {
 	}, 1000);
 
 	function showHitokoto() {
-		/* 增加 hitokoto.cn API */
+		//增加 hitokoto.cn API
 		if (Math.random() < 0.6 && messageArray.length > 0) {
 			showMessage(messageArray[Math.floor(Math.random() * messageArray.length)], 6000, 9);
 		} else $.getJSON("https://v1.hitokoto.cn", function(result) {
@@ -231,9 +231,9 @@ function initWidget(waifuPath, apiPath) {
 		var modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
 		if (modelId == null) {
-			/* 首次访问加载 指定模型 的 指定材质 */
-			var modelId = 1; // 模型 ID
-			var modelTexturesId = 53 // 材质 ID
+			//首次访问加载 指定模型 的 指定材质
+			var modelId = 1, //模型 ID
+				modelTexturesId = 53; //材质 ID
 		}
 		loadModel(modelId, modelTexturesId);
 		$.ajax({
@@ -283,16 +283,16 @@ function initWidget(waifuPath, apiPath) {
 		localStorage.setItem("modelId", modelId);
 		if (modelTexturesId === undefined) modelTexturesId = 0;
 		localStorage.setItem("modelTexturesId", modelTexturesId);
-		loadlive2d("live2d", apiURL + "/get/?id=" + modelId + "-" + modelTexturesId, console.log("live2d", "模型 " + modelId + "-" + modelTexturesId + " 加载完成"));
+		loadlive2d("live2d", `${apiURL}/get/?id=${modelId}-${modelTexturesId}`, console.log("live2d", `模型 ${modelId}-${modelTexturesId} 加载完成`));
 	}
 
 	function loadRandModel() {
 		var modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
-			// 可选 "rand"(随机), "switch"(顺序)
+			//可选 "rand"(随机), "switch"(顺序)
 		$.ajax({
 			cache: false,
-			url: apiURL + "/rand_textures/?id=" + modelId + "-" + modelTexturesId,
+			url: `${apiURL}/rand_textures/?id=${modelId}-${modelTexturesId}`,
 			dataType: "json",
 			success: function(result) {
 				if (result.textures["id"] == 1 && (modelTexturesId == 1 || modelTexturesId == 0)) {
