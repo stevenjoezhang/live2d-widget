@@ -28,10 +28,10 @@ String.prototype.render = function(context) {
 
 function initWidget(waifuPath, apiPath) {
 	if (screen.width <= 768) return;
-	if (sessionStorage.getItem("waifu-display")) {
-		if (new Date().getTime() - sessionStorage.getItem("waifu-display") <= 86400000) return;
+	if (localStorage.getItem("waifu-display")) {
+		if (new Date().getTime() - localStorage.getItem("waifu-display") <= 86400000) return;
 	}
-	sessionStorage.removeItem("waifu-display");
+	localStorage.removeItem("waifu-display");
 	sessionStorage.removeItem("waifu-text");
 	$("body").append('<div id="waifu">\
 			<div id="waifu-tips"></div>\
@@ -111,7 +111,7 @@ function initWidget(waifuPath, apiPath) {
 		window.open("https://github.com/stevenjoezhang/live2d-widget");
 	});
 	$("#waifu-tool .fa-times").click(function() {
-		sessionStorage.setItem("waifu-display", new Date().getTime());
+		localStorage.setItem("waifu-display", new Date().getTime());
 		showMessage("愿你有一天能与重要的人重逢", 2000, 11);
 		$("#waifu").animate({bottom: -1000}, 6000, function() {
 			$("#waifu").hide();

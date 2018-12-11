@@ -1,16 +1,18 @@
-$("<link>").attr({href: "https://www.example.com/path/to/waifu.css", rel: "stylesheet", type: "text/css"}).appendTo('head');
+const live2d_path = "https://www.example.com/path/to/live2d-widget/";
+
+$("<link>").attr({href: live2d_path + "waifu.css", rel: "stylesheet", type: "text/css"}).appendTo("head");
 //waifu.css的绝对路径
 
 $.ajax({
-	url: 'https://www.example.com/path/to/live2d.min.js',
-	dataType:"script",
+	url: live2d_path + "live2d.min.js",
+	dataType: "script",
 	cache: true,
 	async: false
 });
 //live2d.min.js的绝对路径
 
 $.ajax({
-	url: 'https://www.example.com/path/to/waifu-tips.js',
+	url: live2d_path + "waifu-tips.js",
 	dataType:"script",
 	cache: true,
 	async: false
@@ -19,7 +21,7 @@ $.ajax({
 
 // 初始化看板娘，会自动加载指定目录下的 waifu-tips.json
 $(window).on("load", function() {
-	initWidget("https://www.example.com/path/to/waifu-tips.json", "https://live2d.fghrsh.net/api");
+	initWidget(live2d_path + "waifu-tips.json", "https://live2d.fghrsh.net/api");
 });
 //initWidget第一个参数为waifu-tips.json的绝对路径
 //第二个参数为api地址（无需修改）
