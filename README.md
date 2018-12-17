@@ -1,20 +1,22 @@
 # live2d-widget
 
-## 功能
-在网页中添加Live2D看板娘
+## 功能 Feature
+在网页中添加Live2D看板娘  
+Add Live2D widget to web page
 
 ## Demo
 在[米米的博客](https://zhangshuqiao.org)的左下角可查看效果
 
-## 依赖
-需要jQuery和font-awesome支持，请确保它们已在页面中加载，例如在`<header>`中加入：
+## 依赖 Dependencies
+需要jQuery和font-awesome支持，请确保它们已在页面中加载，例如在`<head>`中加入：  
+jQuery and font-awesome is required for this plugin. You can add this to `<head>`:
 ```xml
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
 ```
 否则无法正常显示。
 
-## 使用
+## 使用 Usage
 如果你可以通过ssh访问你的主机，请把整个项目克隆到服务器上。执行：
 ```bash
 cd /path/to/your/webroot
@@ -40,10 +42,18 @@ https://www.example.com/path/to/live2d-widget/
 ```
 就可以加载了。
 
-waifu-tips.json中包含了触发条件（selector，选择器）和触发时显示的文字（text）。源文件是对Hexo的NexT主题有效的，为了适用于你自己的网页，也需要自行修改，或增加新内容。  
+`waifu-tips.json`中包含了触发条件（selector，选择器）和触发时显示的文字（text）。源文件是对Hexo的NexT主题有效的，为了适用于你自己的网页，也需要自行修改，或增加新内容。  
+**警告：作者不对`waifu-tips.json`和`waifu-tips.js`中的内容负责，请自行确保它们是合适的。**
+
 如果有任何疑问，欢迎提交ISSUE。
 
-## 鸣谢
+### Using CDN
+你也可以直接这样使用：
+```xml
+<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
+```
+
+## 鸣谢 Credits
 代码自这篇博文魔改而来：  
 https://www.fghrsh.net/post/123.html  
 其中增加了一些功能，优化了提示展现机制
@@ -56,6 +66,6 @@ https://zhangshuqiao.org/2018-07/在网页中添加Live2D看板娘
 https://github.com/xiazeyu/live2d-widget-models  
 https://github.com/xiaoski/live2d_models_collection
 
-## 更新
+## 更新 Update
 2018年10月31日，由fghrsh提供的原API停用，请更新至新地址。参考文章：  
 https://www.fghrsh.net/post/170.html

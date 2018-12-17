@@ -40,7 +40,7 @@ function initWidget(waifuPath, apiPath) {
 				<span class="fa fa-lg fa-home"></span>\
 				<span class="fa fa-lg fa-comment"></span>\
 				<span class="fa fa-lg fa-paper-plane"></span>\
-				<span class="fa fa-lg fa-user-circle-o"></span>\
+				<span class="fa fa-lg fa-user-circle"></span>\
 				<span class="fa fa-lg fa-street-view"></span>\
 				<span class="fa fa-lg fa-camera-retro"></span>\
 				<span class="fa fa-lg fa-info-circle"></span>\
@@ -83,7 +83,7 @@ function initWidget(waifuPath, apiPath) {
 		}
 	});
 	$(document).on("copy", function() {
-		showMessage("你都复制了些什么呀，转载要记得加上出处哦", 6000, 9);
+		showMessage("你都复制了些什么呀，转载要记得加上出处哦！", 6000, 9);
 	});
 	$("#waifu-tool .fa-home").click(function() {
 		location.href = "/";
@@ -112,8 +112,8 @@ function initWidget(waifuPath, apiPath) {
 	});
 	$("#waifu-tool .fa-times").click(function() {
 		localStorage.setItem("waifu-display", new Date().getTime());
-		showMessage("愿你有一天能与重要的人重逢", 2000, 11);
-		$("#waifu").animate({bottom: -1000}, 6000, function() {
+		showMessage("愿你有一天能与重要的人重逢。", 2000, 11);
+		$("#waifu").animate({bottom: -500}, 3000, function() {
 			$("#waifu").hide();
 		});
 	});
@@ -124,9 +124,9 @@ function initWidget(waifuPath, apiPath) {
 		if (location.href == SiteIndexUrl) { //如果是主页
 			var now = (new Date()).getHours();
 			if (now > 23 || now <= 5) {
-				text = "你是夜猫子呀？这么晚还不睡觉，明天起的来嘛";
+				text = "你是夜猫子呀？这么晚还不睡觉，明天起的来嘛？";
 			} else if (now > 5 && now <= 7) {
-				text = "早上好！一日之计在于晨，美好的一天就要开始了";
+				text = "早上好！一日之计在于晨，美好的一天就要开始了。";
 			} else if (now > 7 && now <= 11) {
 				text = "上午好！工作顺利嘛，不要久坐，多起来走动走动哦！";
 			} else if (now > 11 && now <= 14) {
@@ -138,9 +138,9 @@ function initWidget(waifuPath, apiPath) {
 			} else if (now > 19 && now <= 21) {
 				text = "晚上好，今天过得怎么样？";
 			} else if (now > 21 && now <= 23) {
-				text = ["已经这么晚了呀，早点休息吧，晚安～", "深夜时要爱护眼睛呀"];
+				text = ["已经这么晚了呀，早点休息吧，晚安～", "深夜时要爱护眼睛呀！"];
 			} else {
-				text = "好久不见，日子过得好快呢";
+				text = "好久不见，日子过得好快呢……";
 			}
 		} else {
 			if (document.referrer !== "") {
@@ -168,9 +168,9 @@ function initWidget(waifuPath, apiPath) {
 	var getActed = false,
 		hitokotoTimer = null,
 		messageTimer = null,
-		messageArray = ["已经过了这么久了呀，日子过得好快呢", "使用Chrome可以获得最佳浏览体验哦", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口"],
+		messageArray = ["已经过了这么久了呀，日子过得好快呢……", "使用Chrome可以获得最佳浏览体验哦！", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口！"],
 		apiURL = "";
-	if ($(".fa-share-alt").is(":hidden")) messageArray.push("记得把小家加入Adblock白名单哦");
+	if ($(".fa-share-alt").is(":hidden")) messageArray.push("记得把小家加入Adblock白名单哦！");
 	$(document).mousemove(function() {
 		getActed = true;
 	}).keydown(function() {
@@ -296,9 +296,9 @@ function initWidget(waifuPath, apiPath) {
 			dataType: "json",
 			success: function(result) {
 				if (result.textures["id"] == 1 && (modelTexturesId == 1 || modelTexturesId == 0)) {
-					showMessage("我还没有其他衣服呢", 4000, 10);
+					showMessage("我还没有其他衣服呢！", 4000, 10);
 				} else {
-					showMessage("我的新衣服好看嘛", 4000, 10);
+					showMessage("我的新衣服好看嘛？", 4000, 10);
 				}
 				loadModel(modelId, result.textures["id"]);
 			}
