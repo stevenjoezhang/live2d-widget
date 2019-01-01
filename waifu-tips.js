@@ -3,29 +3,6 @@
  * https://www.fghrsh.net/post/123.html
  */
 
-String.prototype.render = function(context) {
-	var tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g,
-		strFlag = true,
-		result = this.replace(tokenReg, function(word, slash1, token, slash2) {
-			if (slash1 || slash2) {
-				return word.replace("\\", "");
-			}
-			var variables = token.replace(/\s/g, "").split(".");
-			var currentObject = context;
-			var i, length, variable;
-			for (i = 0, length = variables.length; i < length; ++i) {
-				variable = variables[i];
-				currentObject = currentObject[variable].replace(/\s/g, "").replace(/\s+/g, "");
-				if (!currentObject) {
-					strFlag = false;
-					return "";
-				}
-			}
-			return currentObject;
-		});
-	return strFlag ? result : "";
-}
-
 function initWidget(waifuPath, apiPath) {
 	if (screen.width <= 768) return;
 	if (localStorage.getItem("waifu-display")) {
@@ -194,11 +171,7 @@ function initWidget(waifuPath, apiPath) {
 		if (Math.random() < 0.6 && messageArray.length > 0) {
 			showMessage(messageArray[Math.floor(Math.random() * messageArray.length)], 6000, 9);
 		} else $.getJSON("https://v1.hitokoto.cn", function(result) {
-			var text = '这句一言来自 <span style="color:#0099cc;">『{source}』</span>，是 <span style="color:#0099cc;">{creator}</span> 在 hitokoto.cn 投稿的。';
-			text = text.render({
-				source: result.from,
-				creator: result.creator
-			});
+				var text = `这句一言来自 <span style="color:#0099cc;">『${result.from}』</span>，是 <span style="color:#0099cc;">${result.creator}</span> 在 hitokoto.cn 投稿的。`;
 			showMessage(result.hitokoto, 6000, 9);
 			setTimeout(function() {
 				showMessage(text, 4000, 9);
@@ -245,9 +218,7 @@ function initWidget(waifuPath, apiPath) {
 					$(document).on("mouseover", tips.selector, function() {
 						var text = tips.text;
 						if (Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length)];
-						text = text.render({
-							text: $(this).text()
-						});
+							text = text.replace("{text}", $(this).text());
 						showMessage(text, 4000, 8);
 					});
 				});
@@ -255,9 +226,7 @@ function initWidget(waifuPath, apiPath) {
 					$(document).on("click", tips.selector, function() {
 						var text = tips.text;
 						if (Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length)];
-						text = text.render({
-							text: $(this).text()
-						});
+							text = text.replace("{text}", $(this).text());
 						showMessage(text, 4000, 8);
 					});
 				});
@@ -267,10 +236,8 @@ function initWidget(waifuPath, apiPath) {
 						before = tips.date.split("-")[1] || after;
 					if ((after.split("/")[0] <= now.getMonth() + 1 && now.getMonth() + 1 <= before.split("/")[0]) && (after.split("/")[1] <= now.getDate() && now.getDate() <= before.split("/")[1])) {
 						var text = tips.text;
-						//if (Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length)];
-						text = text.render({
-							year: now.getFullYear()
-						});
+						if (Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length)];
+						text = text.replace("{year}", now.getFullYear());
 						//showMessage(text, 7000, true);
 						messageArray.push(text);
 					}
