@@ -13,7 +13,7 @@ $.ajax({
 
 $.ajax({
 	url: live2d_path + "waifu-tips.js",
-	dataType:"script",
+	dataType: "script",
 	cache: true,
 	async: false
 });
