@@ -12,7 +12,7 @@
 		"selector": "#waifu-tool .fa-paper-plane",
 		"text": ["要不要来玩飞机大战？", "这个按钮上写着“不要点击”。", "怎么，你想来和我玩个游戏？", "听说这样可以蹦迪！"]
 	}, {
-		"selector": "#waifu-tool .fa-user-circle-o",
+		"selector": "#waifu-tool .fa-user-circle",
 		"text": ["要见见我的姐姐嘛？", "要切换看板娘吗？"]
 	}, {
 		"selector": "#waifu-tool .fa-street-view",

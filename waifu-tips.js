@@ -73,7 +73,7 @@ function initWidget(waifuPath, apiPath) {
 		document.body.appendChild(s);
 		s.src = "https://galaxymimi.com/js/asteroids.js";
 	});
-	$("#waifu-tool .fa-user-circle-o").click(function() {
+	$("#waifu-tool .fa-user-circle").click(function() {
 		loadOtherModel();
 	});
 	$("#waifu-tool .fa-street-view").click(function() {
