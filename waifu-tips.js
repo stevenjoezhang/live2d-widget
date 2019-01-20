@@ -4,10 +4,7 @@
  */
 
 function initWidget(waifuPath, apiPath) {
-	if (screen.width <= 768) return;
-	if (localStorage.getItem("waifu-display")) {
-		if (new Date().getTime() - localStorage.getItem("waifu-display") <= 86400000) return;
-	}
+	if (screen.width <= 768 || (localStorage.getItem("waifu-display") && new Date().getTime() - localStorage.getItem("waifu-display") <= 86400000)) return;
 	localStorage.removeItem("waifu-display");
 	sessionStorage.removeItem("waifu-text");
 	$("body").append('<div id="waifu">\
@@ -51,7 +48,8 @@ function initWidget(waifuPath, apiPath) {
 				clearTimeout(titleTime);
 				titleTime = null;
 			}
-		} else {
+		}
+		else {
 			document.title = title[titleIndex].focus;
 			showMessage("哇，你又回来了～", 6000, 9);
 			titleTime = setTimeout(function() {
@@ -100,44 +98,28 @@ function initWidget(waifuPath, apiPath) {
 		//var SiteIndexUrl = "https://www.fghrsh.net/"; //手动指定主页
 		if (location.href == SiteIndexUrl) { //如果是主页
 			var now = (new Date()).getHours();
-			if (now > 23 || now <= 5) {
-				text = "你是夜猫子呀？这么晚还不睡觉，明天起的来嘛？";
-			} else if (now > 5 && now <= 7) {
-				text = "早上好！一日之计在于晨，美好的一天就要开始了。";
-			} else if (now > 7 && now <= 11) {
-				text = "上午好！工作顺利嘛，不要久坐，多起来走动走动哦！";
-			} else if (now > 11 && now <= 14) {
-				text = "中午了，工作了一个上午，现在是午餐时间！";
-			} else if (now > 14 && now <= 17) {
-				text = "午后很容易犯困呢，今天的运动目标完成了吗？";
-			} else if (now > 17 && now <= 19) {
-				text = "傍晚了！窗外夕阳的景色很美丽呢，最美不过夕阳红～";
-			} else if (now > 19 && now <= 21) {
-				text = "晚上好，今天过得怎么样？";
-			} else if (now > 21 && now <= 23) {
-				text = ["已经这么晚了呀，早点休息吧，晚安～", "深夜时要爱护眼睛呀！"];
-			} else {
-				text = "好久不见，日子过得好快呢……";
-			}
-		} else {
+			if (now > 23 || now <= 5) text = "你是夜猫子呀？这么晚还不睡觉，明天起的来嘛？";
+			else if (now > 5 && now <= 7) text = "早上好！一日之计在于晨，美好的一天就要开始了。";
+			else if (now > 7 && now <= 11) text = "上午好！工作顺利嘛，不要久坐，多起来走动走动哦！";
+			else if (now > 11 && now <= 14) text = "中午了，工作了一个上午，现在是午餐时间！";
+			else if (now > 14 && now <= 17) text = "午后很容易犯困呢，今天的运动目标完成了吗？";
+			else if (now > 17 && now <= 19) text = "傍晚了！窗外夕阳的景色很美丽呢，最美不过夕阳红～";
+			else if (now > 19 && now <= 21) text = "晚上好，今天过得怎么样？";
+			else if (now > 21 && now <= 23) text = ["已经这么晚了呀，早点休息吧，晚安～", "深夜时要爱护眼睛呀！"];
+			else text = "好久不见，日子过得好快呢……";
+		}
+		else {
 			if (document.referrer !== "") {
 				var referrer = document.createElement("a");
 				referrer.href = document.referrer;
 				var domain = referrer.hostname.split(".")[1];
-				if (location.hostname == referrer.hostname) {
-					text = '欢迎阅读<span style="color:#0099cc;">『' + document.title.split(' - ')[0] + '』</span>';
-				} else if (domain == 'baidu') {
-					text = 'Hello! 来自 百度搜索 的朋友<br>你是搜索 <span style="color:#0099cc;">' + referrer.search.split('&wd=')[1].split('&')[0] + '</span> 找到的我吗？';
-				} else if (domain == 'so') {
-					text = 'Hello! 来自 360搜索 的朋友<br>你是搜索 <span style="color:#0099cc;">' + referrer.search.split('&q=')[1].split('&')[0] + '</span> 找到的我吗？';
-				} else if (domain == 'google') {
-					text = 'Hello! 来自 谷歌搜索 的朋友<br>欢迎阅读<span style="color:#0099cc;">『' + document.title.split(' - ')[0] + '』</span>';
-				} else {
-					text = 'Hello! 来自 <span style="color:#0099cc;">' + referrer.hostname + '</span> 的朋友';
-				}
-			} else {
-				text = '欢迎阅读<span style="color:#0099cc;">『' + document.title.split(' - ')[0] + '』</span>';
+				if (location.hostname == referrer.hostname) text = '欢迎阅读<span style="color:#0099cc;">『' + document.title.split(' - ')[0] + '』</span>';
+				else if (domain == 'baidu') text = 'Hello! 来自 百度搜索 的朋友<br>你是搜索 <span style="color:#0099cc;">' + referrer.search.split('&wd=')[1].split('&')[0] + '</span> 找到的我吗？';
+				else if (domain == 'so') text = 'Hello! 来自 360搜索 的朋友<br>你是搜索 <span style="color:#0099cc;">' + referrer.search.split('&q=')[1].split('&')[0] + '</span> 找到的我吗？';
+				else if (domain == 'google') text = 'Hello! 来自 谷歌搜索 的朋友<br>欢迎阅读<span style="color:#0099cc;">『' + document.title.split(' - ')[0] + '』</span>';
+				else text = 'Hello! 来自 <span style="color:#0099cc;">' + referrer.hostname + '</span> 的朋友';
 			}
+			else text = '欢迎阅读<span style="color:#0099cc;">『' + document.title.split(' - ')[0] + '』</span>';
 		}
 		showMessage(text, 7000, 8);
 	})();
@@ -156,10 +138,9 @@ function initWidget(waifuPath, apiPath) {
 	//hitokotoTimer = setInterval(showHitokoto, 30000);
 	setInterval(function() {
 		if (!getActed) {
-			if (!hitokotoTimer) {
-				hitokotoTimer = setInterval(showHitokoto, 25000);
-			}
-		} else {
+			if (!hitokotoTimer) hitokotoTimer = setInterval(showHitokoto, 25000);
+		}
+		else {
 			getActed = false;
 			clearInterval(hitokotoTimer);
 			hitokotoTimer = null;
@@ -168,9 +149,8 @@ function initWidget(waifuPath, apiPath) {
 
 	function showHitokoto() {
 		//增加 hitokoto.cn API
-		if (Math.random() < 0.6 && messageArray.length > 0) {
-			showMessage(messageArray[Math.floor(Math.random() * messageArray.length)], 6000, 9);
-		} else $.getJSON("https://v1.hitokoto.cn", function(result) {
+		if (Math.random() < 0.6 && messageArray.length > 0) showMessage(messageArray[Math.floor(Math.random() * messageArray.length)], 6000, 9);
+		else $.getJSON("https://v1.hitokoto.cn", function(result) {
 				var text = `这句一言来自 <span style="color:#0099cc;">『${result.from}』</span>，是 <span style="color:#0099cc;">${result.creator}</span> 在 hitokoto.cn 投稿的。`;
 			showMessage(result.hitokoto, 6000, 9);
 			setTimeout(function() {
@@ -216,17 +196,15 @@ function initWidget(waifuPath, apiPath) {
 			success: function(result) {
 				$.each(result.mouseover, function(index, tips) {
 					$(document).on("mouseover", tips.selector, function() {
-						var text = tips.text;
-						if (Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length)];
-							text = text.replace("{text}", $(this).text());
+						var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
+						text = text.replace("{text}", $(this).text());
 						showMessage(text, 4000, 8);
 					});
 				});
 				$.each(result.click, function(index, tips) {
 					$(document).on("click", tips.selector, function() {
-						var text = tips.text;
-						if (Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length)];
-							text = text.replace("{text}", $(this).text());
+						var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
+						text = text.replace("{text}", $(this).text());
 						showMessage(text, 4000, 8);
 					});
 				});
@@ -262,11 +240,8 @@ function initWidget(waifuPath, apiPath) {
 			url: `${apiURL}/rand_textures/?id=${modelId}-${modelTexturesId}`,
 			dataType: "json",
 			success: function(result) {
-				if (result.textures["id"] == 1 && (modelTexturesId == 1 || modelTexturesId == 0)) {
-					showMessage("我还没有其他衣服呢！", 4000, 10);
-				} else {
-					showMessage("我的新衣服好看嘛？", 4000, 10);
-				}
+				if (result.textures["id"] == 1 && (modelTexturesId == 1 || modelTexturesId == 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
+				else showMessage("我的新衣服好看嘛？", 4000, 10);
 				loadModel(modelId, result.textures["id"]);
 			}
 		});

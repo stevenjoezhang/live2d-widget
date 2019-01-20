@@ -1,8 +1,11 @@
-# live2d-widget
+# Live2d Widget
 
 ## 功能 Feature
 在网页中添加Live2D看板娘。  
 Add Live2D widget to web page.
+
+**警告：不支持IE。**  
+**WARNING: DO NOT SUPPORT IE.**
 
 ## Demo
 在[米米的博客](https://zhangshuqiao.org)的左下角可查看效果。
@@ -77,6 +80,10 @@ https://zhangshuqiao.org/2018-07/在网页中添加Live2D看板娘
 还可以自行搭建后端api，并增加模型（需要修改的内容比较多，此处不再赘述）：  
 https://github.com/xiazeyu/live2d-widget-models  
 https://github.com/xiaoski/live2d_models_collection
+
+## License
+Released under the GNU General Public License v3  
+http://www.gnu.org/licenses/gpl-3.0.html
 
 ## 更新 Update
 2018年10月31日，由fghrsh提供的原API停用，请更新至新地址。参考文章：  
