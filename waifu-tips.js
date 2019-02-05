@@ -11,7 +11,6 @@ function initWidget(waifuPath, apiPath) {
 			<div id="waifu-tips"></div>\
 			<canvas id="live2d" width="300" height="300"></canvas>\
 			<div id="waifu-tool">\
-				<span class="fa fa-lg fa-home"></span>\
 				<span class="fa fa-lg fa-comment"></span>\
 				<span class="fa fa-lg fa-paper-plane"></span>\
 				<span class="fa fa-lg fa-user-circle"></span>\
@@ -59,9 +58,6 @@ function initWidget(waifuPath, apiPath) {
 	});
 	$(document).on("copy", function() {
 		showMessage("你都复制了些什么呀，转载要记得加上出处哦！", 6000, 9);
-	});
-	$("#waifu-tool .fa-home").click(function() {
-		location.href = "/";
 	});
 	$("#waifu-tool .fa-comment").click(function() {
 		showHitokoto();

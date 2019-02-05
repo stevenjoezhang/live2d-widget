@@ -3,9 +3,6 @@
 		"selector": "#waifu #live2d",
 		"text": ["干嘛呢你，快把手拿开～～", "鼠…鼠标放错地方了！", "你要干嘛呀？", "喵喵喵？", "怕怕(ノ≧∇≦)ノ", "非礼呀！救命！", "这样的话，只能使用武力了！", "我要生气了哦", "不要动手动脚的！", "真…真的是不知羞耻！", "Hentai！"]
 	}, {
-		"selector": "#waifu-tool .fa-home, .menu-item-home",
-		"text": ["点击前往首页，想回到上一页可以使用浏览器的后退功能哦。", "点它就可以回到首页啦！", "回首页看看吧。"]
-	}, {
 		"selector": "#waifu-tool .fa-comment",
 		"text": ["猜猜我要说些什么？", "我从青蛙王子那里听到了不少人生经验。"]
 	}, {
@@ -26,6 +23,9 @@
 	}, {
 		"selector": "#waifu-tool .fa-times",
 		"text": ["到了要说再见的时候了吗？", "呜呜 QAQ 后会有期……", "不要抛弃我呀……", "我们，还能再见面吗……", "哼，你会后悔的！"]
+	}, {
+		"selector": ".menu-item-home",
+		"text": ["点击前往首页，想回到上一页可以使用浏览器的后退功能哦。", "点它就可以回到首页啦！", "回首页看看吧。"]
 	}, {
 		"selector": ".menu-item-about",
 		"text": ["你想知道我家主人是谁吗？", "这里有一些关于我家主人的秘密哦，要不要看看呢？", "发现主人出没地点！"]
@@ -70,7 +70,7 @@
 		"text": ["代码可以直接点击复制哟。", "GitHub！我是新手！"]
 	}, {
 		"selector": ".container a[href^='http'], .nav-link .nav-text",
-		"text": ["要去看看 <span style=\"color:#0099cc;\">{text}</span> 么？", "去 <span style=\"color:#0099cc;\">{text}</span> 逛逛吧。"]
+		"text": ["要去看看 <span style=\"color:#0099cc;\">{text}</span> 么？", "去 <span style=\"color:#0099cc;\">{text}</span> 逛逛吧。", "到 <span style=\"color:#0099cc;\">{text}</span> 看看吧。"]
 	}, {
 		"selector": "a[href^='mailto']",
 		"text": ["邮件我会及时回复的！", "点击就可以发送邮件啦～"]
@@ -142,7 +142,7 @@
 		"text": ["该怎么称呼你呢？", "留下你的尊姓大名！"]
 	}, {
 		"selector": ".vmail",
-		"text": ["留下你的邮箱，不然就是无头像人士了！", "记得设置好 Gravatar 头像哦！"]
+		"text": ["留下你的邮箱，不然就是无头像人士了！", "记得设置好 Gravatar 头像哦！", "为了方便通知你最新消息，一定要留下邮箱！"]
 	}, {
 		"selector": ".vlink",
 		"text": ["快快告诉我你的家在哪里，好让我去参观参观！"]
