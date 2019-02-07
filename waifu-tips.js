@@ -20,59 +20,14 @@ function initWidget(waifuPath, apiPath) {
 				<span class="fa fa-lg fa-times"></span>
 			</div>
 		</div>`);
-	var re = /x/,
-		OriginTitile = document.title,
-		titleTime = null,
-		titleIndex = 0,
-		title = [{
-			blur: "(●—●) 哎呦，崩溃啦！",
-			focus: "o(≧∇≦o) 啊咧，又好了……"
-		}, {
-			blur: "(つェ⊂) 看不到我～",
-			focus: "(*´∇｀*) 被发现啦～"
-		}, {
-			blur: "(>_<) 我藏好了哦",
-			focus: "(*´∇｀*) 被发现啦～"
-		}];
-	console.log(re);
-	re.toString = function() {
-		showMessage("哈哈，你打开了控制台，是想要看看我的秘密吗？", 6000, 9);
-		return "";
-	};
-	$(document).on("visibilitychange", function() {
-		if (document.hidden) {
-			titleIndex = Math.floor(Math.random() * 3);
-			document.title = title[titleIndex].blur;
-			if (titleTime) {
-				clearTimeout(titleTime);
-				titleTime = null;
-			}
-		}
-		else {
-			document.title = title[titleIndex].focus;
-			showMessage("哇，你又回来了～", 6000, 9);
-			titleTime = setTimeout(function() {
-				document.title = OriginTitile;
-			}, 3000);
-		}
-	});
-	$(document).on("copy", function() {
-		showMessage("你都复制了些什么呀，转载要记得加上出处哦！", 6000, 9);
-	});
-	$("#waifu-tool .fa-comment").click(function() {
-		showHitokoto();
-	});
+	$("#waifu-tool .fa-comment").click(showHitokoto);
 	$("#waifu-tool .fa-paper-plane").click(function() {
 		var s = document.createElement("script");
 		document.body.appendChild(s);
 		s.src = "https://galaxymimi.com/js/asteroids.js";
 	});
-	$("#waifu-tool .fa-user-circle").click(function() {
-		loadOtherModel();
-	});
-	$("#waifu-tool .fa-street-view").click(function() {
-		loadRandModel();
-	});
+	$("#waifu-tool .fa-user-circle").click(loadOtherModel);
+	$("#waifu-tool .fa-street-view").click(loadRandModel);
 	$("#waifu-tool .fa-camera-retro").click(function() {
 		showMessage("照好了嘛，是不是很可爱呢？", 6000, 9);
 		window.Live2D.captureName = "photo.png";
@@ -87,6 +42,18 @@ function initWidget(waifuPath, apiPath) {
 		$("#waifu").animate({ bottom: -500 }, 3000, function() {
 			$("#waifu").hide();
 		});
+	});
+	var re = /x/;
+	console.log(re);
+	re.toString = function() {
+		showMessage("哈哈，你打开了控制台，是想要看看我的秘密吗？", 6000, 9);
+		return "";
+	};
+	$(document).on("copy", function() {
+		showMessage("你都复制了些什么呀，转载要记得加上出处哦！", 6000, 9);
+	});
+	$(document).on("visibilitychange", function() {
+		if (!document.hidden) showMessage("哇，你又回来了～", 6000, 9);
 	});
 	(function() {
 		var SiteIndexUrl = location.port ? `${location.protocol}//${location.hostname}:${location.port}/` : `${location.protocol}//${location.hostname}/`, text; //自动获取主页
