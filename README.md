@@ -44,8 +44,8 @@ cd /path/to/your/webroot
 # Clone this repository
 git clone https://github.com/stevenjoezhang/live2d-widget.git
 ```
-如果你的主机是虚拟主机，请选择`Download ZIP`，然后通过ftp上传到主机上，再解压到网站的目录下。  
-如果你通过Hexo等工具部署静态博客，请选择`Download ZIP`，然后解压到本地的博客目录下，例如`source`下与`_posts`同级的目录。重新部署博客时，相关文件就会自动上传。（还需要在Hexo主题相关的swig或ejs模版中正确配置路径，才可以加载）
+如果你的主机无法用ssh连接（例如一般的虚拟主机），请选择`Download ZIP`，然后通过ftp上传到主机上，再解压到网站的目录下。  
+如果你是通过Hexo等工具部署的静态博客，请选择`Download ZIP`，然后解压到本地的博客目录下，例如`source`下与`_posts`同级的目录。重新部署博客时，相关文件就会自动上传到对应的目录。（还需要在Hexo主题相关的swig或ejs模版中正确配置路径，才可以加载）
 
 这样，整个项目就可以通过你的服务器IP或者域名从公网访问了。你可以试试能否正常的通过浏览器或`curl`打开`autoload.js`和`live2d.min.js`等文件。  
 如果没有问题，接下来需要修改一些配置。（你也可以先在本地完成这一步骤，再上传到服务器上）  

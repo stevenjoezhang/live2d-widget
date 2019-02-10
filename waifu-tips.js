@@ -53,11 +53,10 @@ function initWidget(waifuPath, apiPath) {
 		showMessage("你都复制了些什么呀，转载要记得加上出处哦！", 6000, 9);
 	});
 	$(document).on("visibilitychange", function() {
-		if (!document.hidden) showMessage("哇，你又回来了～", 6000, 9);
+		if (!document.hidden) showMessage("哇，你终于回来了～", 6000, 9);
 	});
 	(function() {
 		var SiteIndexUrl = location.port ? `${location.protocol}//${location.hostname}:${location.port}/` : `${location.protocol}//${location.hostname}/`, text; //自动获取主页
-		//var SiteIndexUrl = "https://www.fghrsh.net/"; //手动指定主页
 		if (location.href == SiteIndexUrl) { //如果是主页
 			var now = new Date().getHours();
 			if (now > 23 || now <= 5) text = "你是夜猫子呀？这么晚还不睡觉，明天起的来嘛？";
@@ -75,10 +74,10 @@ function initWidget(waifuPath, apiPath) {
 			referrer.href = document.referrer;
 			var domain = referrer.hostname.split(".")[1];
 			if (location.hostname == referrer.hostname) text = '欢迎阅读<span style="color:#0099cc;">『' + document.title.split(' - ')[0] + '』</span>';
-			else if (domain == 'baidu') text = 'Hello! 来自 百度搜索 的朋友<br>你是搜索 <span style="color:#0099cc;">' + referrer.search.split('&wd=')[1].split('&')[0] + '</span> 找到的我吗？';
-			else if (domain == 'so') text = 'Hello! 来自 360搜索 的朋友<br>你是搜索 <span style="color:#0099cc;">' + referrer.search.split('&q=')[1].split('&')[0] + '</span> 找到的我吗？';
-			else if (domain == 'google') text = 'Hello! 来自 谷歌搜索 的朋友<br>欢迎阅读<span style="color:#0099cc;">『' + document.title.split(' - ')[0] + '』</span>';
-			else text = 'Hello! 来自 <span style="color:#0099cc;">' + referrer.hostname + '</span> 的朋友';
+			else if (domain == 'baidu') text = 'Hello！来自 百度搜索 的朋友<br/>你是搜索 <span style="color:#0099cc;">' + referrer.search.split('&wd=')[1].split('&')[0] + '</span> 找到的我吗？';
+			else if (domain == 'so') text = 'Hello！来自 360搜索 的朋友<br/>你是搜索 <span style="color:#0099cc;">' + referrer.search.split('&q=')[1].split('&')[0] + '</span> 找到的我吗？';
+			else if (domain == 'google') text = 'Hello！来自 谷歌搜索 的朋友<br/>欢迎阅读<span style="color:#0099cc;">『' + document.title.split(' - ')[0] + '』</span>';
+			else text = 'Hello！来自 <span style="color:#0099cc;">' + referrer.hostname + '</span> 的朋友';
 		}
 		else text = '欢迎阅读<span style="color:#0099cc;">『' + document.title.split(' - ')[0] + '』</span>';
 		showMessage(text, 7000, 8);
@@ -168,8 +167,7 @@ function initWidget(waifuPath, apiPath) {
 					after = tips.date.split("-")[0],
 					before = tips.date.split("-")[1] || after;
 				if ((after.split("/")[0] <= now.getMonth() + 1 && now.getMonth() + 1 <= before.split("/")[0]) && (after.split("/")[1] <= now.getDate() && now.getDate() <= before.split("/")[1])) {
-					var text = tips.text;
-					if (Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length)];
+					var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
 					text = text.replace("{year}", now.getFullYear());
 					//showMessage(text, 7000, true);
 					messageArray.push(text);
@@ -205,7 +203,7 @@ function initWidget(waifuPath, apiPath) {
 		var modelId = localStorage.getItem("modelId");
 		$.ajax({
 			cache: false,
-			url: apiURL + "/switch/?id=" + modelId,
+			url: `${apiURL}/switch/?id=${modelId}`,
 			dataType: "json",
 			success: function(result) {
 				loadModel(result.model["id"]);
