@@ -1,6 +1,6 @@
-# Live2d Widget
+# Live2D Widget
 
-## 功能 Feature
+## Feature
 在网页中添加Live2D看板娘。  
 Add Live2D widget to web page.
 
@@ -8,7 +8,7 @@ Add Live2D widget to web page.
 **WARNING: DO NOT SUPPORT IE.**
 
 ## Demo
-在[米米的博客](https://zhangshuqiao.org)的左下角可查看效果。
+在[米米的博客](https://zhangshuqiao.org)的左下角可查看效果。需要使用支持WebGL的现代浏览器浏览。
 
 ![](screenshot-1.png)
 ![](screenshot-2.png)
@@ -68,14 +68,25 @@ https://www.example.com/path/to/live2d-widget/
 **警告：作者不对`waifu-tips.json`和`waifu-tips.js`中的内容负责，请自行确保它们是合适的。**  
 如果有任何疑问，欢迎提交ISSUE。
 
+## 更多
+Live2D官方网站：  
+https://www.live2d.com/en/  
+https://live2d.github.io
+
+可以在官方网站下载SDK，包含更多的功能，也可以自行编译。具体操作是：
+- 点击Cubism SDK for Web，下载相关文件
+- 解压并进入目录，执行`npm install`
+- 执行`npm run build-sample`
+
+
 ## 鸣谢 Credits
 代码自这篇博文魔改而来：  
 https://www.fghrsh.net/post/123.html  
-相比初始的版本，这个Repo增加了一些功能，并优化了提示展现机制
+相比初始的版本，这个Repo增加了一些功能，并优化了提示展现机制。
 
 更多内容可以参考：  
 https://imjad.cn/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02  
-https://zhangshuqiao.org/2018-07/在网页中添加Live2D看板娘
+https://zhangshuqiao.org/2018-07/在网页中添加Live2D看板娘/
 
 还可以自行搭建后端api，并增加模型（需要修改的内容比较多，此处不再赘述）：  
 https://github.com/xiazeyu/live2d-widget-models  
