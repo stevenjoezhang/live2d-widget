@@ -1,4 +1,5 @@
 const live2d_path = "https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/";
+//const live2d_path = "./";
 
 $("<link>").attr({href: live2d_path + "waifu.css", rel: "stylesheet", type: "text/css"}).appendTo("head");
 //waifu.css的绝对路径
@@ -19,7 +20,7 @@ $.ajax({
 });
 //waifu-tips.js的绝对路径
 
-//初始化看板娘，会自动加载指定目录下的 waifu-tips.json
+//初始化看板娘，会自动加载指定目录下的waifu-tips.json
 $(window).on("load", function() {
 	initWidget(live2d_path + "waifu-tips.json", "https://live2d.fghrsh.net/api");
 });

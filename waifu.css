@@ -1,14 +1,13 @@
 #waifu {
 	position: fixed;
-	bottom: 0;
+	bottom: -3px;
 	left: 0;
 	z-index: 1;
 	line-height: 0;
-	transition: transform .3s ease-in-out;
-	transform: translateY(3px);
+	transition: bottom .3s ease-in-out;
 }
 #waifu:hover {
-	transform: translateY(0);
+	bottom: 0;
 }
 @media (max-width: 768px) {
 	#waifu {
@@ -31,11 +30,7 @@
 	text-overflow: ellipsis;
 	overflow: hidden;
 	position: absolute;
-	animation-delay: 5s;
-	animation-duration: 50s;
-	animation-iteration-count: infinite;
-	animation-name: shake;
-	animation-timing-function: ease-in-out;
+	animation: shake 50s ease-in-out 5s infinite;
 }
 #waifu #live2d {
 	position: relative;
