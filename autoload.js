@@ -7,16 +7,14 @@ $("<link>").attr({href: live2d_path + "waifu.css", rel: "stylesheet", type: "tex
 $.ajax({
 	url: live2d_path + "live2d.min.js",
 	dataType: "script",
-	cache: true,
-	async: false
+	cache: true
 });
 //live2d.min.js的绝对路径
 
 $.ajax({
 	url: live2d_path + "waifu-tips.js",
 	dataType: "script",
-	cache: true,
-	async: false
+	cache: true
 });
 //waifu-tips.js的绝对路径
 
