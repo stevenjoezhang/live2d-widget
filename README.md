@@ -10,14 +10,14 @@ Add Live2D widget to web page.
 ## 示例 Demo
 在[米米的博客](https://zhangshuqiao.org)的左下角可查看效果。需要使用支持WebGL的现代浏览器浏览。
 
-![](screenshot-1.png)
-![](screenshot-2.png)
-![](screenshot-3.png)
+![](assets/screenshot-1.png)
+![](assets/screenshot-2.png)
+![](assets/screenshot-3.png)
 
 这个仓库中也提供了两个Demo，即
 
-- [demo-1.html](https://mi.js.org/live2d-widget/demo-1.html) ，展现基础效果
-- [demo-2.html](https://mi.js.org/live2d-widget/demo-2.html) ，仿NPM的登陆界面
+- [demo1.html](https://mi.js.org/live2d-widget/demo/demo1.html) ，展现基础效果
+- [demo2.html](https://mi.js.org/live2d-widget/demo/demo2.html) ，仿NPM的登陆界面
 
 ## 依赖 Dependencies
 本插件需要jQuery和font-awesome支持，请确保它们已在页面中加载，例如在`<head>`中加入：  
