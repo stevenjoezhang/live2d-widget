@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-<script src="live2d.min.js"></script>
+<script src="../live2d.min.js"></script>
 <style>
 html, body {
 	height: 100%;
@@ -155,7 +155,7 @@ $(function() {
 	"use strict";
 
 	if (!CSS.supports("clip-path", "circle(120px at center)") && !CSS.supports("-webkit-clip-path", "circle(120px at center)")) {
-		$("#stage").html('<img src="screenshot-1.png"/>');
+		$("#stage").html('<img src="../assets/screenshot-1.png"/>');
 		return;
 	}
 
