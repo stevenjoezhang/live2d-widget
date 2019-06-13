@@ -23,7 +23,7 @@ console.log(`
  * https://www.fghrsh.net/post/123.html
  */
 
-function initWidget(waifuPath, apiPath) {
+function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 	if (screen.width <= 768 || (localStorage.getItem("waifu-display") && new Date().getTime() - localStorage.getItem("waifu-display") <= 86400000)) {
 		return;
 	}
@@ -100,14 +100,14 @@ function initWidget(waifuPath, apiPath) {
 			var referrer = document.createElement("a");
 			referrer.href = document.referrer;
 			var domain = referrer.hostname.split(".")[1];
-			if (location.hostname == referrer.hostname) text = '欢迎阅读<span style="color:#0099cc;">『' + document.title.split(' - ')[0] + '』</span>';
-			else if (domain == 'baidu') text = 'Hello！来自 百度搜索 的朋友<br/>你是搜索 <span style="color:#0099cc;">' + referrer.search.split('&wd=')[1].split('&')[0] + '</span> 找到的我吗？';
-			else if (domain == 'so') text = 'Hello！来自 360搜索 的朋友<br/>你是搜索 <span style="color:#0099cc;">' + referrer.search.split('&q=')[1].split('&')[0] + '</span> 找到的我吗？';
-			else if (domain == 'google') text = 'Hello！来自 谷歌搜索 的朋友<br/>欢迎阅读<span style="color:#0099cc;">『' + document.title.split(' - ')[0] + '』</span>';
-			else text = 'Hello！来自 <span style="color:#0099cc;">' + referrer.hostname + '</span> 的朋友';
+			if (location.hostname == referrer.hostname) text = `欢迎阅读<span style="color:#0099cc;">『${document.title.split(" - ")[0]}』</span>`;
+			else if (domain == "baidu") text = `Hello！来自 百度搜索 的朋友<br/>你是搜索 <span style="color:#0099cc;">${referrer.search.split("&wd=")[1].split("&")[0]}</span> 找到的我吗？`;
+			else if (domain == "so") text = `Hello！来自 360搜索 的朋友<br/>你是搜索 <span style="color:#0099cc;">${referrer.search.split("&q=")[1].split("&")[0]}</span> 找到的我吗？`;
+			else if (domain == "google") text = `Hello！来自 谷歌搜索 的朋友<br/>欢迎阅读<span style="color:#0099cc;">『${document.title.split(" - ")[0]}』</span>`;
+			else text = `Hello！来自 <span style="color:#0099cc;">${referrer.hostname}</span> 的朋友`;
 		}
 		else {
-			text = `欢迎阅读<span style="color:#0099cc;">『${document.title.split(' - ')[0]}』</span>`;
+			text = `欢迎阅读<span style="color:#0099cc;">『${document.title.split(" - ")[0]}』</span>`;
 		}
 		showMessage(text, 7000, 8);
 	}
@@ -116,8 +116,7 @@ function initWidget(waifuPath, apiPath) {
 	var userAction = false,
 		hitokotoTimer = null,
 		messageTimer = null,
-		messageArray = ["已经过了这么久了呀，日子过得好快呢……", "使用Chrome可以获得最佳浏览体验哦！", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口！"],
-		apiURL = "";
+		messageArray = ["已经过了这么久了呀，日子过得好快呢……", "使用Chrome可以获得最佳浏览体验哦！", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口！"];
 	if ($(".fa-share-alt").is(":hidden")) messageArray.push("记得把小家加入Adblock白名单哦！");
 	$(document).mousemove(function() {
 		userAction = true;
@@ -165,8 +164,6 @@ function initWidget(waifuPath, apiPath) {
 	}
 
 	function initModel() {
-		waifuPath = waifuPath || "/waifu-tips.json";
-		apiURL = apiPath || "";
 		var modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
 		if (modelId == null) {
@@ -203,12 +200,13 @@ function initWidget(waifuPath, apiPath) {
 			});
 		});
 	}
+	initModel();
 
 	function loadModel(modelId, modelTexturesId) {
 		localStorage.setItem("modelId", modelId);
 		if (modelTexturesId === undefined) modelTexturesId = 0;
 		localStorage.setItem("modelTexturesId", modelTexturesId);
-		loadlive2d("live2d", `${apiURL}/get/?id=${modelId}-${modelTexturesId}`, console.log("live2d", `模型 ${modelId}-${modelTexturesId} 加载完成`));
+		loadlive2d("live2d", `${apiPath}/get/?id=${modelId}-${modelTexturesId}`, console.log("live2d", `模型 ${modelId}-${modelTexturesId} 加载完成`));
 	}
 
 	function loadRandModel() {
@@ -217,7 +215,7 @@ function initWidget(waifuPath, apiPath) {
 			//可选 "rand"(随机), "switch"(顺序)
 		$.ajax({
 			cache: false,
-			url: `${apiURL}/rand_textures/?id=${modelId}-${modelTexturesId}`,
+			url: `${apiPath}/rand_textures/?id=${modelId}-${modelTexturesId}`,
 			dataType: "json",
 			success: function(result) {
 				if (result.textures["id"] == 1 && (modelTexturesId == 1 || modelTexturesId == 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
@@ -231,7 +229,7 @@ function initWidget(waifuPath, apiPath) {
 		var modelId = localStorage.getItem("modelId");
 		$.ajax({
 			cache: false,
-			url: `${apiURL}/switch/?id=${modelId}`,
+			url: `${apiPath}/switch/?id=${modelId}`,
 			dataType: "json",
 			success: function(result) {
 				loadModel(result.model["id"]);
@@ -239,5 +237,4 @@ function initWidget(waifuPath, apiPath) {
 			}
 		});
 	}
-	initModel();
 }
