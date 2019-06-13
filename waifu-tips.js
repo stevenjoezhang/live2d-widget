@@ -54,11 +54,11 @@ function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 		$("#waifu-tool .fa-street-view").click(loadRandModel);
 		$("#waifu-tool .fa-camera-retro").click(function() {
 			showMessage("照好了嘛，是不是很可爱呢？", 6000, 9);
-			window.Live2D.captureName = "photo.png";
-			window.Live2D.captureFrame = true;
+			Live2D.captureName = "photo.png";
+			Live2D.captureFrame = true;
 		});
 		$("#waifu-tool .fa-info-circle").click(function() {
-			window.open("https://github.com/stevenjoezhang/live2d-widget");
+			open("https://github.com/stevenjoezhang/live2d-widget");
 		});
 		$("#waifu-tool .fa-times").click(function() {
 			localStorage.setItem("waifu-display", new Date().getTime());
@@ -206,7 +206,7 @@ function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 		localStorage.setItem("modelId", modelId);
 		if (modelTexturesId === undefined) modelTexturesId = 0;
 		localStorage.setItem("modelTexturesId", modelTexturesId);
-		loadlive2d("live2d", `${apiPath}/get/?id=${modelId}-${modelTexturesId}`, console.log("live2d", `模型 ${modelId}-${modelTexturesId} 加载完成`));
+		loadlive2d("live2d", `${apiPath}/get/?id=${modelId}-${modelTexturesId}`, console.log(`Live2D 模型 ${modelId}-${modelTexturesId} 加载完成`));
 	}
 
 	function loadRandModel() {
