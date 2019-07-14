@@ -23,10 +23,7 @@ console.log(`
  * https://www.fghrsh.net/post/123.html
  */
 
-function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
-	if (screen.width <= 768 || (localStorage.getItem("waifu-display") && new Date().getTime() - localStorage.getItem("waifu-display") <= 86400000)) {
-		return;
-	}
+function loadWidget(waifuPath, apiPath) {
 	localStorage.removeItem("waifu-display");
 	sessionStorage.removeItem("waifu-text");
 	$("body").append(`<div id="waifu">
@@ -42,13 +39,14 @@ function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 				<span class="fa fa-lg fa-times"></span>
 			</div>
 		</div>`);
+	$("#waifu").show().animate({ bottom: 0 }, 3000);
 
 	function registerEventListener() {
 		$("#waifu-tool .fa-comment").click(showHitokoto);
 		$("#waifu-tool .fa-paper-plane").click(function() {
 			var s = document.createElement("script");
 			document.body.appendChild(s);
-			s.src = "https://galaxymimi.com/js/asteroids.js";
+			s.src = "https://cdn.jsdelivr.net/gh/GalaxyMimi/CDN/asteroids.js";
 		});
 		$("#waifu-tool .fa-user-circle").click(loadOtherModel);
 		$("#waifu-tool .fa-street-view").click(loadRandModel);
@@ -65,6 +63,7 @@ function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 			showMessage("愿你有一天能与重要的人重逢。", 2000, 11);
 			$("#waifu").animate({ bottom: -500 }, 3000, function() {
 				$("#waifu").hide();
+				$("#waifu-toggle").show().animate({ "margin-left": -50 }, 1000);
 			});
 		});
 		var re = /x/;
@@ -236,5 +235,35 @@ function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 				showMessage(result.model["message"], 4000, 10);
 			}
 		});
+	}
+}
+
+function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
+	if (screen.width <= 768) return;
+	$("body").append(`<div id="waifu-toggle" style="margin-left: -100px;">
+			<span>看板娘</span>
+		</div>`);
+	$("#waifu-toggle").hover(function() {
+		$("#waifu-toggle").animate({ "margin-left": -30 }, 500);
+	}, function() {
+		$("#waifu-toggle").animate({ "margin-left": -50 }, 500);
+	}).click(function() {
+		$("#waifu-toggle").animate({ "margin-left": -100 }, 1000, function() {
+			$("#waifu-toggle").hide();
+		});
+		if ($("#waifu-toggle").attr("first-time")) {
+			loadWidget(waifuPath, apiPath);
+			$("#waifu-toggle").attr("first-time", false);
+		}
+		else {
+			localStorage.removeItem("waifu-display");
+			$("#waifu").show().animate({ bottom: 0 }, 3000);
+		}
+	});
+	if (localStorage.getItem("waifu-display") && new Date().getTime() - localStorage.getItem("waifu-display") <= 86400000) {
+		$("#waifu-toggle").attr("first-time", true).css({ "margin-left": -50 });
+	}
+	else {
+		loadWidget(waifuPath, apiPath);
 	}
 }

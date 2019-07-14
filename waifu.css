@@ -1,13 +1,27 @@
+#waifu-toggle {
+	position: fixed;
+	writing-mode: vertical-rl;
+	bottom: 10px;
+	left: 0px;
+	background-color: #fa0;
+	color: #fff;
+	border-radius: 5px;
+	padding: 5px;
+	font-size: 12px;
+	width: 60px;
+	cursor: pointer;
+}
 #waifu {
 	position: fixed;
-	bottom: -3px;
+	bottom: -1000px;
 	left: 0;
 	z-index: 1;
 	line-height: 0;
-	transition: bottom .3s ease-in-out;
+	transition: transform .3s ease-in-out;
+	transform: translateY(3px);
 }
 #waifu:hover {
-	bottom: 0;
+	transform: translateY(0);
 }
 @media (max-width: 768px) {
 	#waifu {
