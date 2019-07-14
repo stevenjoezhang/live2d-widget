@@ -1,12 +1,12 @@
 #waifu-toggle {
 	position: fixed;
 	writing-mode: vertical-rl;
-	bottom: 10px;
+	bottom: 66px;
 	left: 0px;
 	background-color: #fa0;
 	color: #fff;
 	border-radius: 5px;
-	padding: 5px;
+	padding: 5px 2px 5px 5px;
 	font-size: 12px;
 	width: 60px;
 	cursor: pointer;
