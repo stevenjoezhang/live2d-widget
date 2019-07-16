@@ -112,6 +112,8 @@ https://github.com/xiaoski/live2d_models_collection
 https://github.com/amorist/platelet  
 https://github.com/akiroz/Live2D-Widget
 
+另外，点击看板娘的纸飞机按钮，会出现一个彩蛋，这来自于[WebsiteAsteroids](http://www.websiteasteroids.com)。
+
 ## 许可证 License
 Released under the GNU General Public License v3  
 http://www.gnu.org/licenses/gpl-3.0.html
