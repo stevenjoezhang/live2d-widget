@@ -13,7 +13,7 @@
 		"text": ["要见见我的姐姐嘛？", "要切换看板娘吗？"]
 	}, {
 		"selector": "#waifu-tool .fa-street-view",
-		"text": ["喜欢换装 PLAY 吗？", "这次要扮演什么呢？", "变装！"]
+		"text": ["喜欢换装 PLAY 吗？", "这次要扮演什么呢？", "变装！", "让我们看看接下来会发生什么！"]
 	}, {
 		"selector": "#waifu-tool .fa-camera-retro",
 		"text": ["你要给我拍照呀？一二三～茄子～", "要不，我们来合影吧！", "保持微笑就好了～"]
@@ -66,8 +66,8 @@
 		"selector": ".fancybox img",
 		"text": ["点击图片可以放大呢！"]
 	}, {
-		"selector": ".highlight-wrap",
-		"text": ["代码可以直接点击复制哟。", "GitHub！我是新手！"]
+		"selector": ".highlight-wrap, .gist",
+		"text": ["代码可以直接点击复制哟。", "GitHub！我是新手！", "PHP 是最好的语言！"]
 	}, {
 		"selector": ".container a[href^='http'], .nav-link .nav-text",
 		"text": ["要去看看 <span style=\"color:#0099cc;\">{text}</span> 么？", "去 <span style=\"color:#0099cc;\">{text}</span> 逛逛吧。", "到 <span style=\"color:#0099cc;\">{text}</span> 看看吧。"]
@@ -148,7 +148,7 @@
 		"text": ["快快告诉我你的家在哪里，好让我去参观参观！"]
 	}, {
 		"selector": ".veditor",
-		"text": ["想要去评论些什么吗？", "要说点什么吗？"]
+		"text": ["想要去评论些什么吗？", "要说点什么吗？", "觉得博客不错？快来留言和主人交流吧！"]
 	}, {
 		"selector": ".vcontrol a",
 		"text": ["你会不会熟练使用Markdown呀？", "使用Markdown让评论更美观吧～"]
@@ -163,7 +163,7 @@
 		"text": ["评论没有审核，要对自己的发言负责哦～", "要提交了吗，请耐心等待回复哦～"]
 	}, {
 		"selector": ".vcontent",
-		"text": ["哇，快看看这个精彩评论！"]
+		"text": ["哇，快看看这个精彩评论！", "如果有疑问，请尽快留言哦～"]
 	}],
 	"click": [{
 		"selector": "#waifu #live2d",
