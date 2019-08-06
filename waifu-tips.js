@@ -24,9 +24,16 @@ function loadWidget(waifuPath, apiPath) {
 	function registerEventListener() {
 		$("#waifu-tool .fa-comment").click(showHitokoto);
 		$("#waifu-tool .fa-paper-plane").click(function() {
-			var s = document.createElement("script");
-			document.body.appendChild(s);
-			s.src = "https://cdn.jsdelivr.net/gh/GalaxyMimi/CDN/asteroids.js";
+			if (window.Asteroids) {
+				if (!window.ASTEROIDSPLAYERS) window.ASTEROIDSPLAYERS = [];
+				window.ASTEROIDSPLAYERS.push(new Asteroids());
+			} else {
+				$.ajax({
+					url: "https://cdn.jsdelivr.net/gh/GalaxyMimi/CDN/asteroids.js",
+					dataType: "script",
+					cache: true
+				});
+			}
 		});
 		$("#waifu-tool .fa-user-circle").click(loadOtherModel);
 		$("#waifu-tool .fa-street-view").click(loadRandModel);
