@@ -24,7 +24,7 @@ Add Live2D widget to web page. Compatible with PJAX.
 jQuery and font-awesome is required for this plugin. You can add this to `<head>`:
 ```xml
 <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
 ```
 否则无法正常显示。（如果你的网页已经加载了jQuery，就不要重复加载了）
 
