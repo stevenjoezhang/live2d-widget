@@ -1,8 +1,8 @@
 # Live2D Widget
 
 ## 特性 Feature
-在网页中添加Live2D看板娘。  
-Add Live2D widget to web page.
+在网页中添加Live2D看板娘。与PJAX兼容，支持无刷新加载。  
+Add Live2D widget to web page. Compatible with PJAX.
 
 **警告：不支持IE。**  
 **WARNING: DO NOT SUPPORT IE.**
@@ -26,7 +26,7 @@ jQuery and font-awesome is required for this plugin. You can add this to `<head>
 <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
 ```
-否则无法正常显示。
+否则无法正常显示。（如果你的网页已经加载了jQuery，就不要重复加载了）
 
 ## 使用 Usage
 
@@ -34,8 +34,11 @@ jQuery and font-awesome is required for this plugin. You can add this to `<head>
 ```xml
 <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
 ```
-将这一行代码加入`<head>`或`<body>`，就可以看到效果了。  
-（换句话说，如果你是小白，或者只需要最基础的功能，就把这一行代码，连同前面的两行代码，一起放到html的`<head>`中即可；如果页面是用各种模版、php、asp生成的，也要类似的修改，可能略为麻烦）
+将这一行代码加入`<head>`或`<body>`，即可看到效果。如果你的网站启用了PJAX，由于看板娘不必每页刷新，因此需要注意将相关脚本放到PJAX刷新区域之外。
+
+换句话说，如果你是小白，或者只需要最基础的功能，就只需要：
+- 把这一行代码，连同前面的两行代码，一起放到html的`<head>`中即可；
+- 如果页面是用各种模版引擎、php、asp生成的，也要自行修改，方法类似，只是可能略为麻烦。
 
 **但是！我们强烈推荐自己进行配置，否则很多功能是不完整的，并且可能产生问题！**  
 如果你有兴趣自己折腾的话，请看下面的详细说明。
@@ -58,7 +61,7 @@ cd /path/to/your/webroot
 # Clone this repository
 git clone https://github.com/stevenjoezhang/live2d-widget.git
 ```
-- 如果你的主机无法用ssh连接（例如一般的虚拟主机），请选择`Download ZIP`，然后通过ftp上传到主机上，再解压到网站的目录下。  
+- 如果你的主机无法用ssh连接（例如一般的虚拟主机），请选择`Download ZIP`，然后通过ftp上传到主机上，再解压到网站的目录下。
 - 如果你是通过Hexo等工具部署的静态博客，请选择`Download ZIP`，然后解压到本地的博客目录下，例如`source`下与`_posts`同级的目录。重新部署博客时，相关文件就会自动上传到对应的目录。（还需要在Hexo主题相关的swig或ejs模版中正确配置路径，才可以加载）
 
 这样，整个项目就可以通过你的服务器IP或者域名从公网访问了。你可以试试能否正常地通过浏览器打开`autoload.js`和`live2d.min.js`等文件。**（最好还要确定一下这些文件的内容是正确的，有时由于字符集的问题，文件中可能出现乱码；此时需要重新下载）**  
@@ -87,9 +90,9 @@ https://www.live2d.com/en/
 https://live2d.github.io
 
 可以在官方网站下载SDK，包含更多的功能，也可以自行编译。具体操作是：
-- 点击Cubism SDK for Web，下载相关文件
-- 解压并进入目录，执行`npm install`
-- 执行`npm run build-sample`
+- 点击Cubism SDK for Web，下载相关文件；
+- 解压并进入目录，执行`npm install`；
+- 执行`npm run build-sample`。
 
 如果有任何疑问，欢迎提Issue。如果有任何修改建议，欢迎提PR。
 
