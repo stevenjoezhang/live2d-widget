@@ -23,7 +23,7 @@ function loadWidget(waifuPath, apiPath) {
 
 	function registerEventListener() {
 		$("#waifu-tool .fa-comment").click(showHitokoto);
-		$("#waifu-tool .fa-paper-plane").click(function() {
+		$("#waifu-tool .fa-paper-plane").click(() => {
 			if (window.Asteroids) {
 				if (!window.ASTEROIDSPLAYERS) window.ASTEROIDSPLAYERS = [];
 				window.ASTEROIDSPLAYERS.push(new Asteroids());
@@ -37,32 +37,32 @@ function loadWidget(waifuPath, apiPath) {
 		});
 		$("#waifu-tool .fa-user-circle").click(loadOtherModel);
 		$("#waifu-tool .fa-street-view").click(loadRandModel);
-		$("#waifu-tool .fa-camera-retro").click(function() {
+		$("#waifu-tool .fa-camera-retro").click(() => {
 			showMessage("照好了嘛，是不是很可爱呢？", 6000, 9);
 			Live2D.captureName = "photo.png";
 			Live2D.captureFrame = true;
 		});
-		$("#waifu-tool .fa-info-circle").click(function() {
+		$("#waifu-tool .fa-info-circle").click(() => {
 			open("https://github.com/stevenjoezhang/live2d-widget");
 		});
-		$("#waifu-tool .fa-times").click(function() {
+		$("#waifu-tool .fa-times").click(() => {
 			localStorage.setItem("waifu-display", new Date().getTime());
 			showMessage("愿你有一天能与重要的人重逢。", 2000, 11);
-			$("#waifu").animate({ bottom: -500 }, 3000, function() {
+			$("#waifu").animate({ bottom: -500 }, 3000, () => {
 				$("#waifu").hide();
 				$("#waifu-toggle").show().animate({ "margin-left": -50 }, 1000);
 			});
 		});
 		var re = /x/;
 		console.log(re);
-		re.toString = function() {
+		re.toString = () => {
 			showMessage("哈哈，你打开了控制台，是想要看看我的秘密吗？", 6000, 9);
 			return "";
 		};
-		$(document).on("copy", function() {
+		$(document).on("copy", () => {
 			showMessage("你都复制了些什么呀，转载要记得加上出处哦！", 6000, 9);
 		});
-		$(document).on("visibilitychange", function() {
+		$(document).on("visibilitychange", () => {
 			if (!document.hidden) showMessage("哇，你终于回来了～", 6000, 9);
 		});
 	}
@@ -104,12 +104,12 @@ function loadWidget(waifuPath, apiPath) {
 		messageTimer = null,
 		messageArray = ["已经过了这么久了呀，日子过得好快呢……", "大坏蛋！你都多久没碰人家了呀，嘤嘤嘤～", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口！"];
 	if ($(".fa-share-alt").is(":hidden")) messageArray.push("记得把小家加入Adblock白名单哦！");
-	$(document).mousemove(function() {
+	$(document).mousemove(() => {
 		userAction = true;
-	}).keydown(function() {
+	}).keydown(() => {
 		userAction = true;
 	});
-	setInterval(function() {
+	setInterval(() => {
 		if (!userAction) {
 			if (!hitokotoTimer) hitokotoTimer = setInterval(showHitokoto, 25000);
 		}
@@ -126,7 +126,7 @@ function loadWidget(waifuPath, apiPath) {
 		else $.getJSON("https://v1.hitokoto.cn", function(result) {
 				var text = `这句一言来自 <span style="color:#0099cc;">『${result.from}』</span>，是 <span style="color:#0099cc;">${result.creator}</span> 在 hitokoto.cn 投稿的。`;
 			showMessage(result.hitokoto, 6000, 9);
-			setTimeout(function() {
+			setTimeout(() => {
 				showMessage(text, 4000, 9);
 			}, 6000);
 		});
@@ -142,7 +142,7 @@ function loadWidget(waifuPath, apiPath) {
 			if (Array.isArray(text)) text = text[Math.floor(Math.random() * text.length)];
 			sessionStorage.setItem("waifu-text", priority);
 			$("#waifu-tips").stop().html(text).fadeTo(200, 1);
-			messageTimer = setTimeout(function() {
+			messageTimer = setTimeout(() => {
 				sessionStorage.removeItem("waifu-text");
 				$("#waifu-tips").fadeTo(1000, 0);
 			}, timeout);
@@ -230,12 +230,12 @@ function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 	$("body").append(`<div id="waifu-toggle" style="margin-left: -100px;">
 			<span>看板娘</span>
 		</div>`);
-	$("#waifu-toggle").hover(function() {
+	$("#waifu-toggle").hover(() => {
 		$("#waifu-toggle").animate({ "margin-left": -30 }, 500);
-	}, function() {
+	}, () => {
 		$("#waifu-toggle").animate({ "margin-left": -50 }, 500);
-	}).click(function() {
-		$("#waifu-toggle").animate({ "margin-left": -100 }, 1000, function() {
+	}).click(() => {
+		$("#waifu-toggle").animate({ "margin-left": -100 }, 1000, () => {
 			$("#waifu-toggle").hide();
 		});
 		if ($("#waifu-toggle").attr("first-time")) {
