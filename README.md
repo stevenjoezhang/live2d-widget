@@ -81,25 +81,19 @@ https://www.example.com/path/to/live2d-widget/
 ```
 就可以加载了。
 
-`waifu-tips.json`中包含了触发条件（`selector`，选择器）和触发时显示的文字（`text`）。源文件是对Hexo的NexT主题有效的，为了适用于你自己的网页，也需要自行修改，或增加新内容。  
+## 目录结构 Files
+- `waifu-tips.json`中包含了触发条件（`selector`，选择器）和触发时显示的文字（`text`）；
+- `waifu.css`是看板娘的样式表。
+
+源文件是对Hexo的NexT主题有效的，为了适用于你自己的网页，可能需要自行修改，或增加新内容。  
 **警告：作者不对包括但不限于`waifu-tips.json`和`waifu-tips.js`文件中的内容负责，请自行确保它们是合适的。**
-
-## 更多 More
-Live2D官方网站：  
-https://www.live2d.com/en/  
-https://live2d.github.io
-
-可以在官方网站下载SDK，包含更多的功能，也可以自行编译。具体操作是：
-- 点击Cubism SDK for Web，下载相关文件；
-- 解压并进入目录，执行`npm install`；
-- 执行`npm run build-sample`。
 
 如果有任何疑问，欢迎提Issue。如果有任何修改建议，欢迎提PR。
 
 ## 鸣谢 Credits
 代码自这篇博文魔改而来：  
 https://www.fghrsh.net/post/123.html  
-相比初始的版本，这个Repo增加了一些功能，并优化了提示展现机制。
+相比初始的版本，这个仓库增加了一些功能，并优化了提示展现机制。
 
 更多内容可以参考：  
 https://zhangshuqiao.org/2018-07/在网页中添加Live2D看板娘/  
@@ -116,6 +110,16 @@ https://github.com/amorist/platelet
 https://github.com/akiroz/Live2D-Widget
 
 另外，点击看板娘的纸飞机按钮，会出现一个彩蛋，这来自于[WebsiteAsteroids](http://www.websiteasteroids.com)。
+
+## 更多 More
+Live2D官方网站：  
+https://www.live2d.com/en/  
+https://live2d.github.io
+
+可以在官方网站下载、打包SDK，以获取更多的功能。具体操作是：
+- 点击Cubism SDK for Web，下载相关文件；
+- 解压并进入目录，执行`npm install`；
+- 执行`npm run build-sample`。
 
 ## 许可证 License
 Released under the GNU General Public License v3  
