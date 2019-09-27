@@ -1,6 +1,7 @@
 # Live2D Widget
 
 ## 特性 Feature
+
 在网页中添加Live2D看板娘。与PJAX兼容，支持无刷新加载。  
 Add Live2D widget to web page. Compatible with PJAX.
 
@@ -8,6 +9,7 @@ Add Live2D widget to web page. Compatible with PJAX.
 **WARNING: DO NOT SUPPORT IE.**
 
 ## 示例 Demo
+
 在[米米的博客](https://zhangshuqiao.org)的左下角可查看效果。需要使用支持WebGL的现代浏览器浏览。
 
 ![](assets/screenshot-1.png)
@@ -20,6 +22,7 @@ Add Live2D widget to web page. Compatible with PJAX.
 - [demo2.html](https://mi.js.org/live2d-widget/demo/demo2.html) ，仿NPM的登陆界面
 
 ## 依赖 Dependencies
+
 本插件需要jQuery和font-awesome支持，请确保它们已在页面中加载，例如在`<head>`中加入：  
 jQuery and font-awesome is required for this plugin. You can add this to `<head>`:
 ```xml
@@ -82,6 +85,7 @@ https://www.example.com/path/to/live2d-widget/
 就可以加载了。
 
 ## 目录结构 Files
+
 - `waifu-tips.json`中包含了触发条件（`selector`，选择器）和触发时显示的文字（`text`）；
 - `waifu.css`是看板娘的样式表。
 
@@ -91,6 +95,7 @@ https://www.example.com/path/to/live2d-widget/
 如果有任何疑问，欢迎提Issue。如果有任何修改建议，欢迎提PR。
 
 ## 鸣谢 Credits
+
 代码自这篇博文魔改而来：  
 https://www.fghrsh.net/post/123.html  
 相比初始的版本，这个仓库增加了一些功能，并优化了提示展现机制。
@@ -112,6 +117,7 @@ https://github.com/akiroz/Live2D-Widget
 另外，点击看板娘的纸飞机按钮，会出现一个彩蛋，这来自于[WebsiteAsteroids](http://www.websiteasteroids.com)。
 
 ## 更多 More
+
 Live2D官方网站：  
 https://www.live2d.com/en/  
 https://live2d.github.io
@@ -122,9 +128,11 @@ https://live2d.github.io
 - 执行`npm run build-sample`。
 
 ## 许可证 License
+
 Released under the GNU General Public License v3  
 http://www.gnu.org/licenses/gpl-3.0.html
 
 ## 更新 Update
+
 2018年10月31日，由fghrsh提供的原API停用，请更新至新地址。参考文章：  
 https://www.fghrsh.net/post/170.html
