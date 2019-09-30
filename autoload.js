@@ -21,7 +21,16 @@ $.ajax({
 
 //初始化看板娘，会自动加载指定目录下的waifu-tips.json
 $(window).on("load", function() {
-	initWidget(live2d_path + "waifu-tips.json", "https://live2d.fghrsh.net/api");
+  if (typeof(initWidget) != "function") {
+    let clock = setInterval(function(){
+      if (typeof(initWidget) == "function") {
+        clearInterval(clock)
+        initWidget(live2d_path + "waifu-tips.json", "https://live2d.fghrsh.net/api");
+      }
+    },500)
+  } else {
+    initWidget(live2d_path + "waifu-tips.json", "https://live2d.fghrsh.net/api");
+  }
 });
 //initWidget第一个参数为waifu-tips.json的路径
 //第二个参数为api地址（无需修改）
