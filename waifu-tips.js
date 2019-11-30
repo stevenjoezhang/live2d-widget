@@ -46,7 +46,7 @@ function loadWidget(waifuPath, apiPath) {
 			open("https://github.com/stevenjoezhang/live2d-widget");
 		});
 		$("#waifu-tool .fa-times").click(() => {
-			localStorage.setItem("waifu-display", new Date().getTime());
+			localStorage.setItem("waifu-display", Date.now());
 			showMessage("愿你有一天能与重要的人重逢。", 2000, 11);
 			$("#waifu").animate({ bottom: -500 }, 3000, () => {
 				$("#waifu").hide();
@@ -242,7 +242,7 @@ function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 			$("#waifu").show().animate({ bottom: 0 }, 3000);
 		}
 	});
-	if (localStorage.getItem("waifu-display") && new Date().getTime() - localStorage.getItem("waifu-display") <= 86400000) {
+	if (localStorage.getItem("waifu-display") && Date.now() - localStorage.getItem("waifu-display") <= 86400000) {
 		$("#waifu-toggle").attr("first-time", true).css({ "margin-left": -50 });
 	} else {
 		loadWidget(waifuPath, apiPath);
