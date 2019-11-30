@@ -69,7 +69,7 @@ function loadWidget(waifuPath, apiPath) {
 	registerEventListener();
 
 	function welcomeMessage() {
-		var SiteIndexUrl = location.port ? `${location.protocol}//${location.hostname}:${location.port}/` : `${location.protocol}//${location.hostname}/`, text; //自动获取主页
+		var SiteIndexUrl = `${location.protocol}//${location.host}/`, text; //自动获取主页
 		if (location.href == SiteIndexUrl) { //如果是主页
 			var now = new Date().getHours();
 			if (now > 5 && now <= 7) text = "早上好！一日之计在于晨，美好的一天就要开始了。";
