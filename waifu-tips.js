@@ -6,7 +6,7 @@
 function loadWidget(waifuPath, apiPath) {
 	localStorage.removeItem("waifu-display");
 	sessionStorage.removeItem("waifu-text");
-	$("body").append(`<div id="waifu">
+	document.body.insertAdjacentHTML('beforeend', `<div id="waifu">
 			<div id="waifu-tips"></div>
 			<canvas id="live2d" width="300" height="300"></canvas>
 			<div id="waifu-tool">
@@ -22,8 +22,8 @@ function loadWidget(waifuPath, apiPath) {
 	$("#waifu").show().animate({ bottom: 0 }, 3000);
 
 	function registerEventListener() {
-		$("#waifu-tool .fa-comment").click(showHitokoto);
-		$("#waifu-tool .fa-paper-plane").click(() => {
+		document.querySelector("#waifu-tool .fa-comment").addEventListener("click", showHitokoto);
+		document.querySelector("#waifu-tool .fa-paper-plane").addEventListener("click", () => {
 			if (window.Asteroids) {
 				if (!window.ASTEROIDSPLAYERS) window.ASTEROIDSPLAYERS = [];
 				window.ASTEROIDSPLAYERS.push(new Asteroids());
@@ -35,17 +35,17 @@ function loadWidget(waifuPath, apiPath) {
 				});
 			}
 		});
-		$("#waifu-tool .fa-user-circle").click(loadOtherModel);
-		$("#waifu-tool .fa-street-view").click(loadRandModel);
-		$("#waifu-tool .fa-camera-retro").click(() => {
+		document.querySelector("#waifu-tool .fa-user-circle").addEventListener("click", loadOtherModel);
+		document.querySelector("#waifu-tool .fa-street-view").addEventListener("click", loadRandModel);
+		document.querySelector("#waifu-tool .fa-camera-retro").addEventListener("click", () => {
 			showMessage("照好了嘛，是不是很可爱呢？", 6000, 9);
 			Live2D.captureName = "photo.png";
 			Live2D.captureFrame = true;
 		});
-		$("#waifu-tool .fa-info-circle").click(() => {
+		document.querySelector("#waifu-tool .fa-info-circle").addEventListener("click", () => {
 			open("https://github.com/stevenjoezhang/live2d-widget");
 		});
-		$("#waifu-tool .fa-times").click(() => {
+		document.querySelector("#waifu-tool .fa-times").addEventListener("click", () => {
 			localStorage.setItem("waifu-display", Date.now());
 			showMessage("愿你有一天能与重要的人重逢。", 2000, 11);
 			$("#waifu").animate({ bottom: -500 }, 3000, () => {
@@ -59,10 +59,10 @@ function loadWidget(waifuPath, apiPath) {
 			showMessage("哈哈，你打开了控制台，是想要看看我的小秘密吗？", 6000, 9);
 			return "";
 		};
-		$(document).on("copy", () => {
+		window.addEventListener("copy", () => {
 			showMessage("你都复制了些什么呀，转载要记得加上出处哦！", 6000, 9);
 		});
-		$(document).on("visibilitychange", () => {
+		window.addEventListener("visibilitychange", () => {
 			if (!document.hidden) showMessage("哇，你终于回来了～", 6000, 9);
 		});
 	}
@@ -155,21 +155,21 @@ function loadWidget(waifuPath, apiPath) {
 		}
 		loadModel(modelId, modelTexturesId);
 		$.getJSON(waifuPath, function(result) {
-			$.each(result.mouseover, function(index, tips) {
+			result.mouseover.forEach(tips => {
 				$(document).on("mouseover", tips.selector, function() {
 					var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
 					text = text.replace("{text}", $(this).text());
 					showMessage(text, 4000, 8);
 				});
 			});
-			$.each(result.click, function(index, tips) {
+			result.click.forEach(tips => {
 				$(document).on("click", tips.selector, function() {
 					var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
 					text = text.replace("{text}", $(this).text());
 					showMessage(text, 4000, 8);
 				});
 			});
-			$.each(result.seasons, function(index, tips) {
+			result.seasons.forEach(tips => {
 				var now = new Date(),
 					after = tips.date.split("-")[0],
 					before = tips.date.split("-")[1] || after;
@@ -223,7 +223,7 @@ function loadWidget(waifuPath, apiPath) {
 
 function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 	if (screen.width <= 768) return;
-	$("body").append(`<div id="waifu-toggle" style="margin-left: -100px;">
+	document.body.insertAdjacentHTML('beforeend', `<div id="waifu-toggle" style="margin-left: -100px;">
 			<span>看板娘</span>
 		</div>`);
 	$("#waifu-toggle").hover(() => {
