@@ -119,13 +119,15 @@ function loadWidget(waifuPath, apiPath) {
 	function showHitokoto() {
 		//增加 hitokoto.cn 的 API
 		if (Math.random() < 0.6 && messageArray.length > 0) showMessage(messageArray[Math.floor(Math.random() * messageArray.length)], 6000, 9);
-		else $.getJSON("https://v1.hitokoto.cn", function(result) {
+		else fetch("https://v1.hitokoto.cn")
+			.then(response => response.json())
+			.then(result => {
 				var text = `这句一言来自 <span style="color:#0099cc;">『${result.from}』</span>，是 <span style="color:#0099cc;">${result.creator}</span> 在 hitokoto.cn 投稿的。`;
-			showMessage(result.hitokoto, 6000, 9);
-			setTimeout(() => {
-				showMessage(text, 4000, 9);
-			}, 6000);
-		});
+				showMessage(result.hitokoto, 6000, 9);
+				setTimeout(() => {
+					showMessage(text, 4000, 9);
+				}, 6000);
+			});
 	}
 
 	function showMessage(text, timeout, priority) {
@@ -154,33 +156,35 @@ function loadWidget(waifuPath, apiPath) {
 				modelTexturesId = 53; //材质 ID
 		}
 		loadModel(modelId, modelTexturesId);
-		$.getJSON(waifuPath, function(result) {
-			result.mouseover.forEach(tips => {
-				$(document).on("mouseover", tips.selector, function() {
-					var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
-					text = text.replace("{text}", $(this).text());
-					showMessage(text, 4000, 8);
+		fetch(waifuPath)
+			.then(response => response.json())
+			.then(result => {
+				result.mouseover.forEach(tips => {
+					$(document).on("mouseover", tips.selector, function() {
+						var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
+						text = text.replace("{text}", $(this).text());
+						showMessage(text, 4000, 8);
+					});
+				});
+				result.click.forEach(tips => {
+					$(document).on("click", tips.selector, function() {
+						var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
+						text = text.replace("{text}", $(this).text());
+						showMessage(text, 4000, 8);
+					});
+				});
+				result.seasons.forEach(tips => {
+					var now = new Date(),
+						after = tips.date.split("-")[0],
+						before = tips.date.split("-")[1] || after;
+					if ((after.split("/")[0] <= now.getMonth() + 1 && now.getMonth() + 1 <= before.split("/")[0]) && (after.split("/")[1] <= now.getDate() && now.getDate() <= before.split("/")[1])) {
+						var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
+						text = text.replace("{year}", now.getFullYear());
+						//showMessage(text, 7000, true);
+						messageArray.push(text);
+					}
 				});
 			});
-			result.click.forEach(tips => {
-				$(document).on("click", tips.selector, function() {
-					var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
-					text = text.replace("{text}", $(this).text());
-					showMessage(text, 4000, 8);
-				});
-			});
-			result.seasons.forEach(tips => {
-				var now = new Date(),
-					after = tips.date.split("-")[0],
-					before = tips.date.split("-")[1] || after;
-				if ((after.split("/")[0] <= now.getMonth() + 1 && now.getMonth() + 1 <= before.split("/")[0]) && (after.split("/")[1] <= now.getDate() && now.getDate() <= before.split("/")[1])) {
-					var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
-					text = text.replace("{year}", now.getFullYear());
-					//showMessage(text, 7000, true);
-					messageArray.push(text);
-				}
-			});
-		});
 	}
 	initModel();
 
@@ -194,30 +198,24 @@ function loadWidget(waifuPath, apiPath) {
 	function loadRandModel() {
 		var modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
-			//可选 "rand"(随机), "switch"(顺序)
-		$.ajax({
-			cache: false,
-			url: `${apiPath}/rand_textures/?id=${modelId}-${modelTexturesId}`,
-			dataType: "json",
-			success: function(result) {
+		//可选 "rand"(随机), "switch"(顺序)
+		fetch(`${apiPath}/rand_textures/?id=${modelId}-${modelTexturesId}`)
+			.then(response => response.json())
+			.then(result => {
 				if (result.textures["id"] == 1 && (modelTexturesId == 1 || modelTexturesId == 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
 				else showMessage("我的新衣服好看嘛？", 4000, 10);
 				loadModel(modelId, result.textures["id"]);
-			}
-		});
+			});
 	}
 
 	function loadOtherModel() {
 		var modelId = localStorage.getItem("modelId");
-		$.ajax({
-			cache: false,
-			url: `${apiPath}/switch/?id=${modelId}`,
-			dataType: "json",
-			success: function(result) {
+		fetch(`${apiPath}/switch/?id=${modelId}`)
+			.then(response => response.json())
+			.then(result => {
 				loadModel(result.model["id"]);
 				showMessage(result.model["message"], 4000, 10);
-			}
-		});
+			});
 	}
 }
 
