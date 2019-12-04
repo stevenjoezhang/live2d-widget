@@ -160,16 +160,18 @@ function loadWidget(waifuPath, apiPath) {
 			.then(response => response.json())
 			.then(result => {
 				result.mouseover.forEach(tips => {
-					$(document).on("mouseover", tips.selector, function() {
+					window.addEventListener("mouseover", event => {
+						if (!event.target.matches(tips.selector)) return;
 						var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
-						text = text.replace("{text}", $(this).text());
+						text = text.replace("{text}", event.target.innerText);
 						showMessage(text, 4000, 8);
 					});
 				});
 				result.click.forEach(tips => {
-					$(document).on("click", tips.selector, function() {
+					window.addEventListener("click", event => {
+						if (!event.target.matches(tips.selector)) return;
 						var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
-						text = text.replace("{text}", $(this).text());
+						text = text.replace("{text}", event.target.innerText);
 						showMessage(text, 4000, 8);
 					});
 				});
