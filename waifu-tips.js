@@ -28,11 +28,9 @@ function loadWidget(waifuPath, apiPath) {
 				if (!window.ASTEROIDSPLAYERS) window.ASTEROIDSPLAYERS = [];
 				window.ASTEROIDSPLAYERS.push(new Asteroids());
 			} else {
-				$.ajax({
-					url: "https://cdn.jsdelivr.net/gh/GalaxyMimi/CDN/asteroids.js",
-					dataType: "script",
-					cache: true
-				});
+				var script = document.createElement('script');
+				script.src = "https://cdn.jsdelivr.net/gh/GalaxyMimi/CDN/asteroids.js";
+				document.head.appendChild(script);
 			}
 		});
 		document.querySelector("#waifu-tool .fa-user-circle").addEventListener("click", loadOtherModel);

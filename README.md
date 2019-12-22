@@ -118,7 +118,7 @@ https://github.com/akiroz/Live2D-Widget
 
 ## 更多 More
 
-Live2D官方网站：  
+Live2D 官方网站：  
 https://www.live2d.com/en/  
 https://live2d.github.io
 
