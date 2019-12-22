@@ -96,6 +96,11 @@ https://www.example.com/path/to/live2d-widget/
 
 ## 鸣谢 Credits
 
+[![](assets/browserstack.svg)](https://www.browserstack.com)
+
+感谢 BrowserStack 容许我们在真实的浏览器中测试此项目。  
+Thanks to BrowserStack for allowing us to test this project in real browsers.
+
 代码自这篇博文魔改而来：  
 https://www.fghrsh.net/post/123.html  
 相比初始的版本，这个仓库增加了一些功能，并优化了提示展现机制。
