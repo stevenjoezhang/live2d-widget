@@ -1,5 +1,12 @@
 # Live2D Widget
 
+![](https://forthebadge.com/images/badges/built-with-love.svg)
+![](https://forthebadge.com/images/badges/uses-html.svg)
+![](https://forthebadge.com/images/badges/made-with-javascript.svg)
+![](https://forthebadge.com/images/badges/contains-cat-gifs.svg)
+![](https://forthebadge.com/images/badges/powered-by-electricity.svg)
+![](https://forthebadge.com/images/badges/makes-people-smile.svg)
+
 ## 特性 Feature
 
 在网页中添加 Live2D 看板娘。兼容 PJAX，支持无刷新加载。  
@@ -65,9 +72,9 @@ cd /path/to/your/webroot
 git clone https://github.com/stevenjoezhang/live2d-widget.git
 ```
 - 如果你的主机无法用 `ssh` 连接（例如一般的虚拟主机），请选择 `Download ZIP`，然后通过 `ftp` 上传到主机上，再解压到网站的目录下。
-- 如果你是通过 Hexo 等工具部署的静态博客，请选择 `Download ZIP`，然后解压到本地的博客目录下，例如 `source` 下与 `_posts` 同级的目录。重新部署博客时，相关文件就会自动上传到对应的目录。（还需要在Hexo主题相关的ejs或njk模版中正确配置路径，才可以加载）
+- 如果你是通过 Hexo 等工具部署的静态博客，请选择 `Download ZIP`，然后解压到本地的博客目录下，例如 `source` 下与 `_posts` 同级的目录。重新部署博客时，相关文件就会自动上传到对应的目录。（还需要在 Hexo 主题相关的 ejs 或 njk 模版中正确配置路径，才可以加载）
 
-这样，整个项目就可以通过你的服务器IP或者域名从公网访问了。你可以试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件。  
+这样，整个项目就可以通过你的服务器 IP 或者域名从公网访问了。你可以试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件。  
 如果没有问题，接下来需要修改一些配置。（需要通过服务器上的文本编辑器修改；你也可以先在本地完成这一步骤，再上传到服务器上）  
 修改 `autoload.js` 中的参数 `live2d_path` 为 `live2d-widget` 这一文件夹在公网上的路径。比如说，如果你可以通过
 ```
@@ -110,7 +117,7 @@ https://imjad.cn/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-0
 https://github.com/xiazeyu/live2d-widget.js  
 https://github.com/summerscar/live2dDemo
 
-还可以自行搭建后端api，并增加模型（需要修改的内容比较多，此处不再赘述）：  
+还可以自行搭建后端 API，并增加模型（需要修改的内容比较多，此处不再赘述）：  
 https://github.com/fghrsh/live2d_api  
 https://github.com/xiazeyu/live2d-widget-models  
 https://github.com/xiaoski/live2d_models_collection
@@ -119,7 +126,7 @@ https://github.com/xiaoski/live2d_models_collection
 https://github.com/amorist/platelet  
 https://github.com/akiroz/Live2D-Widget
 
-点击看板娘的纸飞机按钮时，会出现一个彩蛋，这来自于[WebsiteAsteroids](http://www.websiteasteroids.com)。
+点击看板娘的纸飞机按钮时，会出现一个彩蛋，这来自于 [WebsiteAsteroids](http://www.websiteasteroids.com)。
 
 ## 更多 More
 
@@ -128,7 +135,7 @@ https://www.live2d.com/en/
 https://live2d.github.io
 
 可以在官方网站下载、打包 SDK，以获取更多的功能。具体操作是：
-- 点击Cubism SDK for Web，下载相关文件；
+- 点击 Cubism SDK for Web，下载相关文件；
 - 解压并进入目录，执行 `npm install`；
 - 执行 `npm run build-sample`。
 
