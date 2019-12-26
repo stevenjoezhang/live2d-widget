@@ -30,21 +30,21 @@ Add Live2D widget to web page. Compatible with PJAX.
 
 ## 依赖 Dependencies
 
-本插件需要 jQuery 和 Font Awesome 支持，请确保它们已在页面中加载，例如在 `<head>` 中加入：  
-jQuery and Font Awesome is required for this plugin. You can add this to `<head>`:
+本插件需要 jQuery 和 Font Awesome 4.7.0 支持，请确保它们已在页面中加载，例如在 `<head>` 中加入：  
+jQuery and Font Awesome 4.7.0 is required for this plugin. You can add this to `<head>`:
 ```xml
 <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
 ```
-否则无法正常显示。（如果你的网页已经加载了 jQuery，就不要重复加载了）
+否则无法正常显示。（如果网页中已经加载了 jQuery，就不要重复加载了）
 
 ## 使用 Usage
 
-你可以直接这样使用：
+可以直接这样使用：
 ```xml
 <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
 ```
-将这一行代码加入 `<head>` 或 `<body>`，即可看到效果。如果你的网站启用了 PJAX，由于看板娘不必每页刷新，因此需要注意将相关脚本放到 PJAX 刷新区域之外。
+将这一行代码加入 `<head>` 或 `<body>`，即可看到效果。如果网站启用了 PJAX，由于看板娘不必每页刷新，因此需要注意将相关脚本放到 PJAX 刷新区域之外。
 
 换句话说，如果你是小白，或者只需要最基础的功能，就只需要：
 - 把这一行代码，连同前面的两行代码，一起放到 html 的 `<head>` 中即可；
@@ -55,7 +55,7 @@ jQuery and Font Awesome is required for this plugin. You can add this to `<head>
 
 ### Using CDN
 
-如果要自定义有关内容，可以把这个仓库 Fork 一份，然后进行修改。这时，使用方法对应地变为
+要自定义有关内容，可以把这个仓库 Fork 一份，然后进行修改。这时，使用方法对应地变为
 ```xml
 <script src="https://cdn.jsdelivr.net/gh/username/live2d-widget/autoload.js"></script>
 ```
@@ -75,7 +75,7 @@ git clone https://github.com/stevenjoezhang/live2d-widget.git
 - 如果你是通过 Hexo 等工具部署的静态博客，请选择 `Download ZIP`，然后解压到本地的博客目录下，例如 `source` 下与 `_posts` 同级的目录。重新部署博客时，相关文件就会自动上传到对应的目录。（还需要在 Hexo 主题相关的 ejs 或 njk 模版中正确配置路径，才可以加载）
 
 这样，整个项目就可以通过你的服务器 IP 或者域名从公网访问了。你可以试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件。  
-如果没有问题，接下来需要修改一些配置。（需要通过服务器上的文本编辑器修改；你也可以先在本地完成这一步骤，再上传到服务器上）  
+没有问题的话，接下来需要修改一些配置。（需要通过服务器上的文本编辑器修改；你也可以先在本地完成这一步骤，再上传到服务器上）  
 修改 `autoload.js` 中的参数 `live2d_path` 为 `live2d-widget` 这一文件夹在公网上的路径。比如说，如果你可以通过
 ```
 https://www.example.com/path/to/live2d-widget/live2d.min.js
@@ -112,6 +112,19 @@ Thanks to BrowserStack for allowing us to test this project in real browsers.
 https://www.fghrsh.net/post/123.html  
 相比初始的版本，这个仓库增加了一些功能，并优化了提示展现机制。
 
+点击看板娘的纸飞机按钮时，会出现一个彩蛋，这来自于 [WebsiteAsteroids](http://www.websiteasteroids.com)。
+
+## 更多 More
+
+Live2D 官方网站：  
+https://www.live2d.com/en/  
+https://live2d.github.io
+
+可以在官方网站下载、打包 SDK，以获取更多的功能。具体操作是：
+- 点击 Cubism SDK for Web，下载相关文件；
+- 解压并进入目录，执行 `npm install`；
+- 执行 `npm run build-sample`。
+
 更多内容可以参考：  
 https://imjad.cn/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02  
 https://github.com/xiazeyu/live2d-widget.js  
@@ -125,19 +138,6 @@ https://github.com/xiaoski/live2d_models_collection
 除此之外，还有桌面版本：  
 https://github.com/amorist/platelet  
 https://github.com/akiroz/Live2D-Widget
-
-点击看板娘的纸飞机按钮时，会出现一个彩蛋，这来自于 [WebsiteAsteroids](http://www.websiteasteroids.com)。
-
-## 更多 More
-
-Live2D 官方网站：  
-https://www.live2d.com/en/  
-https://live2d.github.io
-
-可以在官方网站下载、打包 SDK，以获取更多的功能。具体操作是：
-- 点击 Cubism SDK for Web，下载相关文件；
-- 解压并进入目录，执行 `npm install`；
-- 执行 `npm run build-sample`。
 
 ## 许可证 License
 
