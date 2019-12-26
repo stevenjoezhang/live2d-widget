@@ -1,8 +1,8 @@
-//注意：live2d_path参数应使用绝对路径
+// 注意：live2d_path 参数应使用绝对路径
 const live2d_path = "https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/";
 //const live2d_path = "/live2d-widget/";
 
-//封装异步加载资源的方法
+// 封装异步加载资源的方法
 function loadExternalResource(url, type) {
 	return new Promise((resolve, reject) => {
 		let tag;
@@ -24,7 +24,7 @@ function loadExternalResource(url, type) {
 	});
 }
 
-//加载waifu.css live2d.min.js waifu-tips.js
+// 加载 waifu.css live2d.min.js waifu-tips.js
 Promise.all([
 	loadExternalResource(live2d_path + "waifu.css", "css"),
 	loadExternalResource(live2d_path + "live2d.min.js", "js"),
@@ -32,9 +32,9 @@ Promise.all([
 ]).then(() => {
 	initWidget(live2d_path + "waifu-tips.json", "https://live2d.fghrsh.net/api");
 });
-//initWidget第一个参数为waifu-tips.json的路径，第二个参数为api地址
-//api后端可自行搭建，参考https://github.com/fghrsh/live2d_api
-//初始化看板娘会自动加载指定目录下的waifu-tips.json
+// initWidget 第一个参数为 waifu-tips.json 的路径，第二个参数为 api 地址
+// api 后端可自行搭建，参考 https://github.com/fghrsh/live2d_api
+// 初始化看板娘会自动加载指定目录下的 waifu-tips.json
 
 console.log(`
   く__,.ヘヽ.        /  ,ー､ 〉

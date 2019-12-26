@@ -67,8 +67,8 @@ function loadWidget(waifuPath, apiPath) {
 	registerEventListener();
 
 	function welcomeMessage() {
-		var SiteIndexUrl = `${location.protocol}//${location.host}/`, text; //自动获取主页
-		if (location.href == SiteIndexUrl) { //如果是主页
+		var SiteIndexUrl = `${location.protocol}//${location.host}/`, text; // 自动获取主页
+		if (location.href == SiteIndexUrl) { // 如果是主页
 			var now = new Date().getHours();
 			if (now > 5 && now <= 7) text = "早上好！一日之计在于晨，美好的一天就要开始了。";
 			else if (now > 7 && now <= 11) text = "上午好！工作顺利嘛，不要久坐，多起来走动走动哦！";
@@ -93,7 +93,7 @@ function loadWidget(waifuPath, apiPath) {
 		showMessage(text, 7000, 8);
 	}
 	welcomeMessage();
-	//检测用户活动状态，并在空闲时定时显示一言
+	// 检测用户活动状态，并在空闲时定时显示一言
 	var userAction = false,
 		hitokotoTimer = null,
 		messageTimer = null,
@@ -115,7 +115,7 @@ function loadWidget(waifuPath, apiPath) {
 	}, 1000);
 
 	function showHitokoto() {
-		//增加 hitokoto.cn 的 API
+		// 增加 hitokoto.cn 的 API
 		if (Math.random() < 0.6 && messageArray.length > 0) showMessage(messageArray[Math.floor(Math.random() * messageArray.length)], 6000, 9);
 		else fetch("https://v1.hitokoto.cn")
 			.then(response => response.json())
@@ -149,9 +149,9 @@ function loadWidget(waifuPath, apiPath) {
 		var modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
 		if (modelId == null) {
-			//首次访问加载 指定模型 的 指定材质
-			var modelId = 1, //模型 ID
-				modelTexturesId = 53; //材质 ID
+			// 首次访问加载 指定模型 的 指定材质
+			var modelId = 1, // 模型 ID
+				modelTexturesId = 53; // 材质 ID
 		}
 		loadModel(modelId, modelTexturesId);
 		fetch(waifuPath)
@@ -198,7 +198,7 @@ function loadWidget(waifuPath, apiPath) {
 	function loadRandModel() {
 		var modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
-		//可选 "rand"(随机), "switch"(顺序)
+		// 可选 "rand"(随机), "switch"(顺序)
 		fetch(`${apiPath}/rand_textures/?id=${modelId}-${modelTexturesId}`)
 			.then(response => response.json())
 			.then(result => {
