@@ -57,17 +57,11 @@
 
 #waifu #live2d {
 	cursor: grab;
-	cursor: -webkit-grab;
-	cursor: -o-grab;
-	cursor: -ms-grab;
 	position: relative;
 }
 
 #waifu #live2d:active {
 	cursor: grabbing;
-	cursor: -webkit-grabbing;
-	cursor: -o-grabbing;
-	cursor: -ms-grabbing;
 }
 
 #waifu-tool {
