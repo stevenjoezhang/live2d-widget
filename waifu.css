@@ -51,6 +51,10 @@
 	word-break: break-all;
 }
 
+#waifu-tips span {
+	color: #0099cc;
+}
+
 #waifu #live2d {
 	cursor: grab;
 	cursor: -webkit-grab;
