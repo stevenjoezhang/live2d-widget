@@ -99,7 +99,7 @@ https://www.example.com/path/to/live2d-widget/
 源文件是对 Hexo 的 NexT 主题有效的，为了适用于你自己的网页，可能需要自行修改，或增加新内容。  
 **警告：作者不对包括但不限于 `waifu-tips.json` 和 `waifu-tips.js` 文件中的内容负责，请自行确保它们是合适的。**
 
-如果有任何疑问，欢迎提 Issue。如果有任何修改建议，欢迎提 PR。
+如果有任何疑问，欢迎提 Issue。如果有任何修改建议，欢迎提 Pull Request。
 
 ## 鸣谢 Credits
 
@@ -109,8 +109,7 @@ https://www.example.com/path/to/live2d-widget/
 Thanks to BrowserStack for allowing us to test this project in real browsers.
 
 代码自这篇博文魔改而来：  
-https://www.fghrsh.net/post/123.html  
-相比初始的版本，这个仓库增加了一些功能，并优化了提示展现机制。
+https://www.fghrsh.net/post/123.html
 
 点击看板娘的纸飞机按钮时，会出现一个彩蛋，这来自于 [WebsiteAsteroids](http://www.websiteasteroids.com)。
 
@@ -144,7 +143,4 @@ https://github.com/akiroz/Live2D-Widget
 Released under the GNU General Public License v3  
 http://www.gnu.org/licenses/gpl-3.0.html
 
-## 更新 Update
-
-2018年10月31日，由 fghrsh 提供的原 API 停用，请更新至新地址。参考文章：  
-https://www.fghrsh.net/post/170.html
+本仓库中涉及的所有 Live2D 模型、图片、动作数据等版权均属于其原作者，仅供研究学习，不得用于商业用途。
