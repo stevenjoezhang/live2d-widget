@@ -51,7 +51,7 @@ function loadWidget(waifuPath, apiPath) {
 				$("#waifu-toggle").show().animate({ "margin-left": -50 }, 1000);
 			});
 		});
-		var re = /x/;
+		var re = /Live2D Widget/;
 		console.log(re);
 		re.toString = () => {
 			showMessage("哈哈，你打开了控制台，是想要看看我的小秘密吗？", 6000, 9);
@@ -67,8 +67,8 @@ function loadWidget(waifuPath, apiPath) {
 	registerEventListener();
 
 	function welcomeMessage() {
-		var SiteIndexUrl = `${location.protocol}//${location.host}/`, text; // 自动获取主页
-		if (location.href == SiteIndexUrl) { // 如果是主页
+		var text;
+		if (location.pathname === "/") { // 如果是主页
 			var now = new Date().getHours();
 			if (now > 5 && now <= 7) text = "早上好！一日之计在于晨，美好的一天就要开始了。";
 			else if (now > 7 && now <= 11) text = "上午好！工作顺利嘛，不要久坐，多起来走动走动哦！";
