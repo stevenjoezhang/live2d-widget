@@ -183,38 +183,33 @@ $(function() {
 	function loadRandModel() {
 		var modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
-		$.ajax({
-			cache: false,
-			url: `${apiURL}/rand_textures/?id=${modelId}-${modelTexturesId}`,
-			dataType: "json",
-			success: function(result) {
+		fetch(`${apiPath}/rand_textures/?id=${modelId}-${modelTexturesId}`)
+			.then(response => response.json())
+			.then(result => {
 				loadModel(modelId, result.textures["id"]);
 				setTimeout(function() {
 					state = 2;
 					$("#cover").css("bottom", "80%");
 					$("#refresh").attr("href", "javascript:refresh()");
 				}, 1000);
-			}
-		});
+			});
 	}
 
 	function loadOtherModel() {
 		var modelId = localStorage.getItem("modelId");
-		$.ajax({
-			cache: false,
-			url: `${apiURL}/switch/?id=${modelId}`,
-			dataType: "json",
-			success: function(result) {
+		fetch(`${apiPath}/switch/?id=${modelId}`)
+			.then(response => response.json())
+			.then(result => {
 				loadModel(result.model["id"]);
-			}
-		});
+			});
 	}
 
 	window.info = function() {
-		// Your code here...
-		$.getJSON("https://v1.hitokoto.cn/", function(data) {
-			alert("「" + data.hitokoto + "」——" + data.from);
-		});
+		fetch("https://v1.hitokoto.cn")
+			.then(response => response.json())
+			.then(result => {
+				alert("「" + result.hitokoto + "」——" + result.from);
+			});
 	}
 
 	window.refresh = function() {
