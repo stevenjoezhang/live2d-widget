@@ -92,9 +92,9 @@ function loadWidget(waifuPath, apiPath) {
 		showMessage(text, 7000, 8);
 	}
 	welcomeMessage();
-	// 检测用户活动状态，并在空闲时定时显示一言
+	// 检测用户活动状态，并在空闲时显示消息
 	var userAction = false,
-		hitokotoTimer = null,
+		userActionTimer = null,
 		messageTimer = null,
 		messageArray = ["好久不见，日子过得好快呢……", "大坏蛋！你都多久没理人家了呀，嘤嘤嘤～", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口！"];
 	if ($(".fa-share-alt").is(":hidden")) messageArray.push("记得把小家加入 Adblock 白名单哦！");
@@ -104,19 +104,20 @@ function loadWidget(waifuPath, apiPath) {
 		userAction = true;
 	});
 	setInterval(() => {
-		if (!userAction) {
-			if (!hitokotoTimer) hitokotoTimer = setInterval(showHitokoto, 25000);
-		} else {
+		if (userAction) {
 			userAction = false;
-			clearInterval(hitokotoTimer);
-			hitokotoTimer = null;
+			clearInterval(userActionTimer);
+			userActionTimer = null;
+		} else if (!userActionTimer) {
+			userActionTimer = setInterval(() => {
+				showMessage(messageArray[Math.floor(Math.random() * messageArray.length)], 6000, 9);
+			}, 20000);
 		}
 	}, 1000);
 
 	function showHitokoto() {
 		// 增加 hitokoto.cn 的 API
-		if (Math.random() < 0.6 && messageArray.length > 0) showMessage(messageArray[Math.floor(Math.random() * messageArray.length)], 6000, 9);
-		else fetch("https://v1.hitokoto.cn")
+		fetch("https://v1.hitokoto.cn")
 			.then(response => response.json())
 			.then(result => {
 				var text = `这句一言来自 <span>「${result.from}」</span>，是 <span>${result.creator}</span> 在 hitokoto.cn 投稿的。`;
