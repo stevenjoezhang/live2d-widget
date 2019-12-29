@@ -6,10 +6,20 @@
 	cursor: pointer;
 	font-size: 12px;
 	left: 0;
+	margin-left: -100px;
 	padding: 5px 2px 5px 5px;
 	position: fixed;
+	transition: margin-left 1s;
 	width: 60px;
 	writing-mode: vertical-rl;
+}
+
+#waifu-toggle.waifu-toggle-active {
+	margin-left: -50px;
+}
+
+#waifu-toggle.waifu-toggle-active:hover {
+	margin-left: -30px;
 }
 
 #waifu {

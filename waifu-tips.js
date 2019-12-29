@@ -49,7 +49,7 @@ function loadWidget(waifuPath, apiPath) {
 			$("#waifu").css({ bottom: -500 });
 			setTimeout(() => {
 				$("#waifu").hide();
-				$("#waifu-toggle").show().animate({ "margin-left": -50 }, 1000);
+				$("#waifu-toggle").addClass("waifu-toggle-active");
 			}, 3000);
 		});
 		var devtools = () => {};
@@ -220,17 +220,11 @@ function loadWidget(waifuPath, apiPath) {
 
 function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 	if (screen.width <= 768) return;
-	document.body.insertAdjacentHTML("beforeend", `<div id="waifu-toggle" style="margin-left: -100px;">
+	document.body.insertAdjacentHTML("beforeend", `<div id="waifu-toggle">
 			<span>看板娘</span>
 		</div>`);
-	$("#waifu-toggle").hover(() => {
-		$("#waifu-toggle").animate({ "margin-left": -30 }, 500);
-	}, () => {
-		$("#waifu-toggle").animate({ "margin-left": -50 }, 500);
-	}).click(() => {
-		$("#waifu-toggle").animate({ "margin-left": -100 }, 1000, () => {
-			$("#waifu-toggle").hide();
-		});
+	$("#waifu-toggle").click(() => {
+		$("#waifu-toggle").removeClass("waifu-toggle-active");
 		if ($("#waifu-toggle").attr("first-time")) {
 			loadWidget(waifuPath, apiPath);
 			$("#waifu-toggle").attr("first-time", false);
@@ -240,7 +234,10 @@ function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 		}
 	});
 	if (localStorage.getItem("waifu-display") && Date.now() - localStorage.getItem("waifu-display") <= 86400000) {
-		$("#waifu-toggle").attr("first-time", true).css({ "margin-left": -50 });
+		$("#waifu-toggle").attr("first-time", true);
+		setTimeout(() => {
+			$("#waifu-toggle").addClass("waifu-toggle-active");
+		}, 0);
 	} else {
 		loadWidget(waifuPath, apiPath);
 	}
