@@ -57,8 +57,14 @@
 	padding: 5px 10px;
 	position: absolute;
 	text-overflow: ellipsis;
+	transition: opacity 1s;
 	width: 250px;
 	word-break: break-all;
+}
+
+#waifu-tips.waifu-tips-active {
+	opacity: 1;
+	transition: opacity .2s;
 }
 
 #waifu-tips span {

@@ -1,6 +1,6 @@
 /*
- * https://imjad.cn/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02
- * https://www.fghrsh.net/post/123.html
+ * Live2D Widget
+ * https://github.com/stevenjoezhang/live2d-widget
  */
 
 function loadWidget(waifuPath, apiPath) {
@@ -136,10 +136,12 @@ function loadWidget(waifuPath, apiPath) {
 			}
 			if (Array.isArray(text)) text = text[Math.floor(Math.random() * text.length)];
 			sessionStorage.setItem("waifu-text", priority);
-			$("#waifu-tips").stop().html(text).fadeTo(200, 1);
+			var tips = document.getElementById("waifu-tips");
+			tips.innerHTML = text;
+			tips.classList.add("waifu-tips-active");
 			messageTimer = setTimeout(() => {
 				sessionStorage.removeItem("waifu-text");
-				$("#waifu-tips").fadeTo(1000, 0);
+				tips.classList.remove("waifu-tips-active");
 			}, timeout);
 		}
 	}
