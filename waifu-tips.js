@@ -202,9 +202,9 @@ function loadWidget(waifuPath, apiPath) {
 		fetch(`${apiPath}/rand_textures/?id=${modelId}-${modelTexturesId}`)
 			.then(response => response.json())
 			.then(result => {
-				if (result.textures["id"] == 1 && (modelTexturesId == 1 || modelTexturesId == 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
+				if (result.textures.id == 1 && (modelTexturesId == 1 || modelTexturesId == 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
 				else showMessage("我的新衣服好看嘛？", 4000, 10);
-				loadModel(modelId, result.textures["id"]);
+				loadModel(modelId, result.textures.id);
 			});
 	}
 
@@ -213,8 +213,8 @@ function loadWidget(waifuPath, apiPath) {
 		fetch(`${apiPath}/switch/?id=${modelId}`)
 			.then(response => response.json())
 			.then(result => {
-				loadModel(result.model["id"]);
-				showMessage(result.model["message"], 4000, 10);
+				loadModel(result.model.id);
+				showMessage(result.model.message, 4000, 10);
 			});
 	}
 }

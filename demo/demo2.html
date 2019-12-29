@@ -186,7 +186,7 @@ $(function() {
 		fetch(`${apiPath}/rand_textures/?id=${modelId}-${modelTexturesId}`)
 			.then(response => response.json())
 			.then(result => {
-				loadModel(modelId, result.textures["id"]);
+				loadModel(modelId, result.textures.id);
 				setTimeout(function() {
 					state = 2;
 					$("#cover").css("bottom", "80%");
@@ -200,7 +200,7 @@ $(function() {
 		fetch(`${apiPath}/switch/?id=${modelId}`)
 			.then(response => response.json())
 			.then(result => {
-				loadModel(result.model["id"]);
+				loadModel(result.model.id);
 			});
 	}
 
