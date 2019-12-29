@@ -19,7 +19,10 @@ function loadWidget(waifuPath, apiPath) {
 				<span class="fa fa-lg fa-times"></span>
 			</div>
 		</div>`);
-	$("#waifu").show().css({ bottom: 0 });
+	// https://stackoverflow.com/questions/24148403/trigger-css-transition-on-appended-element
+	setTimeout(() => {
+		document.getElementById("waifu").style.bottom = 0;
+	}, 0);
 
 	function registerEventListener() {
 		document.querySelector("#waifu-tool .fa-comment").addEventListener("click", showHitokoto);
@@ -46,9 +49,9 @@ function loadWidget(waifuPath, apiPath) {
 		document.querySelector("#waifu-tool .fa-times").addEventListener("click", () => {
 			localStorage.setItem("waifu-display", Date.now());
 			showMessage("愿你有一天能与重要的人重逢。", 2000, 11);
-			$("#waifu").css({ bottom: -500 });
+			document.getElementById("waifu").style.bottom = "-500px";
 			setTimeout(() => {
-				$("#waifu").hide();
+				document.getElementById("waifu").style.display = "none";
 				document.getElementById("waifu-toggle").classList.add("waifu-toggle-active");
 			}, 3000);
 		});
@@ -96,13 +99,9 @@ function loadWidget(waifuPath, apiPath) {
 	var userAction = false,
 		userActionTimer = null,
 		messageTimer = null,
-		messageArray = ["好久不见，日子过得好快呢……", "大坏蛋！你都多久没理人家了呀，嘤嘤嘤～", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口！"];
-	if ($(".fa-share-alt").is(":hidden")) messageArray.push("记得把小家加入 Adblock 白名单哦！");
-	$(document).mousemove(() => {
-		userAction = true;
-	}).keydown(() => {
-		userAction = true;
-	});
+		messageArray = ["好久不见，日子过得好快呢……", "大坏蛋！你都多久没理人家了呀，嘤嘤嘤～", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口！", "记得把小家加入 Adblock 白名单哦！"];
+	window.addEventListener("mousemove", () => userAction = true);
+	window.addEventListener("keydown", () => userAction = true);
 	setInterval(() => {
 		if (userAction) {
 			userAction = false;
@@ -234,7 +233,10 @@ function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 			toggle.removeAttribute("first-time");
 		} else {
 			localStorage.removeItem("waifu-display");
-			$("#waifu").show().css({ bottom: 0 });
+			document.getElementById("waifu").style.display = "";
+			setTimeout(() => {
+				document.getElementById("waifu").style.bottom = 0;
+			}, 0);
 		}
 	});
 	if (localStorage.getItem("waifu-display") && Date.now() - localStorage.getItem("waifu-display") <= 86400000) {
