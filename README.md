@@ -30,13 +30,12 @@ Add Live2D widget to web page. Compatible with PJAX.
 
 ## 依赖 Dependencies
 
-本插件需要 jQuery 和 Font Awesome 4.7.0 支持，请确保它们已在页面中加载，例如在 `<head>` 中加入：  
-jQuery and Font Awesome 4.7.0 is required for this plugin. You can add this to `<head>`:
+本插件需要 Font Awesome 4.7.0 支持，请确保相关样式表已在页面中加载，例如在 `<head>` 中加入：  
+Font Awesome 4.7.0 is required for this plugin. You can add this to `<head>`:
 ```xml
-<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
 ```
-否则无法正常显示。（如果网页中已经加载了 jQuery，就不要重复加载了）
+否则无法正常显示。（如果网页中已经加载了 Font Awesome，就不要重复加载了）
 
 ## 使用 Usage
 
@@ -144,3 +143,10 @@ Released under the GNU General Public License v3
 http://www.gnu.org/licenses/gpl-3.0.html
 
 本仓库中涉及的所有 Live2D 模型、图片、动作数据等版权均属于其原作者，仅供研究学习，不得用于商业用途。
+
+## 更新 Update
+
+2018年10月31日，由 fghrsh 提供的原 API 停用，请更新至新地址。参考文章：  
+https://www.fghrsh.net/post/170.html
+
+2020年1月1日起，本项目不再依赖于 jQuery。
