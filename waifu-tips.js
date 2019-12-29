@@ -19,7 +19,7 @@ function loadWidget(waifuPath, apiPath) {
 				<span class="fa fa-lg fa-times"></span>
 			</div>
 		</div>`);
-	$("#waifu").show().animate({ bottom: 0 }, 3000);
+	$("#waifu").show().css({ bottom: 0 });
 
 	function registerEventListener() {
 		document.querySelector("#waifu-tool .fa-comment").addEventListener("click", showHitokoto);
@@ -46,10 +46,11 @@ function loadWidget(waifuPath, apiPath) {
 		document.querySelector("#waifu-tool .fa-times").addEventListener("click", () => {
 			localStorage.setItem("waifu-display", Date.now());
 			showMessage("愿你有一天能与重要的人重逢。", 2000, 11);
-			$("#waifu").animate({ bottom: -500 }, 3000, () => {
+			$("#waifu").css({ bottom: -500 });
+			setTimeout(() => {
 				$("#waifu").hide();
 				$("#waifu-toggle").show().animate({ "margin-left": -50 }, 1000);
-			});
+			}, 3000);
 		});
 		var devtools = () => {};
 		console.log("%c", devtools);
@@ -235,7 +236,7 @@ function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 			$("#waifu-toggle").attr("first-time", false);
 		} else {
 			localStorage.removeItem("waifu-display");
-			$("#waifu").show().animate({ bottom: 0 }, 3000);
+			$("#waifu").show().css({ bottom: 0 });
 		}
 	});
 	if (localStorage.getItem("waifu-display") && Date.now() - localStorage.getItem("waifu-display") <= 86400000) {

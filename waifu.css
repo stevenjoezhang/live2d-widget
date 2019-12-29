@@ -18,7 +18,7 @@
 	line-height: 0;
 	position: fixed;
 	transform: translateY(3px);
-	transition: transform .3s ease-in-out;
+	transition: transform .3s ease-in-out, bottom 3s ease-in-out;
 	z-index: 1;
 }
 
