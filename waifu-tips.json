@@ -66,7 +66,7 @@
 		"selector": ".fancybox img, img.medium-zoom-image",
 		"text": ["点击图片可以放大呢！"]
 	}, {
-		"selector": ".highlight-wrap, .gist",
+		"selector": ".highlight, .gist",
 		"text": ["代码可以直接点击复制哟。", "GitHub！我是新手！", "PHP 是最好的语言！"]
 	}, {
 		"selector": ".container a[href^='http'], .nav-link .nav-text",
@@ -93,7 +93,7 @@
 		"selector": ".back-to-top",
 		"text": ["点它就可以回到顶部啦！", "又回到最初的起点～", "要回到开始的地方么？"]
 	}, {
-		"selector": "#rewardButton",
+		"selector": ".reward-container",
 		"text": ["我是不是棒棒哒～快给我点赞吧！", "要打赏我嘛？好期待啊～", "主人最近在吃土呢，很辛苦的样子，给他一些钱钱吧～"]
 	}, {
 		"selector": "#wechat",
@@ -126,10 +126,10 @@
 		"selector": ".need-share-button_facebook",
 		"text": ["emmm…FB 好像也是不存在的东西？"]
 	}, {
-		"selector": ".post-nav-next",
+		"selector": ".post-nav-item a[rel='next']",
 		"text": ["来看看下一篇文章吧。", "点它可以看下一篇文章哦！", "要翻到下一篇文章吗？"]
 	}, {
-		"selector": ".post-nav-prev",
+		"selector": ".post-nav-item a[rel='prev']",
 		"text": ["来看看上一篇文章吧。", "点它可以看上一篇文章哦！", "要翻到上一篇文章吗？"]
 	}, {
 		"selector": ".extend.next",
