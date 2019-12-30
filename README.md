@@ -46,7 +46,7 @@ Font Awesome 4.7.0 is required for this plugin. You can add this to `<head>`:
 将这一行代码加入 `<head>` 或 `<body>`，即可看到效果。如果网站启用了 PJAX，由于看板娘不必每页刷新，因此需要注意将相关脚本放到 PJAX 刷新区域之外。
 
 换句话说，如果你是小白，或者只需要最基础的功能，就只需要：
-- 把这一行代码，连同前面的两行代码，一起放到 html 的 `<head>` 中即可；
+- 把这一行代码，连同前面加载 Font Awesome 的一行代码，一起放到 html 的 `<head>` 中即可；
 - 如果页面是用各种模版引擎（例如 Nunjucks，Jinja 或者 PHP）生成的，也要自行修改，方法类似，只是可能略为麻烦。
 
 **但是！我们强烈推荐自己进行配置，否则很多功能是不完整的，并且可能产生问题！**  
@@ -73,9 +73,9 @@ git clone https://github.com/stevenjoezhang/live2d-widget.git
 - 如果你的主机无法用 `ssh` 连接（例如一般的虚拟主机），请选择 `Download ZIP`，然后通过 `ftp` 上传到主机上，再解压到网站的目录下。
 - 如果你是通过 Hexo 等工具部署的静态博客，请选择 `Download ZIP`，然后解压到本地的博客目录下，例如 `source` 下与 `_posts` 同级的目录。重新部署博客时，相关文件就会自动上传到对应的目录。（还需要在 Hexo 主题相关的 ejs 或 njk 模版中正确配置路径，才可以加载）
 
-这样，整个项目就可以通过你的服务器 IP 或者域名从公网访问了。你可以试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件。  
-没有问题的话，接下来需要修改一些配置。（需要通过服务器上的文本编辑器修改；你也可以先在本地完成这一步骤，再上传到服务器上）  
-修改 `autoload.js` 中的参数 `live2d_path` 为 `live2d-widget` 这一文件夹在公网上的路径。比如说，如果你可以通过
+这样，整个项目就可以通过你的服务器 IP 或者域名从公网访问了。你可以试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件，并确认这些文件的内容是正确的，没有出现乱码。  
+一切正常的话，接下来修改一些配置就行了。（需要通过服务器上的文本编辑器修改；你也可以先在本地完成这一步骤，再上传到服务器上）  
+修改 `autoload.js` 中的常量 `live2d_path` 为 `live2d-widget` 这一文件夹在公网上的路径。比如说，如果你可以通过
 ```
 https://www.example.com/path/to/live2d-widget/live2d.min.js
 ```
@@ -114,15 +114,6 @@ https://www.fghrsh.net/post/123.html
 
 ## 更多 More
 
-Live2D 官方网站：  
-https://www.live2d.com/en/  
-https://live2d.github.io
-
-可以在官方网站下载、打包 SDK，以获取更多的功能。具体操作是：
-- 点击 Cubism SDK for Web，下载相关文件；
-- 解压并进入目录，执行 `npm install`；
-- 执行 `npm run build-sample`。
-
 更多内容可以参考：  
 https://imjad.cn/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02  
 https://github.com/xiazeyu/live2d-widget.js  
@@ -143,6 +134,19 @@ Released under the GNU General Public License v3
 http://www.gnu.org/licenses/gpl-3.0.html
 
 本仓库中涉及的所有 Live2D 模型、图片、动作数据等版权均属于其原作者，仅供研究学习，不得用于商业用途。
+
+Live2D 官方网站：  
+https://www.live2d.com/en/  
+https://live2d.github.io
+
+Live2D Cubism Core は Live2D Proprietary Software License で提供しています。  
+https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html  
+Live2D Cubism Components は Live2D Open Software License で提供しています。  
+http://www.live2d.com/eula/live2d-open-software-license-agreement_en.html
+
+> The terms and conditions do prohibit modification, but obfuscating in `live2d.min.js` would not be considered illegal modification.
+
+https://community.live2d.com/discussion/140/webgl-developer-licence-and-javascript-question
 
 ## 更新 Update
 
