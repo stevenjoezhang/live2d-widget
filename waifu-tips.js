@@ -221,7 +221,6 @@ function loadWidget(waifuPath, apiPath) {
 }
 
 function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
-	if (screen.width <= 768) return;
 	document.body.insertAdjacentHTML("beforeend", `<div id="waifu-toggle">
 			<span>看板娘</span>
 		</div>`);
