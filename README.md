@@ -26,7 +26,7 @@ Add Live2D widget to web page. Compatible with PJAX.
 这个仓库中也提供了两个 Demo，即
 
 - [demo1.html](https://mi.js.org/live2d-widget/demo/demo1.html) ，展现基础效果
-- [demo2.html](https://mi.js.org/live2d-widget/demo/demo2.html) ，仿NPM的登陆界面
+- [demo2.html](https://mi.js.org/live2d-widget/demo/demo2.html) ，仿 NPM 的登陆界面
 
 ## 依赖 Dependencies
 
@@ -39,14 +39,14 @@ Font Awesome 4.7.0 is required for this plugin. You can add this to `<head>`:
 
 ## 使用 Usage
 
-可以直接这样使用：
+将这一行代码加入 `<head>` 或 `<body>`，即可展现出效果：
 ```xml
 <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
 ```
-将这一行代码加入 `<head>` 或 `<body>`，即可看到效果。如果网站启用了 PJAX，由于看板娘不必每页刷新，因此需要注意将相关脚本放到 PJAX 刷新区域之外。
+如果网站启用了 PJAX，由于看板娘不必每页刷新，因此要注意将相关脚本放到 PJAX 刷新区域之外。
 
-换句话说，如果你是小白，或者只需要最基础的功能，就只需要把这一行代码，连同前面加载 Font Awesome 的一行代码，一起放到 html 的 `<head>` 中即可。  
-如果页面是用各种模版引擎（例如 Nunjucks，Jinja 或者 PHP）生成的，也要自行修改，方法类似，只是可能略为麻烦。以 Hexo 为例，需要在主题相关的 ejs 或 njk 模版中正确配置路径，才可以加载。
+换句话说，如果你是小白，或者只需要最基础的功能，就只用把这一行代码，连同前面加载 Font Awesome 的一行代码，一起放到 html 的 `<head>` 中即可。  
+对于用各种模版引擎（例如 Nunjucks，Jinja 或者 PHP）生成的页面，也要自行修改，方法类似，只是可能略为麻烦。以 Hexo 为例，需要在主题相关的 ejs 或 njk 模版中正确配置路径，才可以加载。
 
 **但是！我们强烈推荐自己进行配置，否则很多功能是不完整的，并且可能产生问题！**  
 如果你有兴趣自己折腾的话，请看下面的详细说明。
@@ -63,7 +63,7 @@ Font Awesome 4.7.0 is required for this plugin. You can add this to `<head>`:
 
 你也可以直接把这些文件放到服务器上，而不是通过 CDN 加载。
 
-- 如果你可以通过 `ssh` 访问你的主机，请把整个项目克隆到服务器上。执行：
+- 如果你能够通过 `ssh` 访问你的主机，请把整个仓库克隆到服务器上。执行：
   ```bash
   cd /path/to/your/webroot
   # Clone this repository
@@ -72,9 +72,9 @@ Font Awesome 4.7.0 is required for this plugin. You can add this to `<head>`:
 - 如果你的主机无法用 `ssh` 连接（例如一般的虚拟主机），请选择 `Download ZIP`，然后通过 `ftp` 等方式上传到主机上，再解压到网站的目录下。
 - 如果你是通过 Hexo 等工具部署的静态博客，请在本地开命令行进入博客目录，例如 `source` 下与 `_posts` 同级的目录，然后再执行前述的 `git clone` 命令。重新部署博客时，相关文件就会自动上传到对应的路径下。
 
-这样，整个项目就可以通过你的服务器 IP 或者域名从公网访问了。你可以试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件，并确认这些文件的内容是正确的，没有出现乱码。  
+这样，整个项目就可以通过你的服务器 IP 或者域名从公网访问了。不妨试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件，并确认这些文件的内容是正确的，没有出现乱码。  
 一切正常的话，接下来修改一些配置就行了。（需要通过服务器上的文本编辑器修改；你也可以先在本地完成这一步骤，再上传到服务器上）  
-修改 `autoload.js` 中的常量 `live2d_path` 为 `live2d-widget` 这一文件夹在公网上的路径。比如说，如果你可以通过
+修改 `autoload.js` 中的常量 `live2d_path` 为 `live2d-widget` 这一文件夹在公网上的路径。比如说，如果你能够通过
 ```
 https://www.example.com/path/to/live2d-widget/live2d.min.js
 ```
