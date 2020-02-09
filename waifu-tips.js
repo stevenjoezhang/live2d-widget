@@ -3,7 +3,8 @@
  * https://github.com/stevenjoezhang/live2d-widget
  */
 
-function loadWidget(waifuPath, apiPath) {
+function loadWidget(config) {
+	let { waifuPath, apiPath } = config;
 	localStorage.removeItem("waifu-display");
 	sessionStorage.removeItem("waifu-text");
 	document.body.insertAdjacentHTML("beforeend", `<div id="waifu">
@@ -220,7 +221,13 @@ function loadWidget(waifuPath, apiPath) {
 	}
 }
 
-function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
+function initWidget(config, apiPath = "") {
+	if (typeof config === "string") {
+		config = {
+			waifuPath: config,
+			apiPath
+		};
+	}
 	document.body.insertAdjacentHTML("beforeend", `<div id="waifu-toggle">
 			<span>看板娘</span>
 		</div>`);
@@ -228,7 +235,7 @@ function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 	toggle.addEventListener("click", () => {
 		toggle.classList.remove("waifu-toggle-active");
 		if (toggle.getAttribute("first-time")) {
-			loadWidget(waifuPath, apiPath);
+			loadWidget(config);
 			toggle.removeAttribute("first-time");
 		} else {
 			localStorage.removeItem("waifu-display");
@@ -244,6 +251,6 @@ function initWidget(waifuPath = "/waifu-tips.json", apiPath = "") {
 			toggle.classList.add("waifu-toggle-active");
 		}, 0);
 	} else {
-		loadWidget(waifuPath, apiPath);
+		loadWidget(config);
 	}
 }
