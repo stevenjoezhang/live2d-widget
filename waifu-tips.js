@@ -4,7 +4,13 @@
  */
 
 function loadWidget(config) {
-	let { waifuPath, apiPath } = config;
+	let { waifuPath, apiPath, cdnPath } = config;
+	let useCDN = false;
+	if (typeof cdnPath === "string") {
+		useCDN = true;
+		if (!cdnPath.endsWith("/")) cdnPath += "/";
+	}
+	if (!apiPath.endsWith("/")) apiPath += "/";
 	localStorage.removeItem("waifu-display");
 	sessionStorage.removeItem("waifu-text");
 	document.body.insertAdjacentHTML("beforeend", `<div id="waifu">
@@ -25,7 +31,7 @@ function loadWidget(config) {
 		document.getElementById("waifu").style.bottom = 0;
 	}, 0);
 
-	function registerEventListener() {
+	(function registerEventListener() {
 		document.querySelector("#waifu-tool .fa-comment").addEventListener("click", showHitokoto);
 		document.querySelector("#waifu-tool .fa-paper-plane").addEventListener("click", () => {
 			if (window.Asteroids) {
@@ -67,10 +73,9 @@ function loadWidget(config) {
 		window.addEventListener("visibilitychange", () => {
 			if (!document.hidden) showMessage("哇，你终于回来了～", 6000, 9);
 		});
-	}
-	registerEventListener();
+	})();
 
-	function welcomeMessage() {
+	(function welcomeMessage() {
 		var text;
 		if (location.pathname === "/") { // 如果是主页
 			var now = new Date().getHours();
@@ -94,8 +99,7 @@ function loadWidget(config) {
 			text = `欢迎阅读<span>「${document.title.split(" - ")[0]}」</span>`;
 		}
 		showMessage(text, 7000, 8);
-	}
-	welcomeMessage();
+	})();
 	// 检测用户活动状态，并在空闲时显示消息
 	var userAction = false,
 		userActionTimer = null,
@@ -147,7 +151,7 @@ function loadWidget(config) {
 		}
 	}
 
-	function initModel() {
+	(function initModel() {
 		var modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
 		if (modelId == null) {
@@ -187,21 +191,20 @@ function loadWidget(config) {
 					}
 				});
 			});
-	}
-	initModel();
+	})();
 
 	function loadModel(modelId, modelTexturesId) {
 		localStorage.setItem("modelId", modelId);
 		if (modelTexturesId === undefined) modelTexturesId = 0;
 		localStorage.setItem("modelTexturesId", modelTexturesId);
-		loadlive2d("live2d", `${apiPath}/get/?id=${modelId}-${modelTexturesId}`, console.log(`Live2D 模型 ${modelId}-${modelTexturesId} 加载完成`));
+		loadlive2d("live2d", `${apiPath}get/?id=${modelId}-${modelTexturesId}`, console.log(`Live2D 模型 ${modelId}-${modelTexturesId} 加载完成`));
 	}
 
 	function loadRandModel() {
 		var modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
 		// 可选 "rand"(随机), "switch"(顺序)
-		fetch(`${apiPath}/rand_textures/?id=${modelId}-${modelTexturesId}`)
+		fetch(`${apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`)
 			.then(response => response.json())
 			.then(result => {
 				if (result.textures.id == 1 && (modelTexturesId == 1 || modelTexturesId == 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
@@ -212,7 +215,7 @@ function loadWidget(config) {
 
 	function loadOtherModel() {
 		var modelId = localStorage.getItem("modelId");
-		fetch(`${apiPath}/switch/?id=${modelId}`)
+		fetch(`${apiPath}switch/?id=${modelId}`)
 			.then(response => response.json())
 			.then(result => {
 				loadModel(result.model.id);
@@ -221,7 +224,7 @@ function loadWidget(config) {
 	}
 }
 
-function initWidget(config, apiPath = "") {
+function initWidget(config, apiPath = "/") {
 	if (typeof config === "string") {
 		config = {
 			waifuPath: config,
