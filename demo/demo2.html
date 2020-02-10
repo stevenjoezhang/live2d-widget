@@ -161,7 +161,7 @@ window.addEventListener("load", () => {
 	var apiPath = "https://live2d.fghrsh.net/api", state = 0,
 		modelId = localStorage.getItem("modelId"),
 		modelTexturesId = localStorage.getItem("modelTexturesId");
-	if (modelId == null) {
+	if (modelId === null) {
 		modelId = 1;
 		modelTexturesId = 53;
 	}
@@ -223,24 +223,24 @@ window.addEventListener("load", () => {
 	}
 
 	document.getElementById("handle").addEventListener("click", () => {
-		if (state == 1) {
+		if (state === 1) {
 			state = 2;
 			coverPosition("80%");
 		}
-		else if (state == 2) {
+		else if (state === 2) {
 			state = 1;
 			coverPosition("20%");
 		}
 	});
 
 	document.querySelector("input[type=password]").addEventListener("focus", () => {
-		if (state == 2) {
+		if (state === 2) {
 			state = 1;
 			coverPosition("20%");
 		}
 	});
 	document.querySelector("input[type=password]").addEventListener("blur", () => {
-		if (state == 1) {
+		if (state === 1) {
 			state = 2;
 			coverPosition("80%");
 		}
