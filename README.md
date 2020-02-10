@@ -41,7 +41,7 @@ Font Awesome 4.7.0 is required for this plugin. You can add this to `<head>`:
 
 将这一行代码加入 `<head>` 或 `<body>`，即可展现出效果：
 ```xml
-<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
 ```
 如果网站启用了 PJAX，由于看板娘不必每页刷新，因此要注意将相关脚本放到 PJAX 刷新区域之外。
 
@@ -55,7 +55,7 @@ Font Awesome 4.7.0 is required for this plugin. You can add this to `<head>`:
 
 要自定义有关内容，可以把这个仓库 Fork 一份，然后进行修改。这时，使用方法对应地变为
 ```xml
-<script src="https://cdn.jsdelivr.net/gh/username/live2d-widget/autoload.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/username/live2d-widget@latest/autoload.js"></script>
 ```
 将 `username` 替换为你的 GitHub 用户名即可。
 
