@@ -5,7 +5,7 @@
 
 function loadWidget(config) {
 	let { waifuPath, apiPath, cdnPath } = config;
-	let useCDN = false;
+	let useCDN = false, modelList;
 	if (typeof cdnPath === "string") {
 		useCDN = true;
 		if (!cdnPath.endsWith("/")) cdnPath += "/";
@@ -100,10 +100,13 @@ function loadWidget(config) {
 		}
 		showMessage(text, 7000, 8);
 	})();
+	function randomSelection(obj) {
+		return Array.isArray(obj) ? obj[Math.floor(Math.random() * obj.length)] : obj;
+	}
 	// 检测用户活动状态，并在空闲时显示消息
 	var userAction = false,
-		userActionTimer = null,
-		messageTimer = null,
+		userActionTimer,
+		messageTimer,
 		messageArray = ["好久不见，日子过得好快呢……", "大坏蛋！你都多久没理人家了呀，嘤嘤嘤～", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口！", "记得把小家加入 Adblock 白名单哦！"];
 	window.addEventListener("mousemove", () => userAction = true);
 	window.addEventListener("keydown", () => userAction = true);
@@ -114,7 +117,7 @@ function loadWidget(config) {
 			userActionTimer = null;
 		} else if (!userActionTimer) {
 			userActionTimer = setInterval(() => {
-				showMessage(messageArray[Math.floor(Math.random() * messageArray.length)], 6000, 9);
+				showMessage(randomSelection(messageArray), 6000, 9);
 			}, 20000);
 		}
 	}, 1000);
@@ -139,7 +142,7 @@ function loadWidget(config) {
 				clearTimeout(messageTimer);
 				messageTimer = null;
 			}
-			if (Array.isArray(text)) text = text[Math.floor(Math.random() * text.length)];
+			text = randomSelection(text);
 			sessionStorage.setItem("waifu-text", priority);
 			var tips = document.getElementById("waifu-tips");
 			tips.innerHTML = text;
@@ -166,7 +169,7 @@ function loadWidget(config) {
 				result.mouseover.forEach(tips => {
 					window.addEventListener("mouseover", event => {
 						if (!event.target.matches(tips.selector)) return;
-						var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
+						var text = randomSelection(tips.text);
 						text = text.replace("{text}", event.target.innerText);
 						showMessage(text, 4000, 8);
 					});
@@ -174,7 +177,7 @@ function loadWidget(config) {
 				result.click.forEach(tips => {
 					window.addEventListener("click", event => {
 						if (!event.target.matches(tips.selector)) return;
-						var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
+						var text = randomSelection(tips.text);
 						text = text.replace("{text}", event.target.innerText);
 						showMessage(text, 4000, 8);
 					});
@@ -184,7 +187,7 @@ function loadWidget(config) {
 						after = tips.date.split("-")[0],
 						before = tips.date.split("-")[1] || after;
 					if ((after.split("/")[0] <= now.getMonth() + 1 && now.getMonth() + 1 <= before.split("/")[0]) && (after.split("/")[1] <= now.getDate() && now.getDate() <= before.split("/")[1])) {
-						var text = Array.isArray(tips.text) ? tips.text[Math.floor(Math.random() * tips.text.length)] : tips.text;
+						var text = randomSelection(tips.text);
 						text = text.replace("{year}", now.getFullYear());
 						//showMessage(text, 7000, true);
 						messageArray.push(text);
@@ -193,34 +196,58 @@ function loadWidget(config) {
 			});
 	})();
 
-	function loadModel(modelId, modelTexturesId) {
-		localStorage.setItem("modelId", modelId);
-		if (modelTexturesId === undefined) modelTexturesId = 0;
-		localStorage.setItem("modelTexturesId", modelTexturesId);
-		loadlive2d("live2d", `${apiPath}get/?id=${modelId}-${modelTexturesId}`, console.log(`Live2D 模型 ${modelId}-${modelTexturesId} 加载完成`));
+	async function loadModelList() {
+		let response = await fetch(`${cdnPath}model_list.json`);
+		let result = await response.json();
+		modelList = result;
 	}
 
-	function loadRandModel() {
+	async function loadModel(modelId, modelTexturesId, message) {
+		localStorage.setItem("modelId", modelId);
+		localStorage.setItem("modelTexturesId", modelTexturesId);
+		showMessage(message, 4000, 10);
+		if (useCDN) {
+			if (!modelList) await loadModelList();
+			let target = randomSelection(modelList.models[modelId]);
+			loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
+		} else {
+			loadlive2d("live2d", `${apiPath}get/?id=${modelId}-${modelTexturesId}`);
+			console.log(`Live2D 模型 ${modelId}-${modelTexturesId} 加载完成`);
+		}
+	}
+
+	async function loadRandModel() {
 		var modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
-		// 可选 "rand"(随机), "switch"(顺序)
-		fetch(`${apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`)
-			.then(response => response.json())
-			.then(result => {
-				if (result.textures.id == 1 && (modelTexturesId == 1 || modelTexturesId == 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
-				else showMessage("我的新衣服好看嘛？", 4000, 10);
-				loadModel(modelId, result.textures.id);
-			});
+		if (useCDN) {
+			if (!modelList) await loadModelList();
+			let target = randomSelection(modelList.models[modelId]);
+			loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
+			showMessage("我的新衣服好看嘛？", 4000, 10);
+		} else {
+			// 可选 "rand"(随机), "switch"(顺序)
+			fetch(`${apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`)
+				.then(response => response.json())
+				.then(result => {
+					if (result.textures.id == 1 && (modelTexturesId == 1 || modelTexturesId == 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
+					else loadModel(modelId, result.textures.id, "我的新衣服好看嘛？");
+				});
+		}
 	}
 
-	function loadOtherModel() {
+	async function loadOtherModel() {
 		var modelId = localStorage.getItem("modelId");
-		fetch(`${apiPath}switch/?id=${modelId}`)
-			.then(response => response.json())
-			.then(result => {
-				loadModel(result.model.id);
-				showMessage(result.model.message, 4000, 10);
-			});
+		if (useCDN) {
+			if (!modelList) await loadModelList();
+			let index = (++modelId >= modelList.models.length) ? 0 : modelId;
+			loadModel(index, 0, modelList.messages[index]);
+		} else {
+			fetch(`${apiPath}switch/?id=${modelId}`)
+				.then(response => response.json())
+				.then(result => {
+					loadModel(result.model.id, 0, result.model.message);
+				});
+		}
 	}
 }
 

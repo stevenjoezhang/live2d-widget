@@ -12,7 +12,7 @@
 在网页中添加 Live2D 看板娘。兼容 PJAX，支持无刷新加载。  
 Add Live2D widget to web page. Compatible with PJAX.
 
-**警告：本项目不支持 IE 11 等老旧浏览器。**  
+**警告：本项目使用了大量 ES6 语法，且依赖于 WebGL。不支持 IE 11 等老旧浏览器。**  
 **WARNING: This project does not support legacy browsers such as IE 11.**
 
 ## 示例 Demo
