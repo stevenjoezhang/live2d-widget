@@ -19,9 +19,7 @@ Add Live2D widget to web page. Compatible with PJAX.
 
 在[米米的博客](https://zhangshuqiao.org)的左下角可查看效果。
 
-![](assets/screenshot-1.png)
-![](assets/screenshot-2.png)
-![](assets/screenshot-3.png)
+<img src="assets/screenshot-1.png"><img src="assets/screenshot-2.png" width="300"><img src="assets/screenshot-3.png" width="300">
 
 这个仓库中也提供了两个 Demo，即
 
