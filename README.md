@@ -17,11 +17,11 @@ Add Live2D widget to web page. Compatible with PJAX.
 
 ## 示例 Demo
 
-在[米米的博客](https://zhangshuqiao.org)的左下角可查看效果。
+在[米米的博客](https://zhangshuqiao.org)的左下角可查看效果。（注：以下人物模型仅供展示之用，本仓库并不包含任何模型。）
 
 <img src="assets/screenshot-1.png"><img src="assets/screenshot-2.png" width="300"><img src="assets/screenshot-3.png" width="300">
 
-这个仓库中也提供了两个 Demo，即
+你也可以在允许的范围内进行二次开发，这里有一些示例
 
 - [demo1.html](https://mi.js.org/live2d-widget/demo/demo1.html) ，展现基础效果
 - [demo2.html](https://mi.js.org/live2d-widget/demo/demo2.html) ，仿 NPM 的登陆界面
@@ -44,7 +44,7 @@ Font Awesome (v4 or v5) is required for this plugin. Take Font Awesome v4 as an 
 如果网站启用了 PJAX，由于看板娘不必每页刷新，因此要注意将相关脚本放到 PJAX 刷新区域之外。
 
 换句话说，如果你是小白，或者只需要最基础的功能，就只用把这一行代码，连同前面加载 Font Awesome 的一行代码，一起放到 html 的 `<head>` 中即可。  
-对于用各种模版引擎（例如 Nunjucks，Jinja 或者 PHP）生成的页面，也要自行修改，方法类似，只是可能略为麻烦。以 Hexo 为例，需要在主题相关的 ejs 或 njk 模版中正确配置路径，才可以加载。
+对于用各种模版引擎（例如 Nunjucks，Jinja 或者 PHP）生成的页面，也要自行修改，方法类似，只是可能略为麻烦。以 [Hexo](https://hexo.io) 为例，需要在主题相关的 ejs 或 njk 模版中正确配置路径，才可以加载。
 
 **但是！我们强烈推荐自己进行配置，否则很多功能是不完整的，并且可能产生问题！**  
 如果你有兴趣自己折腾的话，请看下面的详细说明。
@@ -68,9 +68,9 @@ Font Awesome (v4 or v5) is required for this plugin. Take Font Awesome v4 as an 
   git clone https://github.com/stevenjoezhang/live2d-widget.git
   ```
 - 如果你的主机无法用 `ssh` 连接（例如一般的虚拟主机），请选择 `Download ZIP`，然后通过 `ftp` 等方式上传到主机上，再解压到网站的目录下。
-- 如果你是通过 Hexo 等工具部署的静态博客，请在本地开命令行进入博客目录，例如 `source` 下与 `_posts` 同级的目录，然后再执行前述的 `git clone` 命令。重新部署博客时，相关文件就会自动上传到对应的路径下。
+- 如果你是通过 Hexo 等工具部署的静态博客，请在本地的博客目录中（例如 `source` 下与 `_posts` 同级的目录），执行前述的 `git clone` 命令。重新部署博客时，相关文件就会自动上传到对应的路径下。为了避免这些文件被 Hexo 插件错误地修改，可能需要设置 `skip_render`。
 
-这样，整个项目就可以通过你的服务器 IP 或者域名从公网访问了。不妨试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件，并确认这些文件的内容是正确的，没有出现乱码。  
+这样，整个项目就可以通过你的服务器 IP 或者域名从公网访问了。不妨试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件，并确认这些文件的内容是完整和正确的。  
 一切正常的话，接下来修改一些配置就行了。（需要通过服务器上的文本编辑器修改；你也可以先在本地完成这一步骤，再上传到服务器上）  
 修改 `autoload.js` 中的常量 `live2d_path` 为 `live2d-widget` 这一文件夹在公网上的路径。比如说，如果你能够通过
 ```
@@ -89,11 +89,12 @@ https://www.example.com/path/to/live2d-widget/
 
 ## 目录结构 Files
 
-- `waifu-tips.json` 中包含了触发条件（`selector`，选择器）和触发时显示的文字（`text`）；
+- `waifu-tips.js` 包含了按钮和对话框的逻辑；
+- `waifu-tips.json` 中定义了触发条件（`selector`，CSS 选择器）和触发时显示的文字（`text`）；
 - `waifu.css` 是看板娘的样式表。
 
-源文件是对 Hexo 的 NexT 主题有效的，为了适用于你自己的网页，可能需要自行修改，或增加新内容。  
-**警告：作者不对包括但不限于 `waifu-tips.json` 和 `waifu-tips.js` 文件中的内容负责，请自行确保它们是合适的。**
+源文件是对 Hexo 的 [NexT 主题](http://github.com/hexo-next/hexo-theme-next)有效的，为了适用于你自己的网页，可能需要自行修改，或增加新内容。  
+**警告：作者不对包括但不限于 `waifu-tips.js` 和 `waifu-tips.json` 文件中的内容负责，请自行确保它们是合适的。**
 
 如果有任何疑问，欢迎提 Issue。如果有任何修改建议，欢迎提 Pull Request。
 
