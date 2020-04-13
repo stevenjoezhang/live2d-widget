@@ -12,7 +12,7 @@
 在网页中添加 Live2D 看板娘。兼容 PJAX，支持无刷新加载。  
 Add Live2D widget to web page. Compatible with PJAX.
 
-**警告：本项目使用了大量 ES6 语法，且依赖于 WebGL。不支持 IE 11 等老旧浏览器。**  
+**警告：本项目使用了大量 ES6 语法，不支持 IE 11 等老旧浏览器。**  
 **WARNING: This project does not support legacy browsers such as IE 11.**
 
 ## 示例 Demo
@@ -33,7 +33,7 @@ Font Awesome (v4 or v5) is required for this plugin. Take Font Awesome v4 as an 
 ```xml
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
 ```
-否则无法正常显示。（如果网页中已经加载了任何版本的 Font Awesome，就不要重复加载了）
+否则图标将无法正常显示。（如果网页中已经加载了任何版本的 Font Awesome，就不要重复加载了）
 
 ## 使用 Usage
 
