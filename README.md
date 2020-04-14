@@ -98,12 +98,14 @@ https://www.example.com/path/to/live2d-widget/
 
 如果有任何疑问，欢迎提 Issue。如果有任何修改建议，欢迎提 Pull Request。
 
-## 鸣谢 Credits
+## 鸣谢 Thanks
 
-[![](assets/browserstack.svg)](https://www.browserstack.com)
+<a href="https://www.browserstack.com/">
+  <img src="https://live.browserstack.com/images/opensource/browserstack-logo.svg" alt="BrowserStack Logo" width="300">
+</a>
 
 感谢 BrowserStack 容许我们在真实的浏览器中测试此项目。  
-Thanks to BrowserStack for allowing us to test this project in real browsers.
+Thanks to [BrowserStack](https://www.browserstack.com/) for providing the infrastructure that allows us to test in real browsers!
 
 代码自这篇博文魔改而来：  
 https://www.fghrsh.net/post/123.html
