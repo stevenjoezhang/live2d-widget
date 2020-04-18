@@ -23,8 +23,8 @@ Add Live2D widget to web page. Compatible with PJAX.
 
 你也可以在允许的范围内进行二次开发，这里有一些示例
 
-- [demo1.html](https://mi.js.org/live2d-widget/demo/demo1.html) ，展现基础效果
-- [demo2.html](https://mi.js.org/live2d-widget/demo/demo2.html) ，仿 NPM 的登陆界面
+- [demo.html](https://mi.js.org/live2d-widget/demo/demo.html) ，展现基础效果
+- [login.html](https://mi.js.org/live2d-widget/demo/login.html) ，仿 NPM 的登陆界面
 
 ## 依赖 Dependencies
 
