@@ -55,7 +55,9 @@ Font Awesome (v4 or v5) is required for this plugin. Take Font Awesome v4 as an 
 ```xml
 <script src="https://cdn.jsdelivr.net/gh/username/live2d-widget@latest/autoload.js"></script>
 ```
-将 `username` 替换为你的 GitHub 用户名即可。
+将此处的 `username` 替换为你的 GitHub 用户名。为了使 CDN 的内容正常刷新，需要创建新的 git tag 和/或在 GitHub 仓库中创建 release，否则此处的 `@latest` 仍然指向更新前的文件。此外 CDN 本身存在缓存，因此改动可能需要一定的时间生效。相关文档：
+- [Git Basics - Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
+- [Managing releases in a repository](https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository)
 
 ### Self-host
 
