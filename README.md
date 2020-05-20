@@ -70,22 +70,22 @@ Font Awesome (v4 or v5) is required for this plugin. Take Font Awesome v4 as an 
   git clone https://github.com/stevenjoezhang/live2d-widget.git
   ```
 - 如果你的主机无法用 `ssh` 连接（例如一般的虚拟主机），请选择 `Download ZIP`，然后通过 `ftp` 等方式上传到主机上，再解压到网站的目录下。
-- 如果你是通过 Hexo 等工具部署的静态博客，请在本地的博客目录中（例如 `source` 下与 `_posts` 同级的目录），执行前述的 `git clone` 命令。重新部署博客时，相关文件就会自动上传到对应的路径下。为了避免这些文件被 Hexo 插件错误地修改，可能需要设置 `skip_render`。
+- 如果你是通过 Hexo 等工具部署的静态博客，请在博客源文件（即 `source`）目录下，执行前述的 `git clone` 命令。重新部署博客时，相关文件就会自动上传到对应的路径下。为了避免这些文件被 Hexo 插件错误地修改，可能需要设置 `skip_render`。
 
 这样，整个项目就可以通过你的服务器 IP 或者域名从公网访问了。不妨试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件，并确认这些文件的内容是完整和正确的。  
 一切正常的话，接下来修改一些配置就行了。（需要通过服务器上的文本编辑器修改；你也可以先在本地完成这一步骤，再上传到服务器上）  
-修改 `autoload.js` 中的常量 `live2d_path` 为 `live2d-widget` 这一文件夹在公网上的路径。比如说，如果你能够通过
+修改 `autoload.js` 中的常量 `live2d_path` 为 `live2d-widget` 这一目录的 URL。比如说，如果你能够通过
 ```
-https://www.example.com/path/to/live2d-widget/live2d.min.js
+https://example.com/path/to/live2d-widget/live2d.min.js
 ```
 访问到 `live2d.min.js`，那么就把 `live2d_path` 的值修改为
 ```
-https://www.example.com/path/to/live2d-widget/
+https://example.com/path/to/live2d-widget/
 ```
 路径末尾的 `/` 一定要加上。具体可以参考 `autoload.js` 内的注释。  
 完成后，在你要添加看板娘的界面加入
 ```xml
-<script src="https://www.example.com/path/to/live2d-widget/autoload.js"></script>
+<script src="https://example.com/path/to/live2d-widget/autoload.js"></script>
 ```
 就可以加载了。
 
