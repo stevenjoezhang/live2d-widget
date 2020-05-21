@@ -89,6 +89,10 @@ https://example.com/path/to/live2d-widget/
 ```
 就可以加载了。
 
+## 后端 API
+
+`initWidget` 方法接受名为 `apiPath` 和 `cdnPath` 的参数，两者设置其中一项即可。其中 `apiPath` 为后端 API 的 URL，可以自行搭建，并增加模型（需要修改的内容比较多，此处不再赘述）。而 `cdnPath` 则是通过 jsDelivr 这样的 CDN 服务加载资源，更加稳定。
+
 ## 目录结构 Files
 
 - `waifu-tips.js` 包含了按钮和对话框的逻辑；
@@ -123,7 +127,7 @@ https://imjad.cn/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-0
 https://github.com/xiazeyu/live2d-widget.js  
 https://github.com/summerscar/live2dDemo
 
-还可以自行搭建后端 API，并增加模型（需要修改的内容比较多，此处不再赘述）：  
+关于后端 API 模型：  
 https://github.com/fghrsh/live2d_api  
 https://github.com/xiazeyu/live2d-widget-models  
 https://github.com/xiaoski/live2d_models_collection
