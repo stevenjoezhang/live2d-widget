@@ -135,7 +135,9 @@ https://github.com/xiaoski/live2d_models_collection
 
 除此之外，还有桌面版本：  
 https://github.com/amorist/platelet  
-https://github.com/akiroz/Live2D-Widget
+https://github.com/akiroz/Live2D-Widget  
+https://github.com/zenghongtu/PPet  
+https://github.com/LikeNeko/L2dPetForMac
 
 ## 许可证 License
 
