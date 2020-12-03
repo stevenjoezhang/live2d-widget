@@ -139,12 +139,15 @@ https://github.com/akiroz/Live2D-Widget
 https://github.com/zenghongtu/PPet  
 https://github.com/LikeNeko/L2dPetForMac
 
+以及 Wallpaper Engine：
+https://github.com/guansss/nep-live2d
+
 ## 许可证 License
 
 Released under the GNU General Public License v3  
 http://www.gnu.org/licenses/gpl-3.0.html
 
-本仓库中涉及的所有 Live2D 模型、图片、动作数据等版权均属于其原作者，仅供研究学习，不得用于商业用途。
+本仓库并不包含任何模型，用作展示的所有 Live2D 模型、图片、动作数据等版权均属于其原作者，仅供研究学习，不得用于商业用途。
 
 Live2D 官方网站：  
 https://www.live2d.com/en/  
