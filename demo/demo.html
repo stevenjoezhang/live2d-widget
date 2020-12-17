@@ -43,7 +43,7 @@ Language:
     let select = document.querySelector(".select");
     btn.addEventListener("click", () => {
         I18n.locale = select.value;
-        console.log(select.value);
+        alert(`Language changed to ${select.value}. Hover to the waifu again to see result.`)
     }, false);
 </script>
 <script src="../autoload.js"></script>
