@@ -174,7 +174,7 @@ function loadWidget(config) {
 						if (!event.target.matches(selector)) continue;
                         text = randomSelection(text);
                         text = text.replace("{text}", event.target.innerText);
-						showMessage(I18n.t(event.target.innerText), 4000, 8);
+						showMessage(I18n.t(text), 4000, 8);
 						return;
 					}
 				});

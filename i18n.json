@@ -233,8 +233,37 @@
         },
         "click": {
             "waifu": {
-                "1": "Greeting from i18n, click"
+                "1": "Yes... I bumped into it accidentally...",
+                "2": "What is Lolicon?",
+                "3": "Did you see my little bear?",
+                "4": "If you touch it again, I will call the police! ⌇●﹏●⌇",
+                "5": "110? There is a pervert who has been touching me (ó﹏ò｡)",
+                "6": "Don't touch me, I will tell my wife to hit you!",
+                "7": "Why move me! Be careful I bite you!",
+                "8": "Don't touch me, what is there to touch??!"
+            },
+            "veditor": {
+                "1": "What are you going to complain about?",
+                "2": "You must fill in meow carefully~",
+                "3": "Is there anything you want to say?"
+            },
+            "vsubmit": {
+                "1": "Enter the verification code to submit a comment~"
             }
+        },
+        "seasons": {
+            "1": "<span>New Year's Day</span>, the new year has begun again, this year is {year}~",
+            "2": "It's another year <span>Valentine's Day</span>, I found the object in {year}~",
+            "3": "Today is <span>International Women's Day</span>!",
+            "4": "Today is <span>Arbor Day</span>, protect the environment!",
+            "5": "Tell you a secret quietly~<span>Today is April Fool's Day, don't be fooled~</span>",
+            "6": "Today is <span>Labor Day</span>, have you planned where to go for the holiday~",
+            "7": "<span>Children's Day</span> is now, happy time is always short, it would be great if it never grows up...",
+            "8": "<span>The Victory Day of the Chinese People’s War of Resistance Against Japanese Aggression</span>, remembering history, remembering the martyrs, cherishing peace, and creating the future.",
+            "9": "<span>Teacher's Day</span>, I want to say hello to the teacher in school~",
+            "10": "<span>National Day</span> is here, for the motherland’s birthday!",
+            "11": "Who did you spend with this year's <span>Double Eleven</span>~",
+            "12": "These days are <span>Christmas</span>, the owner must have gone shopping again~"
         }
     }
 }
