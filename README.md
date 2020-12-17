@@ -3,7 +3,7 @@
 
 ENGLISH - CDN
 ```
-<script src="https://cdn.jsdelivr.net/gh/nonsoft-dev/live2d-widget@latest/autoload.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nonsoft-dev/live2d-widget@master/autoload.js"></script>
 ```
 
 ---
