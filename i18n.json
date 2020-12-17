@@ -99,6 +99,11 @@
                 "1": "You can use RSS to subscribe here!",
                 "2": "Using the feed subscriber, you can quickly know if the blog has been updated."
             },
+            "cc_opacity_post_copyright_author": {
+                "1": "Remember to reprint the standard.",
+                "2": "All articles adopt CC BY-NC-SA 4.0 license agreement~",
+                "3": "Before reprinting, please pay attention to the copyright agreement of the article."
+            },
             "links_of_author": {
                 "1": "This is my owner's address.",
                 "2": "Here is my owner's contact information!"

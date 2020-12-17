@@ -131,36 +131,36 @@
         {
             "selector": ".menu-item a",
             "text": [
-                " Look at what's here? "
+                "mouseover.menu_item_a.1"
             ]
         },
         {
             "selector": ".site-author",
             "text": [
-                " Does my owner look good? ",
-                " This is my owner (*´∇｀*) "
+                "mouseover.site_author.1",
+                "mouseover.site_author.2"
             ]
         },
         {
             "selector": ".site-state",
             "text": [
-                " This is the statistical information of the article~ ",
-                " Would you like to click in and have a look? "
+                "mouseover.site_state.1",
+                "mouseover.site_state.2"
             ]
         },
         {
             "selector": ".feed-link a",
             "text": [
-                " You can use RSS to subscribe here! ",
-                " Using the feed subscriber, you can quickly know if the blog has been updated. "
+                "mouseover.feed_link_a.1",
+                "mouseover.feed_link_a.2"
             ]
         },
         {
             "selector": ".cc-opacity, .post-copyright-author",
             "text": [
-                " Remember to reprint the standard. ",
-                " All articles adopt CC BY-NC-SA 4.0 license agreement~ ",
-                " Before reprinting, please pay attention to the copyright agreement of the article. "
+                "mouseover.cc_opacity_post_copyright_author.1",
+                "mouseover.cc_opacity_post_copyright_author.2",
+                "mouseover.cc_opacity_post_copyright_author.3"
             ]
         },
         {
