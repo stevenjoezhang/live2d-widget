@@ -306,7 +306,11 @@
             },
             "visibilityChange": {
                 "1": "Wow, finally, you're back!"
-            }  
+            },
+            "dress": {
+                "1": "Does my new dress look good?",
+                "2": "How is my new dress?"
+            }
         },
         "time": {
             "5_7": "Good morning! The plan for a day lies in the morning, and a beautiful day is about to begin.",
@@ -330,7 +334,15 @@
             "6": "Welcome to read<span>「%{data}」</span>"
         },
         "hikoto": {
-            "1": "This sentence come from <span>「${result.from}」</span>，by <span>${result.creator}</span> from hitokoto.cn."
-        }
+            "1": "This sentence come from <span>「%{source}」</span>，by <span>%{author}</span> from hitokoto.cn."
+        },
+        "来自 Potion Maker 的 Pio 酱 ~": "Hi, I'm Potion Maker Pio!",
+        "来自 Potion Maker 的 Tia 酱 ~": "Hi, I'm Potion Maker Tia!",
+        "来自 Bilibili Live 的 22 哦 ~": "22 from Bilibili Live",
+        "来自 Bilibili Live 的 33 的说": "33 from Bilibili Live",
+         "Shizuku Talk ！这里是 Shizuku ~": "Hi, I'm Shizuku from Shizuku Talk!",
+        "Nep! Nep! 超次元游戏：海王星 系列": "Nep, Nep, Nep, Nep! ",
+        "艦隊これくしょん / 叢雲(むらくも)": "Kantai Collection / Murakumo"
+
     }
 }

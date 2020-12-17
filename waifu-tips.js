@@ -132,7 +132,7 @@ function loadWidget(config) {
 		fetch("https://v1.hitokoto.cn")
 			.then(response => response.json())
 			.then(result => {
-				const text = `This sentence come from <span>「${result.from}」</span>，by <span>${result.creator}</span> from hitokoto.cn.`;
+				const text = {i18n: "hikoto", source: result.from, author: result.creator };
 				showMessage(result.hitokoto, 6000, 9);
 				setTimeout(() => {
 					showMessage(text, 4000, 9);
@@ -151,8 +151,11 @@ function loadWidget(config) {
         if (typeof text === 'object' && text !== null && 'i18n' in text) {
             let tmp = {}
             Object.keys(text).forEach(key => {
-                tmp[key] = text[key]
+                if (key != 'i18n') {
+                    tmp[key] = text[key]
+                }
             });
+            console.log(tmp)
             text = I18n.t(text.i18n, tmp);
         } else {
             text = I18n.t(text);
@@ -237,14 +240,14 @@ function loadWidget(config) {
 			if (!modelList) await loadModelList();
 			const target = randomSelection(modelList.models[modelId]);
 			loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
-			showMessage("Does my new dress look good?", 4000, 10);
+			showMessage("general.dress.1", 4000, 10);
 		} else {
 			// 可选 "rand"(随机), "switch"(顺序)
 			fetch(`${apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`)
 				.then(response => response.json())
 				.then(result => {
 					if (result.textures.id === 1 && (modelTexturesId === 1 || modelTexturesId === 0)) showMessage("Ughh, I ran out of clothes!", 4000, 10);
-					else loadModel(modelId, result.textures.id, "How is my new dress?");
+					else loadModel(modelId, result.textures.id, "general.dress.2?");
 				});
 		}
 	}
