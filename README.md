@@ -20,7 +20,7 @@ For a full documentation, please check the above link.
 <script src="https://cdn.jsdelivr.net/npm/i18n-js@3.8.0/app/assets/javascripts/i18n.min.js"></script>
 ```
 
-## Usage
+## Setup
 ### 1. Add dependencies
 
 Add i18n-js cdn as instructed above.
