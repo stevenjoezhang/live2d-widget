@@ -118,7 +118,7 @@
             "copy_btn": {
                 "1": "The code can be copied directly by clicking on it."
             },
-            ".highlight .table-container, .gist": {
+            "highlight_table_container_gist": {
                 "1": "GitHub! I'm a novice!",
                 "2": "PHP is the best language!"
             },

@@ -166,34 +166,34 @@
         {
             "selector": ".links-of-author",
             "text": [
-                " This is the host's resident address. ",
-                " Here is the owner's contact information! "
+                "mouseover.links_of_author.1",
+                "mouseover.links_of_author.2"
             ]
         },
         {
             "selector": "#qrcode",
             "text": [
-                " It's very convenient to continue reading by scanning the phone~ ",
-                " Sweep, open the door to a new world! "
+                "mouseover.qrcode.1",
+                "mouseover.qrcode.2"
             ]
         },
         {
             "selector": ".fancybox img, img.medium-zoom-image",
             "text": [
-                " Click on the picture to enlarge it! "
+                "mouseover.fancybox_img_img_medium_zoom_image.1"
             ]
         },
         {
             "selector": ".copy-btn",
             "text": [
-                "The code can be copied directly by clicking on it. "
+                "mouseover.copy_btn.1"
             ]
         },
         {
             "selector": ".highlight .table-container, .gist",
             "text": [
-                " GitHub! I'm a novice! ",
-                " PHP is the best language! "
+                "mouseover.highlight_table_container_gist.1",
+                "mouseover.highlight_table_container_gist.2"
             ]
         },
         {
