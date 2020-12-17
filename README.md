@@ -50,12 +50,12 @@ fetch("../i18n.json").then(res => res.json()).then(data => {
 For a list of complete locale, click [here](https://github.com/ladjs/i18n-locales).
 
 ### 3. Replace `waifu-tips.json`
-Replace `waifu-tips.json` the same as [waifu-tips.json in this repo](/blob/master/waifu-tips.json).
+Replace `waifu-tips.json` the same as [waifu-tips.json in this repo](/waifu-tips.json).
 This will load up i18n syntax. Modify this file as you needed.
 
 ### 4. Replace `waifu-tips.js` 
 
-Replace `waifu-tips.js` the same as [waifu-tips.js in this repo](/blob/master/waifu-tips.js).
+Replace `waifu-tips.js` the same as [waifu-tips.js in this repo](/waifu-tips.js).
 This will modify the script to work with i18n.
 
 ### 5. Download and modify i18n.json
