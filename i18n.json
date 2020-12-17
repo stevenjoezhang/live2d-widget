@@ -284,6 +284,53 @@
             "10": "<span>National Day</span> is here, for the motherland’s birthday!",
             "11": "Who did you spend with this year's <span>Double Eleven</span>~",
             "12": "These days are <span>Christmas</span>, the owner must have gone shopping again~"
+        },
+        "general": {
+            "longtime": {
+                "1": "Long time no see, time flies so fast...",
+                "2": "Hey! How long have you been ignoring me~~",
+                "3": "Hi~ Come and play with me!",
+                "4": "Take this punch~!"
+            },
+            "camera": {
+                "1": "Yay, it's taken. Isn't it cute?"
+            },
+            "exit": {
+                "1": "May you meet this important person again one day!"
+            },
+            "console": {
+                "1": "Haha, you opened the console, do you want to see my little secret?"
+            },
+            "copy": {
+                "1": "What have you copied? Remember to add the source for reprinting!"
+            },
+            "visibilityChange": {
+                "1": "Wow, finally, you're back!"
+            }  
+        },
+        "time": {
+            "5_7": "Good morning! The plan for a day lies in the morning, and a beautiful day is about to begin.",
+            "7_11": "Good morning! Don't sit for a long time, get up and move around!!",
+            "11_13": "It's noon! Can I take a break? It's lunch time!!",
+            "13_17": "It's easy to get sleepy in the afternoon. Have you done any sports today?",
+            "17_19": "It's evening! The sunset outside the window is very beautiful~",
+            "19_21": "Good evening, how are you doing today?",
+            "21_23": {
+                "1": "It's already so late, rest early, good night~",
+                "2": "Take care of your eyes late at night!"
+            },
+            "24": "Are you a night owl? If you don't go to bed so late, will you get up tomorrow?"
+        },
+        "welcome": {
+            "1": "Welcome to「%{data}」</span>",
+            "2": "Hello! Welcome from Baidu Search<br>You are searching <span>「%{data}」</span>. Did you find it?",
+            "3": "Hello! Welcome from 360 Search<br>You are searching <span>「%{data}」</span>. Did you find it?",
+            "4": "Hello! Friends from Google Search<br>You are searching <span>「${data}」</span>. Did you find it?",
+            "5": "Hello from <span>「%{data}」</span>. Welcome!",
+            "6": "Welcome to read<span>「%{data}」</span>"
+        },
+        "hikoto": {
+            "1": "This sentence come from <span>「${result.from}」</span>，by <span>${result.creator}</span> from hitokoto.cn."
         }
     }
 }

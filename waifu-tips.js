@@ -42,7 +42,7 @@ function loadWidget(config) {
 	let userAction = false,
 		userActionTimer,
 		messageTimer,
-		messageArray = ["Long time no see, life flies so fast...", "Oni-chan! How long have you been ignoring others~~", "Hi~ Come and play with me! ", "Take my small punch to your chest! "];
+		messageArray = ["general.longtime.1", "general.longtime.2", "general.longtime.3", "general.longtime.4"];
 	window.addEventListener("mousemove", () => userAction = true);
 	window.addEventListener("keydown", () => userAction = true);
 	setInterval(() => {
@@ -72,7 +72,7 @@ function loadWidget(config) {
 		document.querySelector("#waifu-tool .fa-user-circle").addEventListener("click", loadOtherModel);
 		document.querySelector("#waifu-tool .fa-street-view").addEventListener("click", loadRandModel);
 		document.querySelector("#waifu-tool .fa-camera-retro").addEventListener("click", () => {
-			showMessage("Yay, it's taken. Isn't it cute?", 6000, 9);
+			showMessage("general.camera.1", 6000, 9);
 			Live2D.captureName = "photo.png";
 			Live2D.captureFrame = true;
 		});
@@ -81,7 +81,7 @@ function loadWidget(config) {
 		});
 		document.querySelector("#waifu-tool .fa-times").addEventListener("click", () => {
 			localStorage.setItem("waifu-display", Date.now());
-			showMessage("May you meet this important person again one day!!", 2000, 11);
+			showMessage("general.exit.1", 2000, 11);
 			document.getElementById("waifu").style.bottom = "-500px";
 			setTimeout(() => {
 				document.getElementById("waifu").style.display = "none";
@@ -91,13 +91,13 @@ function loadWidget(config) {
 		const devtools = () => {};
 		console.log("%c", devtools);
 		devtools.toString = () => {
-			showMessage("Haha, you opened the console, do you want to see my little secret?", 6000, 9);
+			showMessage("general.console.1", 6000, 9);
 		};
 		window.addEventListener("copy", () => {
-			showMessage("What have you copied? Remember to add the source for reprinting!", 6000, 9);
+			showMessage("general.copy.1", 6000, 9);
 		});
 		window.addEventListener("visibilitychange", () => {
-			if (!document.hidden) showMessage("Wow, you are finally back~", 6000, 9);
+			if (!document.hidden) showMessage("general.visibilityChange.1", 6000, 9);
 		});
 	})();
 
@@ -105,24 +105,24 @@ function loadWidget(config) {
 		let text;
 		if (location.pathname === "/") { // 如果是主页
 			const now = new Date().getHours();
-			if (now > 5 && now <= 7) text = "Good morning! The plan for a day lies in the morning, and a beautiful day is about to begin.";
-			else if (now > 7 && now <= 11) text = "Good morning! Don't sit for a long time, get up and move around!!";
-			else if (now > 11 && now <= 13) text = "It's noon! Can I take a break? It's lunch time!!";
-			else if (now > 13 && now <= 17) text = "It's easy to get sleepy in the afternoon. Have you done any sports today?";
-			else if (now > 17 && now <= 19) text = "It's evening! The sunset outside the window is very beautiful~";
-			else if (now > 19 && now <= 21) text = "Good evening, how are you doing today?";
-			else if (now > 21 && now <= 23) text = ["It's already so late, rest early, good night~", "Take care of your eyes late at night!"];
-			else text = "Are you a night owl? If you don't go to bed so late, will you get up tomorrow?";
+			if (now > 5 && now <= 7) text = "time.5_7";
+			else if (now > 7 && now <= 11) text = "time.7_11";
+			else if (now > 11 && now <= 13) text = "time.11_13";
+			else if (now > 13 && now <= 17) text = "time.13_17";
+			else if (now > 17 && now <= 19) text = "time.17_19";
+			else if (now > 19 && now <= 21) text = "time.19_21";
+			else if (now > 21 && now <= 23) text = ["time.21_23.1", "time.21_23.2"];
+			else text = "time.24";
 		} else if (document.referrer !== "") {
 			const referrer = new URL(document.referrer),
 				domain = referrer.hostname.split(".")[1];
-			if (location.hostname === referrer.hostname) text = `Welcome to read<span>「${document.title.split(" - ")[0]}」</span>`;
-			else if (domain === "baidu") text = `Hello! Friends from Baidu Search<br>You are searching <span>${referrer.search.split("&wd=")[1].split("&")[0]}</span>. Did you find it?`;
-			else if (domain === "so") text = `Hello! Friends from 360 Search<br>You are searching <span>${referrer.search.split("&q=")[1].split("&")[0]}</span>. Did you find it?`;
-			else if (domain === "google") text = `Hello! Friends from Google Search<br>You are searching <span>「${document.title.split(" - ")[0]}」</span>. Did you find it? `;
-			else text = `Hello from <span>${referrer.hostname}</span>. Welcome!`;
+			if (location.hostname === referrer.hostname) text = {i18n: "welcome.1", data: document.title.split(" - ")[0]};
+			else if (domain === "baidu") text = {i18n: "welcome.2", data:referrer.search.split("&wd=")[1].split("&")[0]};
+			else if (domain === "so") text = {i18n: "welcome.3", data: referrer.search.split("&q=")[1].split("&")[0]};
+			else if (domain === "google") text = {i18n: "welcome.4", data: document.title.split(" - ")[0]};
+			else text = {i18n: "welcome.5", data: referrer.hostname};
 		} else {
-			text = `Welcome to read<span>「${document.title.split(" - ")[0]}」</span>`;
+			text = {i18n: "welcome.6", data: document.title.split(" - ")[0]};
 		}
 		showMessage(text, 7000, 8);
 	})();
@@ -141,12 +141,22 @@ function loadWidget(config) {
 	}
 
 	function showMessage(text, timeout, priority) {
+
 		if (!text || (sessionStorage.getItem("waifu-text") && sessionStorage.getItem("waifu-text") > priority)) return;
 		if (messageTimer) {
 			clearTimeout(messageTimer);
 			messageTimer = null;
 		}
-		text = randomSelection(text);
+        text = randomSelection(text);
+        if (typeof text === 'object' && text !== null && 'i18n' in text) {
+            let tmp = {}
+            Object.keys(text).forEach(key => {
+                tmp[key] = text[key]
+            });
+            text = I18n.t(text.i18n, tmp);
+        } else {
+            text = I18n.t(text);
+        }
 		sessionStorage.setItem("waifu-text", priority);
 		const tips = document.getElementById("waifu-tips");
 		tips.innerHTML = text;
@@ -174,7 +184,7 @@ function loadWidget(config) {
 						if (!event.target.matches(selector)) continue;
                         text = randomSelection(text);
                         text = text.replace("{text}", event.target.innerText);
-						showMessage(I18n.t(text), 4000, 8);
+						showMessage(text, 4000, 8);
 						return;
 					}
 				});
@@ -183,7 +193,7 @@ function loadWidget(config) {
 						if (!event.target.matches(selector)) continue;
                         text = randomSelection(text);
                         text.replace("{text}", event.target.innerText);
-						showMessage(I18n.t(text), 4000, 8);
+						showMessage(text, 4000, 8);
 						return;
 					}
 				});

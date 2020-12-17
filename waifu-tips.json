@@ -306,121 +306,121 @@
         {
             "selector": ".need-share-button_douban",
             "text": [
-                "It seems good to share on Douban! "
+                "mouseover.need_share_button_douban.1"
             ]
         },
         {
             "selector": ".need-share-button_qqzone",
             "text": [
-                " QQ space, one-click forwarding, yeah~ "
+                "mouseover.need_share_button_qqzone.1"
             ]
         },
         {
             "selector": ".need-share-button_twitter",
             "text": [
-                " Twitter? It doesn't seem to exist? "
+                "mouseover.need_share_button_twitter.1"
             ]
         },
         {
             "selector": ".need-share-button_facebook",
             "text": [
-                " emmm...FB does not seem to exist? "
+                "mouseover.need_share_button_facebook.1"
             ]
         },
         {
             "selector": ".post-nav-item a[rel='next']",
             "text": [
-                " Let's take a look at the next article. ",
-                " Click it to see the next article! ",
-                " Do you want to turn to the next article? "
+                "mouseover.post_nav_item_a_rel_next.1",
+                "mouseover.post_nav_item_a_rel_next.2",
+                "mouseover.post_nav_item_a_rel_next.3"
             ]
         },
         {
             "selector": ".post-nav-item a[rel='prev']",
             "text": [
-                " Let's take a look at the previous article. ",
-                " Click it to read the previous article! ",
-                " Do you want to turn to the previous article? "
+                "mouseover.post_nav_item_a_rel_prev.1",
+                "mouseover.post_nav_item_a_rel_prev.2",
+                "mouseover.post_nav_item_a_rel_prev.3"
             ]
         },
         {
             "selector": ".extend.next",
             "text": [
-                " Go to the next page and see. ",
-                " Click it to move forward! ",
-                " Do you want to turn to the next page? "
+                "mouseover.extend_next.1",
+                "mouseover.extend_next.2",
+                "mouseover.extend_next.3"
             ]
         },
         {
             "selector": ".extend.prev",
             "text": [
-                " Go to the previous page and have a look. ",
-                " Click it to go back! ",
-                " Do you want to turn to the previous page? "
+                "mouseover.extend_prev.1",
+                "mouseover.extend_prev.2",
+                "mouseover.extend_prev.3"
             ]
         },
         {
             "selector": "input.vnick",
             "text": [
-                " What should I call you? ",
-                " Leave your first name! "
+                "mouseover.input_vnick.1",
+                "mouseover.input_vnick.2"
             ]
         },
         {
             "selector": ".vmail",
             "text": [
-                " Leave your mailbox, otherwise you will be a person without a profile picture! ",
-                " Remember to set up a Gravatar profile picture! ",
-                " In order to inform you of the latest news, be sure to leave your email address! "
+                "mouseover.vmail.1",
+                "mouseover.vmail.2",
+                "mouseover.vmail.3"
             ]
         },
         {
             "selector": ".vlink",
             "text": [
-                " Hurry up and tell me where your home is, so that I can visit it! "
+                "mouseover.vlink.1"
             ]
         },
         {
             "selector": ".veditor",
             "text": [
-                " Want to comment on something? ",
-                " Do you want to say something? ",
-                " Think the blog is good? Come and leave a message to communicate with the owner! "
+                "mouseover.veditor.1",
+                "mouseover.veditor.2",
+                "mouseover.veditor.3"
             ]
         },
         {
             "selector": ".vcontrol a",
             "text": [
-                " Can you use Markdown proficiently? ",
-                " Use Markdown to make comments more beautiful~ "
+                "mouseover.vcontrol_a.1",
+                "mouseover.vcontrol_a.2"
             ]
         },
         {
             "selector": ".vemoji-btn",
             "text": [
-                " Do you want to insert a cute emoji? ",
-                " Do you want to come to express your love? "
+                "mouseover.vemoji_btn.1",
+                "mouseover.vemoji_btn.2"
             ]
         },
         {
             "selector": ".vpreview-btn",
             "text": [
-                " Do you want to preview your speech? ",
-                " Look at how much negative entropy your comment has! "
+                "mouseover.vpreview_btn.1",
+                "mouseover.vpreview_btn.2"
             ]
         },
         {
             "selector": ".vsubmit",
             "text": [
-                "The comments have not been reviewed, you are responsible for your own comments~ ",
-                " Do you want to submit, please be patient and wait for the reply~ "
+                "mouseover.vsubmit.1",
+                "mouseover.vsubmit.2"
             ]
         },
         {
             "selector": ".vcontent",
             "text": [
-                " Wow, look at this wonderful review! ",
-                " If you have any questions, please leave a message as soon as possible~ "
+                "mouseover.vcontent.1",
+                "mouseover.vcontent.2"
             ]
         }
     ],
@@ -428,72 +428,79 @@
         {
             "selector": "#waifu #live2d",
             "text": [
-                "click.waifu.1"
+                "click.waifu.1",
+                "click.waifu.2",
+                "click.waifu.3",
+                "click.waifu.4",
+                "click.waifu.5",
+                "click.waifu.6",
+                "click.waifu.7",
+                "click.waifu.8"
             ]
         },
         {
             "selector": ".veditor",
             "text": [
-                " What are you going to complain about? ",
-                " You must fill in meow carefully~ ",
-                " Is there anything you want to say? "
+                "click.veditor.1",
+                "click.veditor.2",
+                "click.veditor.3"
             ]
         },
         {
             "selector": ".vsubmit",
             "text": [
-                " Enter the verification code to submit a comment~ "
+                "click.vsubmit.1"
             ]
         }
     ],
     "seasons": [
         {
             "date": "01/01",
-            " text ": " <span>New Year's Day</span>, the new year has begun again, this year is {year}~ "
+            " text ": "seasons.1"
         },
         {
             "date": "02/14",
-            " text ": "It's another year <span>Valentine's Day</span>, I found the object in {year}~ "
+            " text ": "seasons.2"
         },
         {
             "date": "03/08",
-            " text ": " Today is <span>International Women's Day</span>! "
+            " text ": "seasons.3"
         },
         {
             "date": "03/12",
-            " text ": " Today is <span>Arbor Day</span>, protect the environment! "
+            " text ": "seasons.4"
         },
         {
             "date": "04/01",
-            " text ": " Tell you a secret quietly~<span>Today is April Fool's Day, don't be fooled~</span> "
+            " text ": "seasons.5"
         },
         {
             "date": "05/01",
-            " text ": " Today is <span>Labor Day</span>, have you planned where to go for the holiday~ "
+            " text ": "seasons.6"
         },
         {
             "date": "06/01",
-            " text ": " <span>Children's Day</span> is now, happy time is always short, it would be great if it never grows up... "
+            " text ": "seasons.7"
         },
         {
             "date": "09/03",
-            " text ": " <span>The Victory Day of the Chinese People’s War of Resistance Against Japanese Aggression</span>, remembering history, remembering the martyrs, cherishing peace, and creating the future. "
+            " text ": "seasons.8"
         },
         {
             "date": "09/10",
-            " text ": " <span>Teacher's Day</span>, I want to say hello to the teacher in school~ "
+            " text ": "seasons.9"
         },
         {
             "date": "10/01",
-            " text ": " <span>National Day</span> is here, for the motherland’s birthday! "
+            " text ": "seasons.10"
         },
         {
             "date": "11/05-11/12",
-            " text ": " Who did you spend with this year's <span>Double Eleven</span>~ "
+            " text ": "seasons.11"
         },
         {
             "date": "12/20-12/31",
-            " text ": " These days are <span>Christmas</span>, the owner must have gone shopping again~ "
+            " text ": "seasons.12"
         }
     ]
 }
