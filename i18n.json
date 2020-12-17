@@ -196,6 +196,39 @@
             "input_vnick": {
                 "1": "What should I call you?",
                 "2": "Leave your first name!"
+            },
+            "vmail": {
+                "1": "Leave your mailbox, otherwise you will be a person without a profile picture!",
+                "2": "Remember to set up a Gravatar profile picture!",
+                "3": "In order to inform you of the latest news, be sure to leave your email address!"
+            },
+            "vlink": {
+                "1": "Hurry up and tell me where your home is, so that I can visit it!"
+            },
+            "veditor": {
+                "1": "Want to comment on something?",
+                "2": "Do you want to say something?",
+                "3": "Think the blog is good? Come and leave a message to communicate with the owner!"
+            },
+            "vcontrol_a": {
+                "1": "Can you use Markdown proficiently?",
+                "2": "Use Markdown to make comments more beautiful~"
+            },
+            "vemoji_btn": {
+                "1": "Do you want to insert a cute emoji?",
+                "2": "Do you want to come to express your love?"
+            },
+            "vpreview_btn": {
+                "1": "Do you want to preview your speech?",
+                "2": "Look at how much negative entropy your comment has!"
+            },
+            "vsubmit": {
+                "1": "The comments have not been reviewed, you are responsible for your own comments~",
+                "2": "Do you want to submit, please be patient and wait for the reply~"
+            },
+            "vcontent": {
+                "1": "Wow, look at this wonderful review!",
+                "2": "If you have any questions, please leave a message as soon as possible~"
             }
         },
         "click": {
