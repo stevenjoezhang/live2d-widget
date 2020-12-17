@@ -326,7 +326,7 @@
             "24": "Are you a night owl? If you don't go to bed so late, will you get up tomorrow?"
         },
         "welcome": {
-            "1": "Welcome to「%{data}」</span>",
+            "1": "Welcome to <span>「%{data}」</span>",
             "2": "Hello! Welcome from Baidu Search<br>You are searching <span>「%{data}」</span>. Did you find it?",
             "3": "Hello! Welcome from 360 Search<br>You are searching <span>「%{data}」</span>. Did you find it?",
             "4": "Hello! Friends from Google Search<br>You are searching <span>「${data}」</span>. Did you find it?",
@@ -599,96 +599,96 @@
         },
         "click": {
             "waifu": {
-                "1": "Yes... I bumped into it accidentally...",
-                "2": "What is Lolicon?",
-                "3": "Did you see my little bear?",
-                "4": "If you touch it again, I will call the police! ⌇●﹏●⌇",
-                "5": "110? There is a pervert who has been touching me (ó﹏ò｡)",
-                "6": "Don't touch me, I will tell my wife to hit you!",
-                "7": "Why move me! Be careful I bite you!",
-                "8": "Don't touch me, what is there to touch??!"
+                "1": "是…是不小心碰到了吧…",
+                "2": "萝莉控是什么呀？",
+                "3": "你看到我的小熊了吗？",
+                "4": "再摸的话我可要报警了！⌇●﹏●⌇",
+                "5": "110 吗，这里有个变态一直在摸我(ó﹏ò｡)",
+                "6": "不要摸我了，我会告诉老婆来打你的！",
+                "7": "干嘛动我呀！小心我咬你！",
+                "8": "别摸我，有什么好摸的！"
             },
             "veditor": {
-                "1": "What are you going to complain about?",
-                "2": "You must fill in meow carefully~",
-                "3": "Is there anything you want to say?"
+                "1": "要吐槽些什么呢？",
+                "2": "一定要认真填写喵～",
+                "3": "有什么想说的吗？"
             },
             "vsubmit": {
-                "1": "Enter the verification code to submit a comment~"
+                "1": "输入验证码就可以提交评论啦～"
             }
         },
         "seasons": {
-            "1": "<span>New Year's Day</span>, the new year has begun again, this year is {year}~",
-            "2": "It's another year <span>Valentine's Day</span>, I found the object in {year}~",
-            "3": "Today is <span>International Women's Day</span>!",
-            "4": "Today is <span>Arbor Day</span>, protect the environment!",
-            "5": "Tell you a secret quietly~<span>Today is April Fool's Day, don't be fooled~</span>",
-            "6": "Today is <span>Labor Day</span>, have you planned where to go for the holiday~",
-            "7": "<span>Children's Day</span> is now, happy time is always short, it would be great if it never grows up...",
-            "8": "<span>The Victory Day of the Chinese People’s War of Resistance Against Japanese Aggression</span>, remembering history, remembering the martyrs, cherishing peace, and creating the future.",
-            "9": "<span>Teacher's Day</span>, I want to say hello to the teacher in school~",
-            "10": "<span>National Day</span> is here, for the motherland’s birthday!",
-            "11": "Who did you spend with this year's <span>Double Eleven</span>~",
-            "12": "These days are <span>Christmas</span>, the owner must have gone shopping again~"
+            "1": "<span>元旦</span>了呢，新的一年又开始了，今年是{year}年～",
+            "2": "又是一年<span>情人节</span>，{year}年找到对象了嘛～",
+            "3": "今天是<span>国际妇女节</span>！",
+            "4": "今天是<span>植树节</span>，要保护环境呀！",
+            "5": "悄悄告诉你一个秘密～<span>今天是愚人节，不要被骗了哦～</span>",
+            "6": "今天是<span>五一劳动节</span>，计划好假期去哪里了吗～",
+            "7": "<span>儿童节</span>了呢，快活的时光总是短暂，要是永远长不大该多好啊…",
+            "8": "<span>中国人民抗日战争胜利纪念日</span>，铭记历史、缅怀先烈、珍爱和平、开创未来。",
+            "9": "<span>教师节</span>，在学校要给老师问声好呀～",
+            "10": "<span>国庆节</span>到了，为祖国母亲庆生！",
+            "11": "今年的<span>双十一</span>是和谁一起过的呢～",
+            "12": "这几天是<span>圣诞节</span>，主人肯定又去剁手买买买了～"
         },
         "general": {
             "longtime": {
-                "1": "Long time no see, time flies so fast...",
-                "2": "Hey! How long have you been ignoring me~~",
-                "3": "Hi~ Come and play with me!",
-                "4": "Take this punch~!"
+                "1": "好久不见，日子过得好快呢……",
+                "2": "大坏蛋！你都多久没理人家了呀，嘤嘤嘤～",
+                "3": "嗨～快来逗我玩吧！",
+                "4": "拿小拳拳锤你胸口！"
             },
             "camera": {
-                "1": "Yay, it's taken. Isn't it cute?"
+                "1": "照好了嘛，是不是很可爱呢？"
             },
             "exit": {
-                "1": "May you meet this important person again one day!"
+                "1": "愿你有一天能与重要的人重逢。"
             },
             "console": {
-                "1": "Haha, you opened the console, do you want to see my little secret?"
+                "1": "哈哈，你打开了控制台，是想要看看我的小秘密吗？"
             },
             "copy": {
-                "1": "What have you copied? Remember to add the source for reprinting!"
+                "1": "你都复制了些什么呀，转载要记得加上出处哦！"
             },
             "visibilityChange": {
-                "1": "Wow, finally, you're back!"
+                "1": "哇，你终于回来了～"
             },
             "dress": {
-                "1": "Does my new dress look good?",
-                "2": "How is my new dress?"
+                "1": "我的新衣服好看嘛？",
+                "2": "我的新衣服好看嘛？"
             }
         },
         "time": {
-            "5_7": "Good morning! The plan for a day lies in the morning, and a beautiful day is about to begin.",
-            "7_11": "Good morning! Don't sit for a long time, get up and move around!!",
-            "11_13": "It's noon! Can I take a break? It's lunch time!!",
-            "13_17": "It's easy to get sleepy in the afternoon. Have you done any sports today?",
-            "17_19": "It's evening! The sunset outside the window is very beautiful~",
-            "19_21": "Good evening, how are you doing today?",
+            "5_7": "早上好！一日之计在于晨，美好的一天就要开始了。",
+            "7_11": "上午好！工作顺利嘛，不要久坐，多起来走动走动哦！",
+            "11_13": "中午了，工作了一个上午，现在是午餐时间！",
+            "13_17": "午后很容易犯困呢，今天的运动目标完成了吗？",
+            "17_19": "傍晚了！窗外夕阳的景色很美丽呢，最美不过夕阳红～",
+            "19_21": "晚上好，今天过得怎么样？",
             "21_23": {
-                "1": "It's already so late, rest early, good night~",
-                "2": "Take care of your eyes late at night!"
+                "1": "已经这么晚了呀，早点休息吧，晚安～",
+                "2": "深夜时要爱护眼睛呀！"
             },
-            "24": "Are you a night owl? If you don't go to bed so late, will you get up tomorrow?"
+            "24": "你是夜猫子呀？这么晚还不睡觉，明天起的来嘛？"
         },
         "welcome": {
-            "1": "Welcome to「%{data}」</span>",
-            "2": "Hello! Welcome from Baidu Search<br>You are searching <span>「%{data}」</span>. Did you find it?",
-            "3": "Hello! Welcome from 360 Search<br>You are searching <span>「%{data}」</span>. Did you find it?",
-            "4": "Hello! Friends from Google Search<br>You are searching <span>「${data}」</span>. Did you find it?",
-            "5": "Hello from <span>「%{data}」</span>. Welcome!",
-            "6": "Welcome to read<span>「%{data}」</span>"
+            "1": "欢迎阅读 <span>「%{data}」</span>",
+            "2": "Hello！来自 百度搜索 的朋友<br>你是搜索 <span>「%{data}」</span> 找到的我吗？",
+            "3": "Hello！来自 360搜索 的朋友<br>你是搜索 <span>「%{data}」</span> 找到的我吗？",
+            "4": "Hello！来自 谷歌搜索 的朋友<br>欢迎阅读<span>「${data}」</span>",
+            "5": "Hello！来自 <span>「%{data}」</span>. Welcome!",
+            "6": "欢迎阅读<span>「%{data}」</span>"
         },
         "hikoto": {
-            "1": "This sentence come from <span>「%{source}」</span>，by <span>%{author}</span> from hitokoto.cn."
+            "1": "这句一言来自 <span>「%{source}」</span>，是 <span>%{author}</span> 在 hitokoto.cn 投稿的。"
         },
-        "来自 Potion Maker 的 Pio 酱 ~": "Hi, I'm Potion Maker Pio!",
-        "来自 Potion Maker 的 Tia 酱 ~": "Hi, I'm Potion Maker Tia!",
-        "来自 Bilibili Live 的 22 哦 ~": "22 from Bilibili Live",
-        "来自 Bilibili Live 的 33 的说": "33 from Bilibili Live",
-        "Shizuku Talk ！这里是 Shizuku ~": "Hi, I'm Shizuku from Shizuku Talk!",
-        "Nep! Nep! 超次元游戏：海王星 系列": "Nep, Nep, Nep, Nep! ",
-        "艦隊これくしょん / 叢雲(むらくも)": "Kantai Collection / Murakumo"
+        "来自 Potion Maker 的 Pio 酱 ~": "来自 Potion Maker 的 Pio 酱 ~",
+        "来自 Potion Maker 的 Tia 酱 ~": "来自 Potion Maker 的 Tia 酱 ~",
+        "来自 Bilibili Live 的 22 哦 ~": "来自 Bilibili Live 的 22 哦 ~",
+        "来自 Bilibili Live 的 33 的说": "来自 Bilibili Live 的 33 的说",
+        "Shizuku Talk ！这里是 Shizuku ~": "Shizuku Talk ！这里是 Shizuku ~",
+        "Nep! Nep! 超次元游戏：海王星 系列": "Nep! Nep! 超次元游戏：海王星 系列 ",
+        "艦隊これくしょん / 叢雲(むらくも)": "艦隊これくしょん / 叢雲(むらくも)"
 
     }
 }
