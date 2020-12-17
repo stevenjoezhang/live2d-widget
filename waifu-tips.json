@@ -87,45 +87,45 @@
         {
             "selector": ".menu-item-about a",
             "text": [
-                " Do you want to know who my master is? ",
-                " Here are some secrets about my host. Would you like to read it? ",
-                " Found the location of the owner! "
+                "mouseover.menu_item_categories_a.1",
+                "mouseover.menu_item_categories_a.2",
+                "mouseover.menu_item_categories_a.3"
             ]
         },
         {
             "selector": ".menu-item-tags a",
             "text": [
-                " Click to see the tags of the article! ",
-                " Click to see all tags. "
+                "mouseover.menu_item_tags_a.1",
+                "mouseover.menu_item_tags_a.2"
             ]
         },
         {
             "selector": ".menu-item-categories a",
             "text": [
-                "The articles are all classified~ ",
-                " Click to view the article category. "
+                "mouseover.menu_item_categories_a.1",
+                "mouseover.menu_item_categories_a.2"
             ]
         },
         {
             "selector": ".menu-item-archives a",
             "text": [
-                " Is it troublesome to turn pages? Let's take a look at the article archive. ",
-                "The article catalog is organized here! "
+                "mouseover.menu_item_archieves_a.1",
+                "mouseover.menu_item_archieves_a.2"
             ]
         },
         {
             "selector": ".menu-item-friends a",
             "text": [
-                " This is my friends ヾ(◍°∇°◍)ﾉﾞ",
-                " Would you like to visit the big guys' house? ",
-                " Want to visit my friends? "
+                "mouseover.menu_item_friends_a.1",
+                "mouseover.menu_item_friends_a.2",
+                "mouseover.menu_item_friends_a.3"
             ]
         },
         {
             "selector": ".menu-item-search a",
             "text": [
-                " Can't find what you want to see? Search for it! ",
-                " What are you looking for, do you need help? "
+                "mouseover.menu_item_search_a.1",
+                "mouseover.menu_item_search_a.2"
             ]
         },
         {

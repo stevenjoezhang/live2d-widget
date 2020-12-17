@@ -80,6 +80,10 @@
                 "2": "Would you like to visit my friend's house?",
                 "3": "Want to visit my friends?"
             },
+            "menu_item_search_a": {
+                "1": "Can't find what you want to see? Search for it!",
+                "2": "What are you looking for, do you need help?"
+            },
             "menu_item_a": {
                 "1": "Look at what's here?"
             },
