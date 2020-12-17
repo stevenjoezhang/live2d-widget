@@ -1,6 +1,6 @@
 // 注意：live2d_path 参数应使用绝对路径
-const live2d_path = "https://cdn.jsdelivr.net/gh/nonsoft-dev/live2d-widget@master/";
-// const live2d_path = "/live2d-widget/";
+// const live2d_path = "https://cdn.jsdelivr.net/gh/nonsoft-dev/live2d-widget@master/";
+const live2d_path = "../";
 
 // 封装异步加载资源的方法
 function loadExternalResource(url, type) {
@@ -61,3 +61,23 @@ console.log(`
                   ﾄ-,/  |___./
                   'ｰ'    !_,.:
 `);
+
+
+I18n.defaultLocale = "en-US";
+I18n.locale = "en-US";
+
+I18n.translations = {};
+
+fetch("../i18n.json").then(res => res.json()).then(data => {
+    Object.keys(data).forEach(key => {
+        console.log("key", key)
+        I18n.translations[key] = data[key];
+    })
+})
+
+// $.getJSON("./i18n.json", (data) => {
+//     console.log("Translation data", data)
+//     $.each(data, (key, val) => {
+//         I18n.translations[key] = val;
+//     })
+// });

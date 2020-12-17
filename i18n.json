@@ -1,0 +1,14 @@
+{
+    "en-US": {
+        "mouseover": {
+            "waifu": {
+                "1": "Greeting from i18n"
+            }
+        },
+        "click": {
+            "waifu": {
+                "1": "Greeting from i18n, click"
+            }
+        }
+    }
+}
