@@ -199,108 +199,108 @@
         {
             "selector": "a[href^='mailto']",
             "text": [
-                " I promise I will reply to your email in time! ",
-                " Click to send email~ "
+                "mouseover.a_href_mail_to.1",
+                "mouseover.a_href_mail_to.2"
             ]
         },
         {
             "selector": "a[href^='/tags/']",
             "text": [
-                " Want to see the <span>{text}</span> tag? ",
-                " Click it to view all articles under this label! "
+                "mouseover.a_href_tags.1",
+                "mouseover.a_href_tags.2"
             ]
         },
         {
             "selector": "a[href^='/categories/']",
             "text": [
-                " Want to see the <span>{text}</span> category? ",
-                " Click it to view all articles in this category! "
+                "mouseover.a_href_categories.1",
+                "mouseover.a_href_categories.2"
             ]
         },
         {
             "selector": ".post-title-link",
             "text": [
-                " Want to read <span>{text}</span> this article? "
+                "mouseover.post_title_link.1"
             ]
         },
         {
             "selector": "a[rel='contents']",
             "text": [
-                " Click to read the full text. "
+                "mouseover.a_rel_contents.1"
             ]
         },
         {
             "selector": "a[itemprop='discussionUrl']",
             "text": [
-                " Want to see the comments? "
+                "mouseover.a_itemprop_discussionUrl.1"
             ]
         },
         {
             "selector": ".beian a",
             "text": [
-                " I also have a registered residence. ",
-                " My master is a good master who obeys the law. "
+                "mouseover.bein_a.1",
+                "mouseover.bein_a.2"
             ]
         },
         {
             "selector": ".container a[href^='http'], .nav-link .nav-text",
             "text": [
-                " Want to see <span>{text}</span>? ",
-                " Go to <span>{text}</span> for a stroll. ",
-                " Go to <span>{text}</span> to take a look. "
+                "mouseover.container_a_href_http_nav_link_nav_text.1",
+                "mouseover.container_a_href_http_nav_link_nav_text.2",
+                "mouseover.container_a_href_http_nav_link_nav_text.3"
             ]
         },
         {
             "selector": ".back-to-top",
             "text": [
-                " Click it to go back to the top! ",
-                " Back to the original starting point~ ",
-                " Do you want to go back to where you started? "
+                "mouseover.back_to_top.1",
+                "mouseover.back_to_top.2",
+                "mouseover.back_to_top.3"
             ]
         },
         {
             "selector": ".reward-container",
             "text": [
-                " Am I awesome~ Give me a thumbs up! ",
-                "Do you want to reward me? I look forward to it~ ",
-                "The master is eating dirt recently. It looks very hard. Give him some money~ "
+                "mouseover.reward_container.1",
+                "mouseover.reward_container.2",
+                "mouseover.reward_container.3"
             ]
         },
         {
             "selector": "#wechat",
             "text": [
-                " This is my WeChat QR code~ "
+                "mouseover.wechat.1"
             ]
         },
         {
             "selector": "#alipay",
             "text": [
-                " This is my Alipay! "
+                "mouseover.alipay.1"
             ]
         },
         {
             "selector": "#bitcoin",
             "text": [
-                " This is my Bitcoin account! "
+                "mouseover.bitcoin.1"
             ]
         },
         {
             "selector": "#needsharebutton-postbottom .btn",
             "text": [
-                " Good things must be known to more people. ",
-                "If you think the article is helpful, you can share it with more friends in need. "
+                "mouseover.needsharebutton_postbottom_btn.1",
+                "mouseover.needsharebutton_postbottom_btn.2"
             ]
         },
         {
             "selector": ".need-share-button_weibo",
             "text": [
-                " Weibo? Come and share a wave of meows! "
+                "mouseover.need_share_button_weibo.1"
             ]
         },
         {
             "selector": ".need-share-button_wechat",
             "text": [
-                " Share to WeChat! "
+                "mouseover.need_share_button_wechat.1"
             ]
         },
         {
