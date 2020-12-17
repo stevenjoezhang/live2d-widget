@@ -19,61 +19,61 @@
         {
             "selector": "#waifu-tool .fa-comment",
             "text": [
-                " Guess what I'm going to say? ",
-                " I heard a lot of life experience from the frog prince's story. "
+                "mouseover.waifu_tool_fa_comment.1",
+                "mouseover.waifu_tool_fa_comment.2"
             ]
         },
         {
             "selector": "#waifu-tool .fa-paper-plane",
             "text": [
-                " Do you want to play a plane war? ",
-                " This button says 'DO NOT CLICK' ",
-                " Why, do you want to come and play a game with me? ",
-                " I heard that you can dance this way! "
+                "mouseover.waifu_tool_fa_paper_plane.1",
+                "mouseover.waifu_tool_fa_paper_plane.2",
+                "mouseover.waifu_tool_fa_paper_plane.3",
+                "mouseover.waifu_tool_fa_paper_plane.4"
             ]
         },
         {
             "selector": "#waifu-tool .fa-user-circle",
             "text": [
-                " Are you not in love with me anymore, ohhh~ ",
-                " Would you like to see my sister? ",
-                " Want to see my sister? ",
-                " Do you want to switch the kanban girl? "
+                "mouseover.waifu_tool_fa_user_circle.1",
+                "mouseover.waifu_tool_fa_user_circle.2",
+                "mouseover.waifu_tool_fa_user_circle.3",
+                "mouseover.waifu_tool_fa_user_circle.4"
             ]
         },
         {
             "selector": "#waifu-tool .fa-street-view",
             "text": [
-                " Do you like changing to PLAY? ",
-                " What are you going to play this time? ",
-                " Tadaaa! ",
-                " Let's see what happens next! "
+                "mouseover.waifu_tool_fa_street_view.1",
+                "mouseover.waifu_tool_fa_street_view.2",
+                "mouseover.waifu_tool_fa_street_view.3",
+                "mouseover.waifu_tool_fa_street_view.4"
             ]
         },
         {
             "selector": "#waifu-tool .fa-camera-retro",
             "text": [
-                " You want to take pictures of me? One, two, three~eggplant~ ",
-                " Or, let's take a group photo! ",
-                " Just keep smiling~ "
+                "mouseover.waifu_tool_fa_camera_retro.1",
+                "mouseover.waifu_tool_fa_camera_retro.2",
+                "mouseover.waifu_tool_fa_camera_retro.3"
             ]
         },
         {
             "selector": "#waifu-tool .fa-info-circle",
             "text": [
-                " Want to know more about me? ",
-                " Are you a stalkerrr? ",
-                " What do you want to know more about me? "
+                "mouseover.waifu_tool_fa_info_circle.1",
+                "mouseover.waifu_tool_fa_info_circle.2",
+                "mouseover.waifu_tool_fa_info_circle.3"
             ]
         },
         {
             "selector": "#waifu-tool .fa-times",
             "text": [
-                " Is it time to say goodbye? ",
-                " Woo QAQ there will be an end... ",
-                " Don't abandon me... ",
-                " Can we meet again...?? ",
-                " Hmph, you will regret it!!! "
+                "mouseover.waifu_tool_fa_times.1",
+                "mouseover.waifu_tool_fa_times.2",
+                "mouseover.waifu_tool_fa_times.3",
+                "mouseover.waifu_tool_fa_times.4",
+                "mouseover.waifu_tool_fa_times.5"
             ]
         },
         {

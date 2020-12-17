@@ -30,6 +30,12 @@
                 "3": "Want to see my sister?",
                 "4": "Do you want to switch the kanban girl?"
             },
+            "waifu_tool_fa_street_view": {
+                "1": "Do you like changing to PLAY?",
+                "2": "What are you going to play this time?",
+                "3": "Tadaaa!",
+                "4": "Let's see what happens next!"
+            },
             "waifu_tool_fa_camera_retro": {
                 "1": "You wanna take pictures of me? One, two, three~eggplant~",
                 "2": "Hey! let's take a group photo!",
@@ -37,7 +43,7 @@
             },
             "waifu_tool_fa_info_circle": {
                 "1": "Want to know more about me? ",
-                "2": "Are you a stalker~~? ",
+                "2": "You are not a stalker, right ~~? ",
                 "3": "What do you want to know more about me? "
             },
             "waifu_tool_fa_times": {
