@@ -2,7 +2,200 @@
     "en-US": {
         "mouseover": {
             "waifu": {
-                "1": "Greeting from i18n"
+                "1": "What are you doing, put your hand away~~",
+                "2": "Mouse...the mouse is misplaced!",
+                "3": "What are you doing!!? Stop!",
+                "4": "Meow meow?",
+                "5": "AAAAAA go awayy!! (ノ≧∇≦)ノ",
+                "6": "Gross! Someone, help!!!",
+                "7": "I'll bite you~",
+                "8": "Im going to be angry, grr~",
+                "9": "Don't touch anything!!",
+                "10": "Really~~?",
+                "11": "Pervert"
+            },
+            "waifu_tool_fa_comment": {
+                "1": "Guess what I'm going to say?",
+                "2": "I heard a lot of life experience from the frog prince's story."
+            },
+            "waifu_tool_fa_paper_plane": {
+                "1": "Hey! Let's play paper plane war!",
+                "2": "This button says 'DO NOT CLICK'",
+                "3": "Why? Do you want to play a game with me",
+                "4": "I heard you can play like this and that"
+            },
+            "waifu_tool_fa_user_circle": {
+                "1": "Are you not in love with me anymore, ohhh~",
+                "2": "Would you like to see my sisters?",
+                "3": "Want to see my sister?",
+                "4": "Do you want to switch the kanban girl?"
+            },
+            "waifu_tool_fa_camera_retro": {
+                "1": "You wanna take pictures of me? One, two, three~eggplant~",
+                "2": "Hey! let's take a group photo!",
+                "3": "Keep smiling~"
+            },
+            "waifu_tool_fa_info_circle": {
+                "1": "Want to know more about me? ",
+                "2": "Are you a stalker~~? ",
+                "3": "What do you want to know more about me? "
+            },
+            "waifu_tool_fa_times": {
+                "1": "Is it time to say goodbye?",
+                "2": "Woo QAQ there will be an end...",
+                "3": "Don't abandon me...",
+                "4": "But..can we meet again~~?",
+                "5": "Hmph, you will regret it!!!"
+            },
+            "menu_item_about_a": {
+                "1": "Do you want to know who my master is?",
+                "2": "Here are some secrets about my host. Would you like to read it?",
+                "3": "Found the location of the owner!"
+            },
+            "menu_item_tags_a": {
+                "1": "Click to see the tags of the article!",
+                "2": "Click to see all tags."
+            },
+            "menu_item_categories_a": {
+                "1": "The articles are all classified~",
+                "2": "Click to view the article category."
+            },
+            "menu_item_archieves_a": {
+                "1": "Is it troublesome to turn pages? Let's take a look at the article archive.",
+                "2": "The article catalog is organized here!"
+            },
+            "menu_item_friends_a": {
+                "1": "This is my friends ヾ(◍°∇°◍)",
+                "2": "Would you like to visit my friend's house?",
+                "3": "Want to visit my friends?"
+            },
+            "menu_item_a": {
+                "1": "Look at what's here?"
+            },
+            "site_author": {
+                "1": "Does my owner look good?",
+                "2": "This is my owner (*´∇｀*)"
+            },
+            "site_state": {
+                "1": "This is the statistical information of the article~",
+                "2": "Would you like to click in and have a look?"
+            },
+            "feed_link_a": {
+                "1": "You can use RSS to subscribe here!",
+                "2": "Using the feed subscriber, you can quickly know if the blog has been updated."
+            },
+            "links_of_author": {
+                "1": "This is my owner's address.",
+                "2": "Here is my owner's contact information!"
+            },
+            "qrcode": {
+                "1": "It's very convenient to continue reading by scanning the phone~",
+                "2": "Sweep, open the door to a new world!"
+            },
+            "fancybox_img_img_medium_zoom_image": {
+                "1": "Click on the picture to enlarge it!"
+            },
+            "copy_btn": {
+                "1": "The code can be copied directly by clicking on it."
+            },
+            ".highlight .table-container, .gist": {
+                "1": "GitHub! I'm a novice!",
+                "2": "PHP is the best language!"
+            },
+            "a_href_mail_to": {
+                "1": "I promise I will reply to your email in time!",
+                "2": "Click to send email~"
+            },
+            "a_href_tags": {
+                "1": "Want to see the <span>{text}</span> tag?",
+                "2": "Click it to view all articles under this label!"
+            },
+            "a_href_categories": {
+                "1": "Want to see the <span>{text}</span> category?",
+                "2": "Click it to view all articles in this category!"
+            },
+            "post_title_link": {
+                "1": "Want to read <span>{text}</span> this article?"
+            },
+            "a_rel_contents": {
+                "1": "Click to read the full text."
+            },
+            "a_itemprop_discussionUrl": {
+                "1": "Want to see the comments?"
+            },
+            "bein_a": {
+                "1": "I also have a registered residence.",
+                "2": "My master is a good master who obeys the law."
+            },
+            "container_a_href_http_nav_link_nav_text": {
+                "1": "Want to see <span>{text}</span>?",
+                "2": "Go to <span>{text}</span> for a stroll.",
+                "3": "Go to <span>{text}</span> to take a look."
+            },
+            "back_to_top": {
+                "1": "Click it to go back to the top!",
+                "2": "Back to the original starting point~",
+                "3": "Do you want to go back to where you started?"
+            },
+            "reward_container": {
+                "1": "Am I awesome~ Give me a thumbs up!",
+                "2": "Do you want to reward me? I look forward to it~",
+                "3": "The master is eating dirt recently. It looks very hard. Give him some money~"
+            },
+            "wechat": {
+                "1": "This is my WeChat QR code~"
+            },
+            "alipay": {
+                "1": "This is my Alipay!"
+            },
+            "bitcoin": {
+                "1": "This is my Bitcoin account!"
+            },
+            "needsharebutton_postbottom_btn": {
+                "1": "Good things must be known to more people.",
+                "2": "If you think the article is helpful, you can share it with more friends in need."
+            },
+            "need_share_button_weibo": {
+                "1": "Weibo? Come and share a wave of meows!"
+            },
+            "need_share_button_wechat": {
+                "1": "Share to WeChat!"
+            },
+            "need_share_button_douban": {
+                "1": "It seems good to share on Douban!"
+            },
+            "need_share_button_qqzone": {
+                "1": "QQ space, one-click forwarding, yeah~"
+            },
+            "need_share_button_twitter": {
+                "1": "Twitter? It doesn't seem to exist?"
+            },
+            "need_share_button_facebook": {
+                "1": "emmm...FB does not seem to exist?"
+            },
+            "post_nav_item_a_rel_next": {
+                "1": "Let's take a look at the next article.",
+                "2": "Click it to see the next article!",
+                "3": "Do you want to turn to the next article?"
+            },
+            "post_nav_item_a_rel_prev": {
+                "1": "Let's take a look at the previous article.",
+                "2": "Click it to read the previous article!",
+                "3": "Do you want to turn to the previous article?"
+            },
+            "extend_next": {
+                "1": "Go to the next page and see.",
+                "2": "Click it to move forward!",
+                "3": "Do you want to turn to the next page?"
+            },
+            "extend_prev": {
+                "1": "Go to the previous page and have a look.",
+                "2": "Click it to go back!",
+                "3": "Do you want to turn to the previous page?"
+            },
+            "input_vnick": {
+                "1": "What should I call you?",
+                "2": "Leave your first name!"
             }
         },
         "click": {

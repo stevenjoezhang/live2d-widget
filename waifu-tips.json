@@ -3,7 +3,17 @@
         {
             "selector": "#waifu #live2d",
             "text": [
-                "mouseover.waifu.1"
+                "mouseover.waifu.1",
+                "mouseover.waifu.2",
+                "mouseover.waifu.3",
+                "mouseover.waifu.4",
+                "mouseover.waifu.5",
+                "mouseover.waifu.6",
+                "mouseover.waifu.7",
+                "mouseover.waifu.8",
+                "mouseover.waifu.9",
+                "mouseover.waifu.10",
+                "mouseover.waifu.11"
             ]
         },
         {

@@ -73,11 +73,4 @@ fetch("../i18n.json").then(res => res.json()).then(data => {
         console.log("key", key)
         I18n.translations[key] = data[key];
     })
-})
-
-// $.getJSON("./i18n.json", (data) => {
-//     console.log("Translation data", data)
-//     $.each(data, (key, val) => {
-//         I18n.translations[key] = val;
-//     })
-// });
+});
