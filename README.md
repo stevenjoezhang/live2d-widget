@@ -1,5 +1,13 @@
 # Live2D Widget - English translation
 
+
+ENGLISH - CDN
+```
+<script src="https://cdn.jsdelivr.net/gh/nonsoft-dev/live2d-widget@latest/autoload.js"></script>
+```
+
+---
+
 ![](https://forthebadge.com/images/badges/built-with-love.svg)
 ![](https://forthebadge.com/images/badges/uses-html.svg)
 ![](https://forthebadge.com/images/badges/made-with-javascript.svg)
