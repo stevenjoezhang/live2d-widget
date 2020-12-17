@@ -6,6 +6,10 @@ Original Documentation: https://github.com/stevenjoezhang/live2d-widget
 
 For a full documentation, please check the above link.
 
+**NOTE**: I tried my best to translate it to English. Some of them are still from Google Translate. Contribution for translations are welcome in all languages.
+
+## Demo:
+[http://nonsoft.ml/live2d-widget-i18n/demo/demo.html](http://nonsoft.ml/live2d-widget-i18n/demo/demo.html)
 
 ## Dependencies:
 
@@ -21,6 +25,7 @@ For a full documentation, please check the above link.
 ```
 
 ## Setup
+
 ### 1. Add dependencies
 
 Add i18n-js cdn as instructed above.
@@ -46,7 +51,7 @@ For a list of complete locale, click [here](https://github.com/ladjs/i18n-locale
 
 ### 3. Replace `waifu-tips.json`
 Replace `waifu-tips.json` the same as [waifu-tips.json in this repo](/blob/master/waifu-tips.json).
-This will load up i18n syntax.
+This will load up i18n syntax. Modify this file as you needed.
 
 ### 4. Replace `waifu-tips.js` 
 
@@ -54,7 +59,8 @@ Replace `waifu-tips.js` the same as [waifu-tips.js in this repo](/blob/master/wa
 This will modify the script to work with i18n.
 
 ### 5. Download and modify i18n.json
-`i18n.json` will be the files contain our main conversations. Add more languages as you wished.
+`i18n.json` will be the files contain our main conversations. Add more languages and modify as you wished.
 
 
-
+## Contribution
+Contribution are very welcome. You send a pull request.
