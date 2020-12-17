@@ -53,6 +53,11 @@
                 "4": "But..can we meet again~~?",
                 "5": "Hmph, you will regret it!!!"
             },
+            "menu_item_home_a": {
+                "1": "Click to go to the home page. If you want to go back to the previous page, you can use the browser's back function.",
+                "2": "Click it to return to the homepage!",
+                "3": "Go back to the homepage and take a look."
+            },
             "menu_item_about_a": {
                 "1": "Do you want to know who my master is?",
                 "2": "Here are some secrets about my host. Would you like to read it?",
