@@ -194,18 +194,18 @@ function loadWidget(config) {
 			.then(response => response.json())
 			.then(result => {
 				window.addEventListener("mouseover", event => {
-					for (let tips of result.mouseover) {
-						if (!event.target.matches(tips.selector)) continue;
-						let text = randomSelection(tips.text);
+					for (let { selector, text } of result.mouseover) {
+						if (!event.target.matches(selector)) continue;
+						text = randomSelection(tips.text);
 						text = text.replace("{text}", event.target.innerText);
 						showMessage(text, 4000, 8);
 						return;
 					}
 				});
 				window.addEventListener("click", event => {
-					for (let tips of result.click) {
-						if (!event.target.matches(tips.selector)) continue;
-						let text = randomSelection(tips.text);
+					for (let { selector, text } of result.click) {
+						if (!event.target.matches(selector)) continue;
+						text = randomSelection(tips.text);
 						text = text.replace("{text}", event.target.innerText);
 						showMessage(text, 4000, 8);
 						return;
