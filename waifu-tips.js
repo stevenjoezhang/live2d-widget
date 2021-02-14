@@ -196,7 +196,7 @@ function loadWidget(config) {
 				window.addEventListener("mouseover", event => {
 					for (let { selector, text } of result.mouseover) {
 						if (!event.target.matches(selector)) continue;
-						text = randomSelection(tips.text);
+						text = randomSelection(text);
 						text = text.replace("{text}", event.target.innerText);
 						showMessage(text, 4000, 8);
 						return;
@@ -205,18 +205,18 @@ function loadWidget(config) {
 				window.addEventListener("click", event => {
 					for (let { selector, text } of result.click) {
 						if (!event.target.matches(selector)) continue;
-						text = randomSelection(tips.text);
+						text = randomSelection(text);
 						text = text.replace("{text}", event.target.innerText);
 						showMessage(text, 4000, 8);
 						return;
 					}
 				});
-				result.seasons.forEach(tips => {
+				result.seasons.forEach(({ date, text }) => {
 					const now = new Date(),
-						after = tips.date.split("-")[0],
-						before = tips.date.split("-")[1] || after;
+						after = date.split("-")[0],
+						before = date.split("-")[1] || after;
 					if ((after.split("/")[0] <= now.getMonth() + 1 && now.getMonth() + 1 <= before.split("/")[0]) && (after.split("/")[1] <= now.getDate() && now.getDate() <= before.split("/")[1])) {
-						let text = randomSelection(tips.text);
+						text = randomSelection(text);
 						text = text.replace("{year}", now.getFullYear());
 						//showMessage(text, 7000, true);
 						messageArray.push(text);
