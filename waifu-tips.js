@@ -88,7 +88,7 @@ function loadWidget(config) {
 			Live2D.captureFrame = true;
 		});
 		document.querySelector("#waifu-tool .fa-info-circle").addEventListener("click", () => { // 关于页转跳
-			open("https://github.com/PFiS1737/PFiS_Public_Repository/tree/main/page/effect/Live2D/live2d-widget"); //关于页链接
+			open("https://github.com/stevenjoezhang/live2d-widget"); //关于页链接
 		});
 		document.querySelector("#waifu-tool .fa-times").addEventListener("click", () => { // 关闭看板娘
 			localStorage.setItem("waifu-display", Date.now());
