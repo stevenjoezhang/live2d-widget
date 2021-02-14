@@ -1,10 +1,7 @@
 /*
  * Live2D Widget
- * Original from https://github.com/stevenjoezhang/live2d-widget
- * https://github.com/PFiS1737/PFiS_Public_Repository/tree/main/live2d
+ * https://github.com/stevenjoezhang/live2d-widget
  */
-
-const live2d_path = "/effect/Live2D/live2d-widget/";
 
 function loadWidget(config) {
 	let { waifuPath, apiPath, cdnPath } = config;
