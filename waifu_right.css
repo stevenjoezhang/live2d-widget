@@ -105,24 +105,6 @@
 	transition: color .3s;
 }
 
-#waifu-tool .fa-chevron-right {
-	color: #5b6c7d;
-	cursor: pointer;
-	display: block;
-	margin: 7px 0px;
-	text-align: center;
-	transition: color .3s;
-}
-
-#waifu-tool .fa-chevron-left {
-	color: #5b6c7d;
-	cursor: pointer;
-	display: block;
-	margin-top: 23px;
-	text-align: center;
-	transition: color .3s;
-}
-
 /* 工具栏触碰后的颜色 */
 #waifu-tool span:hover {
 	color: #0684bd;
