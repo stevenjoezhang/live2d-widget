@@ -1,4 +1,3 @@
-/* 看板娘隐藏后的“看板娘”按钮 */
 #waifu-toggle {
 	background-color: #fa0;
 	border-radius: 5px;
@@ -24,14 +23,13 @@
 	margin-left: -30px;
 }
 
-/* 看板娘主体 */
 #waifu {
 	bottom: -1000px;
 	left: 0;
 	line-height: 0;
+	margin-bottom: -10px;
 	position: fixed;
 	transform: translateY(3px);
-	/* margin-bottom: -10px; */
 	transition: transform .3s ease-in-out, bottom 3s ease-in-out;
 	z-index: 1000;
 }
@@ -40,7 +38,6 @@
 	transform: translateY(0);
 }
 
-/* 看板娘对话框 */
 #waifu-tips {
 	animation: shake 50s ease-in-out 5s infinite;
 	background-color: rgba(236, 217, 188, .5);
@@ -59,7 +56,6 @@
 	transition: opacity 1s;
 	width: 250px;
 	word-break: break-all;
-	/* display: none !important; */
 }
 
 #waifu-tips.waifu-tips-active {
@@ -82,7 +78,6 @@
 	cursor: grabbing;
 }
 
-/* 工具栏 */
 #waifu-tool {
 	color: #aaa;
 	opacity: 0;
@@ -97,7 +92,7 @@
 }
 
 #waifu-tool span {
-	color: #5b6c7d;
+	color: #7b8c9d;
 	cursor: pointer;
 	display: block;
 	line-height: 30px;
@@ -105,10 +100,8 @@
 	transition: color .3s;
 }
 
-/* 工具栏触碰后的颜色 */
 #waifu-tool span:hover {
-	color: #0684bd;
-	/* color: #34495e; */
+	color: #0684bd; /* #34495e */
 }
 
 @keyframes shake {
