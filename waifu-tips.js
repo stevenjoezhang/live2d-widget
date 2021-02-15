@@ -1,7 +1,7 @@
 /*
  * @Date: 12/02/2021 21.44.31 +0800
  * @Author: KnowsCount
- * @LastEditTime: 12/02/2021 22.27.44 +0800
+ * @LastEditTime: 15/02/2021 16.04.17 +0800
  * @FilePath: /@knowscount:live2d-widget/waifu-tips.js
  */
 
@@ -33,6 +33,8 @@ function loadWidget(config) {
 				<span class="fa fa-lg fa-camera-retro"></span>
 				<span class="fa fa-lg fa-info-circle"></span>
 				<span class="fa fa-lg fa-times"></span>
+                                <span class="fa fa-lg fa-chevron-right" id="live2d-go-right"></span>
+                                <span class="fa fa-lg fa-chevron-left" id="live2d-go-left"></span>
 			</div>
 		</div>`
 	)
