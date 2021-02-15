@@ -103,15 +103,27 @@ function loadWidget(config) {
 			localStorage.setItem("Live2DPlace", "right");
 			showMessage("耶，可以去右边了呢～。", 2000, 11);
 			document.getElementById("waifu").style.bottom = "-500px";
-	                setTimeout('document.getElementById("live2d_css").setAttribute("href",live2d_path + "waifu_right.css")',3000);
-                        setTimeout('document.getElementById("waifu").style.bottom = "0px"',3000);
+			document.getElementById("waifu-toggle").style.display = "none";
+			setTimeout(() => {
+				document.getElementById("live2d_css").href = live2d_path + "waifu_right.css";
+				document.getElementById("waifu").style.bottom = "0px";
+				document.getElementById("live2d-go-right").style.display = "none";
+				document.getElementById("live2d-go-left").style.display = "block";
+			}, 3000);
+			setTimeout('document.getElementById("waifu-toggle").style.display = "inline"',6000);
 		});
                 document.querySelector("#waifu-tool .fa-chevron-left").addEventListener("click", () => { // 切换看板娘位置（左 <= 右）
 			localStorage.setItem("Live2DPlace", "left");
 			showMessage("耶，可以去左边了呢～。", 2000, 11);
 			document.getElementById("waifu").style.bottom = "-500px";
-			setTimeout('document.getElementById("live2d_css").setAttribute("href",live2d_path + "waifu_left.css")',3000);
-                        setTimeout('document.getElementById("waifu").style.bottom = "0px"',3000);
+			document.getElementById("waifu-toggle").style.display = "none";
+			setTimeout(() => {
+				document.getElementById("live2d_css").href = live2d_path + "waifu_left.css";
+				document.getElementById("waifu").style.bottom = "0px";
+				document.getElementById("live2d-go-left").style.display = "none";
+				document.getElementById("live2d-go-right").style.display = "block";
+			}, 3000);
+			setTimeout('document.getElementById("waifu-toggle").style.display = "inline"',6000);
 		});
 		const devtools = () => { };
 		console.log("%c", devtools);
