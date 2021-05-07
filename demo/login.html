@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>看板娘登陆平台</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
 <script src="../live2d.min.js"></script>
 <style>
@@ -137,17 +137,19 @@ body {
 		<a id="info" href="javascript:info()"><i class="fa fa-lg fa-info"></i></a>
 		<a id="refresh" href="javascript:refresh()"><i class="fa fa-lg fa-refresh"></i></a>
 	</div>
-	<h1 class="h3 mb-3 font-weight-normal">看板娘登陆平台</h1>
+	<h1 class="h3 mb-3 fw-normal">看板娘登陆平台</h1>
 	<label for="room" class="sr-only">用户名</label>
 	<input type="text" name="room" class="form-control" placeholder="用户名" required autofocus>
 	<label for="pass" class="sr-only">密码</label>
 	<input type="password" name="pass" class="form-control" placeholder="密码" required>
-	<div class="checkbox mb-3">
+	<div class="checkbox mb-4">
 		<label>
 			<input type="checkbox" value="remember-me"> 记住我
 		</label>
 	</div>
-	<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+	<div class="d-grid">
+		<button class="btn btn-lg btn-primary" type="submit">登录</button>
+	</div>
 	<p class="mt-5 mb-3 text-muted">Copyleft &copy; Mimi 2019</p>
 </form>
 <script>

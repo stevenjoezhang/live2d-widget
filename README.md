@@ -139,7 +139,7 @@ https://github.com/akiroz/Live2D-Widget
 https://github.com/zenghongtu/PPet  
 https://github.com/LikeNeko/L2dPetForMac
 
-以及 Wallpaper Engine：
+以及 Wallpaper Engine：  
 https://github.com/guansss/nep-live2d
 
 ## 许可证 License
