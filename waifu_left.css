@@ -12,6 +12,7 @@
 	transition: margin-left 1s;
 	width: 60px;
 	writing-mode: vertical-rl;
+	z-index: 1000;
 }
 
 #waifu-toggle.waifu-toggle-active {
@@ -30,7 +31,7 @@
 	position: fixed;
 	transform: translateY(3px);
 	transition: transform .3s ease-in-out, bottom 3s ease-in-out;
-	z-index: 1;
+	z-index: 1000;
 }
 
 #waifu:hover {
@@ -82,7 +83,7 @@
 	opacity: 0;
 	position: absolute;
 	right: -10px;
-	top: 70px;
+	top: 55px;
 	transition: opacity 1s;
 }
 

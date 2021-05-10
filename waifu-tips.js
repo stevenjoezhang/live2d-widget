@@ -28,6 +28,8 @@ function loadWidget(config) {
 				<span class="fa fa-lg fa-camera-retro"></span>
 				<span class="fa fa-lg fa-info-circle"></span>
 				<span class="fa fa-lg fa-times"></span>
+                                <span class="fa fa-lg fa-chevron-right" id="live2d-go-right"></span>
+                                <span class="fa fa-lg fa-chevron-left" id="live2d-go-left"></span>
 			</div>
 		</div>`);
 	// https://stackoverflow.com/questions/24148403/trigger-css-transition-on-appended-element
@@ -57,9 +59,18 @@ function loadWidget(config) {
 		}
 	}, 1000);
 
-	(function registerEventListener() {
-		document.querySelector("#waifu-tool .fa-comment").addEventListener("click", showHitokoto);
-		document.querySelector("#waifu-tool .fa-paper-plane").addEventListener("click", () => {
+        (function () { // 根据位置加载
+                if (localStorage.getItem("Live2DPlace") === "left") {
+                        document.getElementById("live2d-go-left").style.display = "none";
+                } else if (localStorage.getItem("Live2DPlace") === "right") {
+                        document.getElementById("live2d-go-right").style.display = "none";
+                        document.getElementById("live2d_css").href = live2d_path + "waifu_right.css";
+                }
+        })();
+
+	(function registerEventListener() { // 工具栏菜单效果
+		document.querySelector("#waifu-tool .fa-comment").addEventListener("click", showHitokoto); // 一言API对话
+		document.querySelector("#waifu-tool .fa-paper-plane").addEventListener("click", () => { // 飞机大战（雾）
 			if (window.Asteroids) {
 				if (!window.ASTEROIDSPLAYERS) window.ASTEROIDSPLAYERS = [];
 				window.ASTEROIDSPLAYERS.push(new Asteroids());
@@ -69,17 +80,17 @@ function loadWidget(config) {
 				document.head.appendChild(script);
 			}
 		});
-		document.querySelector("#waifu-tool .fa-user-circle").addEventListener("click", loadOtherModel);
-		document.querySelector("#waifu-tool .fa-street-view").addEventListener("click", loadRandModel);
-		document.querySelector("#waifu-tool .fa-camera-retro").addEventListener("click", () => {
+		document.querySelector("#waifu-tool .fa-user-circle").addEventListener("click", loadOtherModel); // 切换模型
+		document.querySelector("#waifu-tool .fa-street-view").addEventListener("click", loadRandModel); // 切换材质
+		document.querySelector("#waifu-tool .fa-camera-retro").addEventListener("click", () => { // 输出照片
 			showMessage("照好了嘛，是不是很可爱呢？", 6000, 9);
-			Live2D.captureName = "photo.png";
+			Live2D.captureName = "photo.png"; // 输出照片的名字
 			Live2D.captureFrame = true;
 		});
-		document.querySelector("#waifu-tool .fa-info-circle").addEventListener("click", () => {
-			open("https://github.com/stevenjoezhang/live2d-widget");
+		document.querySelector("#waifu-tool .fa-info-circle").addEventListener("click", () => { // 关于页转跳
+			open("https://github.com/stevenjoezhang/live2d-widget"); //关于页链接
 		});
-		document.querySelector("#waifu-tool .fa-times").addEventListener("click", () => {
+		document.querySelector("#waifu-tool .fa-times").addEventListener("click", () => { // 关闭看板娘
 			localStorage.setItem("waifu-display", Date.now());
 			showMessage("愿你有一天能与重要的人重逢。", 2000, 11);
 			document.getElementById("waifu").style.bottom = "-500px";
@@ -88,7 +99,33 @@ function loadWidget(config) {
 				document.getElementById("waifu-toggle").classList.add("waifu-toggle-active");
 			}, 3000);
 		});
-		const devtools = () => {};
+		document.querySelector("#waifu-tool .fa-chevron-right").addEventListener("click", () => { // 切换看板娘位置（左 => 右）
+			localStorage.setItem("Live2DPlace", "right");
+			showMessage("耶，可以去右边了呢～。", 2000, 11);
+			document.getElementById("waifu").style.bottom = "-500px";
+			document.getElementById("waifu-toggle").style.display = "none";
+			setTimeout(() => {
+				document.getElementById("live2d_css").href = live2d_path + "waifu_right.css";
+				document.getElementById("waifu").style.bottom = "0px";
+				document.getElementById("live2d-go-right").style.display = "none";
+				document.getElementById("live2d-go-left").style.display = "block";
+			}, 3000);
+			setTimeout('document.getElementById("waifu-toggle").style.display = "inline"',6000);
+		});
+                document.querySelector("#waifu-tool .fa-chevron-left").addEventListener("click", () => { // 切换看板娘位置（左 <= 右）
+			localStorage.setItem("Live2DPlace", "left");
+			showMessage("耶，可以去左边了呢～。", 2000, 11);
+			document.getElementById("waifu").style.bottom = "-500px";
+			document.getElementById("waifu-toggle").style.display = "none";
+			setTimeout(() => {
+				document.getElementById("live2d_css").href = live2d_path + "waifu_left.css";
+				document.getElementById("waifu").style.bottom = "0px";
+				document.getElementById("live2d-go-left").style.display = "none";
+				document.getElementById("live2d-go-right").style.display = "block";
+			}, 3000);
+			setTimeout('document.getElementById("waifu-toggle").style.display = "inline"',6000);
+		});
+		const devtools = () => { };
 		console.log("%c", devtools);
 		devtools.toString = () => {
 			showMessage("哈哈，你打开了控制台，是想要看看我的小秘密吗？", 6000, 9);
@@ -127,8 +164,7 @@ function loadWidget(config) {
 		showMessage(text, 7000, 8);
 	})();
 
-	function showHitokoto() {
-		// 增加 hitokoto.cn 的 API
+	function showHitokoto() { // 增加 hitokoto.cn 的 API
 		fetch("https://v1.hitokoto.cn")
 			.then(response => response.json())
 			.then(result => {
@@ -161,9 +197,9 @@ function loadWidget(config) {
 		let modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
 		if (modelId === null) {
-			// 首次访问加载 指定模型 的 指定材质
-			modelId = 1; // 模型 ID
-			modelTexturesId = 53; // 材质 ID
+			// 首次访问时加载 指定模型 的 指定材质
+			modelId = 2; // 模型 ID
+			modelTexturesId = 39; // 材质 ID
 		}
 		loadModel(modelId, modelTexturesId);
 		fetch(waifuPath)
@@ -229,8 +265,8 @@ function loadWidget(config) {
 			loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
 			showMessage("我的新衣服好看嘛？", 4000, 10);
 		} else {
-			// 可选 "rand"(随机), "switch"(顺序)
-			fetch(`${apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`)
+			// 材质加载方式, 可选 "rand"(随机), "switch"(顺序)
+			fetch(`${apiPath}switch_textures/?id=${modelId}-${modelTexturesId}`)
 				.then(response => response.json())
 				.then(result => {
 					if (result.textures.id === 1 && (modelTexturesId === 1 || modelTexturesId === 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
