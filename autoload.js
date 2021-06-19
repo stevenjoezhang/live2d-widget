@@ -1,12 +1,12 @@
 /*
  * @Date: 15/02/2021 16.05.35 +0800
  * @Author: KnowsCount
- * @LastEditTime: 15/02/2021 21.18.44 +0800
+ * @LastEditTime: 19/06/2021 23.11.56 +0800
  * @FilePath: /@knowscount:live2d-widget/autoload.js
  */
 // 注意：live2d_path 参数应使用绝对路径
-const live2d_path =
-	'https://cdn.jsdelivr.net/gh/knowscount/live2d-widget@latest/'
+// const live2d_path = "https://cdn.jsdelivr.net/gh/nonsoft-dev/live2d-widget@master/";
+const live2d_path = '../'
 
 // 封装异步加载资源的方法
 function loadExternalResource(url, type) {
@@ -69,3 +69,17 @@ console.log(`
                   ﾄ-,/  |___./
                   'ｰ'    !_,.:
 `)
+
+I18n.defaultLocale = 'en-US'
+I18n.locale = 'en-US'
+
+I18n.translations = {}
+
+fetch('../i18n.json')
+	.then((res) => res.json())
+	.then((data) => {
+		Object.keys(data).forEach((key) => {
+			console.log('key', key)
+			I18n.translations[key] = data[key]
+		})
+	})

@@ -1,0 +1,695 @@
+{
+    "en-US": {
+        "mouseover": {
+            "waifu": {
+                "1": "What are you doing, put your hand away~~",
+                "2": "Mouse...the mouse is misplaced!",
+                "3": "What are you doing!!? Stop!",
+                "4": "Meow meow?",
+                "5": "AAAAAA go awayy!! (ノ≧∇≦)ノ",
+                "6": "Gross! Someone, help!!!",
+                "7": "I'll bite you~",
+                "8": "Im going to be angry, grr~",
+                "9": "Don't touch anything!!",
+                "10": "Really~~?",
+                "11": "Pervert"
+            },
+            "waifu_tool_fa_comment": {
+                "1": "Guess what I'm going to say?",
+                "2": "I heard a lot of life experience from the frog prince's story."
+            },
+            "waifu_tool_fa_paper_plane": {
+                "1": "Hey! Let's play paper plane war!",
+                "2": "This button says 'DO NOT CLICK'",
+                "3": "Why? Do you want to play a game with me",
+                "4": "I heard you can play like this and that"
+            },
+            "waifu_tool_fa_user_circle": {
+                "1": "Are you not in love with me anymore, ohhh~",
+                "2": "Would you like to see my sisters?",
+                "3": "Want to see my sister?",
+                "4": "Do you want to switch the kanban girl?"
+            },
+            "waifu_tool_fa_street_view": {
+                "1": "Do you like changing to PLAY?",
+                "2": "What are you going to play this time?",
+                "3": "Tadaaa!",
+                "4": "Let's see what happens next!"
+            },
+            "waifu_tool_fa_camera_retro": {
+                "1": "You wanna take pictures of me? One, two, three~eggplant~",
+                "2": "Hey! let's take a group photo!",
+                "3": "Keep smiling~"
+            },
+            "waifu_tool_fa_info_circle": {
+                "1": "Want to know more about me? ",
+                "2": "You are not a stalker, right ~~? ",
+                "3": "What do you want to know more about me? "
+            },
+            "waifu_tool_fa_times": {
+                "1": "Is it time to say goodbye?",
+                "2": "Woo QAQ there will be an end...",
+                "3": "Don't abandon me...",
+                "4": "But..can we meet again~~?",
+                "5": "Hmph, you will regret it!!!"
+            },
+            "menu_item_home_a": {
+                "1": "Click to go to the home page. If you want to go back to the previous page, you can use the browser's back function.",
+                "2": "Click it to return to the homepage!",
+                "3": "Go back to the homepage and take a look."
+            },
+            "menu_item_about_a": {
+                "1": "Do you want to know who my master is?",
+                "2": "Here are some secrets about my host. Would you like to read it?",
+                "3": "Found the location of the owner!"
+            },
+            "menu_item_tags_a": {
+                "1": "Click to see the tags of the article!",
+                "2": "Click to see all tags."
+            },
+            "menu_item_categories_a": {
+                "1": "The articles are all classified~",
+                "2": "Click to view the article category."
+            },
+            "menu_item_archieves_a": {
+                "1": "Is it troublesome to turn pages? Let's take a look at the article archive.",
+                "2": "The article catalog is organized here!"
+            },
+            "menu_item_friends_a": {
+                "1": "This is my friends ヾ(◍°∇°◍)",
+                "2": "Would you like to visit my friend's house?",
+                "3": "Want to visit my friends?"
+            },
+            "menu_item_search_a": {
+                "1": "Can't find what you want to see? Search for it!",
+                "2": "What are you looking for, do you need help?"
+            },
+            "menu_item_a": {
+                "1": "Look at what's here?"
+            },
+            "site_author": {
+                "1": "Does my owner look good?",
+                "2": "This is my owner (*´∇｀*)"
+            },
+            "site_state": {
+                "1": "This is the statistical information of the article~",
+                "2": "Would you like to click in and have a look?"
+            },
+            "feed_link_a": {
+                "1": "You can use RSS to subscribe here!",
+                "2": "Using the feed subscriber, you can quickly know if the blog has been updated."
+            },
+            "cc_opacity_post_copyright_author": {
+                "1": "Remember to reprint the standard.",
+                "2": "All articles adopt CC BY-NC-SA 4.0 license agreement~",
+                "3": "Before reprinting, please pay attention to the copyright agreement of the article."
+            },
+            "links_of_author": {
+                "1": "This is my owner's address.",
+                "2": "Here is my owner's contact information!"
+            },
+            "qrcode": {
+                "1": "It's very convenient to continue reading by scanning the phone~",
+                "2": "Sweep, open the door to a new world!"
+            },
+            "fancybox_img_img_medium_zoom_image": {
+                "1": "Click on the picture to enlarge it!"
+            },
+            "copy_btn": {
+                "1": "The code can be copied directly by clicking on it."
+            },
+            "highlight_table_container_gist": {
+                "1": "GitHub! I'm a novice!",
+                "2": "PHP is the best language!"
+            },
+            "a_href_mail_to": {
+                "1": "I promise I will reply to your email in time!",
+                "2": "Click to send email~"
+            },
+            "a_href_tags": {
+                "1": "Want to see the <span>{text}</span> tag?",
+                "2": "Click it to view all articles under this label!"
+            },
+            "a_href_categories": {
+                "1": "Want to see the <span>{text}</span> category?",
+                "2": "Click it to view all articles in this category!"
+            },
+            "post_title_link": {
+                "1": "Want to read <span>{text}</span> this article?"
+            },
+            "a_rel_contents": {
+                "1": "Click to read the full text."
+            },
+            "a_itemprop_discussionUrl": {
+                "1": "Want to see the comments?"
+            },
+            "bein_a": {
+                "1": "I also have a registered residence.",
+                "2": "My master is a good master who obeys the law."
+            },
+            "container_a_href_http_nav_link_nav_text": {
+                "1": "Want to see <span>{text}</span>?",
+                "2": "Go to <span>{text}</span> for a stroll.",
+                "3": "Go to <span>{text}</span> to take a look."
+            },
+            "back_to_top": {
+                "1": "Click it to go back to the top!",
+                "2": "Back to the original starting point~",
+                "3": "Do you want to go back to where you started?"
+            },
+            "reward_container": {
+                "1": "Am I awesome~ Give me a thumbs up!",
+                "2": "Do you want to reward me? I look forward to it~",
+                "3": "The master is eating dirt recently. It looks very hard. Give him some money~"
+            },
+            "wechat": {
+                "1": "This is my WeChat QR code~"
+            },
+            "alipay": {
+                "1": "This is my Alipay!"
+            },
+            "bitcoin": {
+                "1": "This is my Bitcoin account!"
+            },
+            "needsharebutton_postbottom_btn": {
+                "1": "Good things must be known to more people.",
+                "2": "If you think the article is helpful, you can share it with more friends in need."
+            },
+            "need_share_button_weibo": {
+                "1": "Weibo? Come and share a wave of meows!"
+            },
+            "need_share_button_wechat": {
+                "1": "Share to WeChat!"
+            },
+            "need_share_button_douban": {
+                "1": "It seems good to share on Douban!"
+            },
+            "need_share_button_qqzone": {
+                "1": "QQ space, one-click forwarding, yeah~"
+            },
+            "need_share_button_twitter": {
+                "1": "Twitter? It doesn't seem to exist?"
+            },
+            "need_share_button_facebook": {
+                "1": "emmm...FB does not seem to exist?"
+            },
+            "post_nav_item_a_rel_next": {
+                "1": "Let's take a look at the next article.",
+                "2": "Click it to see the next article!",
+                "3": "Do you want to turn to the next article?"
+            },
+            "post_nav_item_a_rel_prev": {
+                "1": "Let's take a look at the previous article.",
+                "2": "Click it to read the previous article!",
+                "3": "Do you want to turn to the previous article?"
+            },
+            "extend_next": {
+                "1": "Go to the next page and see.",
+                "2": "Click it to move forward!",
+                "3": "Do you want to turn to the next page?"
+            },
+            "extend_prev": {
+                "1": "Go to the previous page and have a look.",
+                "2": "Click it to go back!",
+                "3": "Do you want to turn to the previous page?"
+            },
+            "input_vnick": {
+                "1": "What should I call you?",
+                "2": "Leave your first name!"
+            },
+            "vmail": {
+                "1": "Leave your mailbox, otherwise you will be a person without a profile picture!",
+                "2": "Remember to set up a Gravatar profile picture!",
+                "3": "In order to inform you of the latest news, be sure to leave your email address!"
+            },
+            "vlink": {
+                "1": "Hurry up and tell me where your home is, so that I can visit it!"
+            },
+            "veditor": {
+                "1": "Want to comment on something?",
+                "2": "Do you want to say something?",
+                "3": "Think the blog is good? Come and leave a message to communicate with the owner!"
+            },
+            "vcontrol_a": {
+                "1": "Can you use Markdown proficiently?",
+                "2": "Use Markdown to make comments more beautiful~"
+            },
+            "vemoji_btn": {
+                "1": "Do you want to insert a cute emoji?",
+                "2": "Do you want to come to express your love?"
+            },
+            "vpreview_btn": {
+                "1": "Do you want to preview your speech?",
+                "2": "Look at how much negative entropy your comment has!"
+            },
+            "vsubmit": {
+                "1": "The comments have not been reviewed, you are responsible for your own comments~",
+                "2": "Do you want to submit, please be patient and wait for the reply~"
+            },
+            "vcontent": {
+                "1": "Wow, look at this wonderful review!",
+                "2": "If you have any questions, please leave a message as soon as possible~"
+            }
+        },
+        "click": {
+            "waifu": {
+                "1": "Yes... I bumped into it accidentally...",
+                "2": "What is Lolicon?",
+                "3": "Did you see my little bear?",
+                "4": "If you touch it again, I will call the police! ⌇●﹏●⌇",
+                "5": "110? There is a pervert who has been touching me (ó﹏ò｡)",
+                "6": "Don't touch me, I will tell my wife to hit you!",
+                "7": "Why move me! Be careful I bite you!",
+                "8": "Don't touch me, what is there to touch??!"
+            },
+            "veditor": {
+                "1": "What are you going to complain about?",
+                "2": "You must fill in meow carefully~",
+                "3": "Is there anything you want to say?"
+            },
+            "vsubmit": {
+                "1": "Enter the verification code to submit a comment~"
+            }
+        },
+        "seasons": {
+            "1": "<span>New Year's Day</span>, the new year has begun again, this year is {year}~",
+            "2": "It's another year <span>Valentine's Day</span>, I found the object in {year}~",
+            "3": "Today is <span>International Women's Day</span>!",
+            "4": "Today is <span>Arbor Day</span>, protect the environment!",
+            "5": "Tell you a secret quietly~<span>Today is April Fool's Day, don't be fooled~</span>",
+            "6": "Today is <span>Labor Day</span>, have you planned where to go for the holiday~",
+            "7": "<span>Children's Day</span> is now, happy time is always short, it would be great if it never grows up...",
+            "8": "<span>The Victory Day of the Chinese People’s War of Resistance Against Japanese Aggression</span>, remembering history, remembering the martyrs, cherishing peace, and creating the future.",
+            "9": "<span>Teacher's Day</span>, I want to say hello to the teacher in school~",
+            "10": "<span>National Day</span> is here, for the motherland’s birthday!",
+            "11": "Who did you spend with this year's <span>Double Eleven</span>~",
+            "12": "These days are <span>Christmas</span>, the owner must have gone shopping again~"
+        },
+        "general": {
+            "longtime": {
+                "1": "Long time no see, time flies so fast...",
+                "2": "Hey! How long have you been ignoring me~~",
+                "3": "Hi~ Come and play with me!",
+                "4": "Take this punch~!"
+            },
+            "camera": {
+                "1": "Yay, it's taken. Isn't it cute?"
+            },
+            "exit": {
+                "1": "May you meet this important person again one day!"
+            },
+            "console": {
+                "1": "Haha, you opened the console, do you want to see my little secret?"
+            },
+            "copy": {
+                "1": "What have you copied? Remember to add the source for reprinting!"
+            },
+            "visibilityChange": {
+                "1": "Wow, finally, you're back!"
+            },
+            "dress": {
+                "1": "Does my new dress look good?",
+                "2": "How is my new dress?"
+            }
+        },
+        "time": {
+            "5_7": "Good morning! The plan for a day lies in the morning, and a beautiful day is about to begin.",
+            "7_11": "Good morning! Don't sit for a long time, get up and move around!!",
+            "11_13": "It's noon! Can I take a break? It's lunch time!!",
+            "13_17": "It's easy to get sleepy in the afternoon. Have you done any sports today?",
+            "17_19": "It's evening! The sunset outside the window is very beautiful~",
+            "19_21": "Good evening, how are you doing today?",
+            "21_23": {
+                "1": "It's already so late, rest early, good night~",
+                "2": "Take care of your eyes late at night!"
+            },
+            "24": "Are you a night owl? If you don't go to bed so late, will you get up tomorrow?"
+        },
+        "welcome": {
+            "1": "Welcome to <span>「%{data}」</span>",
+            "2": "Hello! Welcome from Baidu Search<br>You are searching <span>「%{data}」</span>. Did you find it?",
+            "3": "Hello! Welcome from 360 Search<br>You are searching <span>「%{data}」</span>. Did you find it?",
+            "4": "Hello! Friends from Google Search<br>You are searching <span>「${data}」</span>. Did you find it?",
+            "5": "Hello from <span>「%{data}」</span>. Welcome!",
+            "6": "Welcome to read<span>「%{data}」</span>"
+        },
+        "hikoto": {
+            "1": "This sentence come from <span>「%{source}」</span>，by <span>%{author}</span> from hitokoto.cn."
+        },
+        "来自 Potion Maker 的 Pio 酱 ~": "Hi, I'm Potion Maker Pio!",
+        "来自 Potion Maker 的 Tia 酱 ~": "Hi, I'm Potion Maker Tia!",
+        "来自 Bilibili Live 的 22 哦 ~": "22 from Bilibili Live",
+        "来自 Bilibili Live 的 33 的说": "33 from Bilibili Live",
+        "Shizuku Talk ！这里是 Shizuku ~": "Hi, I'm Shizuku from Shizuku Talk!",
+        "Nep! Nep! 超次元游戏：海王星 系列": "Nep, Nep, Nep, Nep! ",
+        "艦隊これくしょん / 叢雲(むらくも)": "Kantai Collection / Murakumo"
+
+    },
+     "zh-CN": {
+        "mouseover": {
+            "waifu": {
+                "1": "干嘛呢你，快把手拿开～～",
+                "2": "鼠…鼠标放错地方了！",
+                "3": "你要干嘛呀？",
+                "4": "喵喵喵？",
+                "5": "怕怕(ノ≧∇≦)ノ",
+                "6": "非礼呀！救命！",
+                "7": "这样的话，只能使用武力了！",
+                "8": "我要生气了哦",
+                "9": "不要动手动脚的！",
+                "10": "真…真的是不知羞耻！",
+                "11": "Hentai！"
+            },
+            "waifu_tool_fa_comment": {
+                "1": "猜猜我要说些什么？",
+                "2": "我从青蛙王子那里听到了不少人生经验。"
+            },
+            "waifu_tool_fa_paper_plane": {
+                "1": "要不要来玩飞机大战？",
+                "2": "这个按钮上写着「不要点击」。",
+                "3": "怎么，你想来和我玩个游戏？",
+                "4": "听说这样可以蹦迪！"
+            },
+            "waifu_tool_fa_user_circle": {
+                "1": "你是不是不爱人家了呀，呜呜呜～",
+                "2": "要见见我的姐姐嘛？",
+                "3": "想要看我妹妹嘛？",
+                "4": "要切换看板娘吗？"
+            },
+            "waifu_tool_fa_street_view": {
+                "1": "喜欢换装 PLAY 吗？",
+                "2": "这次要扮演什么呢？",
+                "3": "变装！",
+                "4": "让我们看看接下来会发生什么！"
+            },
+            "waifu_tool_fa_camera_retro": {
+                "1": "你要给我拍照呀？一二三～茄子～",
+                "2": "要不，我们来合影吧！",
+                "3": "保持微笑就好了～"
+            },
+            "waifu_tool_fa_info_circle": {
+                "1": "想要知道更多关于我的事么？",
+                "2": "这里记录着我搬家的历史呢。",
+                "3": "你想深入了解我什么呢？"
+            },
+            "waifu_tool_fa_times": {
+                "1": "到了要说再见的时候了吗？",
+                "2": "呜呜 QAQ 后会有期……",
+                "3": "不要抛弃我呀……",
+                "4": "我们，还能再见面吗……",
+                "5": "哼，你会后悔的！"
+            },
+            "menu_item_home_a": {
+                "1": "点击前往首页，想回到上一页可以使用浏览器的后退功能哦。",
+                "2": "点它就可以回到首页啦！",
+                "3": "回首页看看吧。"
+            },
+            "menu_item_about_a": {
+                "1": "你想知道我家主人是谁吗？",
+                "2": "这里有一些关于我家主人的秘密哦，要不要看看呢？",
+                "3": "发现主人出没地点！"
+            },
+            "menu_item_tags_a": {
+                "1": "点击就可以看文章的标签啦！",
+                "2": "点击来查看所有标签哦。"
+            },
+            "menu_item_categories_a": {
+                "1": "文章都分类好啦～",
+                "2": "点击来查看文章分类哦。"
+            },
+            "menu_item_archieves_a": {
+                "1": "翻页比较麻烦吗，那就来看看文章归档吧。",
+                "2": "文章目录都整理在这里啦！"
+            },
+            "menu_item_friends_a": {
+                "1": "这是我的朋友们哦ヾ(◍°∇°◍)ﾉﾞ",
+                "2": "要去大佬们的家看看吗？",
+                "3": "要去拜访一下我的朋友们吗？"
+            },
+            "menu_item_search_a": {
+                "1": "找不到想看的内容？搜索看看吧！",
+                "2": "在找什么东西呢，需要帮忙吗？"
+            },
+            "menu_item_a": {
+                "1": "快看看这里都有什么呢？"
+            },
+            "site_author": {
+                "1": "我家主人好看吗？",
+                "2": "这是我家主人(*´∇｀*)"
+            },
+            "site_state": {
+                "1": "这是文章的统计信息～",
+                "2": "要不要点进去看看？"
+            },
+            "feed_link_a": {
+                "1": "这里可以使用 RSS 订阅呢！",
+                "2": "利用 feed 订阅器，就能快速知道博客有没有更新了呢。"
+            },
+            "cc_opacity_post_copyright_author": {
+                "1": "要记得规范转载哦。",
+                "2": "所有文章均采用 CC BY-NC-SA 4.0 许可协议～",
+                "3": "转载前要先注意下文章的版权协议呢。"
+            },
+            "links_of_author": {
+                "1": "这里是主人的常驻地址哦。",
+                "2": "这里有主人的联系方式！"
+            },
+            "qrcode": {
+                "1": "手机扫一下就能继续看，很方便呢～",
+                "2": "扫一扫，打开新世界的大门！"
+            },
+            "fancybox_img_img_medium_zoom_image": {
+                "1": "点击图片可以放大呢！"
+            },
+            "copy_btn": {
+                "1": "代码可以直接点击复制哟。"
+            },
+            "highlight_table_container_gist": {
+                "1": "GitHub！我是新手！",
+                "2": "PHP 是最好的语言！"
+            },
+            "a_href_mail_to": {
+                "1": "邮件我会及时回复的！",
+                "2": "点击就可以发送邮件啦～"
+            },
+            "a_href_tags": {
+                "1": "要去看看 <span>{text}</span> 标签么？",
+                "2": "点它可以查看此标签下的所有文章哟！"
+            },
+            "a_href_categories": {
+                "1": "要去看看 <span>{text}</span> 分类么？",
+                "2": "点它可以查看此分类下的所有文章哟！"
+            },
+            "post_title_link": {
+                "1": "要看看 <span>{text}</span> 这篇文章吗？"
+            },
+            "a_rel_contents": {
+                "1": "点击来阅读全文哦。"
+            },
+            "a_itemprop_discussionUrl": {
+                "1": "要去看看评论吗？"
+            },
+            "bein_a": {
+                "1": "我也是有户口的人哦。",
+                "2": "我的主人可是遵纪守法的好主人。"
+            },
+            "container_a_href_http_nav_link_nav_text": {
+                "1": "要去看看 <span>{text}</span> 么？",
+                "2": "去 <span>{text}</span> 逛逛吧。",
+                "3": "到 <span>{text}</span> 看看吧。"
+            },
+            "back_to_top": {
+                "1": "点它就可以回到顶部啦！",
+                "2": "又回到最初的起点～",
+                "3": "要回到开始的地方么？"
+            },
+            "reward_container": {
+                "1": "我是不是棒棒哒～快给我点赞吧！",
+                "2": "要打赏我嘛？好期待啊～",
+                "3": "主人最近在吃土呢，很辛苦的样子，给他一些钱钱吧～"
+            },
+            "wechat": {
+                "1": "这是我的微信二维码～"
+            },
+            "alipay": {
+                "1": "这是我的支付宝哦！"
+            },
+            "bitcoin": {
+                "1": "这是我的比特币账号！"
+            },
+            "needsharebutton_postbottom_btn": {
+                "1": "好东西要让更多人知道才行哦。",
+                "2": "觉得文章有帮助的话，可以分享给更多需要的朋友呢。"
+            },
+            "need_share_button_weibo": {
+                "1": "微博？来分享一波喵！"
+            },
+            "need_share_button_wechat": {
+                "1": "分享到微信吧！"
+            },
+            "need_share_button_douban": {
+                "1": "分享到豆瓣好像也不错！"
+            },
+            "need_share_button_qqzone": {
+                "1": "QQ 空间，一键转发，耶～"
+            },
+            "need_share_button_twitter": {
+                "1": "Twitter？好像是不存在的东西？"
+            },
+            "need_share_button_facebook": {
+                "1": "emmm…FB 好像也是不存在的东西？"
+            },
+            "post_nav_item_a_rel_next": {
+                "1": "来看看下一篇文章吧。",
+                "2": "点它可以看下一篇文章哦！",
+                "3": "要翻到下一篇文章吗？"
+            },
+            "post_nav_item_a_rel_prev": {
+                "1": "来看看上一篇文章吧。",
+                "2": "点它可以看上一篇文章哦！",
+                "3": "要翻到上一篇文章吗？"
+            },
+            "extend_next": {
+                "1": "去下一页看看吧。",
+                "2": "点它可以前进哦！",
+                "3": "要翻到下一页吗？"
+            },
+            "extend_prev": {
+                "1": "去上一页看看吧。",
+                "2": "点它可以后退哦！",
+                "3": "要翻到上一页吗？"
+            },
+            "input_vnick": {
+                "1": "该怎么称呼你呢？",
+                "2": "留下你的尊姓大名！"
+            },
+            "vmail": {
+                "1": "留下你的邮箱，不然就是无头像人士了！",
+                "2": "记得设置好 Gravatar 头像哦！",
+                "3": "为了方便通知你最新消息，一定要留下邮箱！"
+            },
+            "vlink": {
+                "1": "快快告诉我你的家在哪里，好让我去参观参观！"
+            },
+            "veditor": {
+                "1": "想要去评论些什么吗？",
+                "2": "要说点什么吗？",
+                "3": "觉得博客不错？快来留言和主人交流吧！"
+            },
+            "vcontrol_a": {
+                "1": "你会不会熟练使用 Markdown 呀？",
+                "2": "使用 Markdown 让评论更美观吧～"
+            },
+            "vemoji_btn": {
+                "1": "要插入一个萌萌哒的表情吗？",
+                "2": "要来一发表情吗？"
+            },
+            "vpreview_btn": {
+                "1": "要预览一下你的发言吗？",
+                "2": "快看看你的评论有多少负熵！"
+            },
+            "vsubmit": {
+                "1": "评论没有审核，要对自己的发言负责哦～",
+                "2": "要提交了吗，请耐心等待回复哦～"
+            },
+            "vcontent": {
+                "1": "哇，快看看这个精彩评论！",
+                "2": "如果有疑问，请尽快留言哦～"
+            }
+        },
+        "click": {
+            "waifu": {
+                "1": "是…是不小心碰到了吧…",
+                "2": "萝莉控是什么呀？",
+                "3": "你看到我的小熊了吗？",
+                "4": "再摸的话我可要报警了！⌇●﹏●⌇",
+                "5": "110 吗，这里有个变态一直在摸我(ó﹏ò｡)",
+                "6": "不要摸我了，我会告诉老婆来打你的！",
+                "7": "干嘛动我呀！小心我咬你！",
+                "8": "别摸我，有什么好摸的！"
+            },
+            "veditor": {
+                "1": "要吐槽些什么呢？",
+                "2": "一定要认真填写喵～",
+                "3": "有什么想说的吗？"
+            },
+            "vsubmit": {
+                "1": "输入验证码就可以提交评论啦～"
+            }
+        },
+        "seasons": {
+            "1": "<span>元旦</span>了呢，新的一年又开始了，今年是{year}年～",
+            "2": "又是一年<span>情人节</span>，{year}年找到对象了嘛～",
+            "3": "今天是<span>国际妇女节</span>！",
+            "4": "今天是<span>植树节</span>，要保护环境呀！",
+            "5": "悄悄告诉你一个秘密～<span>今天是愚人节，不要被骗了哦～</span>",
+            "6": "今天是<span>五一劳动节</span>，计划好假期去哪里了吗～",
+            "7": "<span>儿童节</span>了呢，快活的时光总是短暂，要是永远长不大该多好啊…",
+            "8": "<span>中国人民抗日战争胜利纪念日</span>，铭记历史、缅怀先烈、珍爱和平、开创未来。",
+            "9": "<span>教师节</span>，在学校要给老师问声好呀～",
+            "10": "<span>国庆节</span>到了，为祖国母亲庆生！",
+            "11": "今年的<span>双十一</span>是和谁一起过的呢～",
+            "12": "这几天是<span>圣诞节</span>，主人肯定又去剁手买买买了～"
+        },
+        "general": {
+            "longtime": {
+                "1": "好久不见，日子过得好快呢……",
+                "2": "大坏蛋！你都多久没理人家了呀，嘤嘤嘤～",
+                "3": "嗨～快来逗我玩吧！",
+                "4": "拿小拳拳锤你胸口！"
+            },
+            "camera": {
+                "1": "照好了嘛，是不是很可爱呢？"
+            },
+            "exit": {
+                "1": "愿你有一天能与重要的人重逢。"
+            },
+            "console": {
+                "1": "哈哈，你打开了控制台，是想要看看我的小秘密吗？"
+            },
+            "copy": {
+                "1": "你都复制了些什么呀，转载要记得加上出处哦！"
+            },
+            "visibilityChange": {
+                "1": "哇，你终于回来了～"
+            },
+            "dress": {
+                "1": "我的新衣服好看嘛？",
+                "2": "我的新衣服好看嘛？"
+            }
+        },
+        "time": {
+            "5_7": "早上好！一日之计在于晨，美好的一天就要开始了。",
+            "7_11": "上午好！工作顺利嘛，不要久坐，多起来走动走动哦！",
+            "11_13": "中午了，工作了一个上午，现在是午餐时间！",
+            "13_17": "午后很容易犯困呢，今天的运动目标完成了吗？",
+            "17_19": "傍晚了！窗外夕阳的景色很美丽呢，最美不过夕阳红～",
+            "19_21": "晚上好，今天过得怎么样？",
+            "21_23": {
+                "1": "已经这么晚了呀，早点休息吧，晚安～",
+                "2": "深夜时要爱护眼睛呀！"
+            },
+            "24": "你是夜猫子呀？这么晚还不睡觉，明天起的来嘛？"
+        },
+        "welcome": {
+            "1": "欢迎阅读 <span>「%{data}」</span>",
+            "2": "Hello！来自 百度搜索 的朋友<br>你是搜索 <span>「%{data}」</span> 找到的我吗？",
+            "3": "Hello！来自 360搜索 的朋友<br>你是搜索 <span>「%{data}」</span> 找到的我吗？",
+            "4": "Hello！来自 谷歌搜索 的朋友<br>欢迎阅读<span>「${data}」</span>",
+            "5": "Hello！来自 <span>「%{data}」</span>. Welcome!",
+            "6": "欢迎阅读<span>「%{data}」</span>"
+        },
+        "hikoto": {
+            "1": "这句一言来自 <span>「%{source}」</span>，是 <span>%{author}</span> 在 hitokoto.cn 投稿的。"
+        },
+        "来自 Potion Maker 的 Pio 酱 ~": "来自 Potion Maker 的 Pio 酱 ~",
+        "来自 Potion Maker 的 Tia 酱 ~": "来自 Potion Maker 的 Tia 酱 ~",
+        "来自 Bilibili Live 的 22 哦 ~": "来自 Bilibili Live 的 22 哦 ~",
+        "来自 Bilibili Live 的 33 的说": "来自 Bilibili Live 的 33 的说",
+        "Shizuku Talk ！这里是 Shizuku ~": "Shizuku Talk ！这里是 Shizuku ~",
+        "Nep! Nep! 超次元游戏：海王星 系列": "Nep! Nep! 超次元游戏：海王星 系列 ",
+        "艦隊これくしょん / 叢雲(むらくも)": "艦隊これくしょん / 叢雲(むらくも)"
+
+    }
+}
+

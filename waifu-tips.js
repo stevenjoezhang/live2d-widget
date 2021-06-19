@@ -1,8 +1,6 @@
 /*
- * @Date: 15/02/2021 20.19.03 +0800
- * @Author: KnowsCount
- * @LastEditTime: 15/02/2021 20.19.43 +0800
- * @FilePath: /@knowscount:live2d-widget/waifu-tips.js
+ * Live2D Widget
+ * https://github.com/stevenjoezhang/live2d-widget
  */
 
 function loadWidget(config) {
@@ -27,14 +25,12 @@ function loadWidget(config) {
 			<canvas id="live2d" width="800" height="800"></canvas>
 			<div id="waifu-tool">
 				<span class="fa fa-lg fa-comment"></span>
-				<!--<span class="fa fa-lg fa-paper-plane"></span>-->
+				<span class="fa fa-lg fa-paper-plane"></span>
 				<span class="fa fa-lg fa-user-circle"></span>
 				<span class="fa fa-lg fa-street-view"></span>
 				<span class="fa fa-lg fa-camera-retro"></span>
 				<span class="fa fa-lg fa-info-circle"></span>
 				<span class="fa fa-lg fa-times"></span>
-                                <span class="fa fa-lg fa-chevron-right" id="live2d-go-right"></span>
-                                <span class="fa fa-lg fa-chevron-left" id="live2d-go-left"></span>
 			</div>
 		</div>`
 	)
@@ -53,11 +49,10 @@ function loadWidget(config) {
 		userActionTimer,
 		messageTimer,
 		messageArray = [
-			'好久不见，日子过得好快呢……',
-			'大坏蛋！你都多久没理人家了呀，嘤嘤嘤～',
-			'嗨～快来逗我玩吧！',
-			'拿小拳拳锤你胸口！',
-			'记得把小家加入 Adblock 白名单哦！',
+			'general.longtime.1',
+			'general.longtime.2',
+			'general.longtime.3',
+			'general.longtime.4',
 		]
 	window.addEventListener('mousemove', () => (userAction = true))
 	window.addEventListener('keydown', () => (userAction = true))
@@ -72,57 +67,46 @@ function loadWidget(config) {
 			}, 20000)
 		}
 	}, 1000)
-	;(function () {
-		// 根据位置加载
-		if (localStorage.getItem('Live2DPlace') === 'left') {
-			document.getElementById('live2d-go-left').style.display = 'none'
-		} else if (localStorage.getItem('Live2DPlace') === 'right') {
-			document.getElementById('live2d-go-right').style.display = 'none'
-			document.getElementById('live2d_css').href =
-				live2d_path + 'waifu_right.css'
-		}
-	})()
 	;(function registerEventListener() {
-		// 工具栏菜单效果
 		document
 			.querySelector('#waifu-tool .fa-comment')
-			.addEventListener('click', showHitokoto) // 一言API对话
-		/* document.querySelector("#waifu-tool .fa-paper-plane").addEventListener("click", () => { // 飞机大战（雾）
-			if (window.Asteroids) {
-				if (!window.ASTEROIDSPLAYERS) window.ASTEROIDSPLAYERS = [];
-				window.ASTEROIDSPLAYERS.push(new Asteroids());
-			} else {
-				const script = document.createElement("script");
-				script.src = "https://cdn.jsdelivr.net/gh/stevenjoezhang/asteroids/asteroids.js";
-				document.head.appendChild(script);
-			}
-		}); */
+			.addEventListener('click', showHitokoto)
+		document
+			.querySelector('#waifu-tool .fa-paper-plane')
+			.addEventListener('click', () => {
+				if (window.Asteroids) {
+					if (!window.ASTEROIDSPLAYERS) window.ASTEROIDSPLAYERS = []
+					window.ASTEROIDSPLAYERS.push(new Asteroids())
+				} else {
+					const script = document.createElement('script')
+					script.src =
+						'https://cdn.jsdelivr.net/gh/stevenjoezhang/asteroids/asteroids.js'
+					document.head.appendChild(script)
+				}
+			})
 		document
 			.querySelector('#waifu-tool .fa-user-circle')
-			.addEventListener('click', loadOtherModel) // 切换模型
+			.addEventListener('click', loadOtherModel)
 		document
 			.querySelector('#waifu-tool .fa-street-view')
-			.addEventListener('click', loadRandModel) // 切换材质
+			.addEventListener('click', loadRandModel)
 		document
 			.querySelector('#waifu-tool .fa-camera-retro')
 			.addEventListener('click', () => {
-				// 输出照片
-				showMessage('照好了嘛，是不是很可爱呢？', 6000, 9)
-				Live2D.captureName = 'photo.png' // 输出照片的名字
+				showMessage('general.camera.1', 6000, 9)
+				Live2D.captureName = 'photo.png'
 				Live2D.captureFrame = true
 			})
 		document
 			.querySelector('#waifu-tool .fa-info-circle')
 			.addEventListener('click', () => {
-				// 关于页转跳
-				open('https://github.com/stevenjoezhang/live2d-widget') //关于页链接
+				open('https://github.com/stevenjoezhang/live2d-widget')
 			})
 		document
 			.querySelector('#waifu-tool .fa-times')
 			.addEventListener('click', () => {
-				// 关闭看板娘
 				localStorage.setItem('waifu-display', Date.now())
-				showMessage('愿你有一天能与重要的人重逢。', 2000, 11)
+				showMessage('general.exit.1', 2000, 11)
 				document.getElementById('waifu').style.bottom = '-500px'
 				setTimeout(() => {
 					document.getElementById('waifu').style.display = 'none'
@@ -131,64 +115,17 @@ function loadWidget(config) {
 						.classList.add('waifu-toggle-active')
 				}, 3000)
 			})
-		document
-			.querySelector('#waifu-tool .fa-chevron-right')
-			.addEventListener('click', () => {
-				// 切换看板娘位置（左 => 右）
-				localStorage.setItem('Live2DPlace', 'right')
-				showMessage('耶，可以去右边了呢～。', 2000, 11)
-				document.getElementById('waifu').style.bottom = '-500px'
-				document.getElementById('waifu-toggle').style.display = 'none'
-				setTimeout(() => {
-					document.getElementById('live2d_css').href =
-						live2d_path + 'waifu_right.css'
-					document.getElementById('waifu').style.bottom = '0px'
-					document.getElementById('live2d-go-right').style.display =
-						'none'
-					document.getElementById('live2d-go-left').style.display =
-						'block'
-				}, 3000)
-				setTimeout(
-					'document.getElementById("waifu-toggle").style.display = "inline"',
-					6000
-				)
-			})
-		document
-			.querySelector('#waifu-tool .fa-chevron-left')
-			.addEventListener('click', () => {
-				// 切换看板娘位置（左 <= 右）
-				localStorage.setItem('Live2DPlace', 'left')
-				showMessage('耶，可以去左边了呢～。', 2000, 11)
-				document.getElementById('waifu').style.bottom = '-500px'
-				document.getElementById('waifu-toggle').style.display = 'none'
-				setTimeout(() => {
-					document.getElementById('live2d_css').href =
-						live2d_path + 'waifu_left.css'
-					document.getElementById('waifu').style.bottom = '0px'
-					document.getElementById('live2d-go-left').style.display =
-						'none'
-					document.getElementById('live2d-go-right').style.display =
-						'block'
-				}, 3000)
-				setTimeout(
-					'document.getElementById("waifu-toggle").style.display = "inline"',
-					6000
-				)
-			})
 		const devtools = () => {}
 		console.log('%c', devtools)
 		devtools.toString = () => {
-			showMessage(
-				'哈哈，你打开了控制台，是想要看看我的小秘密吗？',
-				6000,
-				9
-			)
+			showMessage('general.console.1', 6000, 9)
 		}
 		window.addEventListener('copy', () => {
-			showMessage('你都复制了些什么呀，转载要记得加上出处哦！', 6000, 9)
+			showMessage('general.copy.1', 6000, 9)
 		})
 		window.addEventListener('visibilitychange', () => {
-			if (!document.hidden) showMessage('哇，你终于回来了～', 6000, 9)
+			if (!document.hidden)
+				showMessage('general.visibilityChange.1', 6000, 9)
 		})
 	})()
 	;(function welcomeMessage() {
@@ -196,45 +133,41 @@ function loadWidget(config) {
 		if (location.pathname === '/') {
 			// 如果是主页
 			const now = new Date().getHours()
-			if (now > 5 && now <= 7)
-				text = '早上好！一日之计在于晨，美好的一天就要开始了。'
-			else if (now > 7 && now <= 11)
-				text = '上午好！工作顺利嘛，不要久坐，多起来走动走动哦！'
-			else if (now > 11 && now <= 13)
-				text = '中午了，工作了一个上午，现在是午餐时间！'
-			else if (now > 13 && now <= 17)
-				text = '午后很容易犯困呢，今天的运动目标完成了吗？'
-			else if (now > 17 && now <= 19)
-				text = '傍晚了！窗外夕阳的景色很美丽呢，最美不过夕阳红～'
-			else if (now > 19 && now <= 21) text = '晚上好，今天过得怎么样？'
+			if (now > 5 && now <= 7) text = 'time.5_7'
+			else if (now > 7 && now <= 11) text = 'time.7_11'
+			else if (now > 11 && now <= 13) text = 'time.11_13'
+			else if (now > 13 && now <= 17) text = 'time.13_17'
+			else if (now > 17 && now <= 19) text = 'time.17_19'
+			else if (now > 19 && now <= 21) text = 'time.19_21'
 			else if (now > 21 && now <= 23)
-				text = [
-					'已经这么晚了呀，早点休息吧，晚安～',
-					'深夜时要爱护眼睛呀！',
-				]
-			else text = '你是夜猫子呀？这么晚还不睡觉，明天起的来嘛？'
+				text = ['time.21_23.1', 'time.21_23.2']
+			else text = 'time.24'
 		} else if (document.referrer !== '') {
 			const referrer = new URL(document.referrer),
 				domain = referrer.hostname.split('.')[1]
 			if (location.hostname === referrer.hostname)
-				text = `欢迎阅读<span>「${
-					document.title.split(' - ')[0]
-				}」</span>`
+				text = {
+					i18n: 'welcome.1',
+					data: document.title.split(' - ')[0],
+				}
 			else if (domain === 'baidu')
-				text = `Hello！来自 百度搜索 的朋友<br>你是搜索 <span>${
-					referrer.search.split('&wd=')[1].split('&')[0]
-				}</span> 找到的我吗？`
+				text = {
+					i18n: 'welcome.2',
+					data: referrer.search.split('&wd=')[1].split('&')[0],
+				}
 			else if (domain === 'so')
-				text = `Hello！来自 360搜索 的朋友<br>你是搜索 <span>${
-					referrer.search.split('&q=')[1].split('&')[0]
-				}</span> 找到的我吗？`
+				text = {
+					i18n: 'welcome.3',
+					data: referrer.search.split('&q=')[1].split('&')[0],
+				}
 			else if (domain === 'google')
-				text = `Hello！来自 谷歌搜索 的朋友<br>欢迎阅读<span>「${
-					document.title.split(' - ')[0]
-				}」</span>`
-			else text = `Hello！来自 <span>${referrer.hostname}</span> 的朋友`
+				text = {
+					i18n: 'welcome.4',
+					data: document.title.split(' - ')[0],
+				}
+			else text = { i18n: 'welcome.5', data: referrer.hostname }
 		} else {
-			text = `欢迎阅读<span>「${document.title.split(' - ')[0]}」</span>`
+			text = { i18n: 'welcome.6', data: document.title.split(' - ')[0] }
 		}
 		showMessage(text, 7000, 8)
 	})()
@@ -244,7 +177,11 @@ function loadWidget(config) {
 		fetch('https://v1.hitokoto.cn')
 			.then((response) => response.json())
 			.then((result) => {
-				const text = `这句一言来自 <span>「${result.from}」</span>，是 <span>${result.creator}</span> 在 hitokoto.cn 投稿的。`
+				const text = {
+					i18n: 'hikoto',
+					source: result.from,
+					author: result.creator,
+				}
 				showMessage(result.hitokoto, 6000, 9)
 				setTimeout(() => {
 					showMessage(text, 4000, 9)
@@ -264,6 +201,18 @@ function loadWidget(config) {
 			messageTimer = null
 		}
 		text = randomSelection(text)
+		if (typeof text === 'object' && text !== null && 'i18n' in text) {
+			let tmp = {}
+			Object.keys(text).forEach((key) => {
+				if (key != 'i18n') {
+					tmp[key] = text[key]
+				}
+			})
+			console.log(tmp)
+			text = I18n.t(text.i18n, tmp)
+		} else {
+			text = I18n.t(text)
+		}
 		sessionStorage.setItem('waifu-text', priority)
 		const tips = document.getElementById('waifu-tips')
 		tips.innerHTML = text
@@ -278,9 +227,9 @@ function loadWidget(config) {
 		let modelId = localStorage.getItem('modelId'),
 			modelTexturesId = localStorage.getItem('modelTexturesId')
 		if (modelId === null) {
-			// 首次访问时加载 指定模型 的 指定材质
-			modelId = 2 // 模型 ID
-			modelTexturesId = 39 // 材质 ID
+			// 首次访问加载 指定模型 的 指定材质
+			modelId = 1 // 模型 ID
+			modelTexturesId = 53 // 材质 ID
 		}
 		loadModel(modelId, modelTexturesId)
 		fetch(waifuPath)
@@ -299,7 +248,7 @@ function loadWidget(config) {
 					for (let { selector, text } of result.click) {
 						if (!event.target.matches(selector)) continue
 						text = randomSelection(text)
-						text = text.replace('{text}', event.target.innerText)
+						text.replace('{text}', event.target.innerText)
 						showMessage(text, 4000, 8)
 						return
 					}
@@ -352,22 +301,22 @@ function loadWidget(config) {
 			if (!modelList) await loadModelList()
 			const target = randomSelection(modelList.models[modelId])
 			loadlive2d('live2d', `${cdnPath}model/${target}/index.json`)
-			showMessage('我的新衣服好看嘛？', 4000, 10)
+			showMessage('general.dress.1', 4000, 10)
 		} else {
-			// 材质加载方式, 可选 "rand"(随机), "switch"(顺序)
-			fetch(`${apiPath}switch_textures/?id=${modelId}-${modelTexturesId}`)
+			// 可选 "rand"(随机), "switch"(顺序)
+			fetch(`${apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`)
 				.then((response) => response.json())
 				.then((result) => {
 					if (
 						result.textures.id === 1 &&
 						(modelTexturesId === 1 || modelTexturesId === 0)
 					)
-						showMessage('我还没有其他衣服呢！', 4000, 10)
+						showMessage('Ughh, I ran out of clothes!', 4000, 10)
 					else
 						loadModel(
 							modelId,
 							result.textures.id,
-							'我的新衣服好看嘛？'
+							'general.dress.2?'
 						)
 				})
 		}
@@ -399,7 +348,7 @@ function initWidget(config, apiPath) {
 	document.body.insertAdjacentHTML(
 		'beforeend',
 		`<div id="waifu-toggle">
-			<span>看板娘</span>
+			<span>Signboard girl</span>
 		</div>`
 	)
 	const toggle = document.getElementById('waifu-toggle')
