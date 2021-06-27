@@ -66,14 +66,14 @@
 	color: #0099cc;
 }
 
-#waifu #live2d {
+#live2d {
 	cursor: grab;
 	height: 300px;
 	position: relative;
 	width: 300px;
 }
 
-#waifu #live2d:active {
+#live2d:active {
 	cursor: grabbing;
 }
 

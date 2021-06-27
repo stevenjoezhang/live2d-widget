@@ -56,7 +56,7 @@ body {
 	margin-bottom: 20px;
 	border-radius: 20px;
 }
-#stage a {
+#stage button {
 	position: absolute;
 	width: 2em;
 	height: 2em;
@@ -134,8 +134,8 @@ body {
 			</div>
 			<canvas class="mb-4" id="live2d" width="800" height="800"></canvas>
 		</div>
-		<a id="info" href="javascript:info()"><i class="fa fa-lg fa-info"></i></a>
-		<a id="refresh" href="javascript:refresh()"><i class="fa fa-lg fa-refresh"></i></a>
+		<button class="btn btn-link" id="info"><i class="fa fa-lg fa-info"></i></button>
+		<button class="btn btn-link" id="refresh"><i class="fa fa-lg fa-refresh"></i></button>
 	</div>
 	<h1 class="h3 mb-3 fw-normal">看板娘登陆平台</h1>
 	<label for="room" class="sr-only">用户名</label>
@@ -178,7 +178,8 @@ window.addEventListener("load", () => {
 		return;
 	}
 
-	let apiPath = "https://live2d.fghrsh.net/api", state = 0,
+	const apiPath = "https://live2d.fghrsh.net/api";
+	let state = 0, loading = false,
 		modelId = localStorage.getItem("modelId"),
 		modelTexturesId = localStorage.getItem("modelTexturesId");
 	if (modelId === null) {
@@ -209,7 +210,7 @@ window.addEventListener("load", () => {
 				setTimeout(() => {
 					state = 2;
 					coverPosition("80%");
-					document.getElementById("refresh").setAttribute("href", "javascript:refresh()");
+					loading = false;
 				}, 1000);
 			});
 	}
@@ -227,20 +228,21 @@ window.addEventListener("load", () => {
 		document.getElementById("cover").style.bottom = pos;
 	}
 
-	window.info = function() {
+	document.getElementById("info").addEventListener("click", () => {
 		fetch("https://v1.hitokoto.cn")
 			.then(response => response.json())
 			.then(result => {
 				alert("「" + result.hitokoto + "」——" + result.from);
 			});
-	};
+	});
 
-	window.refresh = function() {
+	document.getElementById("refresh").addEventListener("click", () => {
+		if (loading) return;
 		state = 0;
 		coverPosition("10%");
-		document.getElementById("refresh").setAttribute("href", "javascript:void(0)");
+		loading = true;
 		setTimeout(loadRandModel, 1000);
-	};
+	});
 
 	document.getElementById("handle").addEventListener("click", () => {
 		if (state === 1) {
