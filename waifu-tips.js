@@ -3,6 +3,24 @@
  * https://github.com/stevenjoezhang/live2d-widget
  */
 
+let pixiApp;
+
+/**
+ * Load Live2D model into the PIXI application.
+ */
+async function loadlive2dPixi(jsonPath) {
+	const model = await PIXI.live2d.Live2DModel.from(jsonPath);
+	pixiApp.stage.addChild(model);
+	const parentWidth = pixiApp.renderer.width;
+	const parentHeight = pixiApp.renderer.height;
+	// Scale to fit the stage
+	const ratio = Math.min(parentWidth / model.width, parentHeight / model.height);
+	model.scale.set(ratio, ratio);
+	// Align bottom and center horizontally
+	model.x = (parentWidth - model.width) / 2;
+	model.y = parentHeight - model.height;
+}
+
 function loadWidget(config) {
 	let { waifuPath, apiPath, cdnPath } = config;
 	let useCDN = false, modelList;
@@ -19,7 +37,7 @@ function loadWidget(config) {
 	sessionStorage.removeItem("waifu-text");
 	document.body.insertAdjacentHTML("beforeend", `<div id="waifu">
 			<div id="waifu-tips"></div>
-			<canvas id="live2d" width="800" height="800"></canvas>
+			<canvas id="live2d"></canvas>
 			<div id="waifu-tool">
 				<span class="fa fa-lg fa-comment"></span>
 				<span class="fa fa-lg fa-paper-plane"></span>
@@ -30,6 +48,13 @@ function loadWidget(config) {
 				<span class="fa fa-lg fa-times"></span>
 			</div>
 		</div>`);
+	// Create PIXI application
+	const live2dCanvas = document.getElementById('live2d');
+	pixiApp = new PIXI.Application({
+		view: live2dCanvas,
+		resizeTo: live2dCanvas,
+		transparent: true,
+	});
 	// https://stackoverflow.com/questions/24148403/trigger-css-transition-on-appended-element
 	setTimeout(() => {
 		document.getElementById("waifu").style.bottom = 0;
@@ -213,9 +238,9 @@ function loadWidget(config) {
 		if (useCDN) {
 			if (!modelList) await loadModelList();
 			const target = randomSelection(modelList.models[modelId]);
-			loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
+			loadlive2dPixi(`${cdnPath}model/${target}/index.json`);
 		} else {
-			loadlive2d("live2d", `${apiPath}get/?id=${modelId}-${modelTexturesId}`);
+			loadlive2dPixi(`${apiPath}get/?id=${modelId}-${modelTexturesId}`);
 			console.log(`Live2D 模型 ${modelId}-${modelTexturesId} 加载完成`);
 		}
 	}
@@ -226,7 +251,7 @@ function loadWidget(config) {
 		if (useCDN) {
 			if (!modelList) await loadModelList();
 			const target = randomSelection(modelList.models[modelId]);
-			loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
+			loadlive2dPixi(`${cdnPath}model/${target}/index.json`);
 			showMessage("我的新衣服好看嘛？", 4000, 10);
 		} else {
 			// 可选 "rand"(随机), "switch"(顺序)
