@@ -10,6 +10,9 @@ let pixiApp;
  */
 async function loadlive2dPixi(jsonPath) {
 	const model = await PIXI.live2d.Live2DModel.from(jsonPath);
+	if (pixiApp.stage.children.length > 0) {
+		pixiApp.stage.removeChildren(0);
+	}
 	pixiApp.stage.addChild(model);
 	const parentWidth = pixiApp.renderer.width;
 	const parentHeight = pixiApp.renderer.height;
