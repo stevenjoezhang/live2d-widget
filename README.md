@@ -35,6 +35,20 @@ Font Awesome (v4 or v5) is required for this plugin. Take Font Awesome v4 as an 
 ```
 否则图标将无法正常显示。（如果网页中已经加载了任何版本的 Font Awesome，就不要重复加载了）
 
+本插件使用[pixi-live2d-display](https://github.com/guansss/pixi-live2d-display)组件以支持渲染所有版本的Live2D模型。为此，你需要添加PixiJS和pixl-live2d-display依赖。例如，要支持所有版本的模型，则需要添加如下依赖：
+```html
+<!-- PixiJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.3.10/pixi.min.js"></script>
+<!-- Live2D v2.1 -->
+<script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
+<!-- Live2D v3 -->
+<script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+<!-- pixi-live2d-display -->
+<script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
+```
+
+关于Live2D SDK、PixiJS版本的支持情况，请查阅pixi-live2d-display的文档。
+
 ## 使用 Usage
 
 将这一行代码加入 `<head>` 或 `<body>`，即可展现出效果：
