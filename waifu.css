@@ -62,7 +62,7 @@
 	transition: opacity .2s;
 }
 
-#waifu-tips span {
+#waifu-tips .fa-lg {
 	color: #0099cc;
 }
 
@@ -90,16 +90,16 @@
 	opacity: 1;
 }
 
-#waifu-tool span {
+#waifu-tool .fa-lg {
 	color: #7b8c9d;
 	cursor: pointer;
 	display: block;
-	line-height: 30px;
+	height: 30px;
 	text-align: center;
 	transition: color .3s;
 }
 
-#waifu-tool span:hover {
+#waifu-tool .fa-lg:hover {
 	color: #0684bd; /* #34495e */
 }
 
