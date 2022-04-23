@@ -28,10 +28,10 @@ Add Live2D widget to web page. Compatible with PJAX.
 
 ## 依赖 Dependencies
 
-本插件需要 Font Awesome (v4 或 v5) 图标支持，请确保相关样式表已在页面中加载。以 Font Awesome v4 为例，请在 `<head>` 中加入：  
-Font Awesome (v4 or v5) is required for this plugin. Take Font Awesome v4 as an example, please add the following in `<head>`:
+本插件需要 Font Awesome 图标支持，请确保相关样式表已在页面中加载。以 Font Awesome v6 为例，请在 `<head>` 中加入：  
+Font Awesome is required for this plugin. Take Font Awesome v6 as an example, please add the following in `<head>`:
 ```xml
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css">
 ```
 否则图标将无法正常显示。（如果网页中已经加载了任何版本的 Font Awesome，就不要重复加载了）
 
