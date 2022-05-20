@@ -31,7 +31,7 @@ Add Live2D widget to web page. Compatible with PJAX.
 本插件需要 Font Awesome 图标支持，请确保相关样式表已在页面中加载。以 Font Awesome v6 为例，请在 `<head>` 中加入：  
 Font Awesome is required for this plugin. Take Font Awesome v6 as an example, please add the following in `<head>`:
 ```xml
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css">
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css">
 ```
 否则图标将无法正常显示。（如果网页中已经加载了任何版本的 Font Awesome，就不要重复加载了）
 
@@ -39,7 +39,7 @@ Font Awesome is required for this plugin. Take Font Awesome v6 as an example, pl
 
 将这一行代码加入 `<head>` 或 `<body>`，即可展现出效果：
 ```xml
-<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
 ```
 如果网站启用了 PJAX，由于看板娘不必每页刷新，因此要注意将相关脚本放到 PJAX 刷新区域之外。
 
@@ -53,7 +53,7 @@ Font Awesome is required for this plugin. Take Font Awesome v6 as an example, pl
 
 要自定义有关内容，可以把这个仓库 Fork 一份，然后进行修改。这时，使用方法对应地变为
 ```xml
-<script src="https://cdn.jsdelivr.net/gh/username/live2d-widget@latest/autoload.js"></script>
+<script src="https://fastly.jsdelivr.net/gh/username/live2d-widget@latest/autoload.js"></script>
 ```
 将此处的 `username` 替换为你的 GitHub 用户名。为了使 CDN 的内容正常刷新，需要创建新的 git tag 并推送至 GitHub 仓库中，否则此处的 `@latest` 仍然指向更新前的文件。此外 CDN 本身存在缓存，因此改动可能需要一定的时间生效。相关文档：
 - [Git Basics - Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
