@@ -1,6 +1,6 @@
 <script>
 		//待拖拽的元素
-		let _img = document.getElementById('waifu');
+		let _img = document.getElementById('waifu-toggle');
 		//获取元素与浏览器的宽高
 		let winWidth = window.innerWidth,
 			winHeight = window.innerHeight,
