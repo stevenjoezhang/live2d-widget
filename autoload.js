@@ -30,6 +30,7 @@ if (screen.width >= 768) {
 		loadExternalResource(live2d_path + "waifu.css", "css"),
 		loadExternalResource(live2d_path + "live2d.min.js", "js"),
 		loadExternalResource(live2d_path + "waifu-tips.js", "js")
+		loadExternalResource(live2d_path + "drag-waifu.js", "js")
 	]).then(() => {
 		initWidget({
 			waifuPath: live2d_path + "waifu-tips.json",
