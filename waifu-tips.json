@@ -73,7 +73,7 @@
 		"text": ["代码可以直接点击复制哟。"]
 	}, {
 		"selector": ".highlight .table-container, .gist",
-		"text": ["GitHub！我是新手！", "PHP 是最好的语言！"]
+		"text": ["GitHub！meimeitou！", "XXX 是最好的语言！"]
 	}, {
 		"selector": "a[href^='mailto']",
 		"text": ["邮件我会及时回复的！", "点击就可以发送邮件啦～"]
