@@ -2,7 +2,17 @@ import showMessage from "./message.js";
 import randomSelection from "./utils.js";
 
 class Model {
-    constructor(useCDN, apiPath, cdnPath) {
+    constructor(config) {
+        let { apiPath, cdnPath } = config;
+        let useCDN = false;
+        if (typeof cdnPath === "string") {
+            useCDN = true;
+            if (!cdnPath.endsWith("/")) cdnPath += "/";
+        } else if (typeof apiPath === "string") {
+            if (!apiPath.endsWith("/")) apiPath += "/";
+        } else {
+            throw "Invalid initWidget argument!";
+        }
         this.useCDN = useCDN;
         this.apiPath = apiPath;
         this.cdnPath = cdnPath;

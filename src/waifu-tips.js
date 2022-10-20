@@ -9,18 +9,7 @@ import randomSelection from "./utils.js";
 import tools from "./tools.js";
 
 function loadWidget(config) {
-	let { apiPath, cdnPath } = config;
-	let useCDN = false;
-	if (typeof cdnPath === "string") {
-		useCDN = true;
-		if (!cdnPath.endsWith("/")) cdnPath += "/";
-	} else if (typeof apiPath === "string") {
-		if (!apiPath.endsWith("/")) apiPath += "/";
-	} else {
-		console.error("Invalid initWidget argument!");
-		return;
-	}
-	const model = new Model(useCDN, apiPath, cdnPath);
+	const model = new Model(config);
 	localStorage.removeItem("waifu-display");
 	sessionStorage.removeItem("waifu-text");
 	document.body.insertAdjacentHTML("beforeend", `<div id="waifu">
@@ -110,19 +99,6 @@ function loadWidget(config) {
 		}
 	};
 	showMessage(welcomeMessage(), 7000, 8);
-
-	function showHitokoto() {
-		// 增加 hitokoto.cn 的 API
-		fetch("https://v1.hitokoto.cn")
-			.then(response => response.json())
-			.then(result => {
-				const text = `这句一言来自 <span>「${result.from}」</span>，是 <span>${result.creator}</span> 在 hitokoto.cn 投稿的。`;
-				showMessage(result.hitokoto, 6000, 9);
-				setTimeout(() => {
-					showMessage(text, 4000, 9);
-				}, 6000);
-			});
-	}
 
 	(function initModel() {
 		let modelId = localStorage.getItem("modelId"),
