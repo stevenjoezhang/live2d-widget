@@ -11,9 +11,13 @@ import fa_camera_retro from "@fortawesome/fontawesome-free/svgs/solid/camera-ret
 import fa_info_circle from "@fortawesome/fontawesome-free/svgs/solid/circle-info.svg";
 import fa_xmark from "@fortawesome/fontawesome-free/svgs/solid/xmark.svg";
 
+import Model from "./model.js";
+import showMessage from "./message.js";
+import randomSelection from "./utils.js";
+
 function loadWidget(config) {
 	let { apiPath, cdnPath } = config;
-	let useCDN = false, modelList;
+	let useCDN = false;
 	if (typeof cdnPath === "string") {
 		useCDN = true;
 		if (!cdnPath.endsWith("/")) cdnPath += "/";
@@ -23,6 +27,7 @@ function loadWidget(config) {
 		console.error("Invalid initWidget argument!");
 		return;
 	}
+	const model = new Model(useCDN, apiPath, cdnPath);
 	localStorage.removeItem("waifu-display");
 	sessionStorage.removeItem("waifu-text");
 	document.body.insertAdjacentHTML("beforeend", `<div id="waifu">
@@ -35,13 +40,9 @@ function loadWidget(config) {
 		document.getElementById("waifu").style.bottom = 0;
 	}, 0);
 
-	function randomSelection(obj) {
-		return Array.isArray(obj) ? obj[Math.floor(Math.random() * obj.length)] : obj;
-	}
 	// 检测用户活动状态，并在空闲时显示消息
 	let userAction = false,
 		userActionTimer,
-		messageTimer,
 		messageArray = ["好久不见，日子过得好快呢……", "大坏蛋！你都多久没理人家了呀，嘤嘤嘤～", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口！", "记得把小家加入 Adblock 白名单哦！"];
 	window.addEventListener("mousemove", () => userAction = true);
 	window.addEventListener("keydown", () => userAction = true);
@@ -78,11 +79,11 @@ function loadWidget(config) {
 			},
 			"switch-model": {
 				icon: fa_user_circle,
-				callback: loadOtherModel
+				callback: () => model.loadOtherModel()
 			},
 			"switch-texture": {
 				icon: fa_street_view,
-				callback: loadRandModel
+				callback: () => model.loadRandModel()
 			},
 			"photo": {
 				icon: fa_camera_retro,
@@ -181,23 +182,6 @@ function loadWidget(config) {
 			});
 	}
 
-	function showMessage(text, timeout, priority) {
-		if (!text || (sessionStorage.getItem("waifu-text") && sessionStorage.getItem("waifu-text") > priority)) return;
-		if (messageTimer) {
-			clearTimeout(messageTimer);
-			messageTimer = null;
-		}
-		text = randomSelection(text);
-		sessionStorage.setItem("waifu-text", priority);
-		const tips = document.getElementById("waifu-tips");
-		tips.innerHTML = text;
-		tips.classList.add("waifu-tips-active");
-		messageTimer = setTimeout(() => {
-			sessionStorage.removeItem("waifu-text");
-			tips.classList.remove("waifu-tips-active");
-		}, timeout);
-	}
-
 	(function initModel() {
 		let modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
@@ -206,7 +190,7 @@ function loadWidget(config) {
 			modelId = 1; // 模型 ID
 			modelTexturesId = 53; // 材质 ID
 		}
-		loadModel(modelId, modelTexturesId);
+		model.loadModel(modelId, modelTexturesId);
 		fetch(config.waifuPath)
 			.then(response => response.json())
 			.then(result => {
@@ -241,59 +225,6 @@ function loadWidget(config) {
 				});
 			});
 	})();
-
-	async function loadModelList() {
-		const response = await fetch(`${cdnPath}model_list.json`);
-		modelList = await response.json();
-	}
-
-	async function loadModel(modelId, modelTexturesId, message) {
-		localStorage.setItem("modelId", modelId);
-		localStorage.setItem("modelTexturesId", modelTexturesId);
-		showMessage(message, 4000, 10);
-		if (useCDN) {
-			if (!modelList) await loadModelList();
-			const target = randomSelection(modelList.models[modelId]);
-			loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
-		} else {
-			loadlive2d("live2d", `${apiPath}get/?id=${modelId}-${modelTexturesId}`);
-			console.log(`Live2D 模型 ${modelId}-${modelTexturesId} 加载完成`);
-		}
-	}
-
-	async function loadRandModel() {
-		const modelId = localStorage.getItem("modelId"),
-			modelTexturesId = localStorage.getItem("modelTexturesId");
-		if (useCDN) {
-			if (!modelList) await loadModelList();
-			const target = randomSelection(modelList.models[modelId]);
-			loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
-			showMessage("我的新衣服好看嘛？", 4000, 10);
-		} else {
-			// 可选 "rand"(随机), "switch"(顺序)
-			fetch(`${apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`)
-				.then(response => response.json())
-				.then(result => {
-					if (result.textures.id === 1 && (modelTexturesId === 1 || modelTexturesId === 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
-					else loadModel(modelId, result.textures.id, "我的新衣服好看嘛？");
-				});
-		}
-	}
-
-	async function loadOtherModel() {
-		let modelId = localStorage.getItem("modelId");
-		if (useCDN) {
-			if (!modelList) await loadModelList();
-			const index = (++modelId >= modelList.models.length) ? 0 : modelId;
-			loadModel(index, 0, modelList.messages[index]);
-		} else {
-			fetch(`${apiPath}switch/?id=${modelId}`)
-				.then(response => response.json())
-				.then(result => {
-					loadModel(result.model.id, 0, result.model.message);
-				});
-		}
-	}
 }
 
 function initWidget(config, apiPath) {
