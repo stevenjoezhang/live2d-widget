@@ -128,6 +128,8 @@ https://example.com/path/to/live2d-widget/
 代码自这篇博文魔改而来：  
 https://www.fghrsh.net/post/123.html
 
+感谢 [一言](https://hitokoto.cn) 提供的语句接口。
+
 点击看板娘的纸飞机按钮时，会出现一个彩蛋，这来自于 [WebsiteAsteroids](http://www.websiteasteroids.com)。
 
 ## 更多 More
