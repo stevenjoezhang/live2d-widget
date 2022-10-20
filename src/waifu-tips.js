@@ -22,25 +22,7 @@ function loadWidget(config) {
 		document.getElementById("waifu").style.bottom = 0;
 	}, 0);
 
-	// 检测用户活动状态，并在空闲时显示消息
-	let userAction = false,
-		userActionTimer,
-		messageArray = ["好久不见，日子过得好快呢……", "大坏蛋！你都多久没理人家了呀，嘤嘤嘤～", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口！", "记得把小家加入 Adblock 白名单哦！"];
-	window.addEventListener("mousemove", () => userAction = true);
-	window.addEventListener("keydown", () => userAction = true);
-	setInterval(() => {
-		if (userAction) {
-			userAction = false;
-			clearInterval(userActionTimer);
-			userActionTimer = null;
-		} else if (!userActionTimer) {
-			userActionTimer = setInterval(() => {
-				showMessage(randomSelection(messageArray), 6000, 9);
-			}, 20000);
-		}
-	}, 1000);
-
-	(function registerEventListener() {
+	(function registerTools() {
 		tools["switch-model"].callback = () => model.loadOtherModel();
 		tools["switch-texture"].callback = () => model.loadRandModel();
 		if (!Array.isArray(config.tools)) {
@@ -98,6 +80,55 @@ function loadWidget(config) {
 		return message;
 	}
 
+	function registerEventListener(result) {
+		// 检测用户活动状态，并在空闲时显示消息
+		let userAction = false,
+			userActionTimer,
+			messageArray = result.message.default;
+		window.addEventListener("mousemove", () => userAction = true);
+		window.addEventListener("keydown", () => userAction = true);
+		setInterval(() => {
+			if (userAction) {
+				userAction = false;
+				clearInterval(userActionTimer);
+				userActionTimer = null;
+			} else if (!userActionTimer) {
+				userActionTimer = setInterval(() => {
+					showMessage(randomSelection(messageArray), 6000, 9);
+				}, 20000);
+			}
+		}, 1000);
+		showMessage(welcomeMessage(result.time), 7000, 11);
+		window.addEventListener("mouseover", event => {
+			for (let { selector, text } of result.mouseover) {
+				if (!event.target.matches(selector)) continue;
+				text = randomSelection(text);
+				text = text.replace("{text}", event.target.innerText);
+				showMessage(text, 4000, 8);
+				return;
+			}
+		});
+		window.addEventListener("click", event => {
+			for (let { selector, text } of result.click) {
+				if (!event.target.matches(selector)) continue;
+				text = randomSelection(text);
+				text = text.replace("{text}", event.target.innerText);
+				showMessage(text, 4000, 8);
+				return;
+			}
+		});
+		result.seasons.forEach(({ date, text }) => {
+			const now = new Date(),
+				after = date.split("-")[0],
+				before = date.split("-")[1] || after;
+			if ((after.split("/")[0] <= now.getMonth() + 1 && now.getMonth() + 1 <= before.split("/")[0]) && (after.split("/")[1] <= now.getDate() && now.getDate() <= before.split("/")[1])) {
+				text = randomSelection(text);
+				text = text.replace("{year}", now.getFullYear());
+				messageArray.push(text);
+			}
+		});
+	}
+
 	(function initModel() {
 		let modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
@@ -109,37 +140,7 @@ function loadWidget(config) {
 		model.loadModel(modelId, modelTexturesId);
 		fetch(config.waifuPath)
 			.then(response => response.json())
-			.then(result => {
-				showMessage(welcomeMessage(result.time), 7000, 11);
-				window.addEventListener("mouseover", event => {
-					for (let { selector, text } of result.mouseover) {
-						if (!event.target.matches(selector)) continue;
-						text = randomSelection(text);
-						text = text.replace("{text}", event.target.innerText);
-						showMessage(text, 4000, 8);
-						return;
-					}
-				});
-				window.addEventListener("click", event => {
-					for (let { selector, text } of result.click) {
-						if (!event.target.matches(selector)) continue;
-						text = randomSelection(text);
-						text = text.replace("{text}", event.target.innerText);
-						showMessage(text, 4000, 8);
-						return;
-					}
-				});
-				result.seasons.forEach(({ date, text }) => {
-					const now = new Date(),
-						after = date.split("-")[0],
-						before = date.split("-")[1] || after;
-					if ((after.split("/")[0] <= now.getMonth() + 1 && now.getMonth() + 1 <= before.split("/")[0]) && (after.split("/")[1] <= now.getDate() && now.getDate() <= before.split("/")[1])) {
-						text = randomSelection(text);
-						text = text.replace("{year}", now.getFullYear());
-						messageArray.push(text);
-					}
-				});
-			});
+			.then(registerEventListener);
 	})();
 }
 
