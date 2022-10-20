@@ -35,34 +35,21 @@ function loadWidget(config) {
 				document.getElementById(`waifu-tool-${tool}`).addEventListener("click", callback);
 			}
 		}
-
-		const devtools = () => {};
-		console.log("%c", devtools);
-		devtools.toString = () => {
-			showMessage("哈哈，你打开了控制台，是想要看看我的小秘密吗？", 6000, 9);
-		};
-		window.addEventListener("copy", () => {
-			showMessage("你都复制了些什么呀，转载要记得加上出处哦！", 6000, 9);
-		});
-		window.addEventListener("visibilitychange", () => {
-			if (!document.hidden) showMessage("哇，你终于回来了～", 6000, 9);
-		});
 	})();
 
 	function welcomeMessage(time) {
-		const message = `欢迎阅读<span>「${document.title.split(" - ")[0]}」</span>`;
-		let text;
 		if (location.pathname === "/") { // 如果是主页
 			for (let { hour, text } of time) {
 				const now = new Date(),
 					after = hour.split("-")[0],
 					before = hour.split("-")[1] || after;
 				if (after <= now.getHours() && now.getHours() <= before) {
-					text = randomSelection(text);
 					return text;
 				}
 			}
 		}
+		const text = `欢迎阅读<span>「${document.title.split(" - ")[0]}」</span>`;
+		let from;
 		if (document.referrer !== "") {
 			const referrer = new URL(document.referrer),
 				domain = referrer.hostname.split(".")[1];
@@ -71,13 +58,13 @@ function loadWidget(config) {
 				"so": "360搜索",
 				"google": "谷歌搜索"
 			};
-			if (location.hostname === referrer.hostname) return message;
+			if (location.hostname === referrer.hostname) return text;
 
-			if (domain in domains) text = domains[domain];
-			else text = referrer.hostname;
-			return `Hello！来自 <span>${text}</span> 的朋友<br>${message}`;
+			if (domain in domains) from = domains[domain];
+			else from = referrer.hostname;
+			return `Hello！来自 <span>${from}</span> 的朋友<br>${text}`;
 		}
-		return message;
+		return text;
 	}
 
 	function registerEventListener(result) {
@@ -94,7 +81,7 @@ function loadWidget(config) {
 				userActionTimer = null;
 			} else if (!userActionTimer) {
 				userActionTimer = setInterval(() => {
-					showMessage(randomSelection(messageArray), 6000, 9);
+					showMessage(messageArray, 6000, 9);
 				}, 20000);
 			}
 		}, 1000);
@@ -126,6 +113,18 @@ function loadWidget(config) {
 				text = text.replace("{year}", now.getFullYear());
 				messageArray.push(text);
 			}
+		});
+
+		const devtools = () => { };
+		console.log("%c", devtools);
+		devtools.toString = () => {
+			showMessage(result.message.console, 6000, 9);
+		};
+		window.addEventListener("copy", () => {
+			showMessage(result.message.copy, 6000, 9);
+		});
+		window.addEventListener("visibilitychange", () => {
+			if (!document.hidden) showMessage(result.message.visibilitychange, 6000, 9);
 		});
 	}
 
