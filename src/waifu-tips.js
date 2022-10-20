@@ -1,8 +1,3 @@
-/*
- * Live2D Widget
- * https://github.com/stevenjoezhang/live2d-widget
- */
-
 import Model from "./model.js";
 import showMessage from "./message.js";
 import randomSelection from "./utils.js";

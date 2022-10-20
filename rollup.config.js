@@ -18,6 +18,14 @@ function string(opts = {}) {
                     map: { mappings: "" }
                 };
             }
+        },
+
+        renderChunk(code, chunk, outputOptions = {}) {
+            return `/*!
+ * Live2D Widget
+ * https://github.com/stevenjoezhang/live2d-widget
+ */
+` + code;
         }
     };
 }
