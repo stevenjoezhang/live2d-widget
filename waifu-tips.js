@@ -102,7 +102,7 @@ function loadWidget(config) {
 					}, 3000);
 				}
 			}
-		}
+		};
 		if (!Array.isArray(config.tools)) {
 			config.tools = Object.keys(tools);
 		}
@@ -127,7 +127,8 @@ function loadWidget(config) {
 		});
 	})();
 
-	(function welcomeMessage() {
+	function welcomeMessage() {
+		const message = `欢迎阅读<span>「${document.title.split(" - ")[0]}」</span>`;
 		let text;
 		if (location.pathname === "/") { // 如果是主页
 			const now = new Date().getHours();
@@ -139,19 +140,25 @@ function loadWidget(config) {
 			else if (now > 19 && now <= 21) text = "晚上好，今天过得怎么样？";
 			else if (now > 21 && now <= 23) text = ["已经这么晚了呀，早点休息吧，晚安～", "深夜时要爱护眼睛呀！"];
 			else text = "你是夜猫子呀？这么晚还不睡觉，明天起的来嘛？";
+			return text;
 		} else if (document.referrer !== "") {
 			const referrer = new URL(document.referrer),
 				domain = referrer.hostname.split(".")[1];
-			if (location.hostname === referrer.hostname) text = `欢迎阅读<span>「${document.title.split(" - ")[0]}」</span>`;
-			else if (domain === "baidu") text = `Hello！来自 百度搜索 的朋友<br>你是搜索 <span>${referrer.search.split("&wd=")[1].split("&")[0]}</span> 找到的我吗？`;
-			else if (domain === "so") text = `Hello！来自 360搜索 的朋友<br>你是搜索 <span>${referrer.search.split("&q=")[1].split("&")[0]}</span> 找到的我吗？`;
-			else if (domain === "google") text = `Hello！来自 谷歌搜索 的朋友<br>欢迎阅读<span>「${document.title.split(" - ")[0]}」</span>`;
-			else text = `Hello！来自 <span>${referrer.hostname}</span> 的朋友`;
+			const domains = {
+				"baidu": "百度",
+				"so": "360搜索",
+				"google": "谷歌搜索"
+			};
+			if (location.hostname === referrer.hostname) return message;
+
+			if (domain in domains) text = domains[domain];
+			else text = referrer.hostname;
+			return `Hello！来自 <span>${text}</span> 的朋友<br>${message}`;;
 		} else {
-			text = `欢迎阅读<span>「${document.title.split(" - ")[0]}」</span>`;
+			return message;
 		}
-		showMessage(text, 7000, 8);
-	})();
+	};
+	showMessage(welcomeMessage(), 7000, 8);
 
 	function showHitokoto() {
 		// 增加 hitokoto.cn 的 API
