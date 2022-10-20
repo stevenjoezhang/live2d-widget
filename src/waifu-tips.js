@@ -3,17 +3,10 @@
  * https://github.com/stevenjoezhang/live2d-widget
  */
 
-import fa_comment from "@fortawesome/fontawesome-free/svgs/solid/comment.svg";
-import fa_paper_plane from "@fortawesome/fontawesome-free/svgs/solid/paper-plane.svg";
-import fa_user_circle from "@fortawesome/fontawesome-free/svgs/solid/circle-user.svg";
-import fa_street_view from "@fortawesome/fontawesome-free/svgs/solid/street-view.svg";
-import fa_camera_retro from "@fortawesome/fontawesome-free/svgs/solid/camera-retro.svg";
-import fa_info_circle from "@fortawesome/fontawesome-free/svgs/solid/circle-info.svg";
-import fa_xmark from "@fortawesome/fontawesome-free/svgs/solid/xmark.svg";
-
 import Model from "./model.js";
 import showMessage from "./message.js";
 import randomSelection from "./utils.js";
+import tools from "./tools.js";
 
 function loadWidget(config) {
 	let { apiPath, cdnPath } = config;
@@ -59,59 +52,8 @@ function loadWidget(config) {
 	}, 1000);
 
 	(function registerEventListener() {
-		const tools = {
-			"hitokoto": {
-				icon: fa_comment,
-				callback: showHitokoto
-			},
-			"asteroids": {
-				icon: fa_paper_plane,
-				callback: () => {
-					if (window.Asteroids) {
-						if (!window.ASTEROIDSPLAYERS) window.ASTEROIDSPLAYERS = [];
-						window.ASTEROIDSPLAYERS.push(new Asteroids());
-					} else {
-						const script = document.createElement("script");
-						script.src = "https://fastly.jsdelivr.net/gh/stevenjoezhang/asteroids/asteroids.js";
-						document.head.appendChild(script);
-					}
-				}
-			},
-			"switch-model": {
-				icon: fa_user_circle,
-				callback: () => model.loadOtherModel()
-			},
-			"switch-texture": {
-				icon: fa_street_view,
-				callback: () => model.loadRandModel()
-			},
-			"photo": {
-				icon: fa_camera_retro,
-				callback: () => {
-					showMessage("照好了嘛，是不是很可爱呢？", 6000, 9);
-					Live2D.captureName = "photo.png";
-					Live2D.captureFrame = true;
-				}
-			},
-			"info": {
-				icon: fa_info_circle,
-				callback: () => {
-					open("https://github.com/stevenjoezhang/live2d-widget");
-				}
-			},
-			"quit": {
-				icon: fa_xmark,
-				callback: () => {
-					localStorage.setItem("waifu-display", Date.now());
-					showMessage("愿你有一天能与重要的人重逢。", 2000, 11);
-					document.getElementById("waifu").style.bottom = "-500px";
-					setTimeout(() => {
-						document.getElementById("waifu").style.display = "none";
-						document.getElementById("waifu-toggle").classList.add("waifu-toggle-active");
-					}, 3000);
-				}
-			}
-		};
+		tools["switch-model"].callback = () => model.loadOtherModel();
+		tools["switch-texture"].callback = () => model.loadRandModel();
 		if (!Array.isArray(config.tools)) {
 			config.tools = Object.keys(tools);
 		}
