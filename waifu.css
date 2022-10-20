@@ -62,7 +62,7 @@
 	transition: opacity .2s;
 }
 
-#waifu-tips .fa-lg {
+#waifu-tips svg {
 	color: #0099cc;
 }
 
@@ -90,17 +90,21 @@
 	opacity: 1;
 }
 
-#waifu-tool .fa-lg {
-	color: #7b8c9d;
-	cursor: pointer;
+#waifu-tool span {
 	display: block;
 	height: 30px;
 	text-align: center;
-	transition: color .3s;
 }
 
-#waifu-tool .fa-lg:hover {
-	color: #0684bd; /* #34495e */
+#waifu-tool svg {
+	fill: #7b8c9d;
+	cursor: pointer;
+	height: 25px;
+	transition: fill .3s;
+}
+
+#waifu-tool svg:hover {
+	fill: #0684bd; /* #34495e */
 }
 
 @keyframes shake {
