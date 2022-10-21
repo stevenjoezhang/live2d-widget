@@ -12,30 +12,24 @@
 在网页中添加 Live2D 看板娘。兼容 PJAX，支持无刷新加载。  
 Add Live2D widget to web page. Compatible with PJAX.
 
-**警告：本项目使用了大量 ES6 语法，不支持 IE 11 等老旧浏览器。**  
-**WARNING: This project does not support legacy browsers such as IE 11.**
-
-## 示例 Demo
-
-在[米米的博客](https://zhangshuqiao.org)的左下角可查看效果。（注：以下人物模型仅供展示之用，本仓库并不包含任何模型。）
-
 <img src="assets/screenshot-2.png" width="280"><img src="assets/screenshot-3.png" width="280"><img src="assets/screenshot-1.png" width="270">
 
-你也可以在允许的范围内进行二次开发，这里有一些示例
+（注：以上人物模型仅供展示之用，本仓库并不包含任何模型。）
 
-- [demo.html](https://mi.js.org/live2d-widget/demo/demo.html) ，展现基础效果
-- [login.html](https://mi.js.org/live2d-widget/demo/login.html) ，仿 NPM 的登陆界面
+你也可以查看示例网页：
+
+- 在 [米米的博客](https://zhangshuqiao.org) 的左下角可查看效果
+- [demo.html](https://mi.js.org/live2d-widget/demo/demo.html)，展现基础功能
+- [login.html](https://mi.js.org/live2d-widget/demo/login.html)，仿 NPM 的登陆界面
 
 ## 使用 Usage
 
-将这一行代码加入 html 页面的 `head` 或 `body` 中，即可展现出效果：
+如果你是小白，或者只需要最基础的功能，那么只用将这一行代码加入 html 页面的 `head` 或 `body` 中，即可加载看板娘：
 ```xml
 <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
 ```
-如果网站启用了 PJAX，由于看板娘不必每页刷新，因此要注意将相关脚本放到 PJAX 刷新区域之外。
-
-换句话说，如果你是小白，或者只需要最基础的功能，那么只用这一行代码即可加载看板娘。  
-对于用各种模版引擎（例如 Nunjucks，Jinja 或者 PHP）生成的页面，也要自行修改，方法类似，只是可能略为麻烦。以 [Hexo](https://hexo.io) 为例，需要在主题相关的 ejs 或 njk 模版中正确配置路径，才可以加载。
+添加代码的位置取决于你的网站的构建方式。例如，如果你使用的是 [Hexo](https://hexo.io)，那么需要在主题的模版文件中添加以上代码。对于用各种模版引擎生成的页面，修改方法类似。  
+如果网站启用了 PJAX，由于看板娘不必每页刷新，需要注意将该脚本放到 PJAX 刷新区域之外。
 
 **但是！我们强烈推荐自己进行配置，让看板娘更加适合你的网站！**  
 如果你有兴趣自己折腾的话，请看下面的详细说明。
