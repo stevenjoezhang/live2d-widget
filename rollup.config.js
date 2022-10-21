@@ -1,4 +1,4 @@
-import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 import { createFilter } from "@rollup/pluginutils";
 
 function string(opts = {}) {
@@ -31,7 +31,7 @@ function string(opts = {}) {
 }
 
 export default {
-    input: 'src/waifu-tips.js',
+    input: "src/waifu-tips.js",
     plugins: [nodeResolve(), string({
         include: "**/*.svg",
     })]
