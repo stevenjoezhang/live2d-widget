@@ -56,8 +56,8 @@ Add Live2D widget to web page. Compatible with PJAX.
 - `waifu-tips.json` 中定义了触发条件（`selector`，CSS 选择器）和触发时显示的文字（`text`）；
 - `waifu.css` 是看板娘的样式表。
 
-源文件是对 Hexo 的 [NexT 主题](http://github.com/next-theme/hexo-theme-next)有效的，为了适用于你自己的网页，可能需要自行修改，或增加新内容。  
-**警告：作者不对包括但不限于 `waifu-tips.js` 和 `waifu-tips.json` 文件中的内容负责，请自行确保它们是合适的。**
+`waifu-tips.json` 中默认的 CSS 选择器规则是对 Hexo 的 [NexT 主题](http://github.com/next-theme/hexo-theme-next) 有效的，为了适用于你自己的网页，可能需要自行修改，或增加新内容。  
+**警告：`waifu-tips.json` 中的内容可能不适合所有年龄段，或不宜在工作期间访问。在使用时，请自行确保它们是合适的。**
 
 要在本地部署本项目的开发测试环境，你需要安装 Node.js 和 npm，然后执行以下命令：
 
@@ -81,7 +81,7 @@ npm run build
 ```
 将此处的 `username` 替换为你的 GitHub 用户名。为了使 CDN 的内容正常刷新，需要创建新的 git tag 并推送至 GitHub 仓库中，否则此处的 `@latest` 仍然指向更新前的文件。此外 CDN 本身存在缓存，因此改动可能需要一定的时间生效。相关文档：
 - [Git Basics - Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
-- [Managing releases in a repository](https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository)
+- [Managing releases in a repository](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
 
 ### Self-host
 
@@ -129,7 +129,7 @@ https://www.fghrsh.net/post/123.html
 ## 更多 More
 
 更多内容可以参考：  
-https://imjad.cn/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02  
+https://nocilol.me/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02  
 https://github.com/xiazeyu/live2d-widget.js  
 https://github.com/summerscar/live2dDemo
 
