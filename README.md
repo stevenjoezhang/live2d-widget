@@ -36,7 +36,7 @@ Add Live2D widget to web page. Compatible with PJAX.
 
 ## 配置 Configuration
 
-你可以对照 `autoload.js` 的源码查看可选的配置项目。`autoload.js` 会自动加载三个文件：`waifu.css`，`live2d.min.js` 和 `waifu-tips.js`。`waifu-tips.js` 会创建 `initWidget` 函数，这就是加载看板娘的主函数。`initWidget` 函数接收一个 Object 类型的参数，作为看板娘的配置。以下是配置方式：
+你可以对照 `autoload.js` 的源码查看可选的配置项目。`autoload.js` 会自动加载三个文件：`waifu.css`，`live2d.min.js` 和 `waifu-tips.js`。`waifu-tips.js` 会创建 `initWidget` 函数，这就是加载看板娘的主函数。`initWidget` 函数接收一个 Object 类型的参数，作为看板娘的配置。以下是配置选项：
 
 | 选项 | 类型 | 默认值 | 说明 |
 | - | - | - | - |
@@ -87,11 +87,11 @@ npm run build
 
 你也可以直接把这些文件放到服务器上，而不是通过 CDN 加载。
 
-- 如果你能够通过 `ssh` 访问你的主机，请把 Fork 并修改后的代码仓库克隆到服务器上。
-- 如果你的主机无法用 `ssh` 连接（例如一般的虚拟主机），请选择 `Download ZIP`，然后通过 `ftp` 等方式上传到主机上，再解压到网站的目录下。
+- 如果你能够通过 `ssh` 连接你的主机，请把 Fork 并修改后的代码仓库克隆到服务器上。
+- 如果你的主机无法用 `ssh` 连接（例如一般的虚拟主机），请在本地修改好代码后，通过 `ftp` 等方式将文件上传到主机的网站的目录下。
 - 如果你是通过 Hexo 等工具部署的静态博客，请把本项目的代码放在博客源文件目录下（例如 `source` 目录）。重新部署博客时，相关文件就会自动上传到对应的路径下。为了避免这些文件被 Hexo 插件错误地修改，可能需要设置 `skip_render`。
 
-这样，整个项目就可以通过你的服务器 IP 或者域名从公网访问了。不妨试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件，并确认这些文件的内容是完整和正确的。  
+这样，整个项目就可以通过你的域名访问了。不妨试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件，并确认这些文件的内容是完整和正确的。  
 一切正常的话，接下来修改 `autoload.js` 中的常量 `live2d_path` 为 `live2d-widget` 这一目录的 URL 即可。比如说，如果你能够通过
 ```
 https://example.com/path/to/live2d-widget/live2d.min.js
