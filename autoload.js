@@ -41,7 +41,7 @@ if (screen.width >= 768) {
 	});
 }
 
-console.log(`
+console.log(`111222
   く__,.ヘヽ.        /  ,ー､ 〉
            ＼ ', !-─‐-i  /  /´
            ／｀ｰ'       L/／｀ヽ､
