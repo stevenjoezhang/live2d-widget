@@ -1,7 +1,7 @@
 {
 	"mouseover": [{
 		"selector": "#live2d",
-		"text": ["干嘛呢你，快把手拿开～～", "鼠…鼠标放错地方了！", "你要干嘛呀？", "喵喵喵？", "怕怕(ノ≧∇≦)ノ", "非礼呀！救命！", "这样的话，只能使用武力了！", "我要生气了哦", "不要动手动脚的！", "真…真的是不知羞耻！", "Hentai！"]
+		"text": ["What are you doing? Get your hands off me～～", "The mouse...the mouse is in the wrong place!", "What do you want?","I'm afraid(ノ≧∇≦)ノ", "Molestation! Help!", "In that case, only force can be used!", "I'm going to be angry", "Don't move your hands！", "Really...really shameless!", "Hentai！"]
 	}, {
 		"selector": "#waifu-tool-hitokoto",
 		"text": ["猜猜我要说些什么？", "我从青蛙王子那里听到了不少人生经验。"]
