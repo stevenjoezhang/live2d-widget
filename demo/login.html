@@ -213,15 +213,6 @@ window.addEventListener("load", () => {
 			});
 	}
 
-	function loadOtherModel() {
-		const modelId = localStorage.getItem("modelId");
-		fetch(`${apiPath}/switch/?id=${modelId}`)
-			.then(response => response.json())
-			.then(result => {
-				loadModel(result.model.id);
-			});
-	}
-
 	function coverPosition(pos) {
 		document.getElementById("cover").style.bottom = pos;
 	}

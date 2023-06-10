@@ -7,10 +7,11 @@
 ![](https://forthebadge.com/images/badges/powered-by-electricity.svg)
 ![](https://forthebadge.com/images/badges/makes-people-smile.svg)
 
-## 特性 Feature
+[English](README.en.md)
 
-在网页中添加 Live2D 看板娘。兼容 PJAX，支持无刷新加载。  
-Add Live2D widget to web page. Compatible with PJAX.
+## 特性
+
+在网页中添加 Live2D 看板娘。兼容 PJAX，支持无刷新加载。
 
 <img src="assets/screenshot-2.png" width="280"><img src="assets/screenshot-3.png" width="280"><img src="assets/screenshot-1.png" width="270">
 
@@ -22,7 +23,7 @@ Add Live2D widget to web page. Compatible with PJAX.
 - [demo.html](https://mi.js.org/live2d-widget/demo/demo.html)，展现基础功能
 - [login.html](https://mi.js.org/live2d-widget/demo/login.html)，仿 NPM 的登陆界面
 
-## 使用 Usage
+## 使用
 
 如果你是小白，或者只需要最基础的功能，那么只用将这一行代码加入 html 页面的 `head` 或 `body` 中，即可加载看板娘：
 ```xml
@@ -34,7 +35,7 @@ Add Live2D widget to web page. Compatible with PJAX.
 **但是！我们强烈推荐自己进行配置，让看板娘更加适合你的网站！**  
 如果你有兴趣自己折腾的话，请看下面的详细说明。
 
-## 配置 Configuration
+## 配置
 
 你可以对照 `autoload.js` 的源码查看可选的配置项目。`autoload.js` 会自动加载三个文件：`waifu.css`，`live2d.min.js` 和 `waifu-tips.js`。`waifu-tips.js` 会创建 `initWidget` 函数，这就是加载看板娘的主函数。`initWidget` 函数接收一个 Object 类型的参数，作为看板娘的配置。以下是配置选项：
 
@@ -47,7 +48,7 @@ Add Live2D widget to web page. Compatible with PJAX.
 
 其中，`apiPath` 和 `cdnPath` 两个参数设置其中一项即可。`apiPath` 是后端 API 的 URL，可以自行搭建，并增加模型（需要修改的内容比较多，此处不再赘述），可以参考 [live2d_api](https://github.com/fghrsh/live2d_api)。而 `cdnPath` 则是通过 jsDelivr 这样的 CDN 服务加载资源，更加稳定。
 
-## 自定义 Customization
+## 自定义
 
 如果以上「配置」部分提供的选项还不足以满足你的需求，那么你可以自己进行修改。本仓库的目录结构如下：
 
@@ -69,11 +70,11 @@ npm run build
 
 如果有任何疑问，欢迎提 Issue。如果有任何修改建议，欢迎提 Pull Request。
 
-## 部署 Deploy
+## 部署
 
 在本地完成了修改后，你可以将修改后的项目部署在服务器上，或者通过 CDN 加载，以便在网页中使用。
 
-### Using CDN
+### 使用 CDN
 
 要自定义有关内容，可以把这个仓库 Fork 一份，然后把修改后的内容通过 git push 到你的仓库中。这时，使用方法对应地变为
 ```xml
@@ -107,7 +108,7 @@ https://example.com/path/to/live2d-widget/
 ```
 就可以加载了。
 
-## 鸣谢 Thanks
+## 鸣谢
 
 <a href="https://www.browserstack.com/">
   <picture>
@@ -138,7 +139,7 @@ https://www.fghrsh.net/post/123.html
 
 点击看板娘的纸飞机按钮时，会出现一个彩蛋，这来自于 [WebsiteAsteroids](http://www.websiteasteroids.com)。
 
-## 更多 More
+## 更多
 
 更多内容可以参考：  
 https://nocilol.me/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02  
@@ -158,7 +159,7 @@ https://github.com/LikeNeko/L2dPetForMac
 以及 Wallpaper Engine：  
 https://github.com/guansss/nep-live2d
 
-## 许可证 License
+## 许可证
 
 Released under the GNU General Public License v3  
 http://www.gnu.org/licenses/gpl-3.0.html
@@ -178,7 +179,7 @@ http://www.live2d.com/eula/live2d-open-software-license-agreement_en.html
 
 https://community.live2d.com/discussion/140/webgl-developer-licence-and-javascript-question
 
-## 更新 Update
+## 更新日志
 
 2018年10月31日，由 fghrsh 提供的原 API 停用，请更新至新地址。参考文章：  
 https://www.fghrsh.net/post/170.html
