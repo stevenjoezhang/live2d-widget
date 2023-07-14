@@ -110,6 +110,9 @@ https://example.com/path/to/live2d-widget/
 
 ## 鳴謝
 
+### 感謝原作者stevenjoezhang，此儲存庫僅為原作者之中文繁體化版本，並非原作
+### 原作網址：[https://github.com/stevenjoezhang/live2d-widget](https://github.com/stevenjoezhang/live2d-widget)
+
 <a href="https://www.browserstack.com/">
   <picture>
     <source media="(prefers-color-scheme: dark)" height="80" srcset="https://d98b8t1nnulk5.cloudfront.net/production/images/layout/logo-header.png?1469004780">
