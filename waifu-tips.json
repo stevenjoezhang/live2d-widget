@@ -1,0 +1,255 @@
+{
+	"mouseover": [{
+		"selector": "#live2d",
+		"text": ["幹嘛呢你，快把手拿開～～", "鼠…鼠標放錯地方了！", "你要幹嘛呀？", "喵喵喵？", "怕怕(ノ≧∇≦)ノ", "非禮呀！救命！", "這樣的話，只能使用武力了！", "我要生氣了哦", "不要動手動腳的！", "真…真的是不知羞恥！", "Hentai！"]
+	}, {
+		"selector": "#waifu-tool-hitokoto",
+		"text": ["猜猜我要說些什麼？", "我從青蛙王子那裡聽到了不少人生經驗。"]
+	}, {
+		"selector": "#waifu-tool-asteroids",
+		"text": ["要不要來玩飛機大戰？", "這個按鈕上寫著「不要點擊」。 ", "怎麼，你想來和我玩個遊戲？ ", "聽說這樣可以蹦迪！ "]
+	}, {
+		"selector": "#waifu-tool-switch-model",
+		"text": ["你是不是不愛人家了呀，嗚嗚嗚～", "要見見我的姐姐嘛？", "想要看我妹妹嘛？", "要切換看板娘嗎？"]
+	}, {
+		"selector": "#waifu-tool-switch-texture",
+		"text": ["喜歡換裝 PLAY 嗎？", "這次要扮演什麼呢？", "變裝！", "讓我們看看接下來會發生什麼！"]
+	}, {
+		"selector": "#waifu-tool-photo",
+		"text": ["你要給我拍照呀？一二三～茄子～", "要不，我們來合影吧！", "保持微笑就好了～"]
+	}, {
+		"selector": "#waifu-tool-info",
+		"text": ["想要知道更多關於我的事麼？", "這裡記錄著我搬家的歷史呢。", "你想深入了解我什麼呢？"]
+	}, {
+		"selector": "#waifu-tool-quit",
+		"text": ["到了要說再見的時候了嗎？", "嗚嗚 QAQ 後會有期……", "不要拋棄我呀……", "我們，還能再見面嗎……", "哼，你會後悔的！"]
+	}, {
+		"selector": ".menu-item-home a",
+		"text": ["點擊前往首頁，想回到上一頁可以使用瀏覽器的後退功能哦。", "點它就可以回到首頁啦！", "回首頁看看吧。"]
+	}, {
+		"selector": ".menu-item-about a",
+		"text": ["你想知道我家主人是誰嗎？", "這裡有一些關於我家主人的秘密哦，要不要看看呢？", "發現主人出沒地點！"]
+	}, {
+		"selector": ".menu-item-tags a",
+		"text": ["點擊就可以看文章的標籤啦！", "點擊來查看所有標籤哦。"]
+	}, {
+		"selector": ".menu-item-categories a",
+		"text": ["文章都分類好啦～", "點擊來查看文章分類哦。"]
+	}, {
+		"selector": ".menu-item-archives a",
+		"text": ["翻頁比較麻煩嗎，那就來看看文章歸檔吧。", "文章目錄都整理在這裡啦！"]
+	}, {
+		"selector": ".menu-item-friends a",
+		"text": ["這是我的朋友們哦ヾ(◍°∇°◍)ﾉﾞ", "要去大佬們的家看看嗎？", "要去拜訪一下我的朋友們嗎？"]
+	}, {
+		"selector": ".menu-item-search a",
+		"text": ["找不到想看的內容？搜索看看吧！", "在找什麼東西呢，需要幫忙嗎？"]
+	}, {
+		"selector": ".menu-item a",
+		"text": ["快看看這裡都有什麼呢？"]
+	}, {
+		"selector": ".site-author",
+		"text": ["我家主人好看嗎？", "這是我家主人(*´∇｀*)"]
+	}, {
+		"selector": ".site-state",
+		"text": ["這是文章的統計信息～", "要不要點進去看看？"]
+	}, {
+		"selector": ".feed-link a",
+		"text": ["這裡可以使用 RSS 訂閱呢！", "利用 feed 訂閱器，就能快速知道博客有沒有更新了呢。"]
+	}, {
+		"selector": ".cc-opacity, .post-copyright-author",
+		"text": ["要記得規範轉載哦。", "所有文章均採用 CC BY-NC-SA 4.0 許可協議～", "轉載前要先註意下文章的版權協議呢。"]
+	}, {
+		"selector": ".links-of-author",
+		"text": ["這裡是主人的常駐地址哦。", "這裡有主人的聯繫方式！"]
+	}, {
+		"selector": ".followme",
+		"text": ["手機掃一下就能繼續看，很方便呢～", "掃一掃，打開新世界的大門！"]
+	}, {
+		"selector": ".fancybox img, img.medium-zoom-image",
+		"text": ["點擊圖片可以放大呢！"]
+	}, {
+		"selector": ".copy-btn",
+		"text": ["代碼可以直接點擊複製喲。"]
+	}, {
+		"selector": ".highlight .table-container, .gist",
+		"text": ["GitHub！我是新手！", "PHP 是最好的語言！"]
+	}, {
+		"selector": "a[href^='mailto']",
+		"text": ["郵件我會及時回复的！", "點擊就可以發送郵件啦～"]
+	}, {
+		"selector": "a[href^='/tags/']",
+		"text": ["要去看看 <span>{text}</span> 標籤麼？", "點它可以查看此標籤下的所有文章喲！"]
+	}, {
+		"selector": "a[href^='/categories/']",
+		"text": ["要去看看 <span>{text}</span> 分類麼？", "點它可以查看此分類下的所有文章喲！"]
+	}, {
+		"selector": ".post-title-link",
+		"text": ["要看看 <span>{text}</span> 這篇文章嗎？"]
+	}, {
+		"selector": "a[rel='contents']",
+		"text": ["點擊來閱讀全文哦。"]
+	}, {
+		"selector": "a[itemprop='discussionUrl']",
+		"text": ["要去看看評論嗎？"]
+	}, {
+		"selector": ".beian a",
+		"text": ["我也是有戶口的人哦。", "我的主人可是遵紀守法的好主人。"]
+	}, {
+		"selector": ".container a[href^='http'], .nav-link .nav-text",
+		"text": ["要去看看 <span>{text}</span> 麼？", "去 <span>{text}</span> 逛逛吧。", "到 <span>{text}</span> 看看吧。"]
+	}, {
+		"selector": ".back-to-top",
+		"text": ["點它就可以回到頂部啦！", "又回到最初的起點～", "要回到開始的地方麼？"]
+	}, {
+		"selector": ".reward-container",
+		"text": ["我是不是棒棒噠～快給我點贊吧！", "要打賞我嘛？好期待啊～", "主人最近在吃土呢，很辛苦的樣子，給他一些錢錢吧～"]
+	}, {
+		"selector": "#wechat",
+		"text": ["這是我的微信二維碼～"]
+	}, {
+		"selector": "#alipay",
+		"text": ["這是我的支付寶哦！"]
+	}, {
+		"selector": "#bitcoin",
+		"text": ["這是我的比特幣賬號！"]
+	}, {
+		"selector": "#needsharebutton-postbottom .btn",
+		"text": ["好東西要讓更多人知道才行哦。", "覺得文章有幫助的話，可以分享給更多需要的朋友呢。"]
+	}, {
+		"selector": ".need-share-button_weibo",
+		"text": ["微博？來分享一波喵！"]
+	}, {
+		"selector": ".need-share-button_wechat",
+		"text": ["分享到微信吧！"]
+	}, {
+		"selector": ".need-share-button_douban",
+		"text": ["分享到豆瓣好像也不錯！"]
+	}, {
+		"selector": ".need-share-button_qqzone",
+		"text": ["QQ 空間，一鍵轉發，耶～"]
+	}, {
+		"selector": ".need-share-button_twitter",
+		"text": ["Twitter？好像是不存在的東西？"]
+	}, {
+		"selector": ".need-share-button_facebook",
+		"text": ["emmm…FB 好像也是不存在的東西？"]
+	}, {
+		"selector": ".post-nav-item a[rel='next']",
+		"text": ["來看看下一篇文章吧。", "點它可以看下一篇文章哦！", "要翻到下一篇文章嗎？"]
+	}, {
+		"selector": ".post-nav-item a[rel='prev']",
+		"text": ["來看看上一篇文章吧。", "點它可以看上一篇文章哦！", "要翻到上一篇文章嗎？"]
+	}, {
+		"selector": ".extend.next",
+		"text": ["去下一頁看看吧。", "點它可以前進哦！", "要翻到下一頁嗎？"]
+	}, {
+		"selector": ".extend.prev",
+		"text": ["去上一頁看看吧。", "點它可以後退哦！", "要翻到上一頁嗎？"]
+	}, {
+		"selector": "input.vnick",
+		"text": ["該怎麼稱呼你呢？", "留下你的尊姓大名！"]
+	}, {
+		"selector": ".vmail",
+		"text": ["留下你的郵箱，不然就是無頭像人士了！", "記得設置好 Gravatar 頭像哦！", "為了方便通知你最新消息，一定要留下郵箱！"]
+	}, {
+		"selector": ".vlink",
+		"text": ["快快告訴我你的家在哪裡，好讓我去參觀參觀！"]
+	}, {
+		"selector": ".veditor",
+		"text": ["想要去評論些什麼嗎？", "要說點什麼嗎？", "覺得博客不錯？快來留言和主人交流吧！"]
+	}, {
+		"selector": ".vcontrol a",
+		"text": ["你會不會熟練使用 Markdown 呀？", "使用 Markdown 讓評論更美觀吧～"]
+	}, {
+		"selector": ".vemoji-btn",
+		"text": ["要插入一個萌萌噠的表情嗎？", "要來一發表情嗎？"]
+	}, {
+		"selector": ".vpreview-btn",
+		"text": ["要預覽一下你的發言嗎？", "快看看你的評論有多少負熵！"]
+	}, {
+		"selector": ".vsubmit",
+		"text": ["評論沒有審核，要對自己的發言負責哦～", "要提交了嗎，請耐心等待回复哦～"]
+	}, {
+		"selector": ".vcontent",
+		"text": ["哇，快看看這個精彩評論！", "如果有疑問，請盡快留言哦～"]
+	}],
+	"click": [{
+		"selector": "#live2d",
+		"text": ["是…是不小心碰到了吧…", "蘿莉控是什麼呀？", "你看到我的小熊了嗎？", "再摸的話我可要報警了！⌇●﹏●⌇", "110 嗎，這裡有個變態一直在摸我(ó﹏ò｡)", "不要摸我了，我會告訴老婆來打你的！", "幹嘛動我呀！小心我咬你！", "別摸我，有什麼好摸的！"]
+	}, {
+		"selector": ".veditor",
+		"text": ["要吐槽些什麼呢？", "一定要認真填寫喵～", "有什麼想說的嗎？"]
+	}, {
+		"selector": ".vsubmit",
+		"text": ["輸入驗證碼就可以提交評論啦～"]
+	}],
+	"seasons": [{
+		"date": "01/01",
+		"text": "<span>元旦</span>了呢，新的一年又開始了，今年是{year}年～"
+	}, {
+		"date": "02/14",
+		"text": "又是一年<span>情人節</span>，{year}年找到對象了嘛～"
+	}, {
+		"date": "03/08",
+		"text": "今天是<span>國際婦女節</span>！"
+	}, {
+		"date": "03/12",
+		"text": "今天是<span>植樹節</span>，要保護環境呀！"
+	}, {
+		"date": "04/01",
+		"text": "悄悄告訴你一個秘密～<span>今天是愚人節，不要被騙了哦～</span>"
+	}, {
+		"date": "05/01",
+		"text": "今天是<span>五一勞動節</span>，計劃好假期去哪裡了嗎～"
+	}, {
+		"date": "06/01",
+		"text": "<span>兒童節</span>了呢，快活的時光總是短暫，要是永遠長不大該多好啊…"
+	}, {
+		"date": "09/03",
+		"text": "<span>中國人民抗日戰爭勝利紀念日</span>，銘記歷史、緬懷先烈、珍愛和平、開創未來。"
+	}, {
+		"date": "09/10",
+		"text": "<span>教師節</span>，在學校要給老師問聲好呀～"
+	}, {
+		"date": "10/01",
+		"text": "<span>國慶節</span>到了，為祖國母親慶生！"
+	}, {
+		"date": "11/05-11/12",
+		"text": "今年的<span>雙十一</span>是和誰一起過的呢～"
+	}, {
+		"date": "12/20-12/31",
+		"text": "這幾天是<span>聖誕節</span>，主人肯定又去剁手買買買了～"
+	}],
+	"time": [{
+		"hour": "6-7",
+		"text": "早上好！一日之計在於晨，美好的一天就要開始了～"
+	}, {
+		"hour": "8-11",
+		"text": "上午好！工作順利嘛，不要久坐，多起來走動走動哦！"
+	}, {
+		"hour": "12-13",
+		"text": "中午了，工作了一個上午，現在是午餐時間！"
+	}, {
+		"hour": "14-17",
+		"text": "午後很容易犯困呢，今天的運動目標完成了嗎？"
+	}, {
+		"hour": "18-19",
+		"text": "傍晚了！窗外夕陽的景色很美麗呢，最美不過夕陽紅～"
+	}, {
+		"hour": "20-21",
+		"text": "晚上好，今天過得怎麼樣？"
+	}, {
+		"hour": "22-23",
+		"text": ["已經這麼晚了呀，早點休息吧，晚安～", "深夜時要愛護眼睛呀！"]
+	}, {
+		"hour": "0-5",
+		"text": "你是夜貓子呀？這麼晚還不睡覺，明天起的來嘛？"
+	}],
+	"message": {
+		"default": ["好久不見，日子過得好快呢……", "大壞蛋！你都多久沒理人家了呀，嚶嚶嚶～", "嗨～快來逗我玩吧！", "拿小拳拳錘你胸口！", "記得把小家加入收藏夾哦！"],
+		"console": "哈哈，你打開了控制台，是想要看看我的小秘密嗎？",
+		"copy": "你都複製了些什麼呀，轉載要記得加上出處哦！",
+		"visibilitychange": "哇，你終於回來了～"
+	}
+}
