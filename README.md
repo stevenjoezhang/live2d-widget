@@ -11,56 +11,56 @@
 
 ## 特性
 
-在网页中添加 Live2D 看板娘。兼容 PJAX，支持无刷新加载。
+在網頁中添加 Live2D 看板娘。兼容 PJAX，支持無刷新加載。
 
 <img src="assets/screenshot-2.png" width="280"><img src="assets/screenshot-3.png" width="280"><img src="assets/screenshot-1.png" width="270">
 
-（注：以上人物模型仅供展示之用，本仓库并不包含任何模型。）
+（注：以上人物模型僅供展示之用，本倉庫並不包含任何模型。）
 
-你也可以查看示例网页：
+你也可以查看示例網頁：
 
 - 在 [米米的博客](https://zhangshuqiao.org) 的左下角可查看效果
-- [demo.html](https://mi.js.org/live2d-widget/demo/demo.html)，展现基础功能
-- [login.html](https://mi.js.org/live2d-widget/demo/login.html)，仿 NPM 的登陆界面
+- [demo.html](https://mi.js.org/live2d-widget/demo/demo.html)，展現基礎功能
+- [login.html](https://mi.js.org/live2d-widget/demo/login.html)，仿 NPM 的登陸界面
 
 ## 使用
 
-如果你是小白，或者只需要最基础的功能，那么只用将这一行代码加入 html 页面的 `head` 或 `body` 中，即可加载看板娘：
+如果你是小白，或者只需要最基礎的功能，那麼只用將這一行代碼加入 html 頁面的 `head` 或 `body` 中，即可加載看板娘：
 ```xml
-<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+<script src="https://fastly.jsdelivr.net/gh/510208/live2d-widget@master/autoload.js"></script>
 ```
-添加代码的位置取决于你的网站的构建方式。例如，如果你使用的是 [Hexo](https://hexo.io)，那么需要在主题的模版文件中添加以上代码。对于用各种模版引擎生成的页面，修改方法类似。  
-如果网站启用了 PJAX，由于看板娘不必每页刷新，需要注意将该脚本放到 PJAX 刷新区域之外。
+添加代碼的位置取決於你的網站的構建方式。例如，如果你使用的是 [Hexo](https://hexo.io)，那麼需要在主題的模版文件中添加以上代碼。對於用各種模版引擎生成的頁面，修改方法類似。
+如果網站啟用了 PJAX，由於看板娘不必每頁刷新，需要注意將該腳本放到 PJAX 刷新區域之外。
 
-**但是！我们强烈推荐自己进行配置，让看板娘更加适合你的网站！**  
-如果你有兴趣自己折腾的话，请看下面的详细说明。
+**但是！我們強烈推薦自己進行配置，讓看板娘更加適合你的網站！ **  
+如果你有興趣自己折騰的話，請看下面的詳細說明。
 
 ## 配置
 
-你可以对照 `autoload.js` 的源码查看可选的配置项目。`autoload.js` 会自动加载三个文件：`waifu.css`，`live2d.min.js` 和 `waifu-tips.js`。`waifu-tips.js` 会创建 `initWidget` 函数，这就是加载看板娘的主函数。`initWidget` 函数接收一个 Object 类型的参数，作为看板娘的配置。以下是配置选项：
+你可以對照 `autoload.js` 的源碼查看可選的配置項目。 `autoload.js` 會自動加載三個文件：`waifu.css`，`live2d.min.js` 和 `waifu-tips.js`。 `waifu-tips.js` 會創建 `initWidget` 函數，這就是加載看板娘的主函數。 `initWidget` 函數接收一個 Object 類型的參數，作為看板娘的配置。以下是配置選項：
 
-| 选项 | 类型 | 默认值 | 说明 |
+| 選項 | 類型 | 默認值 | 說明 |
 | - | - | - | - |
-| `waifuPath` | `string` | `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu-tips.json` | 看板娘资源路径，可自行修改 |
-| `apiPath` | `string` | `https://live2d.fghrsh.net/api/` | API 路径，可选参数 |
-| `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN 路径，可选参数 |
-| `tools` | `string[]` | 见 `autoload.js` | 加载的小工具按钮，可选参数 |
+| `waifuPath` | `string` | `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu-tips.json` | 看板娘資源路徑，可自行修改 |
+| `apiPath` | `string` | `https://live2d.fghrsh.net/api/` | API 路徑，可選參數 |
+| `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN 路徑，可選參數 |
+| `tools` | `string[]` | 見 `autoload.js` | 加載的小工具按鈕，可選參數 |
 
-其中，`apiPath` 和 `cdnPath` 两个参数设置其中一项即可。`apiPath` 是后端 API 的 URL，可以自行搭建，并增加模型（需要修改的内容比较多，此处不再赘述），可以参考 [live2d_api](https://github.com/fghrsh/live2d_api)。而 `cdnPath` 则是通过 jsDelivr 这样的 CDN 服务加载资源，更加稳定。
+其中，`apiPath` 和 `cdnPath` 兩個參數設置其中一項即可。 `apiPath` 是後端 API 的 URL，可以自行搭建，並增加模型（需要修改的內容比較多，此處不再贅述），可以參考 [live2d_api](https://github.com/fghrsh/live2d_api)。而 `cdnPath` 則是通過 jsDelivr 這樣的 CDN 服務加載資源，更加穩定。
 
-## 自定义
+## 自定義
 
-如果以上「配置」部分提供的选项还不足以满足你的需求，那么你可以自己进行修改。本仓库的目录结构如下：
+如果以上「配置」部分提供的選項還不足以滿足你的需求，那麼你可以自己進行修改。本倉庫的目錄結構如下：
 
-- `src/waifu-tips.js` 包含了按钮和对话框的逻辑；
-- `waifu-tips.js` 是由 `src/waifu-tips.js` 自动打包生成的，不建议直接修改；
-- `waifu-tips.json` 中定义了触发条件（`selector`，CSS 选择器）和触发时显示的文字（`text`）；
-- `waifu.css` 是看板娘的样式表。
+- `src/waifu-tips.js` 包含了按鈕和對話框的邏輯；
+- `waifu-tips.js` 是由 `src/waifu-tips.js` 自動打包生成的，不建議直接修改；
+- `waifu-tips.json` 中定義了觸發條件（`selector`，CSS 選擇器）和触發時顯示的文字（`text`）；
+- `waifu.css` 是看板娘的樣式表。
 
-`waifu-tips.json` 中默认的 CSS 选择器规则是对 Hexo 的 [NexT 主题](http://github.com/next-theme/hexo-theme-next) 有效的，为了适用于你自己的网页，可能需要自行修改，或增加新内容。  
-**警告：`waifu-tips.json` 中的内容可能不适合所有年龄段，或不宜在工作期间访问。在使用时，请自行确保它们是合适的。**
+`waifu-tips.json` 中默認的 CSS 選擇器規則是對 Hexo 的 [NexT 主題](http://github.com/next-theme/hexo-theme-next) 有效的，為了適用於你自己的網頁，可能需要自行修改，或增加新內容。
+**警告：`waifu-tips.json` 中的內容可能不適合所有年齡段，或不宜在工作期間訪問。在使用時，請自行確保它們是合適的。 **
 
-要在本地部署本项目的开发测试环境，你需要安装 Node.js 和 npm，然后执行以下命令：
+要在本地部署本項目的開發測試環境，你需要安裝 Node.js 和 npm，然後執行以下命令：
 
 ```bash
 git clone https://github.com/stevenjoezhang/live2d-widget.git
@@ -68,47 +68,50 @@ npm install
 npm run build
 ```
 
-如果有任何疑问，欢迎提 Issue。如果有任何修改建议，欢迎提 Pull Request。
+如果有任何疑問，歡迎提 Issue。如果有任何修改建議，歡迎提 Pull Request。
 
 ## 部署
 
-在本地完成了修改后，你可以将修改后的项目部署在服务器上，或者通过 CDN 加载，以便在网页中使用。
+在本地完成了修改後，你可以將修改後的項目部署在服務器上，或者通過 CDN 加載，以便在網頁中使用。
 
 ### 使用 CDN
 
-要自定义有关内容，可以把这个仓库 Fork 一份，然后把修改后的内容通过 git push 到你的仓库中。这时，使用方法对应地变为
+要自定義有關內容，可以把這個倉庫 Fork 一份，然後把修改後的內容通過 git push 到你的倉庫中。這時，使用方法對應地變為
 ```xml
 <script src="https://fastly.jsdelivr.net/gh/username/live2d-widget@latest/autoload.js"></script>
 ```
-将此处的 `username` 替换为你的 GitHub 用户名。为了使 CDN 的内容正常刷新，需要创建新的 git tag 并推送至 GitHub 仓库中，否则此处的 `@latest` 仍然指向更新前的文件。此外 CDN 本身存在缓存，因此改动可能需要一定的时间生效。相关文档：
+將此處的 `username` 替換為你的 GitHub 用戶名。為了使 CDN 的內容正常刷新，需要創建新的 git tag 並推送至 GitHub 倉庫中，否則此處的 `@latest` 仍然指向更新前的文件。此外 CDN 本身存在緩存，因此改動可能需要一定的時間生效。相關文檔：
 - [Git Basics - Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
 - [Managing releases in a repository](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
 
 ### Self-host
 
-你也可以直接把这些文件放到服务器上，而不是通过 CDN 加载。
+你也可以直接把這些文件放到服務器上，而不是通過 CDN 加載。
 
-- 如果你能够通过 `ssh` 连接你的主机，请把 Fork 并修改后的代码仓库克隆到服务器上。
-- 如果你的主机无法用 `ssh` 连接（例如一般的虚拟主机），请在本地修改好代码后，通过 `ftp` 等方式将文件上传到主机的网站的目录下。
-- 如果你是通过 Hexo 等工具部署的静态博客，请把本项目的代码放在博客源文件目录下（例如 `source` 目录）。重新部署博客时，相关文件就会自动上传到对应的路径下。为了避免这些文件被 Hexo 插件错误地修改，可能需要设置 `skip_render`。
+- 如果你能夠通過 `ssh` 連接你的主機，請把 Fork 並修改後的代碼倉庫克隆到服務器上。
+- 如果你的主機無法用 `ssh` 連接（例如一般的虛擬主機），請在本地修改好代碼後，通過 `ftp` 等方式將文件上傳到主機的網站的目錄下。
+- 如果你是通過 Hexo 等工具部署的靜態博客，請把本項目的代碼放在博客源文件目錄下（例如 `source` 目錄）。重新部署博客時，相關文件就會自動上傳到對應的路徑下。為了避免這些文件被 Hexo 插件錯誤地修改，可能需要設置 `skip_render`。
 
-这样，整个项目就可以通过你的域名访问了。不妨试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件，并确认这些文件的内容是完整和正确的。  
-一切正常的话，接下来修改 `autoload.js` 中的常量 `live2d_path` 为 `live2d-widget` 这一目录的 URL 即可。比如说，如果你能够通过
+這樣，整個項目就可以通過你的域名訪問了。不妨試試能否正常地通過瀏覽器打開 `autoload.js` 和 `live2d.min.js` 等文件，並確認這些文件的內容是完整和正確的。
+一切正常的話，接下來修改 `autoload.js` 中的常量 `live2d_path` 為 `live2d-widget` 這一目錄的 URL 即可。比如說，如果你能夠通過
 ```
 https://example.com/path/to/live2d-widget/live2d.min.js
 ```
-访问到 `live2d.min.js`，那么就把 `live2d_path` 的值修改为
+訪問到 `live2d.min.js`，那麼就把 `live2d_path` 的值修改為
 ```
 https://example.com/path/to/live2d-widget/
 ```
-路径末尾的 `/` 一定要加上。  
-完成后，在你要添加看板娘的界面加入
+路徑末尾的 `/` 一定要加上。
+完成後，在你要添加看板娘的界面加入
 ```xml
 <script src="https://example.com/path/to/live2d-widget/autoload.js"></script>
 ```
-就可以加载了。
+就可以加載了。
 
-## 鸣谢
+## 鳴謝
+
+### 感謝原作者stevenjoezhang，此儲存庫僅為原作者之中文繁體化版本，並非原作
+### 原作網址：[https://github.com/stevenjoezhang/live2d-widget](https://github.com/stevenjoezhang/live2d-widget)
 
 <a href="https://www.browserstack.com/">
   <picture>
@@ -118,7 +121,7 @@ https://example.com/path/to/live2d-widget/
   </picture>
 </a>
 
-> 感谢 BrowserStack 容许我们在真实的浏览器中测试此项目。  
+> 感謝 BrowserStack 容許我們在真實的瀏覽器中測試此項目。
 > Thanks to [BrowserStack](https://www.browserstack.com/) for providing the infrastructure that allows us to test in real browsers!
 
 <a href="https://www.jsdelivr.com">
@@ -129,28 +132,28 @@ https://example.com/path/to/live2d-widget/
   </picture>
 </a>
 
-> 感谢 jsDelivr 提供的 CDN 服务。  
+> 感謝 jsDelivr 提供的 CDN 服務。
 > Thanks jsDelivr for providing public CDN service.
 
-代码自这篇博文魔改而来：  
+代碼自這篇博文魔改而來：  
 https://www.fghrsh.net/post/123.html
 
-感谢 [一言](https://hitokoto.cn) 提供的语句接口。
+感謝 [一言](https://hitokoto.cn) 提供的語句接口。
 
-点击看板娘的纸飞机按钮时，会出现一个彩蛋，这来自于 [WebsiteAsteroids](http://www.websiteasteroids.com)。
+點擊看板娘的紙飛機按鈕時，會出現一個彩蛋，這來自於 [WebsiteAsteroids](http://www.websiteasteroids.com)。
 
 ## 更多
 
-更多内容可以参考：  
+更多內容可以參考：  
 https://nocilol.me/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02  
 https://github.com/xiazeyu/live2d-widget.js  
 https://github.com/summerscar/live2dDemo
 
-关于后端 API 模型：  
+關於後端 API 模型：  
 https://github.com/xiazeyu/live2d-widget-models  
 https://github.com/xiaoski/live2d_models_collection
 
-除此之外，还有桌面版本：  
+除此之外，還有桌面版本：  
 https://github.com/amorist/platelet  
 https://github.com/akiroz/Live2D-Widget  
 https://github.com/zenghongtu/PPet  
@@ -159,31 +162,31 @@ https://github.com/LikeNeko/L2dPetForMac
 以及 Wallpaper Engine：  
 https://github.com/guansss/nep-live2d
 
-## 许可证
+## 許可證
 
 Released under the GNU General Public License v3  
 http://www.gnu.org/licenses/gpl-3.0.html
 
-本仓库并不包含任何模型，用作展示的所有 Live2D 模型、图片、动作数据等版权均属于其原作者，仅供研究学习，不得用于商业用途。
+本倉庫並不包含任何模型，用作展示的所有 Live2D 模型、圖片、動作數據等版權均屬於其原作者，僅供研究學習，不得用於商業用途。
 
-Live2D 官方网站：  
+Live2D 官方網站：  
 https://www.live2d.com/en/  
 https://live2d.github.io
 
-Live2D Cubism Core は Live2D Proprietary Software License で提供しています。  
+Live2D Cubism Core は Live2D Proprietary Software License で提供しています。
 https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html  
-Live2D Cubism Components は Live2D Open Software License で提供しています。  
+Live2D Cubism Components は Live2D Open Software License で提供しています。
 http://www.live2d.com/eula/live2d-open-software-license-agreement_en.html
 
 > The terms and conditions do prohibit modification, but obfuscating in `live2d.min.js` would not be considered illegal modification.
 
 https://community.live2d.com/discussion/140/webgl-developer-licence-and-javascript-question
 
-## 更新日志
+## 更新日誌
 
-2018年10月31日，由 fghrsh 提供的原 API 停用，请更新至新地址。参考文章：  
+2018年10月31日，由 fghrsh 提供的原 API 停用，請更新至新地址。參考文章：  
 https://www.fghrsh.net/post/170.html
 
-2020年1月1日起，本项目不再依赖于 jQuery。
+2020年1月1日起，本項目不再依賴於 jQuery。
 
-2022年11月1日起，本项目不再需要用户单独加载 Font Awesome。
+2022年11月1日起，本項目不再需要用戶單獨加載 Font Awesome。
