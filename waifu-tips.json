@@ -48,7 +48,7 @@
 		"selector": ".menu-item a",
 		"text": ["快看看這裡都有什麼呢？"]
 	}, {
-		"selector": ".site-author",
+		"selector": ".saboxplugin-wrap",
 		"text": ["我家主人好看嗎？", "這是我家主人(*´∇｀*)"]
 	}, {
 		"selector": ".site-state",
