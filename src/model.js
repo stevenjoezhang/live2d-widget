@@ -33,7 +33,7 @@ class Model {
             loadlive2d("live2d", `${this.cdnPath}model/${target}/index.json`);
         } else {
             loadlive2d("live2d", `${this.apiPath}get/?id=${modelId}-${modelTexturesId}`);
-            console.log(`Live2D 模型 ${modelId}-${modelTexturesId} 加载完成`);
+            console.log(`Live2D 模型 ${modelId}-${modelTexturesId} 載入完成`);
         }
     }
 
@@ -44,13 +44,13 @@ class Model {
             if (!this.modelList) await this.loadModelList();
             const target = randomSelection(this.modelList.models[modelId]);
             loadlive2d("live2d", `${this.cdnPath}model/${target}/index.json`);
-            showMessage("我的新衣服好看嘛？", 4000, 10);
+            showMessage("我的新衣服好看ㄇ？", 4000, 10);
         } else {
             // 可选 "rand"(随机), "switch"(顺序)
             fetch(`${this.apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`)
                 .then(response => response.json())
                 .then(result => {
-                    if (result.textures.id === 1 && (modelTexturesId === 1 || modelTexturesId === 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
+                    if (result.textures.id === 1 && (modelTexturesId === 1 || modelTexturesId === 0)) showMessage("我還沒有其他衣服呢！", 4000, 10);
                     else this.loadModel(modelId, result.textures.id, "我的新衣服好看嘛？");
                 });
         }
