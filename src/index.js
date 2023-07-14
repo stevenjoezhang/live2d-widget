@@ -43,7 +43,7 @@ function loadWidget(config) {
                 }
             }
         }
-        const text = `欢迎阅读<span>「${document.title.split(" - ")[0]}」</span>`;
+        const text = `歡迎閱讀<span>「${document.title.split(" - ")[0]}」</span>`;
         let from;
         if (document.referrer !== "") {
             const referrer = new URL(document.referrer),
@@ -57,7 +57,7 @@ function loadWidget(config) {
 
             if (domain in domains) from = domains[domain];
             else from = referrer.hostname;
-            return `Hello！来自 <span>${from}</span> 的朋友<br>${text}`;
+            return `Hello！來自 <span>${from}</span> 的朋友<br>${text}`;
         }
         return text;
     }
