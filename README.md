@@ -27,7 +27,7 @@
 
 如果你是小白，或者只需要最基礎的功能，那麼只用將這一行代碼加入 html 頁面的 `head` 或 `body` 中，即可加載看板娘：
 ```xml
-<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+<script src="https://fastly.jsdelivr.net/gh/510208/live2d-widget@master/autoload.js"></script>
 ```
 添加代碼的位置取決於你的網站的構建方式。例如，如果你使用的是 [Hexo](https://hexo.io)，那麼需要在主題的模版文件中添加以上代碼。對於用各種模版引擎生成的頁面，修改方法類似。
 如果網站啟用了 PJAX，由於看板娘不必每頁刷新，需要注意將該腳本放到 PJAX 刷新區域之外。
