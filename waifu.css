@@ -5,13 +5,14 @@
 	color: #fff;
 	cursor: pointer;
 	font-size: 12px;
-	left: 0;
+	right: 15px;
 	margin-left: -100px;
 	padding: 5px 2px 5px 5px;
 	position: fixed;
 	transition: margin-left 1s;
 	width: 60px;
 	writing-mode: vertical-rl;
+	z-index: 999;
 }
 
 #waifu-toggle.waifu-toggle-active {
@@ -24,13 +25,13 @@
 
 #waifu {
 	bottom: -1000px;
-	left: 0;
+	right: 15px;
 	line-height: 0;
 	margin-bottom: -10px;
 	position: fixed;
 	transform: translateY(3px);
 	transition: transform .3s ease-in-out, bottom 3s ease-in-out;
-	z-index: 1;
+	z-index: 999;
 }
 
 #waifu:hover {
