@@ -27,7 +27,7 @@
 
 如果你是小白，或者只需要最基础的功能，那么只用将这一行代码加入 html 页面的 `head` 或 `body` 中，即可加载看板娘：
 ```xml
-<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+<script src="https://fastly.jsdelivr.net/gh/zhangyunjie/live2d-widget@latest/autoload.js"></script>
 ```
 添加代码的位置取决于你的网站的构建方式。例如，如果你使用的是 [Hexo](https://hexo.io)，那么需要在主题的模版文件中添加以上代码。对于用各种模版引擎生成的页面，修改方法类似。  
 如果网站启用了 PJAX，由于看板娘不必每页刷新，需要注意将该脚本放到 PJAX 刷新区域之外。
@@ -41,7 +41,7 @@
 
 | 选项 | 类型 | 默认值 | 说明 |
 | - | - | - | - |
-| `waifuPath` | `string` | `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu-tips.json` | 看板娘资源路径，可自行修改 |
+| `waifuPath` | `string` | `https://fastly.jsdelivr.net/gh/zhangyunjie/live2d-widget@latest/waifu-tips.json` | 看板娘资源路径，可自行修改 |
 | `apiPath` | `string` | `https://live2d.fghrsh.net/api/` | API 路径，可选参数 |
 | `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN 路径，可选参数 |
 | `tools` | `string[]` | 见 `autoload.js` | 加载的小工具按钮，可选参数 |
@@ -63,7 +63,7 @@
 要在本地部署本项目的开发测试环境，你需要安装 Node.js 和 npm，然后执行以下命令：
 
 ```bash
-git clone https://github.com/stevenjoezhang/live2d-widget.git
+git clone https://github.com/zhangyunjie/live2d-widget.git
 npm install
 npm run build
 ```

@@ -34,7 +34,7 @@ const tools = {
                 window.ASTEROIDSPLAYERS.push(new Asteroids());
             } else {
                 const script = document.createElement("script");
-                script.src = "https://fastly.jsdelivr.net/gh/stevenjoezhang/asteroids/asteroids.js";
+                script.src = "https://fastly.jsdelivr.net/gh/zhangyunjie/asteroids/asteroids.js";
                 document.head.appendChild(script);
             }
         }
@@ -58,7 +58,7 @@ const tools = {
     "info": {
         icon: fa_info_circle,
         callback: () => {
-            open("https://github.com/stevenjoezhang/live2d-widget");
+            open("https://github.com/zhangyunjie/live2d-widget");
         }
     },
     "quit": {

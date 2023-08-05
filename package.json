@@ -10,17 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stevenjoezhang/live2d-widget.git"
+    "url": "git+https://github.com/zhangyunjie/live2d-widget.git"
   },
   "keywords": [
     "Live2d"
   ],
-  "author": "stevenjoezhang <stevenjoezhang@gmail.com>",
+  "author": "zhangyunjie <yun88xiao88chu@gmail.com>",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/stevenjoezhang/live2d-widget/issues"
+    "url": "https://github.com/zhangyunjie/live2d-widget/issues"
   },
-  "homepage": "https://github.com/stevenjoezhang/live2d-widget#readme",
+  "homepage": "https://github.com/zhangyunjie/live2d-widget#readme",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.2.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
