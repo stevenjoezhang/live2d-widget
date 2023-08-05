@@ -7,7 +7,7 @@ function loadWidget(config) {
     const model = new Model(config);
     localStorage.removeItem("waifu-display");
     sessionStorage.removeItem("waifu-text");
-    document.body.insertAdjacentHTML("beforeend", `<div id="waifu">
+    document.body.insertAdjacentHTML("beforeend", `<div id="waifu" style="bottom: 93px">
             <div id="waifu-tips"></div>
             <canvas id="live2d" width="800" height="800"></canvas>
             <div id="waifu-tool"></div>
@@ -15,7 +15,7 @@ function loadWidget(config) {
     // https://stackoverflow.com/questions/24148403/trigger-css-transition-on-appended-element
     setTimeout(() => {
         document.getElementById("waifu").style.bottom = '93px';
-    }, 0);
+    }, 20);
 
     (function registerTools() {
         tools["switch-model"].callback = () => model.loadOtherModel();
