@@ -27,7 +27,7 @@ You can also check out example web pages:
 
 If you are a beginner or only need the basic functionality, you can simply add the following line of code to the `head` or `body` of your HTML page to load the widget:
 ```xml
-<script src="https://fastly.jsdelivr.net/gh/zhangyunjie/live2d-widget@latest/autoload.js"></script>
+<script src="https://cdn.staticaly.com/gh/zhang-yun-jie/live2d-widget@release/v1.0.0/autoload.js"></script>
 ```
 The placement of the code depends on how your website is built. For example, if you are using [Hexo](https://hexo.io), you need to add the above code to the template file of your theme. The modification process is similar for pages generated using various template engines.  
 If your website uses PJAX, since the widget does not need to be refreshed on every page, make sure to place the script outside the PJAX refresh area.
@@ -41,7 +41,7 @@ You can refer to the source code of `autoload.js` to see the available configura
 
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
-| `waifuPath` | `string` | `https://fastly.jsdelivr.net/gh/zhangyunjie/live2d-widget@latest/waifu-tips.json` | Path to the widget resources, can be modified |
+| `waifuPath` | `string` | `https://cdn.staticaly.com/gh/zhang-yun-jie/live2d-widget@release/v1.0.0/waifu-tips.json` | Path to the widget resources, can be modified |
 | `apiPath` | `string` | `https://live2d.fghrsh.net/api/` | API path, optional |
 | `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN path, optional |
 | `tools` | `string[]` | see `autoload.js` | Buttons of the loaded tools, optional |
