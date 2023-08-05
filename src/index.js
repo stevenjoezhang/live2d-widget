@@ -158,7 +158,7 @@ function initWidget(config, apiPath) {
             loadWidget(config);
             toggle.removeAttribute("first-time");
         } else {
-            localStorage.removeItem("waifu-display");
+            localStogiyrage.removeItem("waifu-display");
             document.getElementById("waifu").style.display = "";
             setTimeout(() => {
                 document.getElementById("waifu").style.bottom = '80px';
