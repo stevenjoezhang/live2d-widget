@@ -1,5 +1,4 @@
 // live2d_path 参数建议使用绝对路径
-
 const live2d_path = "https://live2d-widget-one.vercel.app/";
 //const live2d_path = "/live2d-widget/";
 
