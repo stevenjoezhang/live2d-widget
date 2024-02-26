@@ -20,8 +20,8 @@ Add Live2D widget to web page. Compatible with PJAX.
 You can also check out example web pages:
 
 - Check the effect in the lower left corner of [Mimi's Blog](https://zhangshuqiao.org)
-- [demo.html](https://mi.js.org/live2d-widget/demo/demo.html) to demonstrate basic functionality
-- [login.html](https://mi.js.org/live2d-widget/demo/login.html) to imitate the login interface of NPM
+- [demo.html](https://stevenjoezhang.github.io/live2d-widget/demo/demo.html) to demonstrate basic functionality
+- [login.html](https://stevenjoezhang.github.io/live2d-widget/demo/login.html) to imitate the login interface of NPM
 
 ## Usage
 
