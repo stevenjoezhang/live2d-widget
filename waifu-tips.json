@@ -24,7 +24,7 @@
 		"selector": "#waifu-tool-quit",
 		"text": ["到了要说再见的时候了吗？", "呜呜 QAQ 后会有期……", "不要抛弃我呀……", "我们，还能再见面吗……", "哼，你会后悔的！"]
 	}, {
-		"selector": ".menu-item-home a",
+		"selector": ".site-title img",".menu > li:first-child > a",
 		"text": ["点击前往首页，想回到上一页可以使用浏览器的后退功能哦。", "点它就可以回到首页啦！", "回首页看看吧。"]
 	}, {
 		"selector": ".menu-item-about a",
