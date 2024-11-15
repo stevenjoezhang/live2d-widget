@@ -26,9 +26,11 @@
 ## 使用
 
 如果你是小白，或者只需要最基础的功能，那么只用将这一行代码加入 html 页面的 `head` 或 `body` 中，即可加载看板娘：
+
 ```xml
 <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
 ```
+
 添加代码的位置取决于你的网站的构建方式。例如，如果你使用的是 [Hexo](https://hexo.io)，那么需要在主题的模版文件中添加以上代码。对于用各种模版引擎生成的页面，修改方法类似。  
 如果网站启用了 PJAX，由于看板娘不必每页刷新，需要注意将该脚本放到 PJAX 刷新区域之外。
 
@@ -39,12 +41,15 @@
 
 你可以对照 `autoload.js` 的源码查看可选的配置项目。`autoload.js` 会自动加载三个文件：`waifu.css`，`live2d.min.js` 和 `waifu-tips.js`。`waifu-tips.js` 会创建 `initWidget` 函数，这就是加载看板娘的主函数。`initWidget` 函数接收一个 Object 类型的参数，作为看板娘的配置。以下是配置选项：
 
-| 选项 | 类型 | 默认值 | 说明 |
-| - | - | - | - |
-| `waifuPath` | `string` | `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu-tips.json` | 看板娘资源路径，可自行修改 |
-| `apiPath` | `string` | `https://live2d.fghrsh.net/api/` | API 路径，可选参数 |
-| `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN 路径，可选参数 |
-| `tools` | `string[]` | 见 `autoload.js` | 加载的小工具按钮，可选参数 |
+| 选项            | 类型       | 默认值                                                                               | 说明                                                                  |
+| --------------- | ---------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| `waifuPath`     | `string`   | `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu-tips.json` | 看板娘资源路径，可自行修改                                            |
+| `apiPath`       | `string`   | `https://live2d.fghrsh.net/api/`                                                     | API 路径，可选参数                                                    |
+| `cdnPath`       | `string`   | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/`                                  | CDN 路径，可选参数                                                    |
+| `tools`         | `string[]` | 见 `autoload.js`                                                                     | 加载的小工具按钮，可选参数                                            |
+| `isLocalModel`  | `boolearn` | 见 `demo.js`                                                                         | 是否开启使用本地模型，不声明就是使用远程                              |
+| `modelsPath`    | ` string`  | 见 `demo.js`                                                                         | 本地模型文件夹所在目录，设置本地后必须要设置                          |
+| `modelListPath` | `string`   | 见 `demo.js`                                                                         | 模型列表，如果不写，就约定为 `modelsPath` 下的 `model_list.json` 文件 |
 
 其中，`apiPath` 和 `cdnPath` 两个参数设置其中一项即可。`apiPath` 是后端 API 的 URL，可以自行搭建，并增加模型（需要修改的内容比较多，此处不再赘述），可以参考 [live2d_api](https://github.com/fghrsh/live2d_api)。而 `cdnPath` 则是通过 jsDelivr 这样的 CDN 服务加载资源，更加稳定。
 
@@ -77,10 +82,13 @@ npm run build
 ### 使用 CDN
 
 要自定义有关内容，可以把这个仓库 Fork 一份，然后把修改后的内容通过 git push 到你的仓库中。这时，使用方法对应地变为
+
 ```xml
 <script src="https://fastly.jsdelivr.net/gh/username/live2d-widget@latest/autoload.js"></script>
 ```
+
 将此处的 `username` 替换为你的 GitHub 用户名。为了使 CDN 的内容正常刷新，需要创建新的 git tag 并推送至 GitHub 仓库中，否则此处的 `@latest` 仍然指向更新前的文件。此外 CDN 本身存在缓存，因此改动可能需要一定的时间生效。相关文档：
+
 - [Git Basics - Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
 - [Managing releases in a repository](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
 
@@ -94,18 +102,24 @@ npm run build
 
 这样，整个项目就可以通过你的域名访问了。不妨试试能否正常地通过浏览器打开 `autoload.js` 和 `live2d.min.js` 等文件，并确认这些文件的内容是完整和正确的。  
 一切正常的话，接下来修改 `autoload.js` 中的常量 `live2d_path` 为 `live2d-widget` 这一目录的 URL 即可。比如说，如果你能够通过
+
 ```
 https://example.com/path/to/live2d-widget/live2d.min.js
 ```
+
 访问到 `live2d.min.js`，那么就把 `live2d_path` 的值修改为
+
 ```
 https://example.com/path/to/live2d-widget/
 ```
+
 路径末尾的 `/` 一定要加上。  
 完成后，在你要添加看板娘的界面加入
+
 ```xml
 <script src="https://example.com/path/to/live2d-widget/autoload.js"></script>
 ```
+
 就可以加载了。
 
 ## 鸣谢
@@ -181,9 +195,9 @@ https://community.live2d.com/discussion/140/webgl-developer-licence-and-javascri
 
 ## 更新日志
 
-2018年10月31日，由 fghrsh 提供的原 API 停用，请更新至新地址。参考文章：  
+2018 年 10 月 31 日，由 fghrsh 提供的原 API 停用，请更新至新地址。参考文章：  
 https://www.fghrsh.net/post/170.html
 
-2020年1月1日起，本项目不再依赖于 jQuery。
+2020 年 1 月 1 日起，本项目不再依赖于 jQuery。
 
-2022年11月1日起，本项目不再需要用户单独加载 Font Awesome。
+2022 年 11 月 1 日起，本项目不再需要用户单独加载 Font Awesome。
