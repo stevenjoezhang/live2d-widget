@@ -1,0 +1,176 @@
+{
+  "mouseover": [
+    {
+      "selector": "#live2d",
+      "text": [
+        "What are you doing? Take your hand away~~",
+        "Mouse... mouse is in the wrong place!",
+        "What do you want to do?",
+        "Meow meow meow?",
+        "Scared! (ノ≧∇≦)ノ",
+        "Harassment! Help!",
+        "In that case, I'll have to use force!",
+        "I'm getting angry now.",
+        "Don't touch me!",
+        "Truly... truly shameless!",
+        "Hentai!"
+      ]
+    },
+    {
+      "selector": "#waifu-tool-hitokoto",
+      "text": [
+        "Guess what I'm going to say?",
+        "I heard a lot of life lessons from the Frog Prince."
+      ]
+    },
+    {
+      "selector": "#waifu-tool-asteroids",
+      "text": [
+        "Wanna play a shooting game?",
+        "This button says 'Do not click'.",
+        "Do you want to play a game with me?",
+        "I heard this can make you dance!"
+      ]
+    },
+    {
+      "selector": "#waifu-tool-switch-model",
+      "text": [
+        "Don't you love me anymore? Sob sob~",
+        "Do you want to see my sister?",
+        "Want to meet my little sister?",
+        "Switching waifu models?"
+      ]
+    },
+    {
+      "selector": "#waifu-tool-switch-texture",
+      "text": [
+        "Do you like cosplay PLAY?",
+        "What should we dress up as this time?",
+        "Costume change!",
+        "Let's see what happens next!"
+      ]
+    },
+    {
+      "selector": "#waifu-tool-photo",
+      "text": [
+        "You want to take a photo? 1, 2, 3—Cheese!",
+        "How about we take a selfie?",
+        "Just keep smiling~"
+      ]
+    },
+    {
+      "selector": "#waifu-tool-info",
+      "text": [
+        "Want to know more about me?",
+        "Here is my moving history.",
+        "What would you like to know about me?"
+      ]
+    },
+    {
+      "selector": "#waifu-tool-quit",
+      "text": [
+        "Is it time to say goodbye?",
+        "Sob QAQ... until we meet again...",
+        "Don't abandon me...",
+        "Will we meet again?",
+        "Hmph! You'll regret this!"
+      ]
+    }
+  ],
+  "click": [
+    {
+      "selector": "#live2d",
+      "text": [
+        "Was that an accident?",
+        "What's a lolicon?",
+        "Have you seen my teddy bear?",
+        "Touch me again and I'll call the police! ⌇●﹏●⌇",
+        "Hello, police? Someone is harassing me (ó﹏ò｡)",
+        "Stop touching me, or I'll tell your wife!",
+        "What are you doing? I'll bite you!",
+        "Stop touching me, there's nothing interesting here!"
+      ]
+    },
+    {
+      "selector": ".veditor",
+      "text": [
+        "What do you want to comment?",
+        "Make sure to write something meaningful~",
+        "Got something to say?"
+      ]
+    },
+    {
+      "selector": ".vsubmit",
+      "text": [
+        "Enter the captcha to submit the comment~"
+      ]
+    }
+  ],
+  "seasons": [
+    {
+      "date": "01/01",
+      "text": "Happy <span>New Year</span>! It's {year} now!"
+    },
+    {
+      "date": "02/14",
+      "text": "It's <span>Valentine's Day</span> again! Found your partner in {year}?"
+    },
+    {
+      "date": "03/08",
+      "text": "Today is <span>International Women's Day</span>!"
+    },
+    {
+      "date": "05/01",
+      "text": "It's <span>Labor Day</span>, got any holiday plans?"
+    },
+    {
+      "date": "10/01",
+      "text": "It's <span>National Day</span>, celebrate for the country!"
+    },
+    {
+      "date": "12/20-12/31",
+      "text": "It's <span>Christmas</span>, I bet you’re shopping again!"
+    }
+  ],
+  "time": [
+    {
+      "hour": "6-7",
+      "text": "Good morning! A new day is starting!"
+    },
+    {
+      "hour": "8-11",
+      "text": "Good morning! How's work? Don't sit too long, move around a bit!"
+    },
+    {
+      "hour": "12-13",
+      "text": "It's noon! Lunch break time!"
+    },
+    {
+      "hour": "18-19",
+      "text": "Evening! The sunset looks beautiful, doesn't it?"
+    },
+    {
+      "hour": "22-23",
+      "text": [
+        "It's so late! Go to bed early, good night~",
+        "Take care of your eyes during late hours!"
+      ]
+    },
+    {
+      "hour": "0-5",
+      "text": "Are you a night owl? It's so late, can you wake up tomorrow?"
+    }
+  ],
+  "message": {
+    "default": [
+      "Long time no see, time flies so fast...",
+      "You haven't talked to me in so long, sob sob~",
+      "Hi~ Play with me!",
+      "I'll hit your chest with my tiny fists!",
+      "Don't forget to bookmark this site!"
+    ],
+    "console": "Haha, you opened the console! Trying to see my secrets?",
+    "copy": "What did you copy? Don't forget to credit the source!",
+    "visibilitychange": "Yay, you're back!"
+  }
+}
