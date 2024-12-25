@@ -63,9 +63,9 @@ function loadWidget(config: Config) {
       const referrer = new URL(document.referrer),
         domain = referrer.hostname.split('.')[1];
       const domains = {
-        baidu: 'Baidu',
-        so: '360 Search',
-        google: 'Google Search',
+        baidu: '百度',
+        so: '360搜索',
+        google: '谷歌搜索',
       } as const;
       if (location.hostname === referrer.hostname) return text;
 
@@ -158,9 +158,9 @@ function loadWidget(config: Config) {
       localStorage.getItem('modelTexturesId'),
     );
     if (modelId === null) {
-      // First visit, load the specified model and the specified texture
-      modelId = 1; // Model ID
-      modelTexturesId = 53; // Texture ID
+      // 首次访问加载 指定模型 的 指定材质
+      modelId = 1; // 模型 ID
+      modelTexturesId = 53; // 材质 ID
     }
     void model.loadModel(modelId, modelTexturesId, '');
     fetch(config.waifuPath)

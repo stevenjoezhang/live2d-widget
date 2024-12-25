@@ -1,11 +1,16 @@
 import showMessage from './message.js';
 import randomSelection from './utils.js';
 
+interface ModelList {
+  messages: string[];
+  models: string | string[];
+}
+
 class Model {
   private readonly useCDN: boolean;
   private readonly apiPath: string;
   private readonly cdnPath: string;
-  private modelList: any;
+  private modelList: ModelList | null = null;
 
   constructor(config: { apiPath?: string; cdnPath?: string }) {
     let { apiPath, cdnPath } = config;
@@ -32,7 +37,7 @@ class Model {
     localStorage.setItem('modelId', modelId.toString());
     localStorage.setItem('modelTexturesId', modelTexturesId.toString());
     showMessage(message, 4000, 10);
-    if (this.useCDN) {
+    if (this.useCDN && this.modelList) {
       if (!this.modelList) await this.loadModelList();
       const target = randomSelection(this.modelList.models[modelId]);
       loadlive2d('live2d', `${this.cdnPath}model/${target}/index.json`);
@@ -48,11 +53,13 @@ class Model {
   async loadRandModel() {
     const modelId = Number(localStorage.getItem('modelId'));
     const modelTexturesId = Number(localStorage.getItem('modelTexturesId'));
-    if (this.useCDN && modelId) {
-      if (!this.modelList) await this.loadModelList();
+    if (this.useCDN && modelId && this.modelList) {
+      if (!this.modelList) {
+        await this.loadModelList();
+      }
       const target = randomSelection(this.modelList.models[modelId]);
       loadlive2d('live2d', `${this.cdnPath}model/${target}/index.json`);
-      showMessage('Do you like my new clothes?', 4000, 10);
+      showMessage('我的新衣服好看嘛？', 4000, 10);
     } else {
       // Optional "rand" (Random), "switch" (Switch by order)
       fetch(`${this.apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`)
@@ -62,13 +69,9 @@ class Model {
             result.textures.id === 1 &&
             (modelTexturesId === 1 || modelTexturesId === 0)
           ) {
-            showMessage("I don't have any other clothes yet!", 4000, 10);
+            showMessage('我还没有其他衣服呢！', 4000, 10);
           } else if (modelId) {
-            this.loadModel(
-              modelId,
-              result.textures.id,
-              'Do you like my new clothes?',
-            );
+            this.loadModel(modelId, result.textures.id, '我的新衣服好看嘛？');
           }
         });
     }
@@ -76,7 +79,7 @@ class Model {
 
   async loadOtherModel() {
     let modelId = Number(localStorage.getItem('modelId'));
-    if (this.useCDN && modelId) {
+    if (this.useCDN && modelId && this.modelList) {
       if (!this.modelList) await this.loadModelList();
       const index = ++modelId >= this.modelList.models.length ? 0 : modelId;
       void this.loadModel(index, 0, this.modelList.messages[index]);

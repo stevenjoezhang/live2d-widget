@@ -66,6 +66,7 @@ var live2d_widget = (function () {
     };
     var Model = /** @class */ (function () {
         function Model(config) {
+            this.modelList = null;
             var apiPath = config.apiPath, cdnPath = config.cdnPath;
             var useCDN = false;
             if (typeof cdnPath === 'string') {
@@ -110,7 +111,7 @@ var live2d_widget = (function () {
                             localStorage.setItem('modelId', modelId.toString());
                             localStorage.setItem('modelTexturesId', modelTexturesId.toString());
                             showMessage(message, 4000, 10);
-                            if (!this.useCDN) return [3 /*break*/, 3];
+                            if (!(this.useCDN && this.modelList)) return [3 /*break*/, 3];
                             if (!!this.modelList) return [3 /*break*/, 2];
                             return [4 /*yield*/, this.loadModelList()];
                         case 1:
@@ -138,7 +139,7 @@ var live2d_widget = (function () {
                         case 0:
                             modelId = Number(localStorage.getItem('modelId'));
                             modelTexturesId = Number(localStorage.getItem('modelTexturesId'));
-                            if (!(this.useCDN && modelId)) return [3 /*break*/, 3];
+                            if (!(this.useCDN && modelId && this.modelList)) return [3 /*break*/, 3];
                             if (!!this.modelList) return [3 /*break*/, 2];
                             return [4 /*yield*/, this.loadModelList()];
                         case 1:
@@ -147,7 +148,7 @@ var live2d_widget = (function () {
                         case 2:
                             target = randomSelection(this.modelList.models[modelId]);
                             loadlive2d('live2d', "".concat(this.cdnPath, "model/").concat(target, "/index.json"));
-                            showMessage('Do you like my new clothes?', 4000, 10);
+                            showMessage('我的新衣服好看嘛？', 4000, 10);
                             return [3 /*break*/, 4];
                         case 3:
                             // Optional "rand" (Random), "switch" (Switch by order)
@@ -156,10 +157,10 @@ var live2d_widget = (function () {
                                 .then(function (result) {
                                 if (result.textures.id === 1 &&
                                     (modelTexturesId === 1 || modelTexturesId === 0)) {
-                                    showMessage("I don't have any other clothes yet!", 4000, 10);
+                                    showMessage('我还没有其他衣服呢！', 4000, 10);
                                 }
                                 else if (modelId) {
-                                    _this.loadModel(modelId, result.textures.id, 'Do you like my new clothes?');
+                                    _this.loadModel(modelId, result.textures.id, '我的新衣服好看嘛？');
                                 }
                             });
                             _a.label = 4;
@@ -176,7 +177,7 @@ var live2d_widget = (function () {
                     switch (_a.label) {
                         case 0:
                             modelId = Number(localStorage.getItem('modelId'));
-                            if (!(this.useCDN && modelId)) return [3 /*break*/, 3];
+                            if (!(this.useCDN && modelId && this.modelList)) return [3 /*break*/, 3];
                             if (!!this.modelList) return [3 /*break*/, 2];
                             return [4 /*yield*/, this.loadModelList()];
                         case 1:
@@ -259,7 +260,7 @@ var live2d_widget = (function () {
         photo: {
             icon: fa_camera_retro,
             callback: function () {
-                showMessage("The photo has been taken, isn't it cute?", 6000, 9);
+                showMessage('照好了嘛，是不是很可爱呢？', 6000, 9);
                 Live2D.captureName = 'photo.png';
                 Live2D.captureFrame = true;
             },
@@ -274,7 +275,7 @@ var live2d_widget = (function () {
             icon: fa_xmark,
             callback: function () {
                 localStorage.setItem('waifu-display', Date.now().toString());
-                showMessage('I hope you can meet the person who is important to you again.', 2000, 11);
+                showMessage('愿你有一天能与重要的人重逢。', 2000, 11);
                 var waifu = document.getElementById('waifu');
                 if (!waifu)
                     return;
@@ -335,9 +336,9 @@ var live2d_widget = (function () {
             if (document.referrer !== '') {
                 var referrer = new URL(document.referrer), domain = referrer.hostname.split('.')[1];
                 var domains = {
-                    baidu: 'Baidu',
-                    so: '360 Search',
-                    google: 'Google Search',
+                    baidu: '百度',
+                    so: '360搜索',
+                    google: '谷歌搜索',
                 };
                 if (location.hostname === referrer.hostname)
                     return text;
@@ -426,9 +427,9 @@ var live2d_widget = (function () {
             var modelId = Number(localStorage.getItem('modelId'));
             var modelTexturesId = Number(localStorage.getItem('modelTexturesId'));
             if (modelId === null) {
-                // First visit, load the specified model and the specified texture
-                modelId = 1; // Model ID
-                modelTexturesId = 53; // Texture ID
+                // 首次访问加载 指定模型 的 指定材质
+                modelId = 1; // 模型 ID
+                modelTexturesId = 53; // 材质 ID
             }
             void model.loadModel(modelId, modelTexturesId, '');
             fetch(config.waifuPath)
@@ -443,7 +444,7 @@ var live2d_widget = (function () {
                 apiPath: apiPath,
             };
         }
-        document.body.insertAdjacentHTML('beforeend', "<div id=\"waifu-toggle\">\n            <span>\u770B\u677F\u5A18</span>\n        </div>");
+        document.body.insertAdjacentHTML('beforeend', "<div id=\"waifu-toggle\">\n       <span>\u770B\u677F\u5A18</span>\n     </div>");
         var toggle = document.getElementById('waifu-toggle');
         toggle === null || toggle === void 0 ? void 0 : toggle.addEventListener('click', function () {
             toggle.classList.remove('waifu-toggle-active');
