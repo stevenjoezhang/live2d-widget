@@ -4,5 +4,3 @@ declare module Live2D {
 }
 
 declare function loadlive2d(id: string, path: string): void;
-
-declare class Asteroids {}
