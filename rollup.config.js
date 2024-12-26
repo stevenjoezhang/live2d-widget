@@ -36,7 +36,6 @@ export default {
   input: 'dist/index.js',
   output: {
     name: 'live2d_widget',
-    file: 'dist/waifu-tips.js',
     format: 'iife',
   },
   plugins: [
