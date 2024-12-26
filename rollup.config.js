@@ -1,5 +1,6 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { createFilter } from '@rollup/pluginutils';
+import terser from '@rollup/plugin-terser';
 
 function string(opts = {}) {
   if (!opts.include) {
@@ -33,9 +34,10 @@ function string(opts = {}) {
 }
 
 export default {
-  input: 'dist/index.js',
+  input: 'build/index.js',
   output: {
     name: 'live2d_widget',
+    file: 'dist/waifu-tips.js',
     format: 'iife',
   },
   plugins: [
@@ -43,6 +45,7 @@ export default {
     string({
       include: '**/*.svg',
     }),
+    terser(),
   ],
   context: 'this',
 };
