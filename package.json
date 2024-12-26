@@ -1,5 +1,5 @@
 {
-  "name": "live2d-widget",
+  "name": "live2d-widgets",
   "version": "0.9.0",
   "description": "Live2D widget for web pages",
   "main": "autoload.js",
