@@ -26,7 +26,7 @@ function loadWidget(config: Config) {
     if (!Array.isArray(config.tools)) {
       config.tools = Object.keys(tools);
     }
-    for (let tool of config.tools!) {
+    for (const tool of config.tools!) {
       if ((tools as Tools)[tool]) {
         const { icon, callback } = (tools as Tools)[tool];
         document
@@ -45,7 +45,7 @@ function loadWidget(config: Config) {
   function welcomeMessage(time: Time) {
     if (location.pathname === '/') {
       // 如果是主页
-      for (let { hour, text } of time) {
+      for (const { hour, text } of time) {
         const now = new Date(),
           after = hour.split('-')[0],
           before = hour.split('-')[1] || after;
@@ -80,7 +80,7 @@ function loadWidget(config: Config) {
     // Detect user activity and display messages when idle
     let userAction = false;
     let userActionTimer: any;
-    let messageArray = result.message.default;
+    const messageArray = result.message.default;
     let lastHoverElement: any;
     window.addEventListener('mousemove', () => (userAction = true));
     window.addEventListener('keydown', () => (userAction = true));
@@ -97,6 +97,7 @@ function loadWidget(config: Config) {
     }, 1000);
     showMessage(welcomeMessage(result.time), 7000, 11);
     window.addEventListener('mouseover', (event) => {
+      // eslint-disable-next-line prefer-const
       for (let { selector, text } of result.mouseover) {
         if (!(event.target as HTMLElement)?.closest(selector)) continue;
         if (lastHoverElement === selector) return;
@@ -111,6 +112,7 @@ function loadWidget(config: Config) {
       }
     });
     window.addEventListener('click', (event) => {
+      // eslint-disable-next-line prefer-const
       for (let { selector, text } of result.click) {
         if (!(event.target as HTMLElement)?.closest(selector)) continue;
         text = randomSelection(text);
