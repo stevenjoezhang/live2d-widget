@@ -13,7 +13,7 @@
 
 Add Live2D widget to web page. Compatible with PJAX.
 
-<img src="assets/screenshot-2.png" width="280"><img src="assets/screenshot-3.png" width="280"><img src="assets/screenshot-1.png" width="270">
+<img src="demo/screenshots/screenshot-2.png" width="280"><img src="demo/screenshots/screenshot-3.png" width="280"><img src="demo/screenshots/screenshot-1.png" width="270">
 
 (Note: The character models above are for demonstration purposes only and are not included in this repository.)
 

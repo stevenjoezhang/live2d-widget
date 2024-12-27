@@ -13,7 +13,7 @@
 
 在网页中添加 Live2D 看板娘。兼容 PJAX，支持无刷新加载。
 
-<img src="assets/screenshot-2.png" width="280"><img src="assets/screenshot-3.png" width="280"><img src="assets/screenshot-1.png" width="270">
+<img src="demo/screenshots/screenshot-2.png" width="280"><img src="demo/screenshots/screenshot-3.png" width="280"><img src="demo/screenshots/screenshot-1.png" width="270">
 
 （注：以上人物模型仅供展示之用，本仓库并不包含任何模型。）
 
