@@ -2,11 +2,12 @@
   "name": "live2d-widgets",
   "version": "0.9.0",
   "description": "Live2D widget for web pages",
-  "main": "autoload.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
-    "build": "rollup -c rollup.config.js -f iife | terser -c -m > waifu-tips.js",
-    "build-dev": "rollup -c rollup.config.js -f iife -o waifu-tips.js -w"
+    "build": "tsc && rollup -c rollup.config.js -f iife",
+    "build-dev": "rollup -c rollup.config.js -f iife -o dist/waifu-tips.js -w"
   },
   "repository": {
     "type": "git",
@@ -22,10 +23,14 @@
   },
   "homepage": "https://github.com/stevenjoezhang/live2d-widget#readme",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^6.2.0",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/pluginutils": "^5.0.1",
+    "@types/node": "^20.0.0",
+    "prettier": "^3.4.2",
     "rollup": "^3.2.3",
-    "terser": "^5.15.1"
+    "terser": "^5.15.1",
+    "typescript": "^5.0.0"
   }
 }
