@@ -1,4 +1,4 @@
-declare module Live2D {
+declare namespace Live2D {
   export let captureName: string;
   export let captureFrame: boolean;
 }
