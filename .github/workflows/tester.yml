@@ -1,0 +1,21 @@
+name: Tester
+
+on: [push, pull_request]
+
+jobs:
+  tester:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: hexojs/hexo-starter
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+      - name: Install Dependencies
+        run: npm install
+      - name: Test
+        run: npm run build
