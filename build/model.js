@@ -1,3 +1,7 @@
+/**
+ * @file 包含看板娘模型加载和管理相关的类。
+ * @module model
+ */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,7 +40,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import showMessage from './message.js';
 import randomSelection from './utils.js';
+/**
+ * 看板娘模型类，负责加载和管理模型。
+ */
 var Model = /** @class */ (function () {
+    /**
+     * 创建一个 Model 实例。
+     * @param {Object} config - 配置选项。
+     * @param {string} [config.apiPath] - API 路径。
+     * @param {string} [config.cdnPath] - CDN 路径。
+     */
     function Model(config) {
         this.modelList = null;
         var apiPath = config.apiPath, cdnPath = config.cdnPath;
@@ -57,6 +70,9 @@ var Model = /** @class */ (function () {
         this.apiPath = apiPath || '';
         this.cdnPath = cdnPath || '';
     }
+    /**
+     * 加载模型列表。
+     */
     Model.prototype.loadModelList = function () {
         return __awaiter(this, void 0, void 0, function () {
             var response, _a;
@@ -74,6 +90,12 @@ var Model = /** @class */ (function () {
             });
         });
     };
+    /**
+     * 加载指定模型。
+     * @param {number} modelId - 模型 ID。
+     * @param {number} modelTexturesId - 模型材质 ID。
+     * @param {string} message - 加载消息。
+     */
     Model.prototype.loadModel = function (modelId, modelTexturesId, message) {
         return __awaiter(this, void 0, void 0, function () {
             var target;
@@ -102,6 +124,9 @@ var Model = /** @class */ (function () {
             });
         });
     };
+    /**
+     * 加载随机材质的模型。
+     */
     Model.prototype.loadRandModel = function () {
         return __awaiter(this, void 0, void 0, function () {
             var modelId, modelTexturesId, target;
@@ -141,6 +166,9 @@ var Model = /** @class */ (function () {
             });
         });
     };
+    /**
+     * 加载其他模型。
+     */
     Model.prototype.loadOtherModel = function () {
         return __awaiter(this, void 0, void 0, function () {
             var modelId, index;
