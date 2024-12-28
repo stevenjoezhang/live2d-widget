@@ -1,3 +1,8 @@
+/**
+ * @file 包含看板娘模型加载和管理相关的类。
+ * @module model
+ */
+
 import showMessage from './message.js';
 import randomSelection from './utils.js';
 
@@ -6,12 +11,21 @@ interface ModelList {
   models: string | string[];
 }
 
+/**
+ * 看板娘模型类，负责加载和管理模型。
+ */
 class Model {
   private readonly useCDN: boolean;
   private readonly apiPath: string;
   private readonly cdnPath: string;
   private modelList: ModelList | null = null;
 
+  /**
+   * 创建一个 Model 实例。
+   * @param {Object} config - 配置选项。
+   * @param {string} [config.apiPath] - API 路径。
+   * @param {string} [config.cdnPath] - CDN 路径。
+   */
   constructor(config: { apiPath?: string; cdnPath?: string }) {
     let { apiPath, cdnPath } = config;
     let useCDN = false;
@@ -28,11 +42,20 @@ class Model {
     this.cdnPath = cdnPath || '';
   }
 
+  /**
+   * 加载模型列表。
+   */
   async loadModelList() {
     const response = await fetch(`${this.cdnPath}model_list.json`);
     this.modelList = await response.json();
   }
 
+  /**
+   * 加载指定模型。
+   * @param {number} modelId - 模型 ID。
+   * @param {number} modelTexturesId - 模型材质 ID。
+   * @param {string} message - 加载消息。
+   */
   async loadModel(modelId: number, modelTexturesId: number, message: string) {
     localStorage.setItem('modelId', modelId.toString());
     localStorage.setItem('modelTexturesId', modelTexturesId.toString());
@@ -50,6 +73,9 @@ class Model {
     }
   }
 
+  /**
+   * 加载随机材质的模型。
+   */
   async loadRandModel() {
     const modelId = Number(localStorage.getItem('modelId'));
     const modelTexturesId = Number(localStorage.getItem('modelTexturesId'));
@@ -77,6 +103,9 @@ class Model {
     }
   }
 
+  /**
+   * 加载其他模型。
+   */
   async loadOtherModel() {
     let modelId = Number(localStorage.getItem('modelId'));
     if (this.useCDN && modelId && this.modelList) {
