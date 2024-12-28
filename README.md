@@ -20,8 +20,8 @@
 你也可以查看示例网页：
 
 - 在 [米米的博客](https://zhangshuqiao.org) 的左下角可查看效果
-- [demo.html](https://stevenjoezhang.github.io/live2d-widget/demo/demo.html)，展现基础功能
-- [login.html](https://stevenjoezhang.github.io/live2d-widget/demo/login.html)，仿 NPM 的登陆界面
+- [demo/demo.html](https://live2d-widget.pages.dev/demo/demo)，展现基础功能
+- [demo/login.html](https://live2d-widget.pages.dev/demo/login)，仿 NPM 的登陆界面
 
 ## 使用
 
@@ -37,7 +37,7 @@
 
 ## 配置
 
-你可以对照 `autoload.js` 的源码查看可选的配置项目。`autoload.js` 会自动加载三个文件：`waifu.css`，`live2d.min.js` 和 `waifu-tips.js`。`waifu-tips.js` 会创建 `initWidget` 函数，这就是加载看板娘的主函数。`initWidget` 函数接收一个 Object 类型的参数，作为看板娘的配置。以下是配置选项：
+你可以对照 `dist/autoload.js` 的源码查看可选的配置项目。`autoload.js` 会自动加载三个文件：`waifu.css`，`live2d.min.js` 和 `waifu-tips.js`。`waifu-tips.js` 会创建 `initWidget` 函数，这就是加载看板娘的主函数。`initWidget` 函数接收一个 Object 类型的参数，作为看板娘的配置。以下是配置选项：
 
 | 选项 | 类型 | 默认值 | 说明 |
 | - | - | - | - |
@@ -52,10 +52,13 @@
 
 如果以上「配置」部分提供的选项还不足以满足你的需求，那么你可以自己进行修改。本仓库的目录结构如下：
 
-- `src/waifu-tips.js` 包含了按钮和对话框的逻辑；
-- `waifu-tips.js` 是由 `src/waifu-tips.js` 自动打包生成的，不建议直接修改；
-- `waifu-tips.json` 中定义了触发条件（`selector`，CSS 选择器）和触发时显示的文字（`text`）；
-- `waifu.css` 是看板娘的样式表。
+- `src/` 目录下包含了各个组件的代码，例如按钮和对话框等；
+- `build/` 目录下包含了 TypeScript 构建后的文件；
+- `dist/` 目录下包含了进一步打包后网页直接可用的文件，其中：
+  - `autoload.js` 是用于自动加载其它资源，例如样式表等；
+  - `waifu-tips.js` 是由 `build/waifu-tips.js` 自动打包生成的，不建议直接修改；
+  - `waifu-tips.json` 中定义了触发条件（`selector`，CSS 选择器）和触发时显示的文字（`text`）；
+  - `waifu.css` 是看板娘的样式表。
 
 `waifu-tips.json` 中默认的 CSS 选择器规则是对 Hexo 的 [NexT 主题](http://github.com/next-theme/hexo-theme-next) 有效的，为了适用于你自己的网页，可能需要自行修改，或增加新内容。  
 **警告：`waifu-tips.json` 中的内容可能不适合所有年龄段，或不宜在工作期间访问。在使用时，请自行确保它们是合适的。**
