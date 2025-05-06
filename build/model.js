@@ -1,7 +1,3 @@
-/**
- * @file 包含看板娘模型加载和管理相关的类。
- * @module model
- */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -40,16 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import showMessage from './message.js';
 import randomSelection from './utils.js';
-/**
- * 看板娘模型类，负责加载和管理模型。
- */
-var Model = /** @class */ (function () {
-    /**
-     * 创建一个 Model 实例。
-     * @param {Object} config - 配置选项。
-     * @param {string} [config.apiPath] - API 路径。
-     * @param {string} [config.cdnPath] - CDN 路径。
-     */
+var Model = (function () {
     function Model(config) {
         this.modelList = null;
         var apiPath = config.apiPath, cdnPath = config.cdnPath;
@@ -70,32 +57,23 @@ var Model = /** @class */ (function () {
         this.apiPath = apiPath || '';
         this.cdnPath = cdnPath || '';
     }
-    /**
-     * 加载模型列表。
-     */
     Model.prototype.loadModelList = function () {
         return __awaiter(this, void 0, void 0, function () {
             var response, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0: return [4 /*yield*/, fetch("".concat(this.cdnPath, "model_list.json"))];
+                    case 0: return [4, fetch("".concat(this.cdnPath, "model_list.json"))];
                     case 1:
                         response = _b.sent();
                         _a = this;
-                        return [4 /*yield*/, response.json()];
+                        return [4, response.json()];
                     case 2:
                         _a.modelList = _b.sent();
-                        return [2 /*return*/];
+                        return [2];
                 }
             });
         });
     };
-    /**
-     * 加载指定模型。
-     * @param {number} modelId - 模型 ID。
-     * @param {number} modelTexturesId - 模型材质 ID。
-     * @param {string} message - 加载消息。
-     */
     Model.prototype.loadModel = function (modelId, modelTexturesId, message) {
         return __awaiter(this, void 0, void 0, function () {
             var target;
@@ -105,28 +83,25 @@ var Model = /** @class */ (function () {
                         localStorage.setItem('modelId', modelId.toString());
                         localStorage.setItem('modelTexturesId', modelTexturesId.toString());
                         showMessage(message, 4000, 10);
-                        if (!(this.useCDN && this.modelList)) return [3 /*break*/, 3];
-                        if (!!this.modelList) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.loadModelList()];
+                        if (!(this.useCDN && this.modelList)) return [3, 3];
+                        if (!!this.modelList) return [3, 2];
+                        return [4, this.loadModelList()];
                     case 1:
                         _a.sent();
                         _a.label = 2;
                     case 2:
                         target = randomSelection(this.modelList.models[modelId]);
                         loadlive2d('live2d', "".concat(this.cdnPath, "model/").concat(target, "/index.json"));
-                        return [3 /*break*/, 4];
+                        return [3, 4];
                     case 3:
                         loadlive2d('live2d', "".concat(this.apiPath, "get/?id=").concat(modelId, "-").concat(modelTexturesId));
                         console.log("Live2D Model ".concat(modelId, "-").concat(modelTexturesId, " Loaded"));
                         _a.label = 4;
-                    case 4: return [2 /*return*/];
+                    case 4: return [2];
                 }
             });
         });
     };
-    /**
-     * 加载随机材质的模型。
-     */
     Model.prototype.loadRandModel = function () {
         return __awaiter(this, void 0, void 0, function () {
             var modelId, modelTexturesId, target;
@@ -136,9 +111,9 @@ var Model = /** @class */ (function () {
                     case 0:
                         modelId = Number(localStorage.getItem('modelId'));
                         modelTexturesId = Number(localStorage.getItem('modelTexturesId'));
-                        if (!(this.useCDN && modelId && this.modelList)) return [3 /*break*/, 3];
-                        if (!!this.modelList) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.loadModelList()];
+                        if (!(this.useCDN && modelId && this.modelList)) return [3, 3];
+                        if (!!this.modelList) return [3, 2];
+                        return [4, this.loadModelList()];
                     case 1:
                         _a.sent();
                         _a.label = 2;
@@ -146,9 +121,8 @@ var Model = /** @class */ (function () {
                         target = randomSelection(this.modelList.models[modelId]);
                         loadlive2d('live2d', "".concat(this.cdnPath, "model/").concat(target, "/index.json"));
                         showMessage('我的新衣服好看嘛？', 4000, 10);
-                        return [3 /*break*/, 4];
+                        return [3, 4];
                     case 3:
-                        // Optional "rand" (Random), "switch" (Switch by order)
                         fetch("".concat(this.apiPath, "rand_textures/?id=").concat(modelId, "-").concat(modelTexturesId))
                             .then(function (response) { return response.json(); })
                             .then(function (result) {
@@ -161,14 +135,11 @@ var Model = /** @class */ (function () {
                             }
                         });
                         _a.label = 4;
-                    case 4: return [2 /*return*/];
+                    case 4: return [2];
                 }
             });
         });
     };
-    /**
-     * 加载其他模型。
-     */
     Model.prototype.loadOtherModel = function () {
         return __awaiter(this, void 0, void 0, function () {
             var modelId, index;
@@ -177,16 +148,16 @@ var Model = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         modelId = Number(localStorage.getItem('modelId'));
-                        if (!(this.useCDN && modelId && this.modelList)) return [3 /*break*/, 3];
-                        if (!!this.modelList) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.loadModelList()];
+                        if (!(this.useCDN && modelId && this.modelList)) return [3, 3];
+                        if (!!this.modelList) return [3, 2];
+                        return [4, this.loadModelList()];
                     case 1:
                         _a.sent();
                         _a.label = 2;
                     case 2:
                         index = ++modelId >= this.modelList.models.length ? 0 : modelId;
                         void this.loadModel(index, 0, this.modelList.messages[index]);
-                        return [3 /*break*/, 4];
+                        return [3, 4];
                     case 3:
                         fetch("".concat(this.apiPath, "switch/?id=").concat(modelId))
                             .then(function (response) { return response.json(); })
@@ -194,7 +165,7 @@ var Model = /** @class */ (function () {
                             _this.loadModel(result.model.id, 0, result.model.message);
                         });
                         _a.label = 4;
-                    case 4: return [2 /*return*/];
+                    case 4: return [2];
                 }
             });
         });

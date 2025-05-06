@@ -1,21 +1,12 @@
-/**
- * @file 包含初始化看板娘小部件的函数。
- * @module index
- */
 import Model from './model.js';
 import showMessage from './message.js';
 import randomSelection from './utils.js';
 import tools from './tools.js';
-/**
- * 加载看板娘小部件。
- * @param {Config} config - 看板娘配置。
- */
 function loadWidget(config) {
     var model = new Model(config);
     localStorage.removeItem('waifu-display');
     sessionStorage.removeItem('waifu-text');
     document.body.insertAdjacentHTML('beforeend', "<div id=\"waifu\">\n            <div id=\"waifu-tips\"></div>\n            <canvas id=\"live2d\" width=\"800\" height=\"800\"></canvas>\n            <div id=\"waifu-tool\"></div>\n        </div>");
-    // https://stackoverflow.com/questions/24148403/trigger-css-transition-on-appended-element
     setTimeout(function () {
         document.getElementById('waifu').style.bottom = '0';
     }, 0);
@@ -38,14 +29,8 @@ function loadWidget(config) {
             }
         }
     })();
-    /**
-     * 根据时间显示欢迎消息。
-     * @param {Time} time - 时间消息配置。
-     * @returns {string} 欢迎消息。
-     */
     function welcomeMessage(time) {
         if (location.pathname === '/') {
-            // 如果是主页
             for (var _i = 0, time_1 = time; _i < time_1.length; _i++) {
                 var _a = time_1[_i], hour = _a.hour, text_1 = _a.text;
                 var now = new Date(), after = hour.split('-')[0], before = hour.split('-')[1] || after;
@@ -74,12 +59,7 @@ function loadWidget(config) {
         }
         return text;
     }
-    /**
-     * 注册事件监听器。
-     * @param {Result} result - 结果配置。
-     */
     function registerEventListener(result) {
-        // Detect user activity and display messages when idle
         var userAction = false;
         var userActionTimer;
         var messageArray = result.message.default;
@@ -101,7 +81,6 @@ function loadWidget(config) {
         showMessage(welcomeMessage(result.time), 7000, 11);
         window.addEventListener('mouseover', function (event) {
             var _a;
-            // eslint-disable-next-line prefer-const
             for (var _i = 0, _b = result.mouseover; _i < _b.length; _i++) {
                 var _c = _b[_i], selector = _c.selector, text = _c.text;
                 if (!((_a = event.target) === null || _a === void 0 ? void 0 : _a.closest(selector)))
@@ -117,7 +96,6 @@ function loadWidget(config) {
         });
         window.addEventListener('click', function (event) {
             var _a;
-            // eslint-disable-next-line prefer-const
             for (var _i = 0, _b = result.click; _i < _b.length; _i++) {
                 var _c = _b[_i], selector = _c.selector, text = _c.text;
                 if (!((_a = event.target) === null || _a === void 0 ? void 0 : _a.closest(selector)))
@@ -157,9 +135,8 @@ function loadWidget(config) {
         var modelId = Number(localStorage.getItem('modelId'));
         var modelTexturesId = Number(localStorage.getItem('modelTexturesId'));
         if (!modelId) {
-            // 首次访问加载 指定模型 的 指定材质
-            modelId = 1; // 模型 ID
-            modelTexturesId = 53; // 材质 ID
+            modelId = 1;
+            modelTexturesId = 53;
         }
         void model.loadModel(modelId, modelTexturesId, '');
         fetch(config.waifuPath)
@@ -167,11 +144,6 @@ function loadWidget(config) {
             .then(registerEventListener);
     })();
 }
-/**
- * 初始化看板娘小部件。
- * @param {string | Config} config - 看板娘配置或配置路径。
- * @param {string} [apiPath] - API 路径，如果 config 是字符串。
- */
 function initWidget(config, apiPath) {
     if (typeof config === 'string') {
         config = {

@@ -1,7 +1,3 @@
-/**
- * @file 包含看板娘工具的配置和函数。
- * @module tools
- */
 import fa_comment from '@fortawesome/fontawesome-free/svgs/solid/comment.svg';
 import fa_paper_plane from '@fortawesome/fontawesome-free/svgs/solid/paper-plane.svg';
 import fa_user_circle from '@fortawesome/fontawesome-free/svgs/solid/circle-user.svg';
@@ -10,11 +6,7 @@ import fa_camera_retro from '@fortawesome/fontawesome-free/svgs/solid/camera-ret
 import fa_info_circle from '@fortawesome/fontawesome-free/svgs/solid/circle-info.svg';
 import fa_xmark from '@fortawesome/fontawesome-free/svgs/solid/xmark.svg';
 import showMessage from './message.js';
-/**
- * 显示一句一言。
- */
 function showHitokoto() {
-    // 增加 hitokoto.cn 的 API
     fetch('https://v1.hitokoto.cn')
         .then(function (response) { return response.json(); })
         .then(function (result) {
@@ -25,10 +17,6 @@ function showHitokoto() {
         }, 6000);
     });
 }
-/**
- * 看板娘工具配置。
- * @type {Object}
- */
 var tools = {
     hitokoto: {
         icon: fa_comment,
