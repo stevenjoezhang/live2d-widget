@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import showMessage from './message.js';
 import randomSelection from './utils.js';
-var Model = /** @class */ (function () {
+var Model = (function () {
     function Model(config) {
         this.modelList = null;
         var apiPath = config.apiPath, cdnPath = config.cdnPath;
@@ -62,14 +62,14 @@ var Model = /** @class */ (function () {
             var response, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0: return [4 /*yield*/, fetch("".concat(this.cdnPath, "model_list.json"))];
+                    case 0: return [4, fetch("".concat(this.cdnPath, "model_list.json"))];
                     case 1:
                         response = _b.sent();
                         _a = this;
-                        return [4 /*yield*/, response.json()];
+                        return [4, response.json()];
                     case 2:
                         _a.modelList = _b.sent();
-                        return [2 /*return*/];
+                        return [2];
                 }
             });
         });
@@ -83,21 +83,21 @@ var Model = /** @class */ (function () {
                         localStorage.setItem('modelId', modelId.toString());
                         localStorage.setItem('modelTexturesId', modelTexturesId.toString());
                         showMessage(message, 4000, 10);
-                        if (!(this.useCDN && this.modelList)) return [3 /*break*/, 3];
-                        if (!!this.modelList) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.loadModelList()];
+                        if (!(this.useCDN && this.modelList)) return [3, 3];
+                        if (!!this.modelList) return [3, 2];
+                        return [4, this.loadModelList()];
                     case 1:
                         _a.sent();
                         _a.label = 2;
                     case 2:
                         target = randomSelection(this.modelList.models[modelId]);
                         loadlive2d('live2d', "".concat(this.cdnPath, "model/").concat(target, "/index.json"));
-                        return [3 /*break*/, 4];
+                        return [3, 4];
                     case 3:
                         loadlive2d('live2d', "".concat(this.apiPath, "get/?id=").concat(modelId, "-").concat(modelTexturesId));
                         console.log("Live2D Model ".concat(modelId, "-").concat(modelTexturesId, " Loaded"));
                         _a.label = 4;
-                    case 4: return [2 /*return*/];
+                    case 4: return [2];
                 }
             });
         });
@@ -111,9 +111,9 @@ var Model = /** @class */ (function () {
                     case 0:
                         modelId = Number(localStorage.getItem('modelId'));
                         modelTexturesId = Number(localStorage.getItem('modelTexturesId'));
-                        if (!(this.useCDN && modelId && this.modelList)) return [3 /*break*/, 3];
-                        if (!!this.modelList) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.loadModelList()];
+                        if (!(this.useCDN && modelId && this.modelList)) return [3, 3];
+                        if (!!this.modelList) return [3, 2];
+                        return [4, this.loadModelList()];
                     case 1:
                         _a.sent();
                         _a.label = 2;
@@ -121,9 +121,8 @@ var Model = /** @class */ (function () {
                         target = randomSelection(this.modelList.models[modelId]);
                         loadlive2d('live2d', "".concat(this.cdnPath, "model/").concat(target, "/index.json"));
                         showMessage('我的新衣服好看嘛？', 4000, 10);
-                        return [3 /*break*/, 4];
+                        return [3, 4];
                     case 3:
-                        // Optional "rand" (Random), "switch" (Switch by order)
                         fetch("".concat(this.apiPath, "rand_textures/?id=").concat(modelId, "-").concat(modelTexturesId))
                             .then(function (response) { return response.json(); })
                             .then(function (result) {
@@ -136,7 +135,7 @@ var Model = /** @class */ (function () {
                             }
                         });
                         _a.label = 4;
-                    case 4: return [2 /*return*/];
+                    case 4: return [2];
                 }
             });
         });
@@ -149,16 +148,16 @@ var Model = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         modelId = Number(localStorage.getItem('modelId'));
-                        if (!(this.useCDN && modelId && this.modelList)) return [3 /*break*/, 3];
-                        if (!!this.modelList) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.loadModelList()];
+                        if (!(this.useCDN && modelId && this.modelList)) return [3, 3];
+                        if (!!this.modelList) return [3, 2];
+                        return [4, this.loadModelList()];
                     case 1:
                         _a.sent();
                         _a.label = 2;
                     case 2:
                         index = ++modelId >= this.modelList.models.length ? 0 : modelId;
                         void this.loadModel(index, 0, this.modelList.messages[index]);
-                        return [3 /*break*/, 4];
+                        return [3, 4];
                     case 3:
                         fetch("".concat(this.apiPath, "switch/?id=").concat(modelId))
                             .then(function (response) { return response.json(); })
@@ -166,7 +165,7 @@ var Model = /** @class */ (function () {
                             _this.loadModel(result.model.id, 0, result.model.message);
                         });
                         _a.label = 4;
-                    case 4: return [2 /*return*/];
+                    case 4: return [2];
                 }
             });
         });

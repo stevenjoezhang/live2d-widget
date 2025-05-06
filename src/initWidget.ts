@@ -1,8 +1,17 @@
+/**
+ * @file 包含初始化看板娘小部件的函数。
+ * @module index
+ */
+
 import Model from './model.js';
 import showMessage from './message.js';
 import randomSelection from './utils.js';
 import tools from './tools.js';
 
+/**
+ * 加载看板娘小部件。
+ * @param {Config} config - 看板娘配置。
+ */
 function loadWidget(config: Config) {
   const model = new Model(config);
   localStorage.removeItem('waifu-display');
@@ -42,7 +51,12 @@ function loadWidget(config: Config) {
     }
   })();
 
-  function welcomeMessage(time: Time) {
+  /**
+   * 根据时间显示欢迎消息。
+   * @param {Time} time - 时间消息配置。
+   * @returns {string} 欢迎消息。
+   */
+  function welcomeMessage(time: Time): string {
     if (location.pathname === '/') {
       // 如果是主页
       for (const { hour, text } of time) {
@@ -76,6 +90,10 @@ function loadWidget(config: Config) {
     return text;
   }
 
+  /**
+   * 注册事件监听器。
+   * @param {Result} result - 结果配置。
+   */
   function registerEventListener(result: Result) {
     // Detect user activity and display messages when idle
     let userAction = false;
@@ -159,7 +177,7 @@ function loadWidget(config: Config) {
     let modelTexturesId: number | null = Number(
       localStorage.getItem('modelTexturesId'),
     );
-    if (modelId === null) {
+    if (!modelId) {
       // 首次访问加载 指定模型 的 指定材质
       modelId = 1; // 模型 ID
       modelTexturesId = 53; // 材质 ID
@@ -171,6 +189,11 @@ function loadWidget(config: Config) {
   })();
 }
 
+/**
+ * 初始化看板娘小部件。
+ * @param {string | Config} config - 看板娘配置或配置路径。
+ * @param {string} [apiPath] - API 路径，如果 config 是字符串。
+ */
 function initWidget(config: string | Config, apiPath?: string) {
   if (typeof config === 'string') {
     config = {

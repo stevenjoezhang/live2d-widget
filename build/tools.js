@@ -7,7 +7,6 @@ import fa_info_circle from '@fortawesome/fontawesome-free/svgs/solid/circle-info
 import fa_xmark from '@fortawesome/fontawesome-free/svgs/solid/xmark.svg';
 import showMessage from './message.js';
 function showHitokoto() {
-    // 增加 hitokoto.cn 的 API
     fetch('https://v1.hitokoto.cn')
         .then(function (response) { return response.json(); })
         .then(function (result) {

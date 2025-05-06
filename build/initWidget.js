@@ -7,7 +7,6 @@ function loadWidget(config) {
     localStorage.removeItem('waifu-display');
     sessionStorage.removeItem('waifu-text');
     document.body.insertAdjacentHTML('beforeend', "<div id=\"waifu\">\n            <div id=\"waifu-tips\"></div>\n            <canvas id=\"live2d\" width=\"800\" height=\"800\"></canvas>\n            <div id=\"waifu-tool\"></div>\n        </div>");
-    // https://stackoverflow.com/questions/24148403/trigger-css-transition-on-appended-element
     setTimeout(function () {
         document.getElementById('waifu').style.bottom = '0';
     }, 0);
@@ -32,7 +31,6 @@ function loadWidget(config) {
     })();
     function welcomeMessage(time) {
         if (location.pathname === '/') {
-            // 如果是主页
             for (var _i = 0, time_1 = time; _i < time_1.length; _i++) {
                 var _a = time_1[_i], hour = _a.hour, text_1 = _a.text;
                 var now = new Date(), after = hour.split('-')[0], before = hour.split('-')[1] || after;
@@ -62,7 +60,6 @@ function loadWidget(config) {
         return text;
     }
     function registerEventListener(result) {
-        // Detect user activity and display messages when idle
         var userAction = false;
         var userActionTimer;
         var messageArray = result.message.default;
@@ -137,10 +134,9 @@ function loadWidget(config) {
     (function initModel() {
         var modelId = Number(localStorage.getItem('modelId'));
         var modelTexturesId = Number(localStorage.getItem('modelTexturesId'));
-        if (modelId === null) {
-            // 首次访问加载 指定模型 的 指定材质
-            modelId = 1; // 模型 ID
-            modelTexturesId = 53; // 材质 ID
+        if (!modelId) {
+            modelId = 1;
+            modelTexturesId = 53;
         }
         void model.loadModel(modelId, modelTexturesId, '');
         fetch(config.waifuPath)
