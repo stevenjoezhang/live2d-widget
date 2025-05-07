@@ -234,4 +234,30 @@ function initWidget(config: string | Config, apiPath?: string) {
   }
 }
 
-export default initWidget;
+/**
+ * 异步加载外部资源。
+ * @param {string} url - 资源路径。
+ * @param {string} type - 资源类型。
+ */
+function loadExternalResource(url: string, type: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    let tag;
+
+    if (type === 'css') {
+      tag = document.createElement('link');
+      tag.rel = 'stylesheet';
+      tag.href = url;
+    }
+    else if (type === 'js') {
+      tag = document.createElement('script');
+      tag.src = url;
+    }
+    if (tag) {
+      tag.onload = () => resolve(url);
+      tag.onerror = () => reject(url);
+      document.head.appendChild(tag);
+    }
+  });
+}
+
+export { initWidget, loadExternalResource };

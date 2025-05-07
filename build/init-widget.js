@@ -178,4 +178,23 @@ function initWidget(config, apiPath) {
         loadWidget(config);
     }
 }
-export default initWidget;
+function loadExternalResource(url, type) {
+    return new Promise(function (resolve, reject) {
+        var tag;
+        if (type === 'css') {
+            tag = document.createElement('link');
+            tag.rel = 'stylesheet';
+            tag.href = url;
+        }
+        else if (type === 'js') {
+            tag = document.createElement('script');
+            tag.src = url;
+        }
+        if (tag) {
+            tag.onload = function () { return resolve(url); };
+            tag.onerror = function () { return reject(url); };
+            document.head.appendChild(tag);
+        }
+    });
+}
+export { initWidget, loadExternalResource };
