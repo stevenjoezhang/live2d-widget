@@ -2,12 +2,12 @@
   "name": "live2d-widgets",
   "version": "0.9.0",
   "description": "Live2D widget for web pages",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/waifu-tips.js",
+  "types": "src/types/index.d.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc && rollup -c rollup.config.js -f iife",
-    "build-dev": "rollup -c rollup.config.js -f iife -o dist/waifu-tips.js -w",
+    "build": "tsc && rollup -c rollup.config.js",
+    "build-dev": "rollup -c rollup.config.js -w",
     "eslint": "eslint src/"
   },
   "repository": {
@@ -24,19 +24,17 @@
   },
   "homepage": "https://github.com/stevenjoezhang/live2d-widget#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.7.2"
+    "@fortawesome/fontawesome-free": "6.7.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.17.0",
-    "@rollup/plugin-node-resolve": "^16.0.0",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/pluginutils": "^5.1.4",
-    "@types/node": "^22.10.2",
-    "eslint": "^9.17.0",
-    "prettier": "^3.4.2",
-    "rollup": "^4.29.1",
-    "terser": "^5.37.0",
-    "typescript": "^5.7.2",
-    "typescript-eslint": "^8.18.2"
+    "@eslint/js": "9.26.0",
+    "@rollup/plugin-node-resolve": "16.0.1",
+    "@rollup/plugin-terser": "0.4.4",
+    "@rollup/pluginutils": "5.1.4",
+    "@types/node": "22.15.14",
+    "eslint": "9.26.0",
+    "rollup": "4.40.2",
+    "typescript": "5.8.3",
+    "typescript-eslint": "8.32.0"
   }
 }
