@@ -31,7 +31,7 @@
     "@rollup/plugin-node-resolve": "16.0.1",
     "@rollup/plugin-terser": "0.4.4",
     "@rollup/pluginutils": "5.1.4",
-    "@types/node": "22.15.14",
+    "@types/node": "22.15.17",
     "eslint": "9.26.0",
     "rollup": "4.40.2",
     "typescript": "5.8.3",
