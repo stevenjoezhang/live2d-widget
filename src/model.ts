@@ -91,10 +91,9 @@ class ModelManager {
   /**
    * 加载随机材质的模型。
    */
-  async loadRandModel() {
-    const modelId = Number(localStorage.getItem('modelId'));
-    const modelTexturesId = Number(localStorage.getItem('modelTexturesId'));
-    if (this.useCDN && modelId) {
+  async loadRandTexture() {
+    const modelId = parseInt(localStorage.getItem('modelId') as string, 10);
+    if (this.useCDN) {
       if (!this.modelList) {
         this.modelList = await this.loadModelList();
       }
@@ -102,6 +101,7 @@ class ModelManager {
       await this.loadLive2d(`${this.cdnPath}model/${target}/index.json`);
       showMessage('我的新衣服好看嘛？', 4000, 10);
     } else {
+      const modelTexturesId = parseInt(localStorage.getItem('modelTexturesId') as string, 10);
       // Optional 'rand' (Random), 'switch' (Switch by order)
       const response = await fetch(`${this.apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`);
       const result = await response.json();
@@ -110,7 +110,7 @@ class ModelManager {
         (modelTexturesId === 1 || modelTexturesId === 0)
       ) {
         showMessage('我还没有其他衣服呢！', 4000, 10);
-      } else if (modelId) {
+      } else {
         await this.loadModel(modelId, result.textures.id, '我的新衣服好看嘛？');
       }
     }
@@ -119,9 +119,9 @@ class ModelManager {
   /**
    * 加载其他模型。
    */
-  async loadOtherModel() {
-    let modelId = Number(localStorage.getItem('modelId'));
-    if (this.useCDN && modelId) {
+  async loadNextModel() {
+    let modelId = parseInt(localStorage.getItem('modelId') as string, 10);
+    if (this.useCDN) {
       if (!this.modelList) {
         this.modelList = await this.loadModelList();
       }

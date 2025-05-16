@@ -11,8 +11,8 @@ import logger from './logger.js';
 import registerDrag from './drag.js';
 
 function registerTools(model: ModelManager, config: Config) {
-  (tools as Tools)['switch-model'].callback = () => model.loadOtherModel();
-  (tools as Tools)['switch-texture'].callback = () => model.loadRandModel();
+  (tools as Tools)['switch-model'].callback = () => model.loadNextModel();
+  (tools as Tools)['switch-texture'].callback = () => model.loadRandTexture();
   if (!Array.isArray(config.tools)) {
     config.tools = Object.keys(tools);
   }
@@ -153,28 +153,21 @@ function registerEventListener(result: Result) {
   });
 }
 
-async function initModel(model: ModelManager, config: Config) {
-  let modelId: number | null = Number(localStorage.getItem('modelId'));
-  let modelTexturesId: number | null = Number(
-    localStorage.getItem('modelTexturesId'),
-  );
-  if (!modelId) {
-    // 首次访问加载 指定模型 的 指定材质
-    modelId = 1; // 模型 ID
-    modelTexturesId = 53; // 材质 ID
-  }
-  await model.loadModel(modelId, modelTexturesId, '');
-  const response = await fetch(config.waifuPath);
-  const result = await response.json();
-  registerEventListener(result);
-}
-
 /**
  * 加载看板娘小部件。
  * @param {Config} config - 看板娘配置。
  */
 async function loadWidget(config: Config) {
-  const model = new ModelManager(config);
+  let modelId: number | null = parseInt(localStorage.getItem('modelId') as string, 10);
+  let modelTexturesId: number | null = parseInt(
+    localStorage.getItem('modelTexturesId') as string, 10
+  );
+  if (isNaN(modelId) || isNaN(modelTexturesId)) {
+    modelTexturesId = 0;
+  }
+  if (isNaN(modelId)) {
+    modelId = 0;
+  }
   localStorage.removeItem('waifu-display');
   sessionStorage.removeItem('waifu-text');
   document.body.insertAdjacentHTML(
@@ -185,9 +178,13 @@ async function loadWidget(config: Config) {
             <div id="waifu-tool"></div>
         </div>`,
   );
+  const model = new ModelManager(config);
+  await model.loadModel(modelId, modelTexturesId, '');
   registerTools(model, config);
   if (config.drag) registerDrag();
-  await initModel(model, config);
+  const response = await fetch(config.waifuPath);
+  const result = await response.json();
+  registerEventListener(result);
   document.getElementById('waifu')!.style.bottom = '0';
 }
 
