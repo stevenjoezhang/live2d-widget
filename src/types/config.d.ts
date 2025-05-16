@@ -19,6 +19,11 @@ interface Config {
    */
   tools?: string[];
   /**
+   * 支持拖动看板娘。
+   * @type {boolean | undefined}
+   */
+  drag?: boolean;
+  /**
    * 日志的等级。
    * @type {LogLevel | undefined}
    */

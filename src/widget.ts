@@ -8,6 +8,7 @@ import showMessage from './message.js';
 import randomSelection from './utils.js';
 import tools from './tools.js';
 import logger from './logger.js';
+import registerDrag from './drag.js';
 
 function registerTools(model: ModelManager, config: Config) {
   (tools as Tools)['switch-model'].callback = () => model.loadOtherModel();
@@ -185,6 +186,7 @@ async function loadWidget(config: Config) {
         </div>`,
   );
   registerTools(model, config);
+  if (config.drag) registerDrag();
   await initModel(model, config);
   document.getElementById('waifu')!.style.bottom = '0';
 }
