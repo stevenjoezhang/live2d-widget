@@ -17,7 +17,7 @@ interface ModelList {
  * 看板娘模型类，负责加载和管理模型。
  */
 class ModelManager {
-  private readonly useCDN: boolean;
+  public readonly useCDN: boolean;
   private readonly apiPath: string;
   private readonly cdnPath: string;
   private modelList: ModelList | null = null;
