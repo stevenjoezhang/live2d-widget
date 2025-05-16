@@ -47,6 +47,7 @@ You can refer to the source code of `dist/autoload.js` to see the available conf
 | `apiPath` | `string` | `https://live2d.fghrsh.net/api/` | API path, optional |
 | `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN path, optional |
 | `tools` | `string[]` | see `autoload.js` | Buttons of the loaded tools, optional |
+| `logLevel` | `string` | `error` | Log level: `error`，`info`，`trace` |
 
 Among them, the parameters `apiPath` and `cdnPath` only need to set one of them. `apiPath` is the URL of the backend API, which can be set up and modified by yourself (there are many things to modify, not discussed here). You can refer to [live2d_api](https://github.com/fghrsh/live2d_api) for more information. On the other hand, `cdnPath` is used to load resources through CDN services like jsDelivr, which provides better stability.
 

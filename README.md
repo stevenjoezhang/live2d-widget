@@ -47,6 +47,7 @@
 | `apiPath` | `string` | `https://live2d.fghrsh.net/api/` | API 路径，可选参数 |
 | `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN 路径，可选参数 |
 | `tools` | `string[]` | 见 `autoload.js` | 加载的小工具按钮，可选参数 |
+| `logLevel` | `string` | `error` | 日志等级，支持 `error`，`info`，`trace` |
 
 其中，`apiPath` 和 `cdnPath` 两个参数设置其中一项即可。`apiPath` 是后端 API 的 URL，可以自行搭建，并增加模型（需要修改的内容比较多，此处不再赘述），可以参考 [live2d_api](https://github.com/fghrsh/live2d_api)。而 `cdnPath` 则是通过 jsDelivr 这样的 CDN 服务加载资源，更加稳定。
 
