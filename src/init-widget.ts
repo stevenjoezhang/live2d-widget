@@ -8,11 +8,170 @@ import showMessage from './message.js';
 import randomSelection from './utils.js';
 import tools from './tools.js';
 
+function registerTools(model: ModelManager, config: Config) {
+  (tools as Tools)['switch-model'].callback = () => model.loadOtherModel();
+  (tools as Tools)['switch-texture'].callback = () => model.loadRandModel();
+  if (!Array.isArray(config.tools)) {
+    config.tools = Object.keys(tools);
+  }
+  for (const tool of config.tools!) {
+    if ((tools as Tools)[tool]) {
+      const { icon, callback } = (tools as Tools)[tool];
+      document
+        .getElementById('waifu-tool')!
+        .insertAdjacentHTML(
+          'beforeend',
+          `<span id="waifu-tool-${tool}">${icon}</span>`,
+        );
+      document
+        .getElementById(`waifu-tool-${tool}`)!
+        .addEventListener('click', callback);
+    }
+  }
+}
+
+/**
+ * 根据时间显示欢迎消息。
+ * @param {Time} time - 时间消息配置。
+ * @returns {string} 欢迎消息。
+ */
+function welcomeMessage(time: Time): string {
+  if (location.pathname === '/') {
+    // 如果是主页
+    for (const { hour, text } of time) {
+      const now = new Date(),
+        after = hour.split('-')[0],
+        before = hour.split('-')[1] || after;
+      if (
+        Number(after) <= now.getHours() &&
+        now.getHours() <= Number(before)
+      ) {
+        return text;
+      }
+    }
+  }
+  const text = `欢迎阅读<span>「${document.title.split(' - ')[0]}」</span>`;
+  let from;
+  if (document.referrer !== '') {
+    const referrer = new URL(document.referrer),
+      domain = referrer.hostname.split('.')[1];
+    const domains = {
+      baidu: '百度',
+      so: '360搜索',
+      google: '谷歌搜索',
+    } as const;
+    if (location.hostname === referrer.hostname) return text;
+
+    if (domain in domains) from = domains[domain as keyof typeof domains];
+    else from = referrer.hostname;
+    return `Hello！来自 <span>${from}</span> 的朋友<br>${text}`;
+  }
+  return text;
+}
+
+/**
+ * 注册事件监听器。
+ * @param {Result} result - 结果配置。
+ */
+function registerEventListener(result: Result) {
+  // Detect user activity and display messages when idle
+  let userAction = false;
+  let userActionTimer: any;
+  const messageArray = result.message.default;
+  let lastHoverElement: any;
+  window.addEventListener('mousemove', () => (userAction = true));
+  window.addEventListener('keydown', () => (userAction = true));
+  setInterval(() => {
+    if (userAction) {
+      userAction = false;
+      clearInterval(userActionTimer);
+      userActionTimer = null;
+    } else if (!userActionTimer) {
+      userActionTimer = setInterval(() => {
+        showMessage(randomSelection(messageArray) as string, 6000, 9);
+      }, 20000);
+    }
+  }, 1000);
+  showMessage(welcomeMessage(result.time), 7000, 11);
+  window.addEventListener('mouseover', (event) => {
+    // eslint-disable-next-line prefer-const
+    for (let { selector, text } of result.mouseover) {
+      if (!(event.target as HTMLElement)?.closest(selector)) continue;
+      if (lastHoverElement === selector) return;
+      lastHoverElement = selector;
+      text = randomSelection(text);
+      text = (text as string).replace(
+        '{text}',
+        (event.target as HTMLElement).innerText,
+      );
+      showMessage(text, 4000, 8);
+      return;
+    }
+  });
+  window.addEventListener('click', (event) => {
+    // eslint-disable-next-line prefer-const
+    for (let { selector, text } of result.click) {
+      if (!(event.target as HTMLElement)?.closest(selector)) continue;
+      text = randomSelection(text);
+      text = (text as string).replace(
+        '{text}',
+        (event.target as HTMLElement).innerText,
+      );
+      showMessage(text, 4000, 8);
+      return;
+    }
+  });
+  result.seasons.forEach(({ date, text }) => {
+    const now = new Date(),
+      after = date.split('-')[0],
+      before = date.split('-')[1] || after;
+    if (
+      Number(after.split('/')[0]) <= now.getMonth() + 1 &&
+      now.getMonth() + 1 <= Number(before.split('/')[0]) &&
+      Number(after.split('/')[1]) <= now.getDate() &&
+      now.getDate() <= Number(before.split('/')[1])
+    ) {
+      text = randomSelection(text);
+      text = (text as string).replace('{year}', String(now.getFullYear()));
+      messageArray.push(text);
+    }
+  });
+
+  const devtools = () => { };
+  console.log('%c', devtools);
+  devtools.toString = () => {
+    showMessage(result.message.console, 6000, 9);
+  };
+  window.addEventListener('copy', () => {
+    showMessage(result.message.copy, 6000, 9);
+  });
+  window.addEventListener('visibilitychange', () => {
+    if (!document.hidden)
+      showMessage(result.message.visibilitychange, 6000, 9);
+  });
+}
+
+async function initModel(model: ModelManager, config: Config) {
+  let modelId: number | null = Number(localStorage.getItem('modelId'));
+  let modelTexturesId: number | null = Number(
+    localStorage.getItem('modelTexturesId'),
+  );
+  if (!modelId) {
+    // 首次访问加载 指定模型 的 指定材质
+    modelId = 1; // 模型 ID
+    modelTexturesId = 53; // 材质 ID
+  }
+  await model.loadModel(modelId, modelTexturesId, '');
+  fetch(config.waifuPath)
+    .then((response) => response.json())
+    .then(registerEventListener);
+}
+
 /**
  * 加载看板娘小部件。
  * @param {Config} config - 看板娘配置。
  */
-function loadWidget(config: Config) {
+async function loadWidget(config: Config) {
   const model = new ModelManager(config);
   localStorage.removeItem('waifu-display');
   sessionStorage.removeItem('waifu-text');
@@ -24,169 +183,9 @@ function loadWidget(config: Config) {
             <div id="waifu-tool"></div>
         </div>`,
   );
-  // https://stackoverflow.com/questions/24148403/trigger-css-transition-on-appended-element
-  setTimeout(() => {
-    document.getElementById('waifu')!.style.bottom = '0';
-  }, 0);
-
-  (function registerTools() {
-    (tools as Tools)['switch-model'].callback = () => model.loadOtherModel();
-    (tools as Tools)['switch-texture'].callback = () => model.loadRandModel();
-    if (!Array.isArray(config.tools)) {
-      config.tools = Object.keys(tools);
-    }
-    for (const tool of config.tools!) {
-      if ((tools as Tools)[tool]) {
-        const { icon, callback } = (tools as Tools)[tool];
-        document
-          .getElementById('waifu-tool')!
-          .insertAdjacentHTML(
-            'beforeend',
-            `<span id="waifu-tool-${tool}">${icon}</span>`,
-          );
-        document
-          .getElementById(`waifu-tool-${tool}`)!
-          .addEventListener('click', callback);
-      }
-    }
-  })();
-
-  /**
-   * 根据时间显示欢迎消息。
-   * @param {Time} time - 时间消息配置。
-   * @returns {string} 欢迎消息。
-   */
-  function welcomeMessage(time: Time): string {
-    if (location.pathname === '/') {
-      // 如果是主页
-      for (const { hour, text } of time) {
-        const now = new Date(),
-          after = hour.split('-')[0],
-          before = hour.split('-')[1] || after;
-        if (
-          Number(after) <= now.getHours() &&
-          now.getHours() <= Number(before)
-        ) {
-          return text;
-        }
-      }
-    }
-    const text = `欢迎阅读<span>「${document.title.split(' - ')[0]}」</span>`;
-    let from;
-    if (document.referrer !== '') {
-      const referrer = new URL(document.referrer),
-        domain = referrer.hostname.split('.')[1];
-      const domains = {
-        baidu: '百度',
-        so: '360搜索',
-        google: '谷歌搜索',
-      } as const;
-      if (location.hostname === referrer.hostname) return text;
-
-      if (domain in domains) from = domains[domain as keyof typeof domains];
-      else from = referrer.hostname;
-      return `Hello！来自 <span>${from}</span> 的朋友<br>${text}`;
-    }
-    return text;
-  }
-
-  /**
-   * 注册事件监听器。
-   * @param {Result} result - 结果配置。
-   */
-  function registerEventListener(result: Result) {
-    // Detect user activity and display messages when idle
-    let userAction = false;
-    let userActionTimer: any;
-    const messageArray = result.message.default;
-    let lastHoverElement: any;
-    window.addEventListener('mousemove', () => (userAction = true));
-    window.addEventListener('keydown', () => (userAction = true));
-    setInterval(() => {
-      if (userAction) {
-        userAction = false;
-        clearInterval(userActionTimer);
-        userActionTimer = null;
-      } else if (!userActionTimer) {
-        userActionTimer = setInterval(() => {
-          showMessage(randomSelection(messageArray) as string, 6000, 9);
-        }, 20000);
-      }
-    }, 1000);
-    showMessage(welcomeMessage(result.time), 7000, 11);
-    window.addEventListener('mouseover', (event) => {
-      // eslint-disable-next-line prefer-const
-      for (let { selector, text } of result.mouseover) {
-        if (!(event.target as HTMLElement)?.closest(selector)) continue;
-        if (lastHoverElement === selector) return;
-        lastHoverElement = selector;
-        text = randomSelection(text);
-        text = (text as string).replace(
-          '{text}',
-          (event.target as HTMLElement).innerText,
-        );
-        showMessage(text, 4000, 8);
-        return;
-      }
-    });
-    window.addEventListener('click', (event) => {
-      // eslint-disable-next-line prefer-const
-      for (let { selector, text } of result.click) {
-        if (!(event.target as HTMLElement)?.closest(selector)) continue;
-        text = randomSelection(text);
-        text = (text as string).replace(
-          '{text}',
-          (event.target as HTMLElement).innerText,
-        );
-        showMessage(text, 4000, 8);
-        return;
-      }
-    });
-    result.seasons.forEach(({ date, text }) => {
-      const now = new Date(),
-        after = date.split('-')[0],
-        before = date.split('-')[1] || after;
-      if (
-        Number(after.split('/')[0]) <= now.getMonth() + 1 &&
-        now.getMonth() + 1 <= Number(before.split('/')[0]) &&
-        Number(after.split('/')[1]) <= now.getDate() &&
-        now.getDate() <= Number(before.split('/')[1])
-      ) {
-        text = randomSelection(text);
-        text = (text as string).replace('{year}', String(now.getFullYear()));
-        messageArray.push(text);
-      }
-    });
-
-    const devtools = () => {};
-    console.log('%c', devtools);
-    devtools.toString = () => {
-      showMessage(result.message.console, 6000, 9);
-    };
-    window.addEventListener('copy', () => {
-      showMessage(result.message.copy, 6000, 9);
-    });
-    window.addEventListener('visibilitychange', () => {
-      if (!document.hidden)
-        showMessage(result.message.visibilitychange, 6000, 9);
-    });
-  }
-
-  (function initModel() {
-    let modelId: number | null = Number(localStorage.getItem('modelId'));
-    let modelTexturesId: number | null = Number(
-      localStorage.getItem('modelTexturesId'),
-    );
-    if (!modelId) {
-      // 首次访问加载 指定模型 的 指定材质
-      modelId = 1; // 模型 ID
-      modelTexturesId = 53; // 材质 ID
-    }
-    void model.loadModel(modelId, modelTexturesId, '');
-    fetch(config.waifuPath)
-      .then((response) => response.json())
-      .then(registerEventListener);
-  })();
+  registerTools(model, config);
+  await initModel(model, config);
+  document.getElementById('waifu')!.style.bottom = '0';
 }
 
 /**
