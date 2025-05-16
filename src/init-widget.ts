@@ -3,7 +3,7 @@
  * @module index
  */
 
-import Model from './model.js';
+import ModelManager from './model.js';
 import showMessage from './message.js';
 import randomSelection from './utils.js';
 import tools from './tools.js';
@@ -13,7 +13,7 @@ import tools from './tools.js';
  * @param {Config} config - 看板娘配置。
  */
 function loadWidget(config: Config) {
-  const model = new Model(config);
+  const model = new ModelManager(config);
   localStorage.removeItem('waifu-display');
   sessionStorage.removeItem('waifu-text');
   document.body.insertAdjacentHTML(
@@ -240,7 +240,7 @@ function initWidget(config: string | Config, apiPath?: string) {
  * @param {string} type - 资源类型。
  */
 function loadExternalResource(url: string, type: string): Promise<string> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve: any, reject: any) => {
     let tag;
 
     if (type === 'css') {

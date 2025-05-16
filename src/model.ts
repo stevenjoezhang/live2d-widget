@@ -14,7 +14,7 @@ interface ModelList {
 /**
  * 看板娘模型类，负责加载和管理模型。
  */
-class Model {
+class ModelManager {
   private readonly useCDN: boolean;
   private readonly apiPath: string;
   private readonly cdnPath: string;
@@ -45,9 +45,10 @@ class Model {
   /**
    * 加载模型列表。
    */
-  async loadModelList() {
+  async loadModelList(): Promise<ModelList> {
     const response = await fetch(`${this.cdnPath}model_list.json`);
-    this.modelList = await response.json();
+    const modelList = await response.json();
+    return modelList;
   }
 
   /**
@@ -60,8 +61,10 @@ class Model {
     localStorage.setItem('modelId', modelId.toString());
     localStorage.setItem('modelTexturesId', modelTexturesId.toString());
     showMessage(message, 4000, 10);
-    if (this.useCDN && this.modelList) {
-      if (!this.modelList) await this.loadModelList();
+    if (this.useCDN) {
+      if (!this.modelList) {
+        this.modelList = await this.loadModelList();
+      }
       const target = randomSelection(this.modelList.models[modelId]);
       loadlive2d('live2d', `${this.cdnPath}model/${target}/index.json`);
     } else {
@@ -79,15 +82,15 @@ class Model {
   async loadRandModel() {
     const modelId = Number(localStorage.getItem('modelId'));
     const modelTexturesId = Number(localStorage.getItem('modelTexturesId'));
-    if (this.useCDN && modelId && this.modelList) {
+    if (this.useCDN && modelId) {
       if (!this.modelList) {
-        await this.loadModelList();
+        this.modelList = await this.loadModelList();
       }
       const target = randomSelection(this.modelList.models[modelId]);
       loadlive2d('live2d', `${this.cdnPath}model/${target}/index.json`);
       showMessage('我的新衣服好看嘛？', 4000, 10);
     } else {
-      // Optional "rand" (Random), "switch" (Switch by order)
+      // Optional 'rand' (Random), 'switch' (Switch by order)
       fetch(`${this.apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`)
         .then((response) => response.json())
         .then((result) => {
@@ -108,8 +111,10 @@ class Model {
    */
   async loadOtherModel() {
     let modelId = Number(localStorage.getItem('modelId'));
-    if (this.useCDN && modelId && this.modelList) {
-      if (!this.modelList) await this.loadModelList();
+    if (this.useCDN && modelId) {
+      if (!this.modelList) {
+        this.modelList = await this.loadModelList();
+      }
       const index = ++modelId >= this.modelList.models.length ? 0 : modelId;
       void this.loadModel(index, 0, this.modelList.messages[index]);
     } else {
@@ -122,4 +127,4 @@ class Model {
   }
 }
 
-export default Model;
+export default ModelManager;

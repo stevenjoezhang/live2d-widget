@@ -1,9 +1,9 @@
-import Model from './model.js';
+import ModelManager from './model.js';
 import showMessage from './message.js';
 import randomSelection from './utils.js';
 import tools from './tools.js';
 function loadWidget(config) {
-    var model = new Model(config);
+    var model = new ModelManager(config);
     localStorage.removeItem('waifu-display');
     sessionStorage.removeItem('waifu-text');
     document.body.insertAdjacentHTML('beforeend', "<div id=\"waifu\">\n            <div id=\"waifu-tips\"></div>\n            <canvas id=\"live2d\" width=\"800\" height=\"800\"></canvas>\n            <div id=\"waifu-tool\"></div>\n        </div>");
