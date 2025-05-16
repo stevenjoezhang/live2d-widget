@@ -14,6 +14,16 @@ interface Config {
    */
   apiPath?: string;
   /**
+   * CDN 的路径，如果需要使用 CDN 加载模型。
+   * @type {string | undefined}
+   */
+  cdnPath?: string;
+  /**
+   * 默认模型的 id。
+   * @type {string | undefined}
+   */
+  modelId?: number;
+  /**
    * 需要显示的工具列表。
    * @type {string[] | undefined}
    */

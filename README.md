@@ -43,10 +43,11 @@
 
 | 选项 | 类型 | 默认值 | 说明 |
 | - | - | - | - |
-| `waifuPath` | `string` | `https://fastly.jsdelivr.net/npm/live2d-widgets@0/waifu-tips.json` | 看板娘资源路径，可自行修改 |
-| `apiPath` | `string` | `https://live2d.fghrsh.net/api/` | API 路径，可选参数 |
-| `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN 路径，可选参数 |
-| `tools` | `string[]` | 见 `autoload.js` | 加载的小工具按钮，可选参数 |
+| `waifuPath` | `string` | `https://fastly.jsdelivr.net/npm/live2d-widgets@1/waifu-tips.json` | 看板娘资源路径，可自行修改 |
+| `apiPath` | `string` | `https://live2d.fghrsh.net/api/` | API 路径 |
+| `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN 路径 |
+| `modelId` | `number` | `0` | 默认模型 id |
+| `tools` | `string[]` | 见 `autoload.js` | 加载的小工具按钮 |
 | `drag` | `boolean` | `false` | 支持拖动看板娘 |
 | `logLevel` | `string` | `error` | 日志等级，支持 `error`，`info`，`trace` |
 

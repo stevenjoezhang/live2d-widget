@@ -43,10 +43,11 @@ You can refer to the source code of `dist/autoload.js` to see the available conf
 
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
-| `waifuPath` | `string` | `https://fastly.jsdelivr.net/npm/live2d-widgets@0/waifu-tips.json` | Path to the widget resources, can be modified |
-| `apiPath` | `string` | `https://live2d.fghrsh.net/api/` | API path, optional |
-| `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN path, optional |
-| `tools` | `string[]` | see `autoload.js` | Buttons of the loaded tools, optional |
+| `waifuPath` | `string` | `https://fastly.jsdelivr.net/npm/live2d-widgets@1/waifu-tips.json` | Path to the widget resources, can be modified |
+| `apiPath` | `string` | `https://live2d.fghrsh.net/api/` | API path |
+| `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN path |
+| `modelId` | `number` | `0` | Default model id |
+| `tools` | `string[]` | see `autoload.js` | Buttons of the loaded tools |
 | `drag` | `boolean` | `false` | Make the widget draggable |
 | `logLevel` | `string` | `error` | Log level: `error`，`info`，`trace` |
 

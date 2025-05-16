@@ -166,7 +166,7 @@ async function loadWidget(config: Config) {
     modelTexturesId = 0;
   }
   if (isNaN(modelId)) {
-    modelId = 0;
+    modelId = config.modelId || 0;
   }
   localStorage.removeItem('waifu-display');
   sessionStorage.removeItem('waifu-text');
