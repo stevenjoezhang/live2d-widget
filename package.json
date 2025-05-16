@@ -35,6 +35,6 @@
     "eslint": "9.26.0",
     "rollup": "4.40.2",
     "typescript": "5.8.3",
-    "typescript-eslint": "8.32.0"
+    "typescript-eslint": "8.32.1"
   }
 }
