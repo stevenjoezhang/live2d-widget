@@ -50,8 +50,17 @@ var tools = {
         icon: fa_camera_retro,
         callback: function () {
             showMessage('照好了嘛，是不是很可爱呢？', 6000, 9);
-            Live2D.captureName = 'photo.png';
-            Live2D.captureFrame = true;
+            var canvas = document.getElementById('live2d');
+            if (!canvas)
+                return;
+            var imageUrl = canvas.toDataURL();
+            var link = document.createElement('a');
+            link.style.display = 'none';
+            link.href = imageUrl;
+            link.download = 'live2d-photo.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         },
     },
     info: {

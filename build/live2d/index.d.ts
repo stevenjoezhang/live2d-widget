@@ -1,0 +1,34 @@
+export default Model;
+declare class Model {
+    live2DMgr: LAppLive2DManager;
+    isDrawStart: boolean;
+    gl: any;
+    canvas: HTMLElement | null;
+    dragMgr: L2DTargetPoint | null;
+    viewMatrix: L2DViewMatrix | null;
+    projMatrix: L2DMatrix44 | null;
+    deviceToScreen: L2DMatrix44 | null;
+    drag: boolean;
+    oldLen: number;
+    lastMouseX: number;
+    lastMouseY: number;
+    initL2dCanvas(canvasId: any): void;
+    init(canvasId: any, modelSettingPath: any): Promise<void>;
+    startDraw(): void;
+    draw(): void;
+    changeModel(modelSettingPath: any): Promise<void>;
+    modelScaling(scale: any): void;
+    modelTurnHead(event: any): void;
+    followPointer(event: any): void;
+    lookFront(): void;
+    mouseEvent(e: any): void;
+    touchEvent(e: any): void;
+    transformViewX(deviceX: any): number;
+    transformViewY(deviceY: any): number;
+    transformScreenX(deviceX: any): number;
+    transformScreenY(deviceY: any): number;
+}
+import LAppLive2DManager from './LAppLive2DManager';
+import { L2DTargetPoint } from './Live2DFramework';
+import { L2DViewMatrix } from './Live2DFramework';
+import { L2DMatrix44 } from './Live2DFramework';
