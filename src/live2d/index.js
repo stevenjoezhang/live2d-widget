@@ -79,7 +79,8 @@ class Model {
     this.deviceToScreen.multTranslate(-width / 2.0, -height / 2.0);
     this.deviceToScreen.multScale(2 / width, -2 / width);
 
-    this.gl = this.canvas.getContext('webgl', { premultipliedAlpha: true });
+    // https://stackoverflow.com/questions/26783586/canvas-todataurl-returns-blank-image
+    this.gl = this.canvas.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true });
     if (!this.gl) {
       console.error('Failed to create WebGL context.');
       return;
