@@ -6,8 +6,6 @@ import LAppLive2DManager from './LAppLive2DManager';
 
 class Model {
   constructor() {
-    this.platform = window.navigator.platform.toLowerCase();
-
     this.live2DMgr = new LAppLive2DManager();
 
     this.isDrawStart = false;

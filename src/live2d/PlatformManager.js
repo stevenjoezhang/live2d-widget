@@ -1,4 +1,4 @@
-/* global console, XMLHttpRequest, Image, Live2DModelWebGL, document */
+/* global console, Image, Live2DModelWebGL, document, fetch */
 /**
  *
  *  You can modify and use this source freely
@@ -13,34 +13,22 @@
 //============================================================
 //============================================================
 class PlatformManager {
+  constructor() {
+    this.cache = {};
+  }
   //============================================================
   //    PlatformManager # loadBytes()
   //============================================================
   loadBytes(path /*String*/, callback) {
-    var request = new XMLHttpRequest();
-    request.open('GET', path, true);
-    request.responseType = 'arraybuffer';
-    request.onload = () => {
-      switch (request.status) {
-      case 200:
-        callback(request.response);
-        break;
-      default:
-        console.error('Failed to load (' + request.status + ') : ' + path);
-        break;
-      }
-    };
-    request.send(null);
-    //return request;
-  }
-
-  //============================================================
-  //    PlatformManager # loadString()
-  //============================================================
-  loadString(path /*String*/) {
-    this.loadBytes(path, buf => {
-      return buf;
-    });
+    if (path in this.cache) {
+      return callback(this.cache[path]);
+    }
+    fetch(path)
+      .then(response => response.arrayBuffer())
+      .then(arrayBuffer => {
+        this.cache[path] = arrayBuffer;
+        callback(arrayBuffer);
+      });
   }
 
   //============================================================
