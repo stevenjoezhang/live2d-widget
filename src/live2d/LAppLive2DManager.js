@@ -25,6 +25,7 @@ class LAppLive2DManager {
   }
 
   async changeModel(gl, modelSettingPath) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     return new Promise((resolve, reject) => {
       if (this.reloading) return;
       this.reloading = true;
