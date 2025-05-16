@@ -23,8 +23,6 @@ class Model {
 
     this.lastMouseX = 0;
     this.lastMouseY = 0;
-
-    this.isModelShown = false;
   }
 
   initL2dCanvas(canvasId) {
@@ -47,7 +45,7 @@ class Model {
     }
   }
 
-  init(canvasId, modelSettingPath) {
+  async init(canvasId, modelSettingPath) {
     this.initL2dCanvas(canvasId);
     const width = this.canvas.width;
     const height = this.canvas.height;
@@ -91,7 +89,7 @@ class Model {
 
     this.gl.clearColor(0.0, 0.0, 0.0, 0.0);
 
-    this.changeModel(modelSettingPath);
+    await this.changeModel(modelSettingPath);
 
     this.startDraw();
   }
@@ -129,30 +127,20 @@ class Model {
     MatrixStack.multMatrix(this.viewMatrix.getArray());
     MatrixStack.push();
 
-    for (let i = 0; i < this.live2DMgr.numModels(); i++) {
-      const model = this.live2DMgr.getModel(i);
+    const model = this.live2DMgr.getModel();
 
-      if (model == null) return;
+    if (model == null) return;
 
-      if (model.initialized && !model.updating) {
-        model.update();
-        model.draw(this.gl);
-
-        if (!this.isModelShown && i == this.live2DMgr.numModels() - 1) {
-          this.isModelShown = !this.isModelShown;
-        }
-      }
+    if (model.initialized && !model.updating) {
+      model.update();
+      model.draw(this.gl);
     }
 
     MatrixStack.pop();
   }
 
-  changeModel(modelSettingPath) {
-    this.isModelShown = false;
-
-    this.live2DMgr.reloadFlg = true;
-
-    this.live2DMgr.changeModel(this.gl, modelSettingPath);
+  async changeModel(modelSettingPath) {
+    await this.live2DMgr.changeModel(this.gl, modelSettingPath);
   }
 
   modelScaling(scale) {

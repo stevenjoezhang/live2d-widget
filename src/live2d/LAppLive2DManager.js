@@ -6,68 +6,53 @@ import LAppDefine from './LAppDefine';
 
 class LAppLive2DManager {
   constructor() {
-    // console.log("--> LAppLive2DManager()");
-
-    this.models = [];
-
-    this.reloadFlg = false;
+    this.model = null;
+    this.reloading = false;
 
     Live2D.init();
     Live2DFramework.setPlatformManager(new PlatformManager());
   }
 
-  createModel() {
-    const model = new LAppModel();
-    this.models.push(model);
-
-    return model;
+  getModel() {
+    return this.model;
   }
 
-  changeModel(gl, modelSettingPath) {
-    // console.log("--> LAppLive2DManager.update(gl)");
-
-    if (this.reloadFlg) {
-      this.reloadFlg = false;
-
-      this.releaseModel(0, gl);
-      this.createModel();
-      this.models[0].load(gl, modelSettingPath);
+  releaseModel(gl) {
+    if (this.model) {
+      this.model.release(gl);
+      this.model = null;
     }
   }
 
-  getModel(no) {
-    // console.log("--> LAppLive2DManager.getModel(" + no + ")");
+  async changeModel(gl, modelSettingPath) {
+    return new Promise((resolve, reject) => {
+      if (this.reloading) return;
+      this.reloading = true;
 
-    if (no >= this.models.length) return null;
+      const oldModel = this.model;
+      const newModel = new LAppModel();
 
-    return this.models[no];
-  }
-
-  releaseModel(no, gl) {
-    // console.log("--> LAppLive2DManager.releaseModel(" + no + ")");
-
-    if (this.models.length <= no) return;
-
-    this.models[no].release(gl);
-
-    delete this.models[no];
-    this.models.splice(no, 1);
-  }
-
-  numModels() {
-    return this.models.length;
+      newModel.load(gl, modelSettingPath, () => {
+        if (oldModel) {
+          oldModel.release(gl);
+        }
+        this.model = newModel;
+        this.reloading = false;
+        resolve();
+      });
+    })
   }
 
   setDrag(x, y) {
-    for (let i = 0; i < this.models.length; i++) {
-      this.models[i].setDrag(x, y);
+    if (this.model) {
+      this.model.setDrag(x, y);
     }
   }
 
   maxScaleEvent() {
     if (LAppDefine.DEBUG_LOG) console.log('Max scale event.');
-    for (let i = 0; i < this.models.length; i++) {
-      this.models[i].startRandomMotion(
+    if (this.model) {
+      this.model.startRandomMotion(
         LAppDefine.MOTION_GROUP_PINCH_IN,
         LAppDefine.PRIORITY_NORMAL,
       );
@@ -76,8 +61,8 @@ class LAppLive2DManager {
 
   minScaleEvent() {
     if (LAppDefine.DEBUG_LOG) console.log('Min scale event.');
-    for (let i = 0; i < this.models.length; i++) {
-      this.models[i].startRandomMotion(
+    if (this.model) {
+      this.model.startRandomMotion(
         LAppDefine.MOTION_GROUP_PINCH_OUT,
         LAppDefine.PRIORITY_NORMAL,
       );
@@ -87,22 +72,18 @@ class LAppLive2DManager {
   tapEvent(x, y) {
     if (LAppDefine.DEBUG_LOG) console.log('tapEvent view x:' + x + ' y:' + y);
 
-    for (let i = 0; i < this.models.length; i++) {
-      if (this.models[i].hitTest(LAppDefine.HIT_AREA_HEAD, x, y)) {
-        if (LAppDefine.DEBUG_LOG) console.log('Tap face.');
+    if (!this.model) return false;
 
-        this.models[i].setRandomExpression();
-      } else if (this.models[i].hitTest(LAppDefine.HIT_AREA_BODY, x, y)) {
-        if (LAppDefine.DEBUG_LOG)
-          console.log('Tap body.' + ' models[' + i + ']');
-
-        this.models[i].startRandomMotion(
-          LAppDefine.MOTION_GROUP_TAP_BODY,
-          LAppDefine.PRIORITY_NORMAL,
-        );
-      }
+    if (this.model.hitTest(LAppDefine.HIT_AREA_HEAD, x, y)) {
+      if (LAppDefine.DEBUG_LOG) console.log('Tap face.');
+      this.model.setRandomExpression();
+    } else if (this.model.hitTest(LAppDefine.HIT_AREA_BODY, x, y)) {
+      if (LAppDefine.DEBUG_LOG) console.log('Tap body.');
+      this.model.startRandomMotion(
+        LAppDefine.MOTION_GROUP_TAP_BODY,
+        LAppDefine.PRIORITY_NORMAL,
+      );
     }
-
     return true;
   }
 }
