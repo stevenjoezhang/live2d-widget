@@ -164,9 +164,9 @@ async function initModel(model: ModelManager, config: Config) {
     modelTexturesId = 53; // 材质 ID
   }
   await model.loadModel(modelId, modelTexturesId, '');
-  fetch(config.waifuPath)
-    .then((response) => response.json())
-    .then(registerEventListener);
+  const response = await fetch(config.waifuPath);
+  const result = await response.json();
+  registerEventListener(result);
 }
 
 /**

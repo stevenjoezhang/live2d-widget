@@ -103,18 +103,16 @@ class ModelManager {
       showMessage('我的新衣服好看嘛？', 4000, 10);
     } else {
       // Optional 'rand' (Random), 'switch' (Switch by order)
-      fetch(`${this.apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`)
-        .then((response) => response.json())
-        .then(async (result) => {
-          if (
-            result.textures.id === 1 &&
-            (modelTexturesId === 1 || modelTexturesId === 0)
-          ) {
-            showMessage('我还没有其他衣服呢！', 4000, 10);
-          } else if (modelId) {
-            await this.loadModel(modelId, result.textures.id, '我的新衣服好看嘛？');
-          }
-        });
+      const response = await fetch(`${this.apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`);
+      const result = await response.json();
+      if (
+        result.textures.id === 1 &&
+        (modelTexturesId === 1 || modelTexturesId === 0)
+      ) {
+        showMessage('我还没有其他衣服呢！', 4000, 10);
+      } else if (modelId) {
+        await this.loadModel(modelId, result.textures.id, '我的新衣服好看嘛？');
+      }
     }
   }
 
@@ -130,11 +128,9 @@ class ModelManager {
       const index = ++modelId >= this.modelList.models.length ? 0 : modelId;
       await this.loadModel(index, 0, this.modelList.messages[index]);
     } else {
-      fetch(`${this.apiPath}switch/?id=${modelId}`)
-        .then((response) => response.json())
-        .then(async (result) => {
-          await this.loadModel(result.model.id, 0, result.model.message);
-        });
+      const response = await fetch(`${this.apiPath}switch/?id=${modelId}`);
+      const result = await response.json();
+      await this.loadModel(result.model.id, 0, result.model.message);
     }
   }
 }
