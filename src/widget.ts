@@ -5,7 +5,7 @@
 
 import ModelManager from './model.js';
 import showMessage from './message.js';
-import randomSelection from './utils.js';
+import { randomSelection } from './utils.js';
 import tools from './tools.js';
 import logger from './logger.js';
 import registerDrag from './drag.js';
@@ -237,30 +237,5 @@ function initWidget(config: string | Config, apiPath?: string) {
   }
 }
 
-/**
- * 异步加载外部资源。
- * @param {string} url - 资源路径。
- * @param {string} type - 资源类型。
- */
-function loadExternalResource(url: string, type: string): Promise<string> {
-  return new Promise((resolve: any, reject: any) => {
-    let tag;
-
-    if (type === 'css') {
-      tag = document.createElement('link');
-      tag.rel = 'stylesheet';
-      tag.href = url;
-    }
-    else if (type === 'js') {
-      tag = document.createElement('script');
-      tag.src = url;
-    }
-    if (tag) {
-      tag.onload = () => resolve(url);
-      tag.onerror = () => reject(url);
-      document.head.appendChild(tag);
-    }
-  });
-}
-
-export { initWidget, loadExternalResource };
+export { initWidget };
+export { loadExternalResource } from './utils.js';

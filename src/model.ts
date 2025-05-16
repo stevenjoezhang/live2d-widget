@@ -4,7 +4,7 @@
  */
 
 import showMessage from './message.js';
-import randomSelection from './utils.js';
+import { randomSelection } from './utils.js';
 import Model from './live2d/index.js';
 import logger from './logger.js';
 

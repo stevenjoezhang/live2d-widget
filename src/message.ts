@@ -3,7 +3,7 @@
  * @module message
  */
 
-import randomSelection from './utils.js';
+import { randomSelection } from './utils.js';
 
 let messageTimer: NodeJS.Timeout | null = null;
 
