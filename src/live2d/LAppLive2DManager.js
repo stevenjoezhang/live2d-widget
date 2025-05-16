@@ -17,7 +17,7 @@ class LAppLive2DManager {
   }
 
   createModel() {
-    var model = new LAppModel();
+    const model = new LAppModel();
     this.models.push(model);
 
     return model;
@@ -59,14 +59,14 @@ class LAppLive2DManager {
   }
 
   setDrag(x, y) {
-    for (var i = 0; i < this.models.length; i++) {
+    for (let i = 0; i < this.models.length; i++) {
       this.models[i].setDrag(x, y);
     }
   }
 
   maxScaleEvent() {
     if (LAppDefine.DEBUG_LOG) console.log('Max scale event.');
-    for (var i = 0; i < this.models.length; i++) {
+    for (let i = 0; i < this.models.length; i++) {
       this.models[i].startRandomMotion(
         LAppDefine.MOTION_GROUP_PINCH_IN,
         LAppDefine.PRIORITY_NORMAL,
@@ -76,7 +76,7 @@ class LAppLive2DManager {
 
   minScaleEvent() {
     if (LAppDefine.DEBUG_LOG) console.log('Min scale event.');
-    for (var i = 0; i < this.models.length; i++) {
+    for (let i = 0; i < this.models.length; i++) {
       this.models[i].startRandomMotion(
         LAppDefine.MOTION_GROUP_PINCH_OUT,
         LAppDefine.PRIORITY_NORMAL,
@@ -87,7 +87,7 @@ class LAppLive2DManager {
   tapEvent(x, y) {
     if (LAppDefine.DEBUG_LOG) console.log('tapEvent view x:' + x + ' y:' + y);
 
-    for (var i = 0; i < this.models.length; i++) {
+    for (let i = 0; i < this.models.length; i++) {
       if (this.models[i].hitTest(LAppDefine.HIT_AREA_HEAD, x, y)) {
         if (LAppDefine.DEBUG_LOG) console.log('Tap face.');
 

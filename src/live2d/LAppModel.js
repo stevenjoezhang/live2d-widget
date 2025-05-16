@@ -44,7 +44,7 @@ class LAppModel extends L2DBaseModel {
                 this.expressions = {};
 
                 for (
-                  var j = 0;
+                  let j = 0;
                   j < this.modelSetting.getExpressionNum();
                   j++
                 ) {

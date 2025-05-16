@@ -47,7 +47,7 @@ class PlatformManager {
   //    PlatformManager # loadLive2DModel()
   //============================================================
   loadLive2DModel(path /*String*/, callback) {
-    var model = null;
+    let model = null;
 
     // load moc
     this.loadBytes(path, buf => {
@@ -61,15 +61,15 @@ class PlatformManager {
   //============================================================
   loadTexture(model /*ALive2DModel*/, no /*int*/, path /*String*/, callback) {
     // load textures
-    var loadedImage = new Image();
+    const loadedImage = new Image();
     loadedImage.crossOrigin = 'anonymous';
     loadedImage.src = path;
 
     loadedImage.onload = () => {
       // create texture
-      var canvas = document.getElementById('live2d');
-      var gl = canvas.getContext('webgl', { premultipliedAlpha: true });
-      var texture = gl.createTexture();
+      const canvas = document.getElementById('live2d');
+      const gl = canvas.getContext('webgl', { premultipliedAlpha: true });
+      let texture = gl.createTexture();
       if (!texture) {
         console.error('Failed to generate gl texture name.');
         return -1;
@@ -116,16 +116,16 @@ class PlatformManager {
 
   //============================================================
   jsonParseFromBytes(buf) {
-    var jsonStr;
+    let jsonStr;
 
-    var bomCode = new Uint8Array(buf, 0, 3);
+    const bomCode = new Uint8Array(buf, 0, 3);
     if (bomCode[0] == 239 && bomCode[1] == 187 && bomCode[2] == 191) {
       jsonStr = String.fromCharCode.apply(null, new Uint8Array(buf, 3));
     } else {
       jsonStr = String.fromCharCode.apply(null, new Uint8Array(buf));
     }
 
-    var jsonObj = JSON.parse(jsonStr);
+    const jsonObj = JSON.parse(jsonStr);
 
     return jsonObj;
   }
