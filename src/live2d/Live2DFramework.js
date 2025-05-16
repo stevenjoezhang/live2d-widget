@@ -1,4 +1,4 @@
-/* global Live2D, console, Live2DMotion, AMotion, UtSystem, MotionQueueManager, PhysicsHair, UtDebug, PartsDataID */
+/* global Live2D, Live2DMotion, AMotion, UtSystem, MotionQueueManager, PhysicsHair, UtDebug, PartsDataID */
 /**
  *
  *  You can modify and use this source freely
@@ -6,6 +6,7 @@
  *
  *  (c) Live2D Inc. All rights reserved.
  */
+import logger from '../logger';
 //============================================================
 //============================================================
 //  class L2DBaseModel
@@ -18,7 +19,6 @@ class L2DBaseModel {
     this.eyeBlink = null; // L2DEyeBlink
     this.physics = null; // L2DPhysics
     this.pose = null; // L2DPose
-    this.debugMode = false;
     this.initialized = false;
     this.updating = false;
     this.alpha = 1;
@@ -152,7 +152,7 @@ class L2DBaseModel {
         }
         */
     const pm = Live2DFramework.getPlatformManager(); //IPlatformManager
-    if (this.debugMode) pm.log('Load model : ' + path);
+    logger.info('Load model : ' + path);
 
     pm.loadLive2DModel(path, (l2dModel) => {
       this.live2DModel = l2dModel;
@@ -161,7 +161,7 @@ class L2DBaseModel {
       const _err = Live2D.getError();
 
       if (_err != 0) {
-        console.error('Error : Failed to loadModelData().');
+        logger.error('Error : Failed to loadModelData().');
         return;
       }
 
@@ -184,7 +184,7 @@ class L2DBaseModel {
 
     const pm = Live2DFramework.getPlatformManager(); //IPlatformManager
 
-    if (this.debugMode) pm.log('Load Texture : ' + path);
+    logger.info('Load Texture : ' + path);
 
     pm.loadTexture(this.live2DModel, no, path, () => {
       texCounter--;
@@ -199,7 +199,7 @@ class L2DBaseModel {
   loadMotion(name /*String*/, path /*String*/, callback) {
     const pm = Live2DFramework.getPlatformManager(); //IPlatformManager
 
-    if (this.debugMode) pm.log('Load Motion : ' + path);
+    logger.trace('Load Motion : ' + path);
 
     let motion = null; //Live2DMotion
 
@@ -218,7 +218,7 @@ class L2DBaseModel {
   loadExpression(name /*String*/, path /*String*/, callback) {
     const pm = Live2DFramework.getPlatformManager(); //IPlatformManager
 
-    if (this.debugMode) pm.log('Load Expression : ' + path);
+    logger.trace('Load Expression : ' + path);
 
     pm.loadBytes(path, (buf) => {
       if (name != null) {
@@ -233,14 +233,14 @@ class L2DBaseModel {
   //============================================================
   loadPose(path /*String*/, callback) {
     const pm = Live2DFramework.getPlatformManager(); //IPlatformManager
-    if (this.debugMode) pm.log('Load Pose : ' + path);
+    logger.trace('Load Pose : ' + path);
     try {
       pm.loadBytes(path, (buf) => {
         this.pose = L2DPose.load(buf);
         if (typeof callback == 'function') callback();
       });
     } catch (e) {
-      console.warn(e);
+      logger.warn(e);
     }
   }
 
@@ -249,13 +249,13 @@ class L2DBaseModel {
   //============================================================
   loadPhysics(path /*String*/) {
     const pm = Live2DFramework.getPlatformManager(); //IPlatformManager
-    if (this.debugMode) pm.log('Load Physics : ' + path);
+    logger.trace('Load Physics : ' + path);
     try {
       pm.loadBytes(path, (buf) => {
         this.physics = L2DPhysics.load(buf);
       });
     } catch (e) {
-      console.warn(e);
+      logger.warn(e);
     }
   }
 

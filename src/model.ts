@@ -6,6 +6,7 @@
 import showMessage from './message.js';
 import randomSelection from './utils.js';
 import Model from './live2d/index.js';
+import logger from './logger.js';
 
 interface ModelList {
   messages: string[];
@@ -54,7 +55,7 @@ class ModelManager {
     } else {
       await this.model.changeModel(modelSettingPath);
     }
-    console.log(`Live2D Model ${modelSettingPath} Loaded`);
+    logger.info(`Model ${modelSettingPath} loaded`);
   }
 
   /**

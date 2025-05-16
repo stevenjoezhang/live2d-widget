@@ -1,8 +1,9 @@
-/* global console, document, window, Live2D */
+/* global document, window, Live2D */
 import { L2DMatrix44, L2DTargetPoint, L2DViewMatrix } from './Live2DFramework';
 import LAppDefine from './LAppDefine';
 import MatrixStack from './utils/MatrixStack';
 import LAppLive2DManager from './LAppLive2DManager';
+import logger from '../logger';
 
 class Model {
   constructor() {
@@ -82,7 +83,7 @@ class Model {
     // https://stackoverflow.com/questions/26783586/canvas-todataurl-returns-blank-image
     this.gl = this.canvas.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true });
     if (!this.gl) {
-      console.error('Failed to create WebGL context.');
+      logger.error('Failed to create WebGL context.');
       return;
     }
 
@@ -114,7 +115,7 @@ class Model {
   }
 
   draw() {
-    // l2dLog("--> draw()");
+    // logger.trace("--> draw()");
 
     MatrixStack.reset();
     MatrixStack.loadIdentity();
@@ -174,7 +175,7 @@ class Model {
     const vy = this.transformViewY(event.clientY - rect.top);
 
     if (LAppDefine.DEBUG_MOUSE_LOG)
-      l2dLog(
+      logger.trace(
         'onMouseDown device( x:' +
         event.clientX +
         ' y:' +
@@ -203,7 +204,7 @@ class Model {
     const vy = this.transformViewY(event.clientY - rect.top);
 
     if (LAppDefine.DEBUG_MOUSE_LOG)
-      l2dLog(
+      logger.trace(
         'onMouseMove device( x:' +
         event.clientX +
         ' y:' +
@@ -306,15 +307,6 @@ class Model {
   transformScreenY(deviceY) {
     return this.deviceToScreen.transformY(deviceY);
   }
-}
-
-function l2dLog(msg) {
-  if (!LAppDefine.DEBUG_LOG) return;
-
-  const myconsole = document.getElementById('myconsole');
-  myconsole.innerHTML = myconsole.innerHTML + '<br>' + msg;
-
-  console.log(msg);
 }
 
 export default Model;

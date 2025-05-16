@@ -1,8 +1,9 @@
-/* global console, UtSystem, document */
+/* global UtSystem, document */
 import { L2DBaseModel, Live2DFramework, L2DEyeBlink } from './Live2DFramework';
 import ModelSettingJson from './utils/ModelSettingJson';
 import LAppDefine from './LAppDefine';
 import MatrixStack from './utils/MatrixStack';
+import logger from '../logger';
 
 //============================================================
 //============================================================
@@ -159,10 +160,10 @@ class LAppModel extends L2DBaseModel {
   }
 
   update() {
-    // console.log("--> LAppModel.update()");
+    // logger.trace("--> LAppModel.update()");
 
     if (this.live2DModel == null) {
-      if (LAppDefine.DEBUG_LOG) console.error('Failed to update.');
+      logger.error('Failed to update.');
 
       return;
     }
@@ -273,19 +274,19 @@ class LAppModel extends L2DBaseModel {
   }
 
   startMotion(name, no, priority) {
-    // console.log("startMotion : " + name + " " + no + " " + priority);
+    // logger.trace("startMotion : " + name + " " + no + " " + priority);
 
     const motionName = this.modelSetting.getMotionFile(name, no);
 
     if (motionName == null || motionName == '') {
-      if (LAppDefine.DEBUG_LOG) console.error('Failed to motion.');
+      logger.error('Failed to motion.');
       return;
     }
 
     if (priority == LAppDefine.PRIORITY_FORCE) {
       this.mainMotionManager.setReservePriority(priority);
     } else if (!this.mainMotionManager.reserveMotion(priority)) {
-      if (LAppDefine.DEBUG_LOG) console.log('Motion is running.');
+      logger.trace('Motion is running.');
       return;
     }
 
@@ -310,7 +311,7 @@ class LAppModel extends L2DBaseModel {
     motion.setFadeIn(this.modelSetting.getMotionFadeIn(name, no));
     motion.setFadeOut(this.modelSetting.getMotionFadeOut(name, no));
 
-    if (LAppDefine.DEBUG_LOG) console.log('Start motion : ' + motionName);
+    logger.trace('Start motion : ' + motionName);
 
     if (this.modelSetting.getMotionSound(name, no) == null) {
       this.mainMotionManager.startMotionPrio(motion, priority);
@@ -321,7 +322,7 @@ class LAppModel extends L2DBaseModel {
       const snd = document.createElement('audio');
       snd.src = this.modelHomeDir + soundName;
 
-      if (LAppDefine.DEBUG_LOG) console.log('Start sound : ' + soundName);
+      logger.trace('Start sound : ' + soundName);
 
       snd.play();
       this.mainMotionManager.startMotionPrio(motion, priority);
@@ -331,14 +332,14 @@ class LAppModel extends L2DBaseModel {
   setExpression(name) {
     const motion = this.expressions[name];
 
-    if (LAppDefine.DEBUG_LOG) console.log('Expression : ' + name);
+    logger.trace('Expression : ' + name);
 
     this.expressionManager.startMotion(motion, false);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   draw(gl) {
-    //console.log("--> LAppModel.draw()");
+    //logger.trace("--> LAppModel.draw()");
 
     // if(this.live2DModel == null) return;
 

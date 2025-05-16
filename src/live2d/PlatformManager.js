@@ -1,4 +1,4 @@
-/* global console, Image, Live2DModelWebGL, document, fetch */
+/* global Image, Live2DModelWebGL, document, fetch */
 /**
  *
  *  You can modify and use this source freely
@@ -59,7 +59,7 @@ class PlatformManager {
       const gl = canvas.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true });
       let texture = gl.createTexture();
       if (!texture) {
-        console.error('Failed to generate gl texture name.');
+        logger.error('Failed to generate gl texture name.');
         return -1;
       }
 
@@ -95,7 +95,7 @@ class PlatformManager {
     };
 
     loadedImage.onerror = () => {
-      console.error('Failed to load image : ' + path);
+      logger.error('Failed to load image : ' + path);
     };
   }
 
@@ -116,13 +116,6 @@ class PlatformManager {
     const jsonObj = JSON.parse(jsonStr);
 
     return jsonObj;
-  }
-
-  //============================================================
-  //    PlatformManager # log()
-  //============================================================
-  log(txt /*String*/) {
-    console.log(txt);
   }
 }
 

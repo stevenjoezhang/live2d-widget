@@ -1,8 +1,9 @@
-/* global console, Live2D */
+/* global Live2D */
 import { Live2DFramework } from './Live2DFramework';
 import LAppModel from './LAppModel';
 import PlatformManager from './PlatformManager';
 import LAppDefine from './LAppDefine';
+import logger from '../logger';
 
 class LAppLive2DManager {
   constructor() {
@@ -51,7 +52,7 @@ class LAppLive2DManager {
   }
 
   maxScaleEvent() {
-    if (LAppDefine.DEBUG_LOG) console.log('Max scale event.');
+    logger.trace('Max scale event.');
     if (this.model) {
       this.model.startRandomMotion(
         LAppDefine.MOTION_GROUP_PINCH_IN,
@@ -61,7 +62,7 @@ class LAppLive2DManager {
   }
 
   minScaleEvent() {
-    if (LAppDefine.DEBUG_LOG) console.log('Min scale event.');
+    logger.trace('Min scale event.');
     if (this.model) {
       this.model.startRandomMotion(
         LAppDefine.MOTION_GROUP_PINCH_OUT,
@@ -71,15 +72,15 @@ class LAppLive2DManager {
   }
 
   tapEvent(x, y) {
-    if (LAppDefine.DEBUG_LOG) console.log('tapEvent view x:' + x + ' y:' + y);
+    logger.trace('tapEvent view x:' + x + ' y:' + y);
 
     if (!this.model) return false;
 
     if (this.model.hitTest(LAppDefine.HIT_AREA_HEAD, x, y)) {
-      if (LAppDefine.DEBUG_LOG) console.log('Tap face.');
+      logger.trace('Tap face.');
       this.model.setRandomExpression();
     } else if (this.model.hitTest(LAppDefine.HIT_AREA_BODY, x, y)) {
-      if (LAppDefine.DEBUG_LOG) console.log('Tap body.');
+      logger.trace('Tap body.');
       this.model.startRandomMotion(
         LAppDefine.MOTION_GROUP_TAP_BODY,
         LAppDefine.PRIORITY_NORMAL,

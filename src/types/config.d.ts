@@ -18,4 +18,9 @@ interface Config {
    * @type {string[] | undefined}
    */
   tools?: string[];
+  /**
+   * 日志的等级。
+   * @type {LogLevel | undefined}
+   */
+  logLevel?: LogLevel;
 }

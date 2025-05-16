@@ -7,6 +7,7 @@ import ModelManager from './model.js';
 import showMessage from './message.js';
 import randomSelection from './utils.js';
 import tools from './tools.js';
+import logger from './logger.js';
 
 function registerTools(model: ModelManager, config: Config) {
   (tools as Tools)['switch-model'].callback = () => model.loadOtherModel();
@@ -200,6 +201,7 @@ function initWidget(config: string | Config, apiPath?: string) {
       apiPath,
     };
   }
+  logger.setLevel(config.logLevel);
   document.body.insertAdjacentHTML(
     'beforeend',
     `<div id="waifu-toggle">
