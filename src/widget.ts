@@ -182,9 +182,11 @@ async function loadWidget(config: Config) {
   await model.loadModel(modelId, modelTexturesId, '');
   registerTools(model, config);
   if (config.drag) registerDrag();
-  const response = await fetch(config.waifuPath);
-  const result = await response.json();
-  registerEventListener(result);
+  if (config.waifuPath) {
+    const response = await fetch(config.waifuPath);
+    const result = await response.json();
+    registerEventListener(result);
+  }
   document.getElementById('waifu')!.style.bottom = '0';
 }
 
