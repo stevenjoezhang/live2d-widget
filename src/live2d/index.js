@@ -174,18 +174,17 @@ class Model {
     const vx = this.transformViewX(event.clientX - rect.left);
     const vy = this.transformViewY(event.clientY - rect.top);
 
-    if (LAppDefine.DEBUG_MOUSE_LOG)
-      logger.trace(
-        'onMouseDown device( x:' +
-        event.clientX +
-        ' y:' +
-        event.clientY +
-        ' ) view( x:' +
-        vx +
-        ' y:' +
-        vy +
-        ')',
-      );
+    logger.trace(
+      'onMouseDown device( x:' +
+      event.clientX +
+      ' y:' +
+      event.clientY +
+      ' ) view( x:' +
+      vx +
+      ' y:' +
+      vy +
+      ')',
+    );
 
     this.lastMouseX = sx;
     this.lastMouseY = sy;
@@ -203,18 +202,17 @@ class Model {
     const vx = this.transformViewX(event.clientX - rect.left);
     const vy = this.transformViewY(event.clientY - rect.top);
 
-    if (LAppDefine.DEBUG_MOUSE_LOG)
-      logger.trace(
-        'onMouseMove device( x:' +
-        event.clientX +
-        ' y:' +
-        event.clientY +
-        ' ) view( x:' +
-        vx +
-        ' y:' +
-        vy +
-        ')',
-      );
+    logger.trace(
+      'onMouseMove device( x:' +
+      event.clientX +
+      ' y:' +
+      event.clientY +
+      ' ) view( x:' +
+      vx +
+      ' y:' +
+      vy +
+      ')',
+    );
 
     if (this.drag) {
       this.lastMouseX = sx;

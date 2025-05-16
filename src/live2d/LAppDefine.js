@@ -1,8 +1,4 @@
 const LAppDefine = {
-  DEBUG_MOUSE_LOG: false,
-  // DEBUG_DRAW_HIT_AREA : false,
-  // DEBUG_DRAW_ALPHA_MODEL : false,
-
   VIEW_MAX_SCALE: 2,
   VIEW_MIN_SCALE: 0.8,
 
