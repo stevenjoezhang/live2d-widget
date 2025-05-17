@@ -1,9 +1,9 @@
 /* global UtSystem, document */
-import { L2DBaseModel, Live2DFramework, L2DEyeBlink } from './Live2DFramework';
-import ModelSettingJson from './utils/ModelSettingJson';
-import LAppDefine from './LAppDefine';
-import MatrixStack from './utils/MatrixStack';
-import logger from '../logger';
+import { L2DBaseModel, Live2DFramework, L2DEyeBlink } from './Live2DFramework.js';
+import ModelSettingJson from './utils/ModelSettingJson.js';
+import LAppDefine from './LAppDefine.js';
+import MatrixStack from './utils/MatrixStack.js';
+import logger from '../logger.js';
 
 //============================================================
 //============================================================

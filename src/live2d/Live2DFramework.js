@@ -6,7 +6,7 @@
  *
  *  (c) Live2D Inc. All rights reserved.
  */
-import logger from '../logger';
+import logger from '../logger.js';
 //============================================================
 //============================================================
 //  class L2DBaseModel

@@ -1,4 +1,4 @@
-import { Live2DFramework } from '../Live2DFramework';
+import { Live2DFramework } from '../Live2DFramework.js';
 
 class ModelSettingJson {
   constructor() {

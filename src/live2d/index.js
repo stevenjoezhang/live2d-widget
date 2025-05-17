@@ -1,9 +1,9 @@
 /* global document, window, Live2D */
-import { L2DMatrix44, L2DTargetPoint, L2DViewMatrix } from './Live2DFramework';
-import LAppDefine from './LAppDefine';
-import MatrixStack from './utils/MatrixStack';
-import LAppLive2DManager from './LAppLive2DManager';
-import logger from '../logger';
+import { L2DMatrix44, L2DTargetPoint, L2DViewMatrix } from './Live2DFramework.js';
+import LAppDefine from './LAppDefine.js';
+import MatrixStack from './utils/MatrixStack.js';
+import LAppLive2DManager from './LAppLive2DManager.js';
+import logger from '../logger.js';
 
 class Model {
   constructor() {

@@ -1,9 +1,9 @@
 /* global Live2D */
-import { Live2DFramework } from './Live2DFramework';
-import LAppModel from './LAppModel';
-import PlatformManager from './PlatformManager';
-import LAppDefine from './LAppDefine';
-import logger from '../logger';
+import { Live2DFramework } from './Live2DFramework.js';
+import LAppModel from './LAppModel.js';
+import PlatformManager from './PlatformManager.js';
+import LAppDefine from './LAppDefine.js';
+import logger from '../logger.js';
 
 class LAppLive2DManager {
   constructor() {
