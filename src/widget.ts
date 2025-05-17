@@ -130,17 +130,7 @@ async function loadWidget(config: Config) {
         </div>`,
   );
   const model = new ModelManager(config);
-  let modelId: number | null = parseInt(localStorage.getItem('modelId') as string, 10);
-  let modelTexturesId: number | null = parseInt(
-    localStorage.getItem('modelTexturesId') as string, 10
-  );
-  if (isNaN(modelId) || isNaN(modelTexturesId)) {
-    modelTexturesId = 0;
-  }
-  if (isNaN(modelId)) {
-    modelId = config.modelId || (model.useCDN ? 0 : 1);
-  }
-  await model.loadModel(modelId, modelTexturesId, '');
+  await model.loadModel('');
   registerTools(model, config);
   if (config.drag) registerDrag();
   if (config.waifuPath) {
