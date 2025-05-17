@@ -25,6 +25,7 @@ class ModelManager {
   private modelList: ModelList | null = null;
   private readonly model: Model;
   private modelInitialized: boolean;
+  private modelJSONCache: Record<string, any>;
 
   /**
    * 创建一个 Model 实例。
@@ -60,6 +61,7 @@ class ModelManager {
     this._modelTexturesId = modelTexturesId;
     this.model = new Model();
     this.modelInitialized = false;
+    this.modelJSONCache = {};
   }
 
   public set modelId(modelId: number) {
@@ -80,12 +82,24 @@ class ModelManager {
     return this._modelTexturesId;
   }
 
-  async loadLive2d(modelSettingPath: string) {
+  async fetchWithCache(url: string) {
+    let result;
+    if (url in this.modelJSONCache) {
+      result = this.modelJSONCache[url];
+    } else {
+      const response = await fetch(url);
+      result = await response.json();
+      this.modelJSONCache[url] = result;
+    }
+    return result;
+  }
+
+  async loadLive2d(modelSettingPath: string, modelSetting: object) {
     if (!this.modelInitialized) {
       this.modelInitialized = true;
-      await this.model.init('live2d', modelSettingPath);
+      await this.model.init('live2d', modelSettingPath, modelSetting);
     } else {
-      await this.model.changeModel(modelSettingPath);
+      await this.model.changeModelWithJSON(modelSettingPath, modelSetting);
     }
     logger.info(`Model ${modelSettingPath} loaded`);
   }
@@ -97,6 +111,11 @@ class ModelManager {
     const response = await fetch(`${this.cdnPath}model_list.json`);
     const modelList = await response.json();
     return modelList;
+  }
+
+  async loadTextureCache(modelName: string): Promise<any[]> {
+    const textureCache = await this.fetchWithCache(`${this.cdnPath}model/${modelName}/textures.cache`);
+    return textureCache;
   }
 
   /**
@@ -111,10 +130,18 @@ class ModelManager {
       if (!this.modelList) {
         this.modelList = await this.loadModelList();
       }
-      const target = randomSelection(this.modelList.models[modelId]);
-      await this.loadLive2d(`${this.cdnPath}model/${target}/index.json`);
+      const modelName = randomSelection(this.modelList.models[modelId]);
+      const modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
+      const textureCache = await this.loadTextureCache(modelName);
+      const modelSetting = await this.fetchWithCache(modelSettingPath);
+      let textures = textureCache[modelTexturesId];
+      if (typeof textures === 'string') textures = [textures];
+      modelSetting.textures = textures;
+      await this.loadLive2d(modelSettingPath, modelSetting);
     } else {
-      await this.loadLive2d(`${this.apiPath}get/?id=${modelId}-${modelTexturesId}`);
+      const modelSettingPath = `${this.apiPath}get/?id=${modelId}-${modelTexturesId}`;
+      const modelSetting = await this.fetchWithCache(modelSettingPath);
+      await this.loadLive2d(modelSettingPath, modelSetting);
     }
     showMessage(message, 4000, 10);
   }
@@ -123,16 +150,22 @@ class ModelManager {
    * 加载随机材质的模型。
    */
   async loadRandTexture() {
-    const { modelId } = this;
+    const { modelId, modelTexturesId } = this;
     if (this.useCDN) {
       if (!this.modelList) {
         this.modelList = await this.loadModelList();
       }
-      const target = randomSelection(this.modelList.models[modelId]);
-      await this.loadLive2d(`${this.cdnPath}model/${target}/index.json`);
+      const modelName = randomSelection(this.modelList.models[modelId]);
+      const modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
+      const textureCache = await this.loadTextureCache(modelName);
+      const modelSetting = await this.fetchWithCache(modelSettingPath);
+      this.modelTexturesId = Math.floor(Math.random() * textureCache.length);
+      let textures = textureCache[this.modelTexturesId];
+      if (typeof textures === 'string') textures = [textures];
+      modelSetting.textures = textures;
+      await this.loadLive2d(modelSettingPath, modelSetting);
       showMessage('我的新衣服好看嘛？', 4000, 10);
     } else {
-      const { modelTexturesId } = this;
       // Optional 'rand' (Random), 'switch' (Switch by order)
       const response = await fetch(`${this.apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`);
       const result = await response.json();

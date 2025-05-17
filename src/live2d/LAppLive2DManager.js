@@ -42,7 +42,22 @@ class LAppLive2DManager {
         this.reloading = false;
         resolve();
       });
-    })
+    });
+  }
+
+  async changeModelWithJSON(gl, modelSettingPath, modelSetting) {
+    if (this.reloading) return;
+    this.reloading = true;
+
+    const oldModel = this.model;
+    const newModel = new LAppModel();
+
+    await newModel.loadModelSetting(modelSettingPath, modelSetting);
+    if (oldModel) {
+      oldModel.release(gl);
+    }
+    this.model = newModel;
+    this.reloading = false;
   }
 
   setDrag(x, y) {

@@ -46,7 +46,7 @@ class Model {
     }
   }
 
-  async init(canvasId, modelSettingPath) {
+  async init(canvasId, modelSettingPath, modelSetting) {
     this.initL2dCanvas(canvasId);
     const width = this.canvas.width;
     const height = this.canvas.height;
@@ -91,7 +91,7 @@ class Model {
 
     this.gl.clearColor(0.0, 0.0, 0.0, 0.0);
 
-    await this.changeModel(modelSettingPath);
+    await this.changeModelWithJSON(modelSettingPath, modelSetting);
 
     this.startDraw();
   }
@@ -143,6 +143,10 @@ class Model {
 
   async changeModel(modelSettingPath) {
     await this.live2DMgr.changeModel(this.gl, modelSettingPath);
+  }
+
+  async changeModelWithJSON(modelSettingPath, modelSetting) {
+    await this.live2DMgr.changeModelWithJSON(this.gl, modelSettingPath, modelSetting);
   }
 
   modelScaling(scale) {

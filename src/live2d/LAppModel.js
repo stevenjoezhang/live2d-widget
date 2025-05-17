@@ -20,6 +20,130 @@ class LAppModel extends L2DBaseModel {
     this.tmpMatrix = [];
   }
 
+  async loadJSON(callback) {
+    const path = this.modelHomeDir + this.modelSetting.getModelFile();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    this.loadModelData(path, model => {
+      for (let i = 0; i < this.modelSetting.getTextureNum(); i++) {
+        const texPaths =
+          this.modelHomeDir + this.modelSetting.getTextureFile(i);
+
+        this.loadTexture(i, texPaths, () => {
+          if (this.isTexLoaded) {
+            if (this.modelSetting.getExpressionNum() > 0) {
+              this.expressions = {};
+
+              for (
+                let j = 0;
+                j < this.modelSetting.getExpressionNum();
+                j++
+              ) {
+                const expName = this.modelSetting.getExpressionName(j);
+                const expFilePath =
+                  this.modelHomeDir +
+                  this.modelSetting.getExpressionFile(j);
+
+                this.loadExpression(expName, expFilePath);
+              }
+            } else {
+              this.expressionManager = null;
+              this.expressions = {};
+            }
+
+            if (this.eyeBlink == null) {
+              this.eyeBlink = new L2DEyeBlink();
+            }
+
+            if (this.modelSetting.getPhysicsFile() != null) {
+              this.loadPhysics(
+                this.modelHomeDir + this.modelSetting.getPhysicsFile(),
+              );
+            } else {
+              this.physics = null;
+            }
+
+            if (this.modelSetting.getPoseFile() != null) {
+              this.loadPose(
+                this.modelHomeDir + this.modelSetting.getPoseFile(),
+                () => {
+                  this.pose.updateParam(this.live2DModel);
+                },
+              );
+            } else {
+              this.pose = null;
+            }
+
+            if (this.modelSetting.getLayout() != null) {
+              const layout = this.modelSetting.getLayout();
+              if (layout['width'] != null)
+                this.modelMatrix.setWidth(layout['width']);
+              if (layout['height'] != null)
+                this.modelMatrix.setHeight(layout['height']);
+
+              if (layout['x'] != null) this.modelMatrix.setX(layout['x']);
+              if (layout['y'] != null) this.modelMatrix.setY(layout['y']);
+              if (layout['center_x'] != null)
+                this.modelMatrix.centerX(layout['center_x']);
+              if (layout['center_y'] != null)
+                this.modelMatrix.centerY(layout['center_y']);
+              if (layout['top'] != null)
+                this.modelMatrix.top(layout['top']);
+              if (layout['bottom'] != null)
+                this.modelMatrix.bottom(layout['bottom']);
+              if (layout['left'] != null)
+                this.modelMatrix.left(layout['left']);
+              if (layout['right'] != null)
+                this.modelMatrix.right(layout['right']);
+            }
+
+            for (let j = 0; j < this.modelSetting.getInitParamNum(); j++) {
+              this.live2DModel.setParamFloat(
+                this.modelSetting.getInitParamID(j),
+                this.modelSetting.getInitParamValue(j),
+              );
+            }
+
+            for (
+              let j = 0;
+              j < this.modelSetting.getInitPartsVisibleNum();
+              j++
+            ) {
+              this.live2DModel.setPartsOpacity(
+                this.modelSetting.getInitPartsVisibleID(j),
+                this.modelSetting.getInitPartsVisibleValue(j),
+              );
+            }
+
+            this.live2DModel.saveParam();
+            // this.live2DModel.setGL(gl);
+
+            this.preloadMotionGroup(LAppDefine.MOTION_GROUP_IDLE);
+            this.mainMotionManager.stopAllMotions();
+
+            this.setUpdating(false);
+            this.setInitialized(true);
+
+            if (typeof callback == 'function') callback();
+          }
+        });
+      }
+    });
+  }
+
+  async loadModelSetting(modelSettingPath, modelSetting) {
+    this.setUpdating(true);
+    this.setInitialized(false);
+
+    this.modelHomeDir = modelSettingPath.substring(
+      0,
+      modelSettingPath.lastIndexOf('/') + 1,
+    );
+
+    this.modelSetting = new ModelSettingJson();
+    this.modelSetting.json = modelSetting;
+    await this.loadJSON();
+  }
+
   load(gl, modelSettingPath, callback) {
     this.setUpdating(true);
     this.setInitialized(false);
@@ -32,113 +156,7 @@ class LAppModel extends L2DBaseModel {
     this.modelSetting = new ModelSettingJson();
 
     this.modelSetting.loadModelSetting(modelSettingPath, () => {
-      const path = this.modelHomeDir + this.modelSetting.getModelFile();
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      this.loadModelData(path, model => {
-        for (let i = 0; i < this.modelSetting.getTextureNum(); i++) {
-          const texPaths =
-            this.modelHomeDir + this.modelSetting.getTextureFile(i);
-
-          this.loadTexture(i, texPaths, () => {
-            if (this.isTexLoaded) {
-              if (this.modelSetting.getExpressionNum() > 0) {
-                this.expressions = {};
-
-                for (
-                  let j = 0;
-                  j < this.modelSetting.getExpressionNum();
-                  j++
-                ) {
-                  const expName = this.modelSetting.getExpressionName(j);
-                  const expFilePath =
-                    this.modelHomeDir +
-                    this.modelSetting.getExpressionFile(j);
-
-                  this.loadExpression(expName, expFilePath);
-                }
-              } else {
-                this.expressionManager = null;
-                this.expressions = {};
-              }
-
-              if (this.eyeBlink == null) {
-                this.eyeBlink = new L2DEyeBlink();
-              }
-
-              if (this.modelSetting.getPhysicsFile() != null) {
-                this.loadPhysics(
-                  this.modelHomeDir + this.modelSetting.getPhysicsFile(),
-                );
-              } else {
-                this.physics = null;
-              }
-
-              if (this.modelSetting.getPoseFile() != null) {
-                this.loadPose(
-                  this.modelHomeDir + this.modelSetting.getPoseFile(),
-                  () => {
-                    this.pose.updateParam(this.live2DModel);
-                  },
-                );
-              } else {
-                this.pose = null;
-              }
-
-              if (this.modelSetting.getLayout() != null) {
-                const layout = this.modelSetting.getLayout();
-                if (layout['width'] != null)
-                  this.modelMatrix.setWidth(layout['width']);
-                if (layout['height'] != null)
-                  this.modelMatrix.setHeight(layout['height']);
-
-                if (layout['x'] != null) this.modelMatrix.setX(layout['x']);
-                if (layout['y'] != null) this.modelMatrix.setY(layout['y']);
-                if (layout['center_x'] != null)
-                  this.modelMatrix.centerX(layout['center_x']);
-                if (layout['center_y'] != null)
-                  this.modelMatrix.centerY(layout['center_y']);
-                if (layout['top'] != null)
-                  this.modelMatrix.top(layout['top']);
-                if (layout['bottom'] != null)
-                  this.modelMatrix.bottom(layout['bottom']);
-                if (layout['left'] != null)
-                  this.modelMatrix.left(layout['left']);
-                if (layout['right'] != null)
-                  this.modelMatrix.right(layout['right']);
-              }
-
-              for (let j = 0; j < this.modelSetting.getInitParamNum(); j++) {
-                this.live2DModel.setParamFloat(
-                  this.modelSetting.getInitParamID(j),
-                  this.modelSetting.getInitParamValue(j),
-                );
-              }
-
-              for (
-                let j = 0;
-                j < this.modelSetting.getInitPartsVisibleNum();
-                j++
-              ) {
-                this.live2DModel.setPartsOpacity(
-                  this.modelSetting.getInitPartsVisibleID(j),
-                  this.modelSetting.getInitPartsVisibleValue(j),
-                );
-              }
-
-              this.live2DModel.saveParam();
-              // this.live2DModel.setGL(gl);
-
-              this.preloadMotionGroup(LAppDefine.MOTION_GROUP_IDLE);
-              this.mainMotionManager.stopAllMotions();
-
-              this.setUpdating(false);
-              this.setInitialized(true);
-
-              if (typeof callback == 'function') callback();
-            }
-          });
-        }
-      });
+      this.loadJSON(callback);
     });
   }
 
