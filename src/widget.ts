@@ -34,13 +34,13 @@ function registerTools(model: ModelManager, config: Config) {
 
 /**
  * 注册事件监听器。
- * @param {Tips} result - 结果配置。
+ * @param {Tips} tips - 结果配置。
  */
-function registerEventListener(result: Tips) {
+function registerEventListener(tips: Tips) {
   // Detect user activity and display messages when idle
   let userAction = false;
   let userActionTimer: any;
-  const messageArray = result.message.default;
+  const messageArray = tips.message.default;
   let lastHoverElement: any;
   window.addEventListener('mousemove', () => (userAction = true));
   window.addEventListener('keydown', () => (userAction = true));
@@ -55,10 +55,10 @@ function registerEventListener(result: Tips) {
       }, 20000);
     }
   }, 1000);
-  showMessage(welcomeMessage(result.time), 7000, 11);
+  showMessage(welcomeMessage(tips.time), 7000, 11);
   window.addEventListener('mouseover', (event) => {
     // eslint-disable-next-line prefer-const
-    for (let { selector, text } of result.mouseover) {
+    for (let { selector, text } of tips.mouseover) {
       if (!(event.target as HTMLElement)?.closest(selector)) continue;
       if (lastHoverElement === selector) return;
       lastHoverElement = selector;
@@ -73,7 +73,7 @@ function registerEventListener(result: Tips) {
   });
   window.addEventListener('click', (event) => {
     // eslint-disable-next-line prefer-const
-    for (let { selector, text } of result.click) {
+    for (let { selector, text } of tips.click) {
       if (!(event.target as HTMLElement)?.closest(selector)) continue;
       text = randomSelection(text);
       text = (text as string).replace(
@@ -84,7 +84,7 @@ function registerEventListener(result: Tips) {
       return;
     }
   });
-  result.seasons.forEach(({ date, text }) => {
+  tips.seasons.forEach(({ date, text }) => {
     const now = new Date(),
       after = date.split('-')[0],
       before = date.split('-')[1] || after;
@@ -103,14 +103,14 @@ function registerEventListener(result: Tips) {
   const devtools = () => { };
   console.log('%c', devtools);
   devtools.toString = () => {
-    showMessage(result.message.console, 6000, 9);
+    showMessage(tips.message.console, 6000, 9);
   };
   window.addEventListener('copy', () => {
-    showMessage(result.message.copy, 6000, 9);
+    showMessage(tips.message.copy, 6000, 9);
   });
   window.addEventListener('visibilitychange', () => {
     if (!document.hidden)
-      showMessage(result.message.visibilitychange, 6000, 9);
+      showMessage(tips.message.visibilitychange, 6000, 9);
   });
 }
 

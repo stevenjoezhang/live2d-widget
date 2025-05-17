@@ -34,10 +34,10 @@ function string(opts = {}) {
 }
 
 export default {
-  input: 'build/waifu-tips.js',
+  input: 'build/index.js',
   output: {
     name: 'live2d_widget',
-    file: 'dist/waifu-tips.js',
+    file: 'dist/index.js',
     format: 'iife',
   },
   plugins: [
