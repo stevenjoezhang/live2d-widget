@@ -1,7 +1,8 @@
 /**
  * @file 定义 tips 配置的类型。
- * @module types/result
+ * @module types/tips
  */
+// eslint-disable-next-line  @typescript-eslint/no-unused-vars
 interface Tips {
   /**
    * 默认消息配置。

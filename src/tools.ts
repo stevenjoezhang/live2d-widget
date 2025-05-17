@@ -11,7 +11,7 @@ import fa_camera_retro from '@fortawesome/fontawesome-free/svgs/solid/camera-ret
 import fa_info_circle from '@fortawesome/fontawesome-free/svgs/solid/circle-info.svg';
 import fa_xmark from '@fortawesome/fontawesome-free/svgs/solid/xmark.svg';
 
-import showMessage from './message.js';
+import { showMessage } from './message.js';
 
 /**
  * 显示一句一言。
