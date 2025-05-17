@@ -13,6 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+import logger from '../logger';
 var L2DBaseModel = (function () {
     function L2DBaseModel() {
         this.live2DModel = null;
@@ -20,7 +21,6 @@ var L2DBaseModel = (function () {
         this.eyeBlink = null;
         this.physics = null;
         this.pose = null;
-        this.debugMode = false;
         this.initialized = false;
         this.updating = false;
         this.alpha = 1;
@@ -91,14 +91,13 @@ var L2DBaseModel = (function () {
     L2DBaseModel.prototype.loadModelData = function (path, callback) {
         var _this = this;
         var pm = Live2DFramework.getPlatformManager();
-        if (this.debugMode)
-            pm.log('Load model : ' + path);
+        logger.info('Load model : ' + path);
         pm.loadLive2DModel(path, function (l2dModel) {
             _this.live2DModel = l2dModel;
             _this.live2DModel.saveParam();
             var _err = Live2D.getError();
             if (_err != 0) {
-                console.error('Error : Failed to loadModelData().');
+                logger.error('Error : Failed to loadModelData().');
                 return;
             }
             _this.modelMatrix = new L2DModelMatrix(_this.live2DModel.getCanvasWidth(), _this.live2DModel.getCanvasHeight());
@@ -111,8 +110,7 @@ var L2DBaseModel = (function () {
         var _this = this;
         texCounter++;
         var pm = Live2DFramework.getPlatformManager();
-        if (this.debugMode)
-            pm.log('Load Texture : ' + path);
+        logger.info('Load Texture : ' + path);
         pm.loadTexture(this.live2DModel, no, path, function () {
             texCounter--;
             if (texCounter == 0)
@@ -124,8 +122,7 @@ var L2DBaseModel = (function () {
     L2DBaseModel.prototype.loadMotion = function (name, path, callback) {
         var _this = this;
         var pm = Live2DFramework.getPlatformManager();
-        if (this.debugMode)
-            pm.log('Load Motion : ' + path);
+        logger.trace('Load Motion : ' + path);
         var motion = null;
         pm.loadBytes(path, function (buf) {
             motion = Live2DMotion.loadMotion(buf);
@@ -138,8 +135,7 @@ var L2DBaseModel = (function () {
     L2DBaseModel.prototype.loadExpression = function (name, path, callback) {
         var _this = this;
         var pm = Live2DFramework.getPlatformManager();
-        if (this.debugMode)
-            pm.log('Load Expression : ' + path);
+        logger.trace('Load Expression : ' + path);
         pm.loadBytes(path, function (buf) {
             if (name != null) {
                 _this.expressions[name] = L2DExpressionMotion.loadJson(buf);
@@ -151,8 +147,7 @@ var L2DBaseModel = (function () {
     L2DBaseModel.prototype.loadPose = function (path, callback) {
         var _this = this;
         var pm = Live2DFramework.getPlatformManager();
-        if (this.debugMode)
-            pm.log('Load Pose : ' + path);
+        logger.trace('Load Pose : ' + path);
         try {
             pm.loadBytes(path, function (buf) {
                 _this.pose = L2DPose.load(buf);
@@ -161,21 +156,20 @@ var L2DBaseModel = (function () {
             });
         }
         catch (e) {
-            console.warn(e);
+            logger.warn(e);
         }
     };
     L2DBaseModel.prototype.loadPhysics = function (path) {
         var _this = this;
         var pm = Live2DFramework.getPlatformManager();
-        if (this.debugMode)
-            pm.log('Load Physics : ' + path);
+        logger.trace('Load Physics : ' + path);
         try {
             pm.loadBytes(path, function (buf) {
                 _this.physics = L2DPhysics.load(buf);
             });
         }
         catch (e) {
-            console.warn(e);
+            logger.warn(e);
         }
     };
     L2DBaseModel.prototype.hitTestSimple = function (drawID, testX, testY) {

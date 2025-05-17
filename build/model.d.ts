@@ -1,22 +1,38 @@
+import { LogLevel } from './logger.js';
 interface ModelList {
     messages: string[];
     models: string | string[];
 }
+interface Config {
+    waifuPath: string;
+    apiPath?: string;
+    cdnPath?: string;
+    modelId?: number;
+    tools?: string[];
+    drag?: boolean;
+    logLevel?: LogLevel;
+}
 declare class ModelManager {
-    private readonly useCDN;
+    readonly useCDN: boolean;
     private readonly apiPath;
     private readonly cdnPath;
+    private _modelId;
+    private _modelTexturesId;
     private modelList;
     private readonly model;
     private modelInitialized;
-    constructor(config: {
-        apiPath?: string;
-        cdnPath?: string;
-    });
-    loadLive2d(modelSettingPath: string): Promise<void>;
+    private modelJSONCache;
+    constructor(config: Config);
+    set modelId(modelId: number);
+    get modelId(): number;
+    set modelTexturesId(modelTexturesId: number);
+    get modelTexturesId(): number;
+    fetchWithCache(url: string): Promise<any>;
+    loadLive2d(modelSettingPath: string, modelSetting: object): Promise<void>;
     loadModelList(): Promise<ModelList>;
-    loadModel(modelId: number, modelTexturesId: number, message: string): Promise<void>;
-    loadRandModel(): Promise<void>;
-    loadOtherModel(): Promise<void>;
+    loadTextureCache(modelName: string): Promise<any[]>;
+    loadModel(message: string): Promise<void>;
+    loadRandTexture(): Promise<void>;
+    loadNextModel(): Promise<void>;
 }
-export default ModelManager;
+export { ModelManager, Config };

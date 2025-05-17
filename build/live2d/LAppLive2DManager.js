@@ -38,6 +38,7 @@ import { Live2DFramework } from './Live2DFramework';
 import LAppModel from './LAppModel';
 import PlatformManager from './PlatformManager';
 import LAppDefine from './LAppDefine';
+import logger from '../logger';
 var LAppLive2DManager = (function () {
     function LAppLive2DManager() {
         this.model = null;
@@ -76,38 +77,57 @@ var LAppLive2DManager = (function () {
             });
         });
     };
+    LAppLive2DManager.prototype.changeModelWithJSON = function (gl, modelSettingPath, modelSetting) {
+        return __awaiter(this, void 0, void 0, function () {
+            var oldModel, newModel;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (this.reloading)
+                            return [2];
+                        this.reloading = true;
+                        oldModel = this.model;
+                        newModel = new LAppModel();
+                        return [4, newModel.loadModelSetting(modelSettingPath, modelSetting)];
+                    case 1:
+                        _a.sent();
+                        if (oldModel) {
+                            oldModel.release(gl);
+                        }
+                        this.model = newModel;
+                        this.reloading = false;
+                        return [2];
+                }
+            });
+        });
+    };
     LAppLive2DManager.prototype.setDrag = function (x, y) {
         if (this.model) {
             this.model.setDrag(x, y);
         }
     };
     LAppLive2DManager.prototype.maxScaleEvent = function () {
-        if (LAppDefine.DEBUG_LOG)
-            console.log('Max scale event.');
+        logger.trace('Max scale event.');
         if (this.model) {
             this.model.startRandomMotion(LAppDefine.MOTION_GROUP_PINCH_IN, LAppDefine.PRIORITY_NORMAL);
         }
     };
     LAppLive2DManager.prototype.minScaleEvent = function () {
-        if (LAppDefine.DEBUG_LOG)
-            console.log('Min scale event.');
+        logger.trace('Min scale event.');
         if (this.model) {
             this.model.startRandomMotion(LAppDefine.MOTION_GROUP_PINCH_OUT, LAppDefine.PRIORITY_NORMAL);
         }
     };
     LAppLive2DManager.prototype.tapEvent = function (x, y) {
-        if (LAppDefine.DEBUG_LOG)
-            console.log('tapEvent view x:' + x + ' y:' + y);
+        logger.trace('tapEvent view x:' + x + ' y:' + y);
         if (!this.model)
             return false;
         if (this.model.hitTest(LAppDefine.HIT_AREA_HEAD, x, y)) {
-            if (LAppDefine.DEBUG_LOG)
-                console.log('Tap face.');
+            logger.trace('Tap face.');
             this.model.setRandomExpression();
         }
         else if (this.model.hitTest(LAppDefine.HIT_AREA_BODY, x, y)) {
-            if (LAppDefine.DEBUG_LOG)
-                console.log('Tap body.');
+            logger.trace('Tap body.');
             this.model.startRandomMotion(LAppDefine.MOTION_GROUP_TAP_BODY, LAppDefine.PRIORITY_NORMAL);
         }
         return true;

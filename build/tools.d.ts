@@ -1,4 +1,4 @@
-declare function showHitokoto(): void;
+declare function showHitokoto(): Promise<void>;
 declare const tools: {
     hitokoto: {
         icon: string;

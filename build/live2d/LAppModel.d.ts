@@ -3,6 +3,8 @@ declare class LAppModel extends L2DBaseModel {
     modelHomeDir: string;
     modelSetting: ModelSettingJson | null;
     tmpMatrix: any[];
+    loadJSON(callback: any): void;
+    loadModelSetting(modelSettingPath: any, modelSetting: any): Promise<void>;
     load(gl: any, modelSettingPath: any, callback: any): void;
     release(gl: any): void;
     preloadMotionGroup(name: any): void;

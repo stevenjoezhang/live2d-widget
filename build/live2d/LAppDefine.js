@@ -1,6 +1,4 @@
 var LAppDefine = {
-    DEBUG_LOG: true,
-    DEBUG_MOUSE_LOG: false,
     VIEW_MAX_SCALE: 2,
     VIEW_MIN_SCALE: 0.8,
     VIEW_LOGICAL_LEFT: -1,

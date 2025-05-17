@@ -38,6 +38,7 @@ import { L2DMatrix44, L2DTargetPoint, L2DViewMatrix } from './Live2DFramework';
 import LAppDefine from './LAppDefine';
 import MatrixStack from './utils/MatrixStack';
 import LAppLive2DManager from './LAppLive2DManager';
+import logger from '../logger';
 var Model = (function () {
     function Model() {
         this.live2DMgr = new LAppLive2DManager();
@@ -68,7 +69,7 @@ var Model = (function () {
             this.canvas.addEventListener('touchmove', this.touchEvent.bind(this), false);
         }
     };
-    Model.prototype.init = function (canvasId, modelSettingPath) {
+    Model.prototype.init = function (canvasId, modelSettingPath, modelSetting) {
         return __awaiter(this, void 0, void 0, function () {
             var width, height, ratio, left, right, bottom, top;
             return __generator(this, function (_a) {
@@ -95,12 +96,12 @@ var Model = (function () {
                         this.deviceToScreen.multScale(2 / width, -2 / width);
                         this.gl = this.canvas.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true });
                         if (!this.gl) {
-                            console.error('Failed to create WebGL context.');
+                            logger.error('Failed to create WebGL context.');
                             return [2];
                         }
                         Live2D.setGL(this.gl);
                         this.gl.clearColor(0.0, 0.0, 0.0, 0.0);
-                        return [4, this.changeModel(modelSettingPath)];
+                        return [4, this.changeModelWithJSON(modelSettingPath, modelSetting)];
                     case 1:
                         _a.sent();
                         this.startDraw();
@@ -154,6 +155,18 @@ var Model = (function () {
             });
         });
     };
+    Model.prototype.changeModelWithJSON = function (modelSettingPath, modelSetting) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.live2DMgr.changeModelWithJSON(this.gl, modelSettingPath, modelSetting)];
+                    case 1:
+                        _a.sent();
+                        return [2];
+                }
+            });
+        });
+    };
     Model.prototype.modelScaling = function (scale) {
         var isMaxScale = this.viewMatrix.isMaxScale();
         var isMinScale = this.viewMatrix.isMinScale();
@@ -176,16 +189,15 @@ var Model = (function () {
         var sy = this.transformScreenY(event.clientY - rect.top);
         var vx = this.transformViewX(event.clientX - rect.left);
         var vy = this.transformViewY(event.clientY - rect.top);
-        if (LAppDefine.DEBUG_MOUSE_LOG)
-            l2dLog('onMouseDown device( x:' +
-                event.clientX +
-                ' y:' +
-                event.clientY +
-                ' ) view( x:' +
-                vx +
-                ' y:' +
-                vy +
-                ')');
+        logger.trace('onMouseDown device( x:' +
+            event.clientX +
+            ' y:' +
+            event.clientY +
+            ' ) view( x:' +
+            vx +
+            ' y:' +
+            vy +
+            ')');
         this.lastMouseX = sx;
         this.lastMouseY = sy;
         this.dragMgr.setPoint(vx, vy);
@@ -197,16 +209,15 @@ var Model = (function () {
         var sy = this.transformScreenY(event.clientY - rect.top);
         var vx = this.transformViewX(event.clientX - rect.left);
         var vy = this.transformViewY(event.clientY - rect.top);
-        if (LAppDefine.DEBUG_MOUSE_LOG)
-            l2dLog('onMouseMove device( x:' +
-                event.clientX +
-                ' y:' +
-                event.clientY +
-                ' ) view( x:' +
-                vx +
-                ' y:' +
-                vy +
-                ')');
+        logger.trace('onMouseMove device( x:' +
+            event.clientX +
+            ' y:' +
+            event.clientY +
+            ' ) view( x:' +
+            vx +
+            ' y:' +
+            vy +
+            ')');
         if (this.drag) {
             this.lastMouseX = sx;
             this.lastMouseY = sy;
@@ -291,11 +302,4 @@ var Model = (function () {
     };
     return Model;
 }());
-function l2dLog(msg) {
-    if (!LAppDefine.DEBUG_LOG)
-        return;
-    var myconsole = document.getElementById('myconsole');
-    myconsole.innerHTML = myconsole.innerHTML + '<br>' + msg;
-    console.log(msg);
-}
 export default Model;

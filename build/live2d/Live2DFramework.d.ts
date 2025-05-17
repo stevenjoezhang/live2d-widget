@@ -4,7 +4,6 @@ export class L2DBaseModel {
     eyeBlink: any;
     physics: L2DPhysics | null;
     pose: L2DPose | null;
-    debugMode: boolean;
     initialized: boolean;
     updating: boolean;
     alpha: number;

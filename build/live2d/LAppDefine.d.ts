@@ -1,7 +1,5 @@
 export default LAppDefine;
 declare namespace LAppDefine {
-    let DEBUG_LOG: boolean;
-    let DEBUG_MOUSE_LOG: boolean;
     let VIEW_MAX_SCALE: number;
     let VIEW_MIN_SCALE: number;
     let VIEW_LOGICAL_LEFT: number;

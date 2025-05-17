@@ -34,13 +34,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import ModelManager from './model.js';
-import showMessage from './message.js';
-import randomSelection from './utils.js';
+import { ModelManager } from './model.js';
+import { showMessage, welcomeMessage } from './message.js';
+import { randomSelection } from './utils.js';
 import tools from './tools.js';
+import logger from './logger.js';
+import registerDrag from './drag.js';
 function registerTools(model, config) {
-    tools['switch-model'].callback = function () { return model.loadOtherModel(); };
-    tools['switch-texture'].callback = function () { return model.loadRandModel(); };
+    tools['switch-model'].callback = function () { return model.loadNextModel(); };
+    tools['switch-texture'].callback = function () { return model.loadRandTexture(); };
     if (!Array.isArray(config.tools)) {
         config.tools = Object.keys(tools);
     }
@@ -57,40 +59,10 @@ function registerTools(model, config) {
         }
     }
 }
-function welcomeMessage(time) {
-    if (location.pathname === '/') {
-        for (var _i = 0, time_1 = time; _i < time_1.length; _i++) {
-            var _a = time_1[_i], hour = _a.hour, text_1 = _a.text;
-            var now = new Date(), after = hour.split('-')[0], before = hour.split('-')[1] || after;
-            if (Number(after) <= now.getHours() &&
-                now.getHours() <= Number(before)) {
-                return text_1;
-            }
-        }
-    }
-    var text = "\u6B22\u8FCE\u9605\u8BFB<span>\u300C".concat(document.title.split(' - ')[0], "\u300D</span>");
-    var from;
-    if (document.referrer !== '') {
-        var referrer = new URL(document.referrer), domain = referrer.hostname.split('.')[1];
-        var domains = {
-            baidu: '百度',
-            so: '360搜索',
-            google: '谷歌搜索',
-        };
-        if (location.hostname === referrer.hostname)
-            return text;
-        if (domain in domains)
-            from = domains[domain];
-        else
-            from = referrer.hostname;
-        return "Hello\uFF01\u6765\u81EA <span>".concat(from, "</span> \u7684\u670B\u53CB<br>").concat(text);
-    }
-    return text;
-}
-function registerEventListener(result) {
+function registerEventListener(tips) {
     var userAction = false;
     var userActionTimer;
-    var messageArray = result.message.default;
+    var messageArray = tips.message.default;
     var lastHoverElement;
     window.addEventListener('mousemove', function () { return (userAction = true); });
     window.addEventListener('keydown', function () { return (userAction = true); });
@@ -106,10 +78,10 @@ function registerEventListener(result) {
             }, 20000);
         }
     }, 1000);
-    showMessage(welcomeMessage(result.time), 7000, 11);
+    showMessage(welcomeMessage(tips.time), 7000, 11);
     window.addEventListener('mouseover', function (event) {
         var _a;
-        for (var _i = 0, _b = result.mouseover; _i < _b.length; _i++) {
+        for (var _i = 0, _b = tips.mouseover; _i < _b.length; _i++) {
             var _c = _b[_i], selector = _c.selector, text = _c.text;
             if (!((_a = event.target) === null || _a === void 0 ? void 0 : _a.closest(selector)))
                 continue;
@@ -124,7 +96,7 @@ function registerEventListener(result) {
     });
     window.addEventListener('click', function (event) {
         var _a;
-        for (var _i = 0, _b = result.click; _i < _b.length; _i++) {
+        for (var _i = 0, _b = tips.click; _i < _b.length; _i++) {
             var _c = _b[_i], selector = _c.selector, text = _c.text;
             if (!((_a = event.target) === null || _a === void 0 ? void 0 : _a.closest(selector)))
                 continue;
@@ -134,7 +106,7 @@ function registerEventListener(result) {
             return;
         }
     });
-    result.seasons.forEach(function (_a) {
+    tips.seasons.forEach(function (_a) {
         var date = _a.date, text = _a.text;
         var now = new Date(), after = date.split('-')[0], before = date.split('-')[1] || after;
         if (Number(after.split('/')[0]) <= now.getMonth() + 1 &&
@@ -149,66 +121,54 @@ function registerEventListener(result) {
     var devtools = function () { };
     console.log('%c', devtools);
     devtools.toString = function () {
-        showMessage(result.message.console, 6000, 9);
+        showMessage(tips.message.console, 6000, 9);
     };
     window.addEventListener('copy', function () {
-        showMessage(result.message.copy, 6000, 9);
+        showMessage(tips.message.copy, 6000, 9);
     });
     window.addEventListener('visibilitychange', function () {
         if (!document.hidden)
-            showMessage(result.message.visibilitychange, 6000, 9);
-    });
-}
-function initModel(model, config) {
-    return __awaiter(this, void 0, void 0, function () {
-        var modelId, modelTexturesId;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    modelId = Number(localStorage.getItem('modelId'));
-                    modelTexturesId = Number(localStorage.getItem('modelTexturesId'));
-                    if (!modelId) {
-                        modelId = 1;
-                        modelTexturesId = 53;
-                    }
-                    return [4, model.loadModel(modelId, modelTexturesId, '')];
-                case 1:
-                    _a.sent();
-                    fetch(config.waifuPath)
-                        .then(function (response) { return response.json(); })
-                        .then(registerEventListener);
-                    return [2];
-            }
-        });
+            showMessage(tips.message.visibilitychange, 6000, 9);
     });
 }
 function loadWidget(config) {
     return __awaiter(this, void 0, void 0, function () {
-        var model;
+        var model, response, result;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    model = new ModelManager(config);
                     localStorage.removeItem('waifu-display');
                     sessionStorage.removeItem('waifu-text');
-                    document.body.insertAdjacentHTML('beforeend', "<div id=\"waifu\">\n            <div id=\"waifu-tips\"></div>\n            <canvas id=\"live2d\" width=\"800\" height=\"800\"></canvas>\n            <div id=\"waifu-tool\"></div>\n        </div>");
-                    registerTools(model, config);
-                    return [4, initModel(model, config)];
+                    document.body.insertAdjacentHTML('beforeend', "<div id=\"waifu\">\n       <div id=\"waifu-tips\"></div>\n       <canvas id=\"live2d\" width=\"800\" height=\"800\"></canvas>\n       <div id=\"waifu-tool\"></div>\n     </div>");
+                    model = new ModelManager(config);
+                    return [4, model.loadModel('')];
                 case 1:
                     _a.sent();
+                    registerTools(model, config);
+                    if (config.drag)
+                        registerDrag();
+                    if (!config.waifuPath) return [3, 4];
+                    return [4, fetch(config.waifuPath)];
+                case 2:
+                    response = _a.sent();
+                    return [4, response.json()];
+                case 3:
+                    result = _a.sent();
+                    registerEventListener(result);
+                    _a.label = 4;
+                case 4:
                     document.getElementById('waifu').style.bottom = '0';
                     return [2];
             }
         });
     });
 }
-function initWidget(config, apiPath) {
+function initWidget(config) {
     if (typeof config === 'string') {
-        config = {
-            waifuPath: config,
-            apiPath: apiPath,
-        };
+        logger.error('Your config for Live2d initWidget is outdated. Please refer to https://github.com/stevenjoezhang/live2d-widget/blob/master/dist/autoload.js');
+        return;
     }
+    logger.setLevel(config.logLevel);
     document.body.insertAdjacentHTML('beforeend', "<div id=\"waifu-toggle\">\n       <span>\u770B\u677F\u5A18</span>\n     </div>");
     var toggle = document.getElementById('waifu-toggle');
     toggle === null || toggle === void 0 ? void 0 : toggle.addEventListener('click', function () {
@@ -236,23 +196,4 @@ function initWidget(config, apiPath) {
         loadWidget(config);
     }
 }
-function loadExternalResource(url, type) {
-    return new Promise(function (resolve, reject) {
-        var tag;
-        if (type === 'css') {
-            tag = document.createElement('link');
-            tag.rel = 'stylesheet';
-            tag.href = url;
-        }
-        else if (type === 'js') {
-            tag = document.createElement('script');
-            tag.src = url;
-        }
-        if (tag) {
-            tag.onload = function () { return resolve(url); };
-            tag.onerror = function () { return reject(url); };
-            document.head.appendChild(tag);
-        }
-    });
-}
-export { initWidget, loadExternalResource };
+export { initWidget };

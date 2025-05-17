@@ -5,6 +5,7 @@ declare class LAppLive2DManager {
     getModel(): LAppModel | null;
     releaseModel(gl: any): void;
     changeModel(gl: any, modelSettingPath: any): Promise<any>;
+    changeModelWithJSON(gl: any, modelSettingPath: any, modelSetting: any): Promise<void>;
     setDrag(x: any, y: any): void;
     maxScaleEvent(): void;
     minScaleEvent(): void;

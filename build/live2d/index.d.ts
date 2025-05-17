@@ -13,10 +13,11 @@ declare class Model {
     lastMouseX: number;
     lastMouseY: number;
     initL2dCanvas(canvasId: any): void;
-    init(canvasId: any, modelSettingPath: any): Promise<void>;
+    init(canvasId: any, modelSettingPath: any, modelSetting: any): Promise<void>;
     startDraw(): void;
     draw(): void;
     changeModel(modelSettingPath: any): Promise<void>;
+    changeModelWithJSON(modelSettingPath: any, modelSetting: any): Promise<void>;
     modelScaling(scale: any): void;
     modelTurnHead(event: any): void;
     followPointer(event: any): void;

@@ -1,6 +1,6 @@
 // live2d_path 参数建议使用绝对路径
-const live2d_path = 'https://fastly.jsdelivr.net/npm/live2d-widgets@0/';
-// const live2d_path = '/live2d-widget/dist/';
+const live2d_path = 'https://fastly.jsdelivr.net/npm/live2d-widgets@1/dist/';
+// const live2d_path = '/dist/';
 
 // 封装异步加载资源的方法
 function loadExternalResource(url, type) {
@@ -24,21 +24,24 @@ function loadExternalResource(url, type) {
   });
 }
 
-// 加载 waifu.css live2d.min.js waifu-tips.js
+// 加载 live2d.min.js waifu.css waifu-tips.js
 // 如果担心手机上显示效果不佳，可以通过 `if (screen.width >= 768)` 来判断是否加载
-Promise.all([
-  loadExternalResource(live2d_path + 'waifu.css', 'css'),
-  loadExternalResource(live2d_path + 'live2d.min.js', 'js'),
-  loadExternalResource(live2d_path + 'waifu-tips.js', 'js')
-]).then(() => {
+(async () => {
+  await loadExternalResource(live2d_path + 'live2d.min.js', 'js');
+  await Promise.all([
+    loadExternalResource(live2d_path + 'waifu.css', 'css'),
+    loadExternalResource(live2d_path + 'waifu-tips.js', 'js')
+  ]);
   // 配置选项的具体用法见 README.md
   initWidget({
     waifuPath: live2d_path + 'waifu-tips.json',
     // apiPath: 'https://live2d.fghrsh.net/api/',
     cdnPath: 'https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/',
-    tools: ['hitokoto', 'asteroids', 'switch-model', 'switch-texture', 'photo', 'info', 'quit']
+    tools: ['hitokoto', 'asteroids', 'switch-model', 'switch-texture', 'photo', 'info', 'quit'],
+    logLevel: 'warn',
+    drag: false,
   });
-});
+})();
 
 console.log(`\n%cLive2D%cWidget%c\n`, 'padding: 8px; background: #cd3e45; font-weight: bold; font-size: large; color: white;', 'padding: 8px; background: #ff5450; font-size: large; color: #eee;', '');
 console.log(`

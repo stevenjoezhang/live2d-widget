@@ -1,3 +1,4 @@
+import logger from '../logger';
 var PlatformManager = (function () {
     function PlatformManager() {
         this.cache = {};
@@ -30,7 +31,7 @@ var PlatformManager = (function () {
             var gl = canvas.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true });
             var texture = gl.createTexture();
             if (!texture) {
-                console.error('Failed to generate gl texture name.');
+                logger.error('Failed to generate gl texture name.');
                 return -1;
             }
             if (model.isPremultipliedAlpha() == false) {
@@ -49,7 +50,7 @@ var PlatformManager = (function () {
                 callback();
         };
         loadedImage.onerror = function () {
-            console.error('Failed to load image : ' + path);
+            logger.error('Failed to load image : ' + path);
         };
     };
     PlatformManager.prototype.jsonParseFromBytes = function (buf) {
@@ -63,9 +64,6 @@ var PlatformManager = (function () {
         }
         var jsonObj = JSON.parse(jsonStr);
         return jsonObj;
-    };
-    PlatformManager.prototype.log = function (txt) {
-        console.log(txt);
     };
     return PlatformManager;
 }());
