@@ -28,7 +28,7 @@
 如果你是小白，或者只需要最基础的功能，那么只用将这一行代码加入 html 页面的 `head` 或 `body` 中，即可加载看板娘：
 
 ```html
-<script src="https://fastly.jsdelivr.net/npm/live2d-widgets@0/autoload.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1/autoload.js"></script>
 ```
 
 添加代码的位置取决于你的网站的构建方式。例如，如果你使用的是 [Hexo](https://hexo.io)，那么需要在主题的模版文件中添加以上代码。对于用各种模版引擎生成的页面，修改方法类似。  
@@ -49,7 +49,7 @@
 | `modelId` | `number` | `0` | 默认模型 id |
 | `tools` | `string[]` | 见 `autoload.js` | 加载的小工具按钮 |
 | `drag` | `boolean` | `false` | 支持拖动看板娘 |
-| `logLevel` | `string` | `error` | 日志等级，支持 `error`，`info`，`trace` |
+| `logLevel` | `string` | `error` | 日志等级，支持 `error`，`warn`，`info`，`trace` |
 
 其中，`apiPath` 和 `cdnPath` 两个参数设置其中一项即可。`apiPath` 是后端 API 的 URL，可以自行搭建，并增加模型（需要修改的内容比较多，此处不再赘述），可以参考 [live2d_api](https://github.com/fghrsh/live2d_api)。而 `cdnPath` 则是通过 jsDelivr 这样的 CDN 服务加载资源，更加稳定。
 

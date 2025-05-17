@@ -1,9 +1,16 @@
 {
   "name": "live2d-widgets",
-  "version": "0.9.0",
+  "version": "1.0.0-rc.1",
   "description": "Live2D widget for web pages",
-  "main": "dist/waifu-tips.js",
-  "types": "src/types/index.d.ts",
+  "main": "build/index.js",
+  "files": [
+    "build",
+    "dist",
+    "src",
+    "LICENSE",
+    "README.en.md"
+  ],
+  "types": "build/index.d.ts",
   "type": "module",
   "scripts": {
     "build": "tsc && rollup -c rollup.config.js",
