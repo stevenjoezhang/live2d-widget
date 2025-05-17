@@ -20,7 +20,7 @@ class LAppModel extends L2DBaseModel {
     this.tmpMatrix = [];
   }
 
-  async loadJSON(callback) {
+  loadJSON(callback) {
     const path = this.modelHomeDir + this.modelSetting.getModelFile();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.loadModelData(path, model => {
@@ -141,7 +141,7 @@ class LAppModel extends L2DBaseModel {
 
     this.modelSetting = new ModelSettingJson();
     this.modelSetting.json = modelSetting;
-    await this.loadJSON();
+    await new Promise(resolve => this.loadJSON(resolve));
   }
 
   load(gl, modelSettingPath, callback) {
