@@ -3,12 +3,88 @@
  * @module widget
  */
 
-import ModelManager from './model.js';
-import { showMessage, welcomeMessage } from './message.js';
+import { ModelManager, Config } from './model.js';
+import { showMessage, welcomeMessage, Time } from './message.js';
 import { randomSelection } from './utils.js';
 import tools from './tools.js';
 import logger from './logger.js';
 import registerDrag from './drag.js';
+
+interface Tools {
+  /**
+   * 工具的键值对，键为工具的名称。
+   * @type {string}
+   */
+  [key: string]: {
+    /**
+     * 工具的图标，通常为 SVG 字符串。
+     * @type {string}
+     */
+    icon: string;
+    /**
+     * 工具的回调函数。
+     * @type {() => void}
+     */
+    callback: () => void;
+  };
+}
+
+interface Tips {
+  /**
+   * 默认消息配置。
+   */
+  message: {
+    /**
+     * 默认消息数组。
+     * @type {string[]}
+     */
+    default: string[];
+    /**
+     * 控制台消息。
+     * @type {string}
+     */
+    console: string;
+    /**
+     * 复制消息。
+     * @type {string}
+     */
+    copy: string;
+    /**
+     * 可见性更改消息。
+     * @type {string}
+     */
+    visibilitychange: string;
+  };
+  /**
+   * 时间配置。
+   * @type {Time}
+   */
+  time: Time;
+  /**
+   * 鼠标悬停消息配置。
+   * @type {Array<{selector: string, text: string | string[]}>}
+   */
+  mouseover: {
+    selector: string;
+    text: string | string[];
+  }[];
+  /**
+   * 点击消息配置。
+   * @type {Array<{selector: string, text: string | string[]}>}
+   */
+  click: {
+    selector: string;
+    text: string | string[];
+  }[];
+  /**
+   * 季节消息配置。
+   * @type {Array<{date: string, text: string | string[]}>}
+   */
+  seasons: {
+    date: string;
+    text: string | string[];
+  }[];
+}
 
 function registerTools(model: ModelManager, config: Config) {
   (tools as Tools)['switch-model'].callback = () => model.loadNextModel();
@@ -124,10 +200,10 @@ async function loadWidget(config: Config) {
   document.body.insertAdjacentHTML(
     'beforeend',
     `<div id="waifu">
-            <div id="waifu-tips"></div>
-            <canvas id="live2d" width="800" height="800"></canvas>
-            <div id="waifu-tool"></div>
-        </div>`,
+       <div id="waifu-tips"></div>
+       <canvas id="live2d" width="800" height="800"></canvas>
+       <div id="waifu-tool"></div>
+     </div>`,
   );
   const model = new ModelManager(config);
   await model.loadModel('');
@@ -187,4 +263,4 @@ function initWidget(config: string | Config, apiPath?: string) {
   }
 }
 
-export { initWidget };
+export { initWidget, Tools, Tips };

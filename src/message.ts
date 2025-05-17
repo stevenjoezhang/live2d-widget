@@ -5,6 +5,19 @@
 
 import { randomSelection } from './utils.js';
 
+type Time = {
+  /**
+   * 时间段，格式为 "HH-HH"，例如 "00-06" 表示 0 点到 6 点。
+   * @type {string}
+   */
+  hour: string;
+  /**
+   * 在该时间段显示的消息。
+   * @type {string}
+   */
+  text: string;
+}[];
+
 let messageTimer: NodeJS.Timeout | null = null;
 
 /**
@@ -78,4 +91,4 @@ function welcomeMessage(time: Time): string {
   return text;
 }
 
-export { showMessage, welcomeMessage };
+export { showMessage, welcomeMessage, Time };

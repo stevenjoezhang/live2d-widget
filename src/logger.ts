@@ -14,7 +14,8 @@ class Logger {
     this.level = level;
   }
 
-  setLevel(level: LogLevel) {
+  setLevel(level: LogLevel | undefined) {
+    if (!level) return;
     this.level = level;
   }
 
@@ -50,3 +51,4 @@ class Logger {
 const logger = new Logger();
 
 export default logger;
+export { LogLevel };

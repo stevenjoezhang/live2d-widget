@@ -41,7 +41,7 @@ const tools = {
     callback: () => {
       if (window.Asteroids) {
         if (!window.ASTEROIDSPLAYERS) window.ASTEROIDSPLAYERS = [];
-        window.ASTEROIDSPLAYERS.push(new Asteroids());
+        window.ASTEROIDSPLAYERS.push(new window.Asteroids());
       } else {
         const script = document.createElement('script');
         script.src =
