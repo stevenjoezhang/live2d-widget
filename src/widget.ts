@@ -188,4 +188,3 @@ function initWidget(config: string | Config, apiPath?: string) {
 }
 
 export { initWidget };
-export { loadExternalResource } from './utils.js';

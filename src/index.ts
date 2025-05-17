@@ -3,7 +3,6 @@
  * @module index
  */
 
-import { initWidget, loadExternalResource } from './widget.js';
+import { initWidget } from './widget.js';
 
 window.initWidget = initWidget;
-window.loadExternalResource = loadExternalResource;
