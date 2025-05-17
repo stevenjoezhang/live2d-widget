@@ -220,14 +220,11 @@ async function loadWidget(config: Config) {
 /**
  * 初始化看板娘小部件。
  * @param {string | Config} config - 看板娘配置或配置路径。
- * @param {string} [apiPath] - API 路径，如果 config 是字符串。
  */
-function initWidget(config: string | Config, apiPath?: string) {
+function initWidget(config: string | Config) {
   if (typeof config === 'string') {
-    config = {
-      waifuPath: config,
-      apiPath,
-    };
+    logger.error('Your config for Live2d initWidget is outdated. Please refer to https://github.com/stevenjoezhang/live2d-widget/blob/master/dist/autoload.js');
+    return;
   }
   logger.setLevel(config.logLevel);
   document.body.insertAdjacentHTML(
