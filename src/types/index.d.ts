@@ -6,7 +6,7 @@ export * from './asteroids';
 export * from './config';
 export * from './model';
 export * from './live2dApi';
-export * from './result';
+export * from './tips';
 export * from './svg';
 export * from './time';
 export * from './tools';

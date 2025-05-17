@@ -1,6 +1,6 @@
 /**
  * @file 包含初始化看板娘小部件的函数。
- * @module index
+ * @module widget
  */
 
 import ModelManager from './model.js';
@@ -73,9 +73,9 @@ function welcomeMessage(time: Time): string {
 
 /**
  * 注册事件监听器。
- * @param {Result} result - 结果配置。
+ * @param {Tips} result - 结果配置。
  */
-function registerEventListener(result: Result) {
+function registerEventListener(result: Tips) {
   // Detect user activity and display messages when idle
   let userAction = false;
   let userActionTimer: any;

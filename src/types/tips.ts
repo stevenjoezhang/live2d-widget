@@ -1,8 +1,8 @@
 /**
- * @file 定义结果配置的类型。
+ * @file 定义 tips 配置的类型。
  * @module types/result
  */
-interface Result {
+interface Tips {
   /**
    * 默认消息配置。
    */
