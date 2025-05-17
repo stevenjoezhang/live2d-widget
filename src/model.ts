@@ -52,7 +52,7 @@ class ModelManager {
       modelTexturesId = 0;
     }
     if (isNaN(modelId)) {
-      modelId = config.modelId || (useCDN ? 0 : 1);
+      modelId = config.modelId ?? (useCDN ? 0 : 1);
     }
     this.useCDN = useCDN;
     this.apiPath = apiPath || '';

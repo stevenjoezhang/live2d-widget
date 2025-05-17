@@ -78,4 +78,4 @@ function welcomeMessage(time: Time): string {
   return text;
 }
 
-export { showMessage, welcomeMessage } ;
+export { showMessage, welcomeMessage };
