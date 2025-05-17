@@ -1,6 +1,6 @@
 {
   "name": "live2d-widgets",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Live2D widget for web pages",
   "main": "autoload.js",
   "type": "module",
