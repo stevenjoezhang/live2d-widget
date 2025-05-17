@@ -1,25 +1,9 @@
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import { createFilter } from '@rollup/pluginutils';
 import terser from '@rollup/plugin-terser';
 
-function string(opts = {}) {
-  if (!opts.include) {
-    throw Error('include option should be specified');
-  }
-
-  const filter = createFilter(opts.include, opts.exclude);
+function banner() {
 
   return {
-    name: 'string',
-
-    transform(code, id) {
-      if (filter(id)) {
-        return {
-          code: `export default ${JSON.stringify(code)};`,
-          map: { mappings: '' },
-        };
-      }
-    },
+    name: 'banner',
 
     renderChunk(code, chunk, outputOptions = {}) {
       return (
@@ -41,10 +25,7 @@ export default {
     format: 'iife',
   },
   plugins: [
-    nodeResolve(),
-    string({
-      include: '**/*.svg',
-    }),
+    banner(),
     terser(),
   ],
   context: 'this',

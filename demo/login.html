@@ -150,7 +150,7 @@ body {
 	</div>
 	<p class="mt-5 mb-3 text-muted">Copyleft &copy; Mimi 2019</p>
 </form>
-<script>
+<script type="module">
 /*
  * _(:з」∠)_
  * Created by Shuqiao Zhang in 2019.
@@ -168,49 +168,43 @@ body {
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  */
+import { Model } from "../build/index.js";
 window.addEventListener("load", () => {
-	"use strict";
-
 	if (!CSS.supports("clip-path", "circle(120px at center)")) {
 		document.getElementById("stage").innerHTML = '<img src="./screenshots/screenshot-1.png">';
 		return;
 	}
 
 	const apiPath = "https://live2d.fghrsh.net/api";
-	let state = 0, loading = false,
-		modelId = localStorage.getItem("modelId"),
-		modelTexturesId = localStorage.getItem("modelTexturesId");
-	if (modelId === null) {
-		modelId = 1;
-		modelTexturesId = 53;
-	}
-	loadModel(modelId, modelTexturesId);
+	let state = 0, loading = false, modelInitialized = false;
+	const model = new Model();
+	const modelId = 1;
+	let modelTexturesId = 0;
+	loadModel();
 
-	function loadModel(modelId, modelTexturesId) {
-		localStorage.setItem("modelId", modelId);
-		if (modelTexturesId === undefined) modelTexturesId = 0;
-		localStorage.setItem("modelTexturesId", modelTexturesId);
-		loadlive2d("live2d", `${apiPath}/get/?id=${modelId}-${modelTexturesId}`, null);
+	async function loadModel() {
+		const modelSettingPath = `${apiPath}/get/?id=${modelId}-${modelTexturesId}`;
+		const response = await fetch(modelSettingPath);
+		const modelSetting = await response.json();
+		if (!modelInitialized) {
+			modelInitialized = true;
+			await model.init('live2d', modelSettingPath, modelSetting);
+		} else {
+			await model.changeModelWithJSON(modelSettingPath, modelSetting);
+		}
 		console.log("live2d", `模型 ${modelId}-${modelTexturesId} 加载完成`);
-		setTimeout(() => {
-			coverPosition("80%");
-			state = 2;
-		}, 2000);
+		coverPosition("80%");
+		state = 2;
 	}
 
-	function loadRandModel() {
-		const modelId = localStorage.getItem("modelId"),
-			modelTexturesId = localStorage.getItem("modelTexturesId");
-		fetch(`${apiPath}/rand_textures/?id=${modelId}-${modelTexturesId}`)
-			.then(response => response.json())
-			.then(result => {
-				loadModel(modelId, result.textures.id);
-				setTimeout(() => {
-					state = 2;
-					coverPosition("80%");
-					loading = false;
-				}, 1000);
-			});
+	async function loadRandModel() {
+		const response = await fetch(`${apiPath}/rand_textures/?id=${modelId}-${modelTexturesId}`);
+		const result = await response.json();
+		modelTexturesId = result.textures.id;
+		await loadModel();
+		state = 2;
+		coverPosition("80%");
+		loading = false;
 	}
 
 	function coverPosition(pos) {

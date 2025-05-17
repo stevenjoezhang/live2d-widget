@@ -3,14 +3,15 @@
  * @module tools
  */
 
-import fa_comment from '@fortawesome/fontawesome-free/svgs/solid/comment.svg';
-import fa_paper_plane from '@fortawesome/fontawesome-free/svgs/solid/paper-plane.svg';
-import fa_user_circle from '@fortawesome/fontawesome-free/svgs/solid/circle-user.svg';
-import fa_street_view from '@fortawesome/fontawesome-free/svgs/solid/street-view.svg';
-import fa_camera_retro from '@fortawesome/fontawesome-free/svgs/solid/camera-retro.svg';
-import fa_info_circle from '@fortawesome/fontawesome-free/svgs/solid/circle-info.svg';
-import fa_xmark from '@fortawesome/fontawesome-free/svgs/solid/xmark.svg';
-
+import {
+  fa_comment,
+  fa_paper_plane,
+  fa_user_circle,
+  fa_street_view,
+  fa_camera_retro,
+  fa_info_circle,
+  fa_xmark
+} from './icons.js';
 import { showMessage } from './message.js';
 
 /**
