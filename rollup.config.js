@@ -1,12 +1,24 @@
 import terser from '@rollup/plugin-terser';
 import alias from '@rollup/plugin-alias';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-function banner() {
+function findCubismDir() {
+  const buildDir = path.join(__dirname, 'build');
+  let candidates = fs.readdirSync(buildDir)
+    .filter(f => f.startsWith('CubismSdkForWeb-') && fs.statSync(path.join(buildDir, f)).isDirectory());
+  if (candidates.length === 0) {
+    candidates = ['CubismSdkForWeb-5-r.4'];
+  }
+  return path.join(buildDir, candidates[0]);
+}
 
+const cubismDir = findCubismDir();
+
+function banner() {
   return {
     name: 'banner',
 
@@ -34,11 +46,11 @@ export default {
       entries: [
         {
           find: '@demo',
-          replacement: path.resolve(__dirname, 'build/CubismSdkForWeb-5-r.4/Samples/TypeScript/Demo/src/')
+          replacement: path.resolve(cubismDir, 'Samples/TypeScript/Demo/src/')
         },
         {
           find: '@framework',
-          replacement: path.resolve(__dirname, 'build/CubismSdkForWeb-5-r.4/Framework/src/')
+          replacement: path.resolve(cubismDir, 'Framework/src/')
         }
       ]
     }),
