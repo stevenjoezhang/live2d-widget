@@ -151,7 +151,7 @@ class ModelManager {
     return 2;
   }
 
-  async loadLive2d(modelSettingPath: string, modelSetting: object) {
+  async loadLive2D(modelSettingPath: string, modelSetting: object) {
     const version = this.checkModelVersion(modelSetting);
     if (version === 2) {
       if (!this.model) {
@@ -213,7 +213,7 @@ class ModelManager {
       let textures = textureCache[modelTexturesId];
       if (typeof textures === 'string') textures = [textures];
       modelSetting.textures = textures;
-      await this.loadLive2d(modelSettingPath, modelSetting);
+      await this.loadLive2D(modelSettingPath, modelSetting);
     }
     showMessage(message, 4000, 10);
   }
@@ -235,7 +235,7 @@ class ModelManager {
       let textures = textureCache[this.modelTexturesId];
       if (typeof textures === 'string') textures = [textures];
       modelSetting.textures = textures;
-      await this.loadLive2d(modelSettingPath, modelSetting);
+      await this.loadLive2D(modelSettingPath, modelSetting);
       showMessage('我的新衣服好看嘛？', 4000, 10);
     }
   }

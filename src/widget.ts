@@ -204,7 +204,7 @@ async function loadWidget(config: Config) {
  */
 function initWidget(config: string | Config) {
   if (typeof config === 'string') {
-    logger.error('Your config for Live2d initWidget is outdated. Please refer to https://github.com/stevenjoezhang/live2d-widget/blob/master/dist/autoload.js');
+    logger.error('Your config for Live2D initWidget is outdated. Please refer to https://github.com/stevenjoezhang/live2d-widget/blob/master/dist/autoload.js');
     return;
   }
   logger.setLevel(config.logLevel);
