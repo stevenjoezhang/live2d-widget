@@ -70,18 +70,18 @@ body {
 	background-color: #CB3837;
 	width: 100%;
 	height: 100%;
-	bottom: 10%;
+	bottom: 0;
 	transition: all 1s;
 	box-shadow: 0 0 0 5px rgba(0, 0, 0, .1);
+	overflow: hidden;
 }
 #text {
 	position: absolute;
-	bottom: 30%;
 	font-size: 2em;
-	left: 50%;
-	transform: translateX(-50%);
 	opacity: 0.4;
 	font-weight: bold;
+	word-wrap: break-word;
+	max-width: 100%;
 }
 #detail {
 	position: absolute;
@@ -124,9 +124,7 @@ body {
 	<div id="stage">
 		<div id="inner">
 			<div id="cover">
-				<div id="text">
-					<span style="color: cyan;">MIMI</span><span style="color: white;">POWERED</span>
-				</div>
+				<div id="text"></div>
 				<div id="detail"></div>
 				<div id="handle"></div>
 			</div>
@@ -169,6 +167,7 @@ body {
  *  GNU General Public License for more details.
  */
 import { Model } from "../build/index.js";
+document.getElementById("text").innerHTML = `<span style="color: cyan;">MIMI</span><span style="color: white;">POWERED</span>`.repeat(10);
 window.addEventListener("load", () => {
 	if (!CSS.supports("clip-path", "circle(120px at center)")) {
 		document.getElementById("stage").innerHTML = '<img src="./screenshots/screenshot-1.png">';
@@ -202,9 +201,8 @@ window.addEventListener("load", () => {
 		const result = await response.json();
 		modelTexturesId = result.textures.id;
 		await loadModel();
-		state = 2;
 		coverPosition("80%");
-		loading = false;
+		state = 2;
 	}
 
 	function coverPosition(pos) {
@@ -219,12 +217,13 @@ window.addEventListener("load", () => {
 			});
 	});
 
-	document.getElementById("refresh").addEventListener("click", () => {
+	document.getElementById("refresh").addEventListener("click", async () => {
 		if (loading) return;
+		loading = true;
 		state = 0;
 		coverPosition("10%");
-		loading = true;
-		setTimeout(loadRandModel, 1000);
+		await loadRandModel();
+		loading = false;
 	});
 
 	document.getElementById("handle").addEventListener("click", () => {
