@@ -12,5 +12,13 @@ export default tseslint.config(
       quotes: ['error', 'single'],
       indent: ['error', 2],
     }
+  },
+  {
+    ignores: [
+      'src/CubismSdkForWeb-*/**',
+      'dist/**',
+      'build/**',
+      'node_modules/**'
+    ]
   }
 );

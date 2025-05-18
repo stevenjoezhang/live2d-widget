@@ -7,10 +7,18 @@
     "outDir": "build",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false,
     "skipLibCheck": true,
     "removeComments": true,
-    "allowJs": true
+    "allowJs": true,
+    "paths": {
+      "@framework/*": [
+        "./src/CubismSdkForWeb-5-r.4/Framework/src/*"
+      ],
+      "@demo/*": [
+        "./src/CubismSdkForWeb-5-r.4/Samples/TypeScript/Demo/src/*"
+      ]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "build", "dist"]
