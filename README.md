@@ -45,8 +45,10 @@
 
 | 选项 | 类型 | 默认值 | 说明 |
 | - | - | - | - |
-| `waifuPath` | `string` | `https://fastly.jsdelivr.net/npm/live2d-widgets@1/waifu-tips.json` | 看板娘资源路径，可自行修改 |
+| `waifuPath` | `string` | `https://fastly.jsdelivr.net/npm/live2d-widgets@1/dist/waifu-tips.json` | 看板娘资源路径，可自行修改 |
 | `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN 路径 |
+| `cubism2Path` | `string` | `https://fastly.jsdelivr.net/npm/live2d-widgets@1/dist/live2d.min.js` | Cubism 2 Core 路径 |
+| `cubism5Path` | `string` | `https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js` | Cubism 5 Core 路径 |
 | `modelId` | `number` | `0` | 默认模型 id |
 | `tools` | `string[]` | 见 `autoload.js` | 加载的小工具按钮 |
 | `drag` | `boolean` | `false` | 支持拖动看板娘 |
@@ -54,7 +56,7 @@
 
 ## 模型仓库
 
-本仓库中并不包含任何模型，需要单独配置模型仓库，并通过 `cdnPath` 选项进行设置。
+本仓库中并不包含任何模型，需要单独配置模型仓库，并通过 `cdnPath` 选项进行设置。  
 旧版本的 `initWidget` 函数支持 `apiPath` 参数，这要求用户自行搭建后端，可以参考 [live2d_api](https://github.com/fghrsh/live2d_api)。后端接口会对模型资源进行整合并动态生成 JSON 描述文件。自 1.0 版本起，相关功能已通过前端实现，因此不再需要专门的 `apiPath`，所有模型资源都可通过静态方式提供。只要存在 `model_list.json` 和模型对应的 `textures.cache`，即可支持换装等功能。
 
 ## 开发
@@ -68,7 +70,7 @@
   - `waifu-tips.js` 是由 `build/waifu-tips.js` 自动打包生成的，不建议直接修改；
   - `waifu.css` 是看板娘的样式表；
   - `waifu-tips.json` 中定义了触发条件（`selector`，CSS 选择器）和触发时显示的文字（`text`）。  
-    `waifu-tips.json` 中默认的 CSS 选择器规则是对 Hexo 的 [NexT 主题](http://github.com/next-theme/hexo-theme-next) 有效的，为了适用于你自己的网页，可能需要自行修改，或增加新内容。  
+    `waifu-tips.json` 中默认的 CSS 选择器规则是对 Hexo 的 [NexT 主题](https://github.com/next-theme/hexo-theme-next) 有效的，为了适用于你自己的网页，可能需要自行修改，或增加新内容。  
     **警告：`waifu-tips.json` 中的内容可能不适合所有年龄段，或不宜在工作期间访问。在使用时，请自行确保它们是合适的。**
 
 要在本地部署本项目的开发测试环境，你需要安装 Node.js 和 npm，然后执行以下命令：
@@ -76,10 +78,18 @@
 ```bash
 git clone https://github.com/stevenjoezhang/live2d-widget.git
 npm install
+```
+
+如果需要使用 Cubism 3 及更新的模型，请单独下载并解压 Cubism SDK for Web 到 `src` 目录下，例如 `src/CubismSdkForWeb-5-r.4`。受 Live2D 许可协议（包括 Live2D Proprietary Software License Agreement 和 Live2D Open Software License Agreement）限制，本项目无法包含 Cubism SDK for Web 的源码。  
+如果只需要使用 Cubism 2 版本的模型，可以跳过此步骤。本仓库使用的代码满足 Live2D 许可协议中 Redistributable Code 相关条款。  
+完成后，使用以下命令进行编译和打包。
+
+```bash
 npm run build
 ```
 
-`src` 目录中的 TypeScript 代码会被编译到 `build` 目录中，`build` 目录中的代码会被进一步打包到 `dist` 目录中。
+`src` 目录中的 TypeScript 代码会被编译到 `build` 目录中，`build` 目录中的代码会被进一步打包到 `dist` 目录中。  
+为了能够兼容 Cubism 2 和 Cubism 3 及更新的模型，并减小代码体积，Cubism Core 及相关的代码会根据检测到的模型版本动态加载。
 
 ## 部署
 
@@ -189,7 +199,7 @@ https://www.live2d.com/en/
 
 本仓库并不包含任何模型，用作展示的所有 Live2D 模型、图片、动作数据等版权均属于其原作者，仅供研究学习，不得用于商业用途。
 
-本仓库的代码（不包括受 Cubism Live2D Proprietary Software License 和 Live2D Open Software License 约束的部分）基于 GNU General Public License v3 协议开源  
+本仓库的代码（不包括受 Live2D Proprietary Software License 和 Live2D Open Software License 约束的部分）基于 GNU General Public License v3 协议开源  
 http://www.gnu.org/licenses/gpl-3.0.html
 
 Live2D 相关代码的使用请遵守对应的许可：
@@ -199,9 +209,9 @@ Live2D Cubism SDK 2.1 的许可证：
 
 Live2D Cubism SDK 5 的许可证：  
 Live2D Cubism Core は Live2D Proprietary Software License で提供しています。  
-https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html  
+https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_cn.html  
 Live2D Cubism Components は Live2D Open Software License で提供しています。  
-http://www.live2d.com/eula/live2d-open-software-license-agreement_en.html
+https://www.live2d.com/eula/live2d-open-software-license-agreement_cn.html
 
 ## 更新日志
 
