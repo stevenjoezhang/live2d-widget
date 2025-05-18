@@ -15,7 +15,7 @@ Add Live2D widget to web page. Compatible with PJAX.
 
 <img src="demo/screenshots/screenshot-2.png" width="280"><img src="demo/screenshots/screenshot-3.png" width="280"><img src="demo/screenshots/screenshot-1.png" width="270">
 
-(Note: The character models above are for demonstration purposes only and are not included in this repository.)
+*Note: The character models above are for demonstration purposes only and are not included in this repository.*
 
 You can also check out example web pages:
 
@@ -44,14 +44,16 @@ You can refer to the source code of `dist/autoload.js` to see the available conf
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
 | `waifuPath` | `string` | `https://fastly.jsdelivr.net/npm/live2d-widgets@1/waifu-tips.json` | Path to the widget resources, can be modified |
-| `apiPath` | `string` | `https://live2d.fghrsh.net/api/` | API path |
 | `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN path |
 | `modelId` | `number` | `0` | Default model id |
 | `tools` | `string[]` | see `autoload.js` | Buttons of the loaded tools |
 | `drag` | `boolean` | `false` | Make the widget draggable |
 | `logLevel` | `string` | `error` | Log level: `error`, `warn`, `info`, `trace` |
 
-Among them, the parameters `apiPath` and `cdnPath` only need to set one of them. `apiPath` is the URL of the backend API, which can be set up and modified by yourself (there are many things to modify, not discussed here). You can refer to [live2d_api](https://github.com/fghrsh/live2d_api) for more information. On the other hand, `cdnPath` is used to load resources through CDN services like jsDelivr, which provides better stability.
+## Model Repository
+
+This repository does not include any models. You need to configure a separate model repository and set it via the `cdnPath` option.
+Older versions of the `initWidget` function supported the `apiPath` parameter, which required users to set up their own backend. You can refer to [live2d_api](https://github.com/fghrsh/live2d_api) for details. The backend interface would integrate model resources and dynamically generate JSON description files. Since version 1.0, these features have been implemented on the frontend, so a dedicated `apiPath` is no longer required. All model resources can be provided statically. As long as `model_list.json` and the corresponding `textures.cache` for each model exist, features such as outfit changing are supported.
 
 ## Development
 
@@ -121,7 +123,7 @@ Make sure to include the trailing `/` in the path.
 Once done, add the following code to the interface where you want to add the live2d-widget:
 
 ```html
-<script src="https://example.com/path/to/live2d-widget/autoload.js"></script>
+<script src="https://example.com/path/to/live2d-widget/dist/autoload.js"></script>
 ```
 
 This will load the widget.
@@ -196,9 +198,6 @@ http://www.live2d.com/eula/live2d-open-software-license-agreement_en.html
 https://community.live2d.com/discussion/140/webgl-developer-licence-and-javascript-question
 
 ## Update Log
-
-On October 31, 2018, the original API provided by fghrsh was discontinued. Please update to the new address. Refer to the following article for more information:  
-https://www.fghrsh.net/post/170.html
 
 Starting from January 1, 2020, this project no longer depends on jQuery.
 

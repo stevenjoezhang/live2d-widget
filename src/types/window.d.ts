@@ -15,7 +15,7 @@ interface Window {
   ASTEROIDSPLAYERS: any[];
   /**
    * 初始化看板娘小部件的函数。
-   * @type {(config: string | Config, apiPath?: string) => void}
+   * @type {(config: Config) => void}
    */
-  initWidget: (config: string | Config, apiPath?: string) => void;
+  initWidget: (config: Config) => void;
 }

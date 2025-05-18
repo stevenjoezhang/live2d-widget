@@ -15,7 +15,7 @@
 
 <img src="demo/screenshots/screenshot-2.png" width="280"><img src="demo/screenshots/screenshot-3.png" width="280"><img src="demo/screenshots/screenshot-1.png" width="270">
 
-（注：以上人物模型仅供展示之用，本仓库并不包含任何模型。）
+*注：以上人物模型仅供展示之用，本仓库并不包含任何模型。*
 
 你也可以查看示例网页：
 
@@ -44,14 +44,16 @@
 | 选项 | 类型 | 默认值 | 说明 |
 | - | - | - | - |
 | `waifuPath` | `string` | `https://fastly.jsdelivr.net/npm/live2d-widgets@1/waifu-tips.json` | 看板娘资源路径，可自行修改 |
-| `apiPath` | `string` | `https://live2d.fghrsh.net/api/` | API 路径 |
 | `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN 路径 |
 | `modelId` | `number` | `0` | 默认模型 id |
 | `tools` | `string[]` | 见 `autoload.js` | 加载的小工具按钮 |
 | `drag` | `boolean` | `false` | 支持拖动看板娘 |
 | `logLevel` | `string` | `error` | 日志等级，支持 `error`，`warn`，`info`，`trace` |
 
-其中，`apiPath` 和 `cdnPath` 两个参数设置其中一项即可。`apiPath` 是后端 API 的 URL，可以自行搭建，并增加模型（需要修改的内容比较多，此处不再赘述），可以参考 [live2d_api](https://github.com/fghrsh/live2d_api)。而 `cdnPath` 则是通过 jsDelivr 这样的 CDN 服务加载资源，更加稳定。
+## 模型仓库
+
+本仓库中并不包含任何模型，需要单独配置模型仓库，并通过 `cdnPath` 选项进行设置。
+旧版本的 `initWidget` 函数支持 `apiPath` 参数，这要求用户自行搭建后端，可以参考 [live2d_api](https://github.com/fghrsh/live2d_api)。后端接口会对模型资源进行整合并动态生成 JSON 描述文件。自 1.0 版本起，相关功能已通过前端实现，因此不再需要专门的 `apiPath`，所有模型资源都可通过静态方式提供。只要存在 `model_list.json` 和模型对应的 `textures.cache`，即可支持换装等功能。
 
 ## 开发
 
@@ -198,9 +200,6 @@ http://www.live2d.com/eula/live2d-open-software-license-agreement_en.html
 https://community.live2d.com/discussion/140/webgl-developer-licence-and-javascript-question
 
 ## 更新日志
-
-2018年10月31日，由 fghrsh 提供的原 API 停用，请更新至新地址。参考文章：  
-https://www.fghrsh.net/post/170.html
 
 2020年1月1日起，本项目不再依赖于 jQuery。
 

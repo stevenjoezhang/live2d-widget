@@ -56,7 +56,6 @@ interface Config {
  */
 class ModelManager {
   public readonly useCDN: boolean;
-  private readonly apiPath: string;
   private readonly cdnPath: string;
   private _modelId: number;
   private _modelTexturesId: number;
@@ -68,17 +67,17 @@ class ModelManager {
   /**
    * 创建一个 Model 实例。
    * @param {Object} config - 配置选项。
-   * @param {string} [config.apiPath] - API 路径。
    * @param {string} [config.cdnPath] - CDN 路径。
    */
   constructor(config: Config) {
     let { apiPath, cdnPath } = config;
-    let useCDN = false;
+    const useCDN = true;
     if (typeof cdnPath === 'string') {
-      useCDN = true;
       if (!cdnPath.endsWith('/')) cdnPath += '/';
     } else if (typeof apiPath === 'string') {
       if (!apiPath.endsWith('/')) apiPath += '/';
+      cdnPath = apiPath;
+      logger.warn('apiPath option is deprecated. Please use cdnPath instead.');
     } else {
       throw 'Invalid initWidget argument!';
     }
@@ -93,7 +92,6 @@ class ModelManager {
       modelId = config.modelId ?? (useCDN ? 0 : 1);
     }
     this.useCDN = useCDN;
-    this.apiPath = apiPath || '';
     this.cdnPath = cdnPath || '';
     this._modelId = modelId;
     this._modelTexturesId = modelTexturesId;
@@ -176,10 +174,6 @@ class ModelManager {
       if (typeof textures === 'string') textures = [textures];
       modelSetting.textures = textures;
       await this.loadLive2d(modelSettingPath, modelSetting);
-    } else {
-      const modelSettingPath = `${this.apiPath}get/?id=${modelId}-${modelTexturesId}`;
-      const modelSetting = await this.fetchWithCache(modelSettingPath);
-      await this.loadLive2d(modelSettingPath, modelSetting);
     }
     showMessage(message, 4000, 10);
   }
@@ -188,7 +182,7 @@ class ModelManager {
    * 加载随机材质的模型。
    */
   async loadRandTexture() {
-    const { modelId, modelTexturesId } = this;
+    const { modelId } = this;
     if (this.useCDN) {
       if (!this.modelList) {
         this.modelList = await this.loadModelList();
@@ -203,19 +197,6 @@ class ModelManager {
       modelSetting.textures = textures;
       await this.loadLive2d(modelSettingPath, modelSetting);
       showMessage('我的新衣服好看嘛？', 4000, 10);
-    } else {
-      // Optional 'rand' (Random), 'switch' (Switch by order)
-      const response = await fetch(`${this.apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`);
-      const result = await response.json();
-      if (
-        result.textures.id === 1 &&
-        (modelTexturesId === 1 || modelTexturesId === 0)
-      ) {
-        showMessage('我还没有其他衣服呢！', 4000, 10);
-      } else {
-        this.modelTexturesId = result.textures.id;
-        await this.loadModel('我的新衣服好看嘛？');
-      }
     }
   }
 
@@ -232,11 +213,6 @@ class ModelManager {
       const index = ++modelId >= this.modelList.models.length ? 0 : modelId;
       this.modelId = index;
       await this.loadModel(this.modelList.messages[index]);
-    } else {
-      const response = await fetch(`${this.apiPath}switch/?id=${modelId}`);
-      const result = await response.json();
-      this.modelId = result.model.id;
-      await this.loadModel(result.model.message);
     }
   }
 }
