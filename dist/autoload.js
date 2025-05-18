@@ -14,6 +14,7 @@ function loadExternalResource(url, type) {
     }
     else if (type === 'js') {
       tag = document.createElement('script');
+      tag.type = 'module';
       tag.src = url;
     }
     if (tag) {
@@ -27,7 +28,6 @@ function loadExternalResource(url, type) {
 // 加载 live2d.min.js waifu.css waifu-tips.js
 // 如果担心手机上显示效果不佳，可以通过 `if (screen.width >= 768)` 来判断是否加载
 (async () => {
-  await loadExternalResource(live2d_path + 'live2d.min.js', 'js');
   await Promise.all([
     loadExternalResource(live2d_path + 'waifu.css', 'css'),
     loadExternalResource(live2d_path + 'waifu-tips.js', 'js')
@@ -35,8 +35,9 @@ function loadExternalResource(url, type) {
   // 配置选项的具体用法见 README.md
   initWidget({
     waifuPath: live2d_path + 'waifu-tips.json',
-    // apiPath: 'https://live2d.fghrsh.net/api/',
     cdnPath: 'https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/',
+    cubism2Path: live2d_path + 'live2d.min.js',
+    cubism5Path: 'https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js',
     tools: ['hitokoto', 'asteroids', 'switch-model', 'switch-texture', 'photo', 'info', 'quit'],
     logLevel: 'warn',
     drag: false,

@@ -5,9 +5,9 @@
   "main": "build/index.js",
   "files": [
     "build",
+    "demo",
     "dist",
     "src",
-    "LICENSE",
     "README.en.md"
   ],
   "types": "build/index.d.ts",
@@ -22,7 +22,8 @@
     "url": "git+https://github.com/stevenjoezhang/live2d-widget.git"
   },
   "keywords": [
-    "Live2d"
+    "Live2d",
+    "WebGL"
   ],
   "author": "stevenjoezhang <stevenjoezhang@gmail.com>",
   "license": "GPL-3.0-or-later",

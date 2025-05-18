@@ -20,9 +20,8 @@ function banner() {
 export default {
   input: 'build/waifu-tips.js',
   output: {
-    name: 'live2d_widget',
-    file: 'dist/waifu-tips.js',
-    format: 'iife',
+    dir: 'dist/',
+    format: 'esm',
   },
   plugins: [
     banner(),
