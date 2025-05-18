@@ -5,7 +5,7 @@
 
 import { showMessage } from './message.js';
 import { randomSelection } from './utils.js';
-import Model from './live2d/index.js';
+import type Model from './live2d/index.js';
 import logger, { LogLevel } from './logger.js';
 
 interface ModelList {
@@ -29,6 +29,16 @@ interface Config {
    * @type {string | undefined}
    */
   cdnPath?: string;
+  /**
+   * Cubism 2 Core 的路径，如果需要加载 Cubism 2 模型。
+   * @type {string | undefined}
+   */
+  cubism2Path?: string;
+  /**
+   * Cubism 5 Core 的路径，如果需要加载 Cubism 3 及之后的模型。
+   * @type {string | undefined}
+   */
+  cubism5Path?: string;
   /**
    * 默认模型的 id。
    * @type {string | undefined}
@@ -57,10 +67,12 @@ interface Config {
 class ModelManager {
   public readonly useCDN: boolean;
   private readonly cdnPath: string;
+  private readonly cubism2Path: string;
+  private readonly cubism5Path: string;
   private _modelId: number;
   private _modelTexturesId: number;
   private modelList: ModelList | null = null;
-  private readonly model: Model;
+  private model: Model | undefined;
   private modelInitialized: boolean;
   private modelJSONCache: Record<string, any>;
 
@@ -71,6 +83,7 @@ class ModelManager {
    */
   constructor(config: Config) {
     let { apiPath, cdnPath } = config;
+    const { cubism2Path, cubism5Path } = config;
     const useCDN = true;
     if (typeof cdnPath === 'string') {
       if (!cdnPath.endsWith('/')) cdnPath += '/';
@@ -93,9 +106,10 @@ class ModelManager {
     }
     this.useCDN = useCDN;
     this.cdnPath = cdnPath || '';
+    this.cubism2Path = cubism2Path || '';
+    this.cubism5Path = cubism5Path || '';
     this._modelId = modelId;
     this._modelTexturesId = modelTexturesId;
-    this.model = new Model();
     this.modelInitialized = false;
     this.modelJSONCache = {};
   }
@@ -130,12 +144,38 @@ class ModelManager {
     return result;
   }
 
+  checkModelVersion(modelSetting: any) {
+    if (modelSetting.Version === 3 || modelSetting.FileReferences) {
+      return 3;
+    }
+    return 2;
+  }
+
   async loadLive2d(modelSettingPath: string, modelSetting: object) {
+    const version = this.checkModelVersion(modelSetting);
+    if (version === 2) {
+      if (!this.model) {
+        if (!this.cubism2Path) {
+          logger.error('No cubism2Path set, cannot load Cubism 2 Core.')
+          return;
+        }
+        await import(this.cubism2Path);
+        const Model = await import('./live2d/index.js');
+        this.model = new Model.default();
+      }
+    } else {
+      if (!this.cubism5Path) {
+        logger.error('No cubism5Path set, cannot load Cubism 5 Core.')
+        return;
+      }
+      logger.error('Models version of Cubism 3 and later are not supported.')
+      return;
+    }
     if (!this.modelInitialized) {
       this.modelInitialized = true;
-      await this.model.init('live2d', modelSettingPath, modelSetting);
+      await this.model?.init('live2d', modelSettingPath, modelSetting);
     } else {
-      await this.model.changeModelWithJSON(modelSettingPath, modelSetting);
+      await this.model?.changeModelWithJSON(modelSettingPath, modelSetting);
     }
     logger.info(`Model ${modelSettingPath} loaded`);
   }
