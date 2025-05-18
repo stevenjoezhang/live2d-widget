@@ -187,4 +187,8 @@ export class AppDelegate extends LAppDelegate {
     // 将新模型加入到模型列表
     live2dManager._models.pushBack(instance);
   }
+
+  get subdelegates() {
+    return this._subdelegates;
+  }
 }
