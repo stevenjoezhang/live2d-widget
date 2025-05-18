@@ -1,35 +1,34 @@
-import logger from '../logger';
-var PlatformManager = (function () {
-    function PlatformManager() {
+import logger from '../logger.js';
+class PlatformManager {
+    constructor() {
         this.cache = {};
     }
-    PlatformManager.prototype.loadBytes = function (path, callback) {
-        var _this = this;
+    loadBytes(path, callback) {
         if (path in this.cache) {
             return callback(this.cache[path]);
         }
         fetch(path)
-            .then(function (response) { return response.arrayBuffer(); })
-            .then(function (arrayBuffer) {
-            _this.cache[path] = arrayBuffer;
+            .then(response => response.arrayBuffer())
+            .then(arrayBuffer => {
+            this.cache[path] = arrayBuffer;
             callback(arrayBuffer);
         });
-    };
-    PlatformManager.prototype.loadLive2DModel = function (path, callback) {
-        var model = null;
-        this.loadBytes(path, function (buf) {
+    }
+    loadLive2DModel(path, callback) {
+        let model = null;
+        this.loadBytes(path, buf => {
             model = Live2DModelWebGL.loadModel(buf);
             callback(model);
         });
-    };
-    PlatformManager.prototype.loadTexture = function (model, no, path, callback) {
-        var loadedImage = new Image();
+    }
+    loadTexture(model, no, path, callback) {
+        const loadedImage = new Image();
         loadedImage.crossOrigin = 'anonymous';
         loadedImage.src = path;
-        loadedImage.onload = function () {
-            var canvas = document.getElementById('live2d');
-            var gl = canvas.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true });
-            var texture = gl.createTexture();
+        loadedImage.onload = () => {
+            const canvas = document.getElementById('live2d');
+            const gl = canvas.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true });
+            let texture = gl.createTexture();
             if (!texture) {
                 logger.error('Failed to generate gl texture name.');
                 return -1;
@@ -49,22 +48,21 @@ var PlatformManager = (function () {
             if (typeof callback == 'function')
                 callback();
         };
-        loadedImage.onerror = function () {
+        loadedImage.onerror = () => {
             logger.error('Failed to load image : ' + path);
         };
-    };
-    PlatformManager.prototype.jsonParseFromBytes = function (buf) {
-        var jsonStr;
-        var bomCode = new Uint8Array(buf, 0, 3);
+    }
+    jsonParseFromBytes(buf) {
+        let jsonStr;
+        const bomCode = new Uint8Array(buf, 0, 3);
         if (bomCode[0] == 239 && bomCode[1] == 187 && bomCode[2] == 191) {
             jsonStr = String.fromCharCode.apply(null, new Uint8Array(buf, 3));
         }
         else {
             jsonStr = String.fromCharCode.apply(null, new Uint8Array(buf));
         }
-        var jsonObj = JSON.parse(jsonStr);
+        const jsonObj = JSON.parse(jsonStr);
         return jsonObj;
-    };
-    return PlatformManager;
-}());
+    }
+}
 export default PlatformManager;

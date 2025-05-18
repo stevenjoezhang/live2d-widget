@@ -1,40 +1,38 @@
-var MatrixStack = (function () {
-    function MatrixStack() {
-    }
-    MatrixStack.reset = function () {
+class MatrixStack {
+    static reset() {
         this.depth = 0;
-    };
-    MatrixStack.loadIdentity = function () {
-        for (var i = 0; i < 16; i++) {
+    }
+    static loadIdentity() {
+        for (let i = 0; i < 16; i++) {
             this.currentMatrix[i] = i % 5 == 0 ? 1 : 0;
         }
-    };
-    MatrixStack.push = function () {
-        var offset = this.depth * 16;
-        var nextOffset = (this.depth + 1) * 16;
+    }
+    static push() {
+        const offset = this.depth * 16;
+        const nextOffset = (this.depth + 1) * 16;
         if (this.matrixStack.length < nextOffset + 16) {
             this.matrixStack.length = nextOffset + 16;
         }
-        for (var i = 0; i < 16; i++) {
+        for (let i = 0; i < 16; i++) {
             this.matrixStack[nextOffset + i] = this.currentMatrix[i];
         }
         this.depth++;
-    };
-    MatrixStack.pop = function () {
+    }
+    static pop() {
         this.depth--;
         if (this.depth < 0) {
             this.depth = 0;
         }
-        var offset = this.depth * 16;
-        for (var i = 0; i < 16; i++) {
+        const offset = this.depth * 16;
+        for (let i = 0; i < 16; i++) {
             this.currentMatrix[i] = this.matrixStack[offset + i];
         }
-    };
-    MatrixStack.getMatrix = function () {
+    }
+    static getMatrix() {
         return this.currentMatrix;
-    };
-    MatrixStack.multMatrix = function (matNew) {
-        var i, j, k;
+    }
+    static multMatrix(matNew) {
+        let i, j, k;
         for (i = 0; i < 16; i++) {
             this.tmp[i] = 0;
         }
@@ -49,9 +47,8 @@ var MatrixStack = (function () {
         for (i = 0; i < 16; i++) {
             this.currentMatrix[i] = this.tmp[i];
         }
-    };
-    return MatrixStack;
-}());
+    }
+}
 MatrixStack.matrixStack = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 MatrixStack.depth = 0;
 MatrixStack.currentMatrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];

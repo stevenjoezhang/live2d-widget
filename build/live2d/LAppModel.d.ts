@@ -17,5 +17,5 @@ declare class LAppModel extends L2DBaseModel {
     draw(gl: any): void;
     hitTest(id: any, testX: any, testY: any): boolean;
 }
-import { L2DBaseModel } from './Live2DFramework';
-import ModelSettingJson from './utils/ModelSettingJson';
+import { L2DBaseModel } from './Live2DFramework.js';
+import ModelSettingJson from './utils/ModelSettingJson.js';

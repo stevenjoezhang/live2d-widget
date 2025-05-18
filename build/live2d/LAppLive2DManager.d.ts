@@ -11,4 +11,4 @@ declare class LAppLive2DManager {
     minScaleEvent(): void;
     tapEvent(x: any, y: any): boolean;
 }
-import LAppModel from './LAppModel';
+import LAppModel from './LAppModel.js';

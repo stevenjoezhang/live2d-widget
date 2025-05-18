@@ -1,32 +1,9 @@
-declare function showHitokoto(): Promise<void>;
-declare const tools: {
-    hitokoto: {
-        icon: string;
-        callback: typeof showHitokoto;
-    };
-    asteroids: {
+interface Tools {
+    [key: string]: {
         icon: string;
         callback: () => void;
     };
-    'switch-model': {
-        icon: string;
-        callback: () => void;
-    };
-    'switch-texture': {
-        icon: string;
-        callback: () => void;
-    };
-    photo: {
-        icon: string;
-        callback: () => void;
-    };
-    info: {
-        icon: string;
-        callback: () => void;
-    };
-    quit: {
-        icon: string;
-        callback: () => void;
-    };
-};
+}
+declare const tools: Tools;
 export default tools;
+export { Tools };

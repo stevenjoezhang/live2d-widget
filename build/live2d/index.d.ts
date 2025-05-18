@@ -29,7 +29,7 @@ declare class Model {
     transformScreenX(deviceX: any): number;
     transformScreenY(deviceY: any): number;
 }
-import LAppLive2DManager from './LAppLive2DManager';
-import { L2DTargetPoint } from './Live2DFramework';
-import { L2DViewMatrix } from './Live2DFramework';
-import { L2DMatrix44 } from './Live2DFramework';
+import LAppLive2DManager from './LAppLive2DManager.js';
+import { L2DTargetPoint } from './Live2DFramework.js';
+import { L2DViewMatrix } from './Live2DFramework.js';
+import { L2DMatrix44 } from './Live2DFramework.js';

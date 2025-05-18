@@ -7,6 +7,8 @@ interface Config {
     waifuPath: string;
     apiPath?: string;
     cdnPath?: string;
+    cubism2Path?: string;
+    cubism5Path?: string;
     modelId?: number;
     tools?: string[];
     drag?: boolean;
@@ -14,12 +16,13 @@ interface Config {
 }
 declare class ModelManager {
     readonly useCDN: boolean;
-    private readonly apiPath;
     private readonly cdnPath;
+    private readonly cubism2Path;
+    private readonly cubism5Path;
     private _modelId;
     private _modelTexturesId;
     private modelList;
-    private readonly model;
+    private model;
     private modelInitialized;
     private modelJSONCache;
     constructor(config: Config);
@@ -28,6 +31,7 @@ declare class ModelManager {
     set modelTexturesId(modelTexturesId: number);
     get modelTexturesId(): number;
     fetchWithCache(url: string): Promise<any>;
+    checkModelVersion(modelSetting: any): 2 | 3;
     loadLive2d(modelSettingPath: string, modelSetting: object): Promise<void>;
     loadModelList(): Promise<ModelList>;
     loadTextureCache(modelName: string): Promise<any[]>;

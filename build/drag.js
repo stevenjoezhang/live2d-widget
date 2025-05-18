@@ -1,21 +1,21 @@
 function registerDrag() {
-    var element = document.getElementById('waifu');
-    var canvas = document.getElementById('live2d');
+    const element = document.getElementById('waifu');
+    const canvas = document.getElementById('live2d');
     if (!element || !canvas)
         return;
-    var winWidth = window.innerWidth, winHeight = window.innerHeight;
-    var imgWidth = element.offsetWidth, imgHeight = element.offsetHeight;
-    element.addEventListener('mousedown', function (event) {
+    let winWidth = window.innerWidth, winHeight = window.innerHeight;
+    const imgWidth = element.offsetWidth, imgHeight = element.offsetHeight;
+    element.addEventListener('mousedown', event => {
         if (event.button === 2) {
             return;
         }
         if (event.target !== canvas)
             return;
         event.preventDefault();
-        var _offsetX = event.offsetX, _offsetY = event.offsetY;
-        document.onmousemove = function (event) {
-            var _x = event.clientX, _y = event.clientY;
-            var _left = _x - _offsetX, _top = _y - _offsetY;
+        const _offsetX = event.offsetX, _offsetY = event.offsetY;
+        document.onmousemove = event => {
+            const _x = event.clientX, _y = event.clientY;
+            let _left = _x - _offsetX, _top = _y - _offsetY;
             if (_top < 0) {
                 _top = 0;
             }
@@ -31,11 +31,11 @@ function registerDrag() {
             element.style.top = _top + 'px';
             element.style.left = _left + 'px';
         };
-        document.onmouseup = function () {
+        document.onmouseup = () => {
             document.onmousemove = null;
         };
     });
-    window.onresize = function () {
+    window.onresize = () => {
         winWidth = window.innerWidth;
         winHeight = window.innerHeight;
     };

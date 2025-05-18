@@ -7,40 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
-    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (g && (g = 0, op[0] && (_ = 0)), _) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-import { L2DMatrix44, L2DTargetPoint, L2DViewMatrix } from './Live2DFramework';
-import LAppDefine from './LAppDefine';
-import MatrixStack from './utils/MatrixStack';
-import LAppLive2DManager from './LAppLive2DManager';
-import logger from '../logger';
-var Model = (function () {
-    function Model() {
+import { L2DMatrix44, L2DTargetPoint, L2DViewMatrix } from './Live2DFramework.js';
+import LAppDefine from './LAppDefine.js';
+import MatrixStack from './utils/MatrixStack.js';
+import LAppLive2DManager from './LAppLive2DManager.js';
+import logger from '../logger.js';
+class Model {
+    constructor() {
         this.live2DMgr = new LAppLive2DManager();
         this.isDrawStart = false;
         this.gl = null;
@@ -54,7 +27,7 @@ var Model = (function () {
         this.lastMouseX = 0;
         this.lastMouseY = 0;
     }
-    Model.prototype.initL2dCanvas = function (canvasId) {
+    initL2dCanvas(canvasId) {
         this.canvas = document.getElementById(canvasId);
         if (this.canvas.addEventListener) {
             this.canvas.addEventListener('mousewheel', this.mouseEvent.bind(this), false);
@@ -68,64 +41,54 @@ var Model = (function () {
             this.canvas.addEventListener('touchend', this.touchEvent.bind(this), false);
             this.canvas.addEventListener('touchmove', this.touchEvent.bind(this), false);
         }
-    };
-    Model.prototype.init = function (canvasId, modelSettingPath, modelSetting) {
-        return __awaiter(this, void 0, void 0, function () {
-            var width, height, ratio, left, right, bottom, top;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.initL2dCanvas(canvasId);
-                        width = this.canvas.width;
-                        height = this.canvas.height;
-                        this.dragMgr = new L2DTargetPoint();
-                        ratio = height / width;
-                        left = LAppDefine.VIEW_LOGICAL_LEFT;
-                        right = LAppDefine.VIEW_LOGICAL_RIGHT;
-                        bottom = -ratio;
-                        top = ratio;
-                        this.viewMatrix = new L2DViewMatrix();
-                        this.viewMatrix.setScreenRect(left, right, bottom, top);
-                        this.viewMatrix.setMaxScreenRect(LAppDefine.VIEW_LOGICAL_MAX_LEFT, LAppDefine.VIEW_LOGICAL_MAX_RIGHT, LAppDefine.VIEW_LOGICAL_MAX_BOTTOM, LAppDefine.VIEW_LOGICAL_MAX_TOP);
-                        this.viewMatrix.setMaxScale(LAppDefine.VIEW_MAX_SCALE);
-                        this.viewMatrix.setMinScale(LAppDefine.VIEW_MIN_SCALE);
-                        this.projMatrix = new L2DMatrix44();
-                        this.projMatrix.multScale(1, width / height);
-                        this.deviceToScreen = new L2DMatrix44();
-                        this.deviceToScreen.multTranslate(-width / 2.0, -height / 2.0);
-                        this.deviceToScreen.multScale(2 / width, -2 / width);
-                        this.gl = this.canvas.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true });
-                        if (!this.gl) {
-                            logger.error('Failed to create WebGL context.');
-                            return [2];
-                        }
-                        Live2D.setGL(this.gl);
-                        this.gl.clearColor(0.0, 0.0, 0.0, 0.0);
-                        return [4, this.changeModelWithJSON(modelSettingPath, modelSetting)];
-                    case 1:
-                        _a.sent();
-                        this.startDraw();
-                        return [2];
-                }
-            });
+    }
+    init(canvasId, modelSettingPath, modelSetting) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.initL2dCanvas(canvasId);
+            const width = this.canvas.width;
+            const height = this.canvas.height;
+            this.dragMgr = new L2DTargetPoint();
+            const ratio = height / width;
+            const left = LAppDefine.VIEW_LOGICAL_LEFT;
+            const right = LAppDefine.VIEW_LOGICAL_RIGHT;
+            const bottom = -ratio;
+            const top = ratio;
+            this.viewMatrix = new L2DViewMatrix();
+            this.viewMatrix.setScreenRect(left, right, bottom, top);
+            this.viewMatrix.setMaxScreenRect(LAppDefine.VIEW_LOGICAL_MAX_LEFT, LAppDefine.VIEW_LOGICAL_MAX_RIGHT, LAppDefine.VIEW_LOGICAL_MAX_BOTTOM, LAppDefine.VIEW_LOGICAL_MAX_TOP);
+            this.viewMatrix.setMaxScale(LAppDefine.VIEW_MAX_SCALE);
+            this.viewMatrix.setMinScale(LAppDefine.VIEW_MIN_SCALE);
+            this.projMatrix = new L2DMatrix44();
+            this.projMatrix.multScale(1, width / height);
+            this.deviceToScreen = new L2DMatrix44();
+            this.deviceToScreen.multTranslate(-width / 2.0, -height / 2.0);
+            this.deviceToScreen.multScale(2 / width, -2 / width);
+            this.gl = this.canvas.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true });
+            if (!this.gl) {
+                logger.error('Failed to create WebGL context.');
+                return;
+            }
+            Live2D.setGL(this.gl);
+            this.gl.clearColor(0.0, 0.0, 0.0, 0.0);
+            yield this.changeModelWithJSON(modelSettingPath, modelSetting);
+            this.startDraw();
         });
-    };
-    Model.prototype.startDraw = function () {
-        var _this = this;
+    }
+    startDraw() {
         if (!this.isDrawStart) {
             this.isDrawStart = true;
-            var tick_1 = function () {
-                _this.draw();
-                var requestAnimationFrame = window.requestAnimationFrame ||
+            const tick = () => {
+                this.draw();
+                const requestAnimationFrame = window.requestAnimationFrame ||
                     window.mozRequestAnimationFrame ||
                     window.webkitRequestAnimationFrame ||
                     window.msRequestAnimationFrame;
-                requestAnimationFrame(tick_1, _this.canvas);
+                requestAnimationFrame(tick, this.canvas);
             };
-            tick_1();
+            tick();
         }
-    };
-    Model.prototype.draw = function () {
+    }
+    draw() {
         MatrixStack.reset();
         MatrixStack.loadIdentity();
         this.dragMgr.update();
@@ -134,7 +97,7 @@ var Model = (function () {
         MatrixStack.multMatrix(this.projMatrix.getArray());
         MatrixStack.multMatrix(this.viewMatrix.getArray());
         MatrixStack.push();
-        var model = this.live2DMgr.getModel();
+        const model = this.live2DMgr.getModel();
         if (model == null)
             return;
         if (model.initialized && !model.updating) {
@@ -142,34 +105,20 @@ var Model = (function () {
             model.draw(this.gl);
         }
         MatrixStack.pop();
-    };
-    Model.prototype.changeModel = function (modelSettingPath) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.live2DMgr.changeModel(this.gl, modelSettingPath)];
-                    case 1:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    changeModel(modelSettingPath) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.live2DMgr.changeModel(this.gl, modelSettingPath);
         });
-    };
-    Model.prototype.changeModelWithJSON = function (modelSettingPath, modelSetting) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.live2DMgr.changeModelWithJSON(this.gl, modelSettingPath, modelSetting)];
-                    case 1:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    changeModelWithJSON(modelSettingPath, modelSetting) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.live2DMgr.changeModelWithJSON(this.gl, modelSettingPath, modelSetting);
         });
-    };
-    Model.prototype.modelScaling = function (scale) {
-        var isMaxScale = this.viewMatrix.isMaxScale();
-        var isMinScale = this.viewMatrix.isMinScale();
+    }
+    modelScaling(scale) {
+        const isMaxScale = this.viewMatrix.isMaxScale();
+        const isMinScale = this.viewMatrix.isMinScale();
         this.viewMatrix.adjustScale(0, 0, scale);
         if (!isMaxScale) {
             if (this.viewMatrix.isMaxScale()) {
@@ -181,14 +130,14 @@ var Model = (function () {
                 this.live2DMgr.minScaleEvent();
             }
         }
-    };
-    Model.prototype.modelTurnHead = function (event) {
+    }
+    modelTurnHead(event) {
         this.drag = true;
-        var rect = event.target.getBoundingClientRect();
-        var sx = this.transformScreenX(event.clientX - rect.left);
-        var sy = this.transformScreenY(event.clientY - rect.top);
-        var vx = this.transformViewX(event.clientX - rect.left);
-        var vy = this.transformViewY(event.clientY - rect.top);
+        const rect = event.target.getBoundingClientRect();
+        const sx = this.transformScreenX(event.clientX - rect.left);
+        const sy = this.transformScreenY(event.clientY - rect.top);
+        const vx = this.transformViewX(event.clientX - rect.left);
+        const vy = this.transformViewY(event.clientY - rect.top);
         logger.trace('onMouseDown device( x:' +
             event.clientX +
             ' y:' +
@@ -202,13 +151,13 @@ var Model = (function () {
         this.lastMouseY = sy;
         this.dragMgr.setPoint(vx, vy);
         this.live2DMgr.tapEvent(vx, vy);
-    };
-    Model.prototype.followPointer = function (event) {
-        var rect = event.target.getBoundingClientRect();
-        var sx = this.transformScreenX(event.clientX - rect.left);
-        var sy = this.transformScreenY(event.clientY - rect.top);
-        var vx = this.transformViewX(event.clientX - rect.left);
-        var vy = this.transformViewY(event.clientY - rect.top);
+    }
+    followPointer(event) {
+        const rect = event.target.getBoundingClientRect();
+        const sx = this.transformScreenX(event.clientX - rect.left);
+        const sy = this.transformScreenY(event.clientY - rect.top);
+        const vx = this.transformViewX(event.clientX - rect.left);
+        const vy = this.transformViewY(event.clientY - rect.top);
         logger.trace('onMouseMove device( x:' +
             event.clientX +
             ' y:' +
@@ -223,14 +172,14 @@ var Model = (function () {
             this.lastMouseY = sy;
             this.dragMgr.setPoint(vx, vy);
         }
-    };
-    Model.prototype.lookFront = function () {
+    }
+    lookFront() {
         if (this.drag) {
             this.drag = false;
         }
         this.dragMgr.setPoint(0, 0);
-    };
-    Model.prototype.mouseEvent = function (e) {
+    }
+    mouseEvent(e) {
         e.preventDefault();
         if (e.type == 'mousewheel') {
             if (e.clientX < 0 ||
@@ -260,10 +209,10 @@ var Model = (function () {
         else if (e.type == 'mouseout') {
             this.lookFront();
         }
-    };
-    Model.prototype.touchEvent = function (e) {
+    }
+    touchEvent(e) {
         e.preventDefault();
-        var touch = e.touches[0];
+        const touch = e.touches[0];
         if (e.type == 'touchstart') {
             if (e.touches.length == 1)
                 this.modelTurnHead(touch);
@@ -271,9 +220,9 @@ var Model = (function () {
         else if (e.type == 'touchmove') {
             this.followPointer(touch);
             if (e.touches.length == 2) {
-                var touch1 = e.touches[0];
-                var touch2 = e.touches[1];
-                var len = Math.pow(touch1.pageX - touch2.pageX, 2) +
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const len = Math.pow(touch1.pageX - touch2.pageX, 2) +
                     Math.pow(touch1.pageY - touch2.pageY, 2);
                 if (this.oldLen - len < 0)
                     this.modelScaling(1.025);
@@ -285,21 +234,20 @@ var Model = (function () {
         else if (e.type == 'touchend') {
             this.lookFront();
         }
-    };
-    Model.prototype.transformViewX = function (deviceX) {
-        var screenX = this.deviceToScreen.transformX(deviceX);
+    }
+    transformViewX(deviceX) {
+        const screenX = this.deviceToScreen.transformX(deviceX);
         return this.viewMatrix.invertTransformX(screenX);
-    };
-    Model.prototype.transformViewY = function (deviceY) {
-        var screenY = this.deviceToScreen.transformY(deviceY);
+    }
+    transformViewY(deviceY) {
+        const screenY = this.deviceToScreen.transformY(deviceY);
         return this.viewMatrix.invertTransformY(screenY);
-    };
-    Model.prototype.transformScreenX = function (deviceX) {
+    }
+    transformScreenX(deviceX) {
         return this.deviceToScreen.transformX(deviceX);
-    };
-    Model.prototype.transformScreenY = function (deviceY) {
+    }
+    transformScreenY(deviceY) {
         return this.deviceToScreen.transformY(deviceY);
-    };
-    return Model;
-}());
+    }
+}
 export default Model;

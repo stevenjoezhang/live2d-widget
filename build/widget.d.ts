@@ -1,11 +1,5 @@
 import { Config } from './model.js';
 import { Time } from './message.js';
-interface Tools {
-    [key: string]: {
-        icon: string;
-        callback: () => void;
-    };
-}
 interface Tips {
     message: {
         default: string[];
@@ -28,4 +22,4 @@ interface Tips {
     }[];
 }
 declare function initWidget(config: string | Config): void;
-export { initWidget, Tools, Tips };
+export { initWidget, Tips };
