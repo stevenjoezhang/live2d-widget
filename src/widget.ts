@@ -10,25 +10,6 @@ import tools from './tools.js';
 import logger from './logger.js';
 import registerDrag from './drag.js';
 
-interface Tools {
-  /**
-   * 工具的键值对，键为工具的名称。
-   * @type {string}
-   */
-  [key: string]: {
-    /**
-     * 工具的图标，通常为 SVG 字符串。
-     * @type {string}
-     */
-    icon: string;
-    /**
-     * 工具的回调函数。
-     * @type {() => void}
-     */
-    callback: () => void;
-  };
-}
-
 interface Tips {
   /**
    * 默认消息配置。
@@ -87,22 +68,22 @@ interface Tips {
 }
 
 function registerTools(model: ModelManager, config: Config) {
-  (tools as Tools)['switch-model'].callback = () => model.loadNextModel();
-  (tools as Tools)['switch-texture'].callback = () => model.loadRandTexture();
+  tools['switch-model'].callback = () => model.loadNextModel();
+  tools['switch-texture'].callback = () => model.loadRandTexture();
   if (!Array.isArray(config.tools)) {
     config.tools = Object.keys(tools);
   }
-  for (const tool of config.tools!) {
-    if ((tools as Tools)[tool]) {
-      const { icon, callback } = (tools as Tools)[tool];
+  for (const toolName of config.tools!) {
+    if (tools[toolName]) {
+      const { icon, callback } = tools[toolName];
       document
         .getElementById('waifu-tool')!
         .insertAdjacentHTML(
           'beforeend',
-          `<span id="waifu-tool-${tool}">${icon}</span>`,
+          `<span id="waifu-tool-${toolName}">${icon}</span>`,
         );
       document
-        .getElementById(`waifu-tool-${tool}`)!
+        .getElementById(`waifu-tool-${toolName}`)!
         .addEventListener('click', callback);
     }
   }
@@ -260,4 +241,4 @@ function initWidget(config: string | Config) {
   }
 }
 
-export { initWidget, Tools, Tips };
+export { initWidget, Tips };

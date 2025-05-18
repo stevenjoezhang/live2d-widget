@@ -14,6 +14,25 @@ import {
 } from './icons.js';
 import { showMessage } from './message.js';
 
+interface Tools {
+  /**
+   * 工具的键值对，键为工具的名称。
+   * @type {string}
+   */
+  [key: string]: {
+    /**
+     * 工具的图标，通常为 SVG 字符串。
+     * @type {string}
+     */
+    icon: string;
+    /**
+     * 工具的回调函数。
+     * @type {() => void}
+     */
+    callback: () => void;
+  };
+}
+
 /**
  * 显示一句一言。
  */
@@ -30,9 +49,9 @@ async function showHitokoto() {
 
 /**
  * 看板娘工具配置。
- * @type {Object}
+ * @type {Tools}
  */
-const tools = {
+const tools: Tools = {
   hitokoto: {
     icon: fa_comment,
     callback: showHitokoto,
@@ -102,3 +121,4 @@ const tools = {
 };
 
 export default tools;
+export { Tools };
