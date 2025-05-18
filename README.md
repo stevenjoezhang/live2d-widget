@@ -1,17 +1,19 @@
 # Live2D Widget
 
 ![](https://forthebadge.com/images/badges/built-with-love.svg)
-![](https://forthebadge.com/images/badges/uses-html.svg)
-![](https://forthebadge.com/images/badges/made-with-javascript.svg)
+![](https://forthebadge.com/images/badges/made-with-typescript.svg)
+![](https://forthebadge.com/images/badges/uses-css.svg)
 ![](https://forthebadge.com/images/badges/contains-cat-gifs.svg)
-![](https://forthebadge.com/images/badges/powered-by-electricity.svg)
+![](https://forthebadge.com/images/badges/powered-by-responsibility.svg)
 ![](https://forthebadge.com/images/badges/makes-people-smile.svg)
 
 [English](README.en.md)
 
 ## 特性
 
-在网页中添加 Live2D 看板娘。兼容 PJAX，支持无刷新加载。
+- 在网页中添加 Live2D 看板娘
+- 轻量级，除 Live2D Cubism Core 外无其他运行时依赖
+- 核心代码由 TypeScript 编写，易于集成
 
 <img src="demo/screenshots/screenshot-2.png" width="280"><img src="demo/screenshots/screenshot-3.png" width="280"><img src="demo/screenshots/screenshot-1.png" width="270">
 
@@ -39,7 +41,7 @@
 
 ## 配置
 
-你可以对照 `dist/autoload.js` 的源码查看可选的配置项目。`autoload.js` 会自动加载三个文件：`waifu.css`，`live2d.min.js` 和 `waifu-tips.js`。`waifu-tips.js` 会创建 `initWidget` 函数，这就是加载看板娘的主函数。`initWidget` 函数接收一个 Object 类型的参数，作为看板娘的配置。以下是配置选项：
+你可以对照 `dist/autoload.js` 的源码查看可选的配置项目。`autoload.js` 会自动加载两个文件：`waifu.css` 和 `waifu-tips.js`。`waifu-tips.js` 会创建 `initWidget` 函数，这就是加载看板娘的主函数。`initWidget` 函数接收一个 Object 类型的参数，作为看板娘的配置。以下是配置选项：
 
 | 选项 | 类型 | 默认值 | 说明 |
 | - | - | - | - |
@@ -152,8 +154,7 @@ https://example.com/path/to/live2d-widget/dist/
 > 感谢 jsDelivr 提供的 CDN 服务。  
 > Thanks jsDelivr for providing public CDN service.
 
-代码自这篇博文魔改而来：  
-https://www.fghrsh.net/post/123.html
+感谢 fghrsh 提供的 API 服务。
 
 感谢 [一言](https://hitokoto.cn) 提供的语句接口。
 
@@ -161,16 +162,18 @@ https://www.fghrsh.net/post/123.html
 
 ## 更多
 
+代码自这篇博文魔改而来：  
+https://www.fghrsh.net/post/123.html
+
 更多内容可以参考：  
 https://nocilol.me/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02  
-https://github.com/xiazeyu/live2d-widget.js  
-https://github.com/summerscar/live2dDemo
+https://github.com/guansss/pixi-live2d-display
 
-关于后端 API 模型：  
-https://github.com/xiazeyu/live2d-widget-models  
-https://github.com/xiaoski/live2d_models_collection
+更多模型仓库：  
+https://github.com/zenghongtu/live2d-model-assets
 
 除此之外，还有桌面版本：  
+https://github.com/TSKI433/hime-display  
 https://github.com/amorist/platelet  
 https://github.com/akiroz/Live2D-Widget  
 https://github.com/zenghongtu/PPet  
@@ -179,25 +182,26 @@ https://github.com/LikeNeko/L2dPetForMac
 以及 Wallpaper Engine：  
 https://github.com/guansss/nep-live2d
 
-## 许可证
+Live2D 官方网站：  
+https://www.live2d.com/en/
 
-Released under the GNU General Public License v3  
-http://www.gnu.org/licenses/gpl-3.0.html
+## 许可证
 
 本仓库并不包含任何模型，用作展示的所有 Live2D 模型、图片、动作数据等版权均属于其原作者，仅供研究学习，不得用于商业用途。
 
-Live2D 官方网站：  
-https://www.live2d.com/en/  
-https://live2d.github.io
+本仓库的代码（不包括受 Cubism Live2D Proprietary Software License 和 Live2D Open Software License 约束的部分）基于 GNU General Public License v3 协议开源  
+http://www.gnu.org/licenses/gpl-3.0.html
 
+Live2D 相关代码的使用请遵守对应的许可：
+
+Live2D Cubism SDK 2.1 的许可证：  
+[Live2D SDK License Agreement (Public)](https://docs.google.com/document/d/10tz1WrycskzGGBOhrAfGiTSsgmyFy8D9yHx9r_PsN8I/)
+
+Live2D Cubism SDK 5 的许可证：  
 Live2D Cubism Core は Live2D Proprietary Software License で提供しています。  
 https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html  
 Live2D Cubism Components は Live2D Open Software License で提供しています。  
 http://www.live2d.com/eula/live2d-open-software-license-agreement_en.html
-
-> The terms and conditions do prohibit modification, but obfuscating in `live2d.min.js` would not be considered illegal modification.
-
-https://community.live2d.com/discussion/140/webgl-developer-licence-and-javascript-question
 
 ## 更新日志
 

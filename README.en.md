@@ -1,17 +1,19 @@
 # Live2D Widget
 
 ![](https://forthebadge.com/images/badges/built-with-love.svg)
-![](https://forthebadge.com/images/badges/uses-html.svg)
-![](https://forthebadge.com/images/badges/made-with-javascript.svg)
+![](https://forthebadge.com/images/badges/made-with-typescript.svg)
+![](https://forthebadge.com/images/badges/uses-css.svg)
 ![](https://forthebadge.com/images/badges/contains-cat-gifs.svg)
-![](https://forthebadge.com/images/badges/powered-by-electricity.svg)
+![](https://forthebadge.com/images/badges/powered-by-responsibility.svg)
 ![](https://forthebadge.com/images/badges/makes-people-smile.svg)
 
 [中文](README.md)
 
 ## Features
 
-Add Live2D widget to web page. Compatible with PJAX.
+- Add Live2D widget to web page
+- Lightweight, with no runtime dependencies other than Live2D Cubism Core
+- Core code is written in TypeScript, making it easy to integrate
 
 <img src="demo/screenshots/screenshot-2.png" width="280"><img src="demo/screenshots/screenshot-3.png" width="280"><img src="demo/screenshots/screenshot-1.png" width="270">
 
@@ -39,7 +41,7 @@ If you are interested in customizing the widget, please refer to the detailed in
 
 ## Configuration
 
-You can refer to the source code of `dist/autoload.js` to see the available configuration options. `autoload.js` will automatically load three files: `waifu.css`, `live2d.min.js`, and `waifu-tips.js`. `waifu-tips.js` creates the `initWidget` function, which is the main function for loading the widget. The `initWidget` function accepts an object-type parameter as the configuration for the widget. The following are the available options:
+You can refer to the source code of `dist/autoload.js` to see the available configuration options. `autoload.js` will automatically load two files: `waifu.css` and `waifu-tips.js`. `waifu-tips.js` creates the `initWidget` function, which is the main function for loading the widget. The `initWidget` function accepts an object-type parameter as the configuration for the widget. The following are the available options:
 
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
@@ -150,8 +152,7 @@ This will load the widget.
 
 > Thanks to jsDelivr for providing public CDN service.
 
-The code is modified based on this blog post:  
-https://www.fghrsh.net/post/123.html
+Thanks fghrsh for providing API service.
 
 Thanks to [Hitokoto](https://hitokoto.cn) for providing the sentence API.
 
@@ -159,16 +160,18 @@ When you click on the paper airplane button of the virtual assistant, a hidden s
 
 ## More
 
+The code is modified based on this blog post:  
+https://www.fghrsh.net/post/123.html
+
 For more information, you can refer to the following links:  
 https://nocilol.me/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02  
-https://github.com/xiazeyu/live2d-widget.js  
-https://github.com/summerscar/live2dDemo
+https://github.com/guansss/pixi-live2d-display
 
-Regarding the backend API models:  
-https://github.com/xiazeyu/live2d-widget-models  
-https://github.com/xiaoski/live2d_models_collection
+For more models:  
+https://github.com/zenghongtu/live2d-model-assets
 
 In addition to that, there are desktop versions available:  
+https://github.com/TSKI433/hime-display  
 https://github.com/amorist/platelet  
 https://github.com/akiroz/Live2D-Widget  
 https://github.com/zenghongtu/PPet  
@@ -177,25 +180,26 @@ https://github.com/LikeNeko/L2dPetForMac
 And also Wallpaper Engine:  
 https://github.com/guansss/nep-live2d
 
-## License
+Official Live2D websites:  
+https://www.live2d.com/en/
 
-Released under the GNU General Public License v3  
-http://www.gnu.org/licenses/gpl-3.0.html
+## License
 
 This repository does not contain any models. The copyrights of all Live2D models, images, and motion data used for demonstration purposes belong to their respective original authors. They are provided for research and learning purposes only and should not be used for commercial purposes.
 
-Official Live2D websites:  
-https://www.live2d.com/en/  
-https://live2d.github.io
+The code in this repository (excluding parts covered by the Cubism Live2D Proprietary Software License and the Live2D Open Software License) is released under the GNU General Public License v3  
+http://www.gnu.org/licenses/gpl-3.0.html
 
+Please comply with the relevant licenses when using any Live2D-related code:
+
+License for Live2D Cubism SDK 2.1:  
+[Live2D SDK License Agreement (Public)](https://docs.google.com/document/d/10tz1WrycskzGGBOhrAfGiTSsgmyFy8D9yHx9r_PsN8I/)
+
+License for Live2D Cubism SDK 5:  
 Live2D Cubism Core is provided under the Live2D Proprietary Software License.  
 https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html  
 Live2D Cubism Components are provided under the Live2D Open Software License.  
 http://www.live2d.com/eula/live2d-open-software-license-agreement_en.html
-
-> The terms and conditions do prohibit modification, but obfuscating in `live2d.min.js` would not be considered illegal modification.
-
-https://community.live2d.com/discussion/140/webgl-developer-licence-and-javascript-question
 
 ## Update Log
 
