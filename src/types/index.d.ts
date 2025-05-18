@@ -3,5 +3,4 @@
  * @module types/index
  */
 export * from './live2dApi';
-export * from './svg';
 export * from './window';
