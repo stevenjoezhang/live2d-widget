@@ -4,7 +4,7 @@
  */
 
 import { showMessage } from './message.js';
-import { randomSelection, loadExternalResource } from './utils.js';
+import { loadExternalResource, randomOtherOption } from './utils.js';
 import type Cubism2Model from './cubism2/index.js';
 import type { AppDelegate as Cubism5Model } from './cubism5/index.js';
 import logger, { LogLevel } from './logger.js';
@@ -90,7 +90,7 @@ class ModelManager {
    * Create a Model instance.
    * @param {Config} config - Configuration options
    */
-  constructor(config: Config, models: ModelList[] = []) {
+  private constructor(config: Config, models: ModelList[] = []) {
     let { apiPath, cdnPath } = config;
     const { cubism2Path, cubism5Path } = config;
     let useCDN = false;
@@ -127,6 +127,41 @@ class ModelManager {
     this.models = models;
   }
 
+  public static async initCheck(config: Config, models: ModelList[] = []) {
+    const model = new ModelManager(config, models);
+    if (model.useCDN) {
+      const response = await fetch(`${model.cdnPath}model_list.json`);
+      model.modelList = await response.json();
+      if (model.modelId >= model.modelList.models.length) {
+        model.modelId = 0;
+      }
+      const modelName = model.modelList.models[model.modelId];
+      if (Array.isArray(modelName)) {
+        if (model.modelTexturesId >= modelName.length) {
+          model.modelTexturesId = 0;
+        }
+      } else {
+        const modelSettingPath = `${model.cdnPath}model/${modelName}/index.json`;
+        const modelSetting = await model.fetchWithCache(modelSettingPath);
+        const version = model.checkModelVersion(modelSetting);
+        if (version === 2) {
+          const textureCache = await model.loadTextureCache(modelName);
+          if (model.modelTexturesId >= textureCache.length) {
+            model.modelTexturesId = 0;
+          }
+        }
+      }
+    } else {
+      if (model.modelId >= model.models.length) {
+        model.modelId = 0;
+      }
+      if (model.modelTexturesId >= model.models[model.modelId].paths.length) {
+        model.modelTexturesId = 0;
+      }
+    }
+    return model;
+  }
+
   public set modelId(modelId: number) {
     this._modelId = modelId;
     localStorage.setItem('modelId', modelId.toString());
@@ -155,7 +190,11 @@ class ModelManager {
       result = this.modelJSONCache[url];
     } else {
       const response = await fetch(url);
-      result = await response.json();
+      try {
+        result = await response.json();
+      } catch {
+        result = null;
+      }
       this.modelJSONCache[url] = result;
     }
     return result;
@@ -225,18 +264,9 @@ class ModelManager {
     this.loading = false;
   }
 
-  /**
-   * Load the model list.
-   */
-  async loadModelList(): Promise<ModelListCDN> {
-    const response = await fetch(`${this.cdnPath}model_list.json`);
-    const modelList = await response.json();
-    return modelList;
-  }
-
   async loadTextureCache(modelName: string): Promise<any[]> {
     const textureCache = await this.fetchWithCache(`${this.cdnPath}model/${modelName}/textures.cache`);
-    return textureCache;
+    return textureCache || [];
   }
 
   /**
@@ -244,38 +274,26 @@ class ModelManager {
    * @param {string} message - Loading message.
    */
   async loadModel(message: string) {
+    let modelSettingPath, modelSetting;
     if (this.useCDN) {
-      if (!this.modelList) {
-        this.modelList = await this.loadModelList();
+      let modelName = this.modelList.models[this.modelId];
+      if (Array.isArray(modelName)) {
+        modelName = modelName[this.modelTexturesId];
       }
-      if (this.modelId >= this.modelList.models.length) {
-        this.modelId = 0;
-      }
-      const modelName = randomSelection(this.modelList.models[this.modelId]);
-      const modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
-      const modelSetting = await this.fetchWithCache(modelSettingPath);
+      modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
+      modelSetting = await this.fetchWithCache(modelSettingPath);
       const version = this.checkModelVersion(modelSetting);
       if (version === 2) {
         const textureCache = await this.loadTextureCache(modelName);
-        if (this.modelTexturesId >= textureCache.length) {
-          this.modelTexturesId = 0;
-        }
         let textures = textureCache[this.modelTexturesId];
         if (typeof textures === 'string') textures = [textures];
         modelSetting.textures = textures;
       }
-      await this.loadLive2D(modelSettingPath, modelSetting);
     } else {
-      if (this.modelId >= this.models.length) {
-        this.modelId = 0;
-      }
-      if (this.modelTexturesId >= this.models[this.modelId].paths.length) {
-        this.modelTexturesId = 0;
-      }
-      const modelSettingPath = this.models[this.modelId].paths[this.modelTexturesId];
-      const modelSetting = await this.fetchWithCache(modelSettingPath);
-      await this.loadLive2D(modelSettingPath, modelSetting);
+      modelSettingPath = this.models[this.modelId].paths[this.modelTexturesId];
+      modelSetting = await this.fetchWithCache(modelSettingPath);
     }
+    await this.loadLive2D(modelSettingPath, modelSetting);
     showMessage(message, 4000, 10);
   }
 
@@ -284,29 +302,37 @@ class ModelManager {
    */
   async loadRandTexture() {
     const { modelId } = this;
+    let noTextureAvailable = false;
     if (this.useCDN) {
-      if (!this.modelList) {
-        this.modelList = await this.loadModelList();
+      const modelName = this.modelList.models[modelId];
+      if (Array.isArray(modelName)) {
+        this.modelTexturesId = randomOtherOption(modelName.length, this.modelTexturesId);
+      } else {
+        const modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
+        const modelSetting = await this.fetchWithCache(modelSettingPath);
+        const version = this.checkModelVersion(modelSetting);
+        if (version === 2) {
+          const textureCache = await this.loadTextureCache(modelName);
+          if (textureCache.length <= 1) {
+            noTextureAvailable = true;
+          } else {
+            this.modelTexturesId = randomOtherOption(textureCache.length, this.modelTexturesId);
+          }
+        } else {
+          noTextureAvailable = true;
+        }
       }
-      const modelName = randomSelection(this.modelList.models[modelId]);
-      const modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
-      const modelSetting = await this.fetchWithCache(modelSettingPath);
-      const version = this.checkModelVersion(modelSetting);
-      if (version === 2) {
-        const textureCache = await this.loadTextureCache(modelName);
-        this.modelTexturesId = Math.floor(Math.random() * textureCache.length);
-        let textures = textureCache[this.modelTexturesId];
-        if (typeof textures === 'string') textures = [textures];
-        modelSetting.textures = textures;
-      }
-      await this.loadLive2D(modelSettingPath, modelSetting);
-      showMessage('我的新衣服好看嘛？', 4000, 10);
     } else {
-      this.modelTexturesId = Math.floor(Math.random() * this.models[modelId].paths.length);
-      const modelSettingPath = this.models[modelId].paths[this.modelTexturesId];
-      const modelSetting = await this.fetchWithCache(modelSettingPath);
-      await this.loadLive2D(modelSettingPath, modelSetting);
-      showMessage('我的新衣服好看嘛？', 4000, 10);
+      if (this.models[modelId].paths.length === 1) {
+        noTextureAvailable = true;
+      } else {
+        this.modelTexturesId = randomOtherOption(this.models[modelId].paths.length, this.modelTexturesId);
+      }
+    }
+    if (noTextureAvailable) {
+      showMessage('我还没有其他衣服呢！', 4000, 10);
+    } else {
+      await this.loadModel('我的新衣服好看嘛？');
     }
   }
 
@@ -316,9 +342,6 @@ class ModelManager {
   async loadNextModel() {
     this.modelTexturesId = 0;
     if (this.useCDN) {
-      if (!this.modelList) {
-        this.modelList = await this.loadModelList();
-      }
       this.modelId = (this.modelId + 1) % this.modelList.models.length;
       await this.loadModel(this.modelList.messages[this.modelId]);
     } else {

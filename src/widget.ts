@@ -197,7 +197,7 @@ async function loadWidget(config: Config) {
     models = result.models;
     registerEventListener(result);
   }
-  const model = new ModelManager(config, models);
+  const model = await ModelManager.initCheck(config, models);
   await model.loadModel('');
   registerTools(model, config);
   if (config.drag) registerDrag();

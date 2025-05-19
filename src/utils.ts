@@ -5,11 +5,16 @@
 
 /**
  * Randomly select an element from an array, or return the original value if not an array.
- * @param {any} obj - The object or array to select from.
- * @returns {any} The randomly selected element or the original value.
+ * @param {string[] | string} obj - The object or array to select from.
+ * @returns {string} The randomly selected element or the original value.
  */
-function randomSelection(obj: any) {
+function randomSelection(obj: string[] | string): string {
   return Array.isArray(obj) ? obj[Math.floor(Math.random() * obj.length)] : obj;
+}
+
+function randomOtherOption(total: number, excludeIndex: number): number {
+  const idx = Math.floor(Math.random() * (total - 1));
+  return idx >= excludeIndex ? idx + 1 : idx;
 }
 
 /**
@@ -38,4 +43,4 @@ function loadExternalResource(url: string, type: string): Promise<string> {
   });
 }
 
-export { randomSelection, loadExternalResource };
+export { randomSelection, loadExternalResource, randomOtherOption };
