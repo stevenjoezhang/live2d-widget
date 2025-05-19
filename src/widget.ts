@@ -36,6 +36,8 @@ interface Tips {
      * @type {string}
      */
     visibilitychange: string;
+    changeSuccess: string;
+    changeFail: string;
   };
   /**
    * Time configuration.
@@ -69,9 +71,16 @@ interface Tips {
   models: ModelList[];
 }
 
-function registerTools(model: ModelManager, config: Config) {
+function registerTools(model: ModelManager, config: Config, tips: Tips) {
   tools['switch-model'].callback = () => model.loadNextModel();
-  tools['switch-texture'].callback = () => model.loadRandTexture();
+  tools['switch-texture'].callback = () => {
+    let successMessage = '', failMessage = '';
+    if (tips) {
+      successMessage = tips.message.changeSuccess;
+      failMessage = tips.message.changeFail;
+    }
+    model.loadRandTexture(successMessage, failMessage);
+  };
   if (!Array.isArray(config.tools)) {
     config.tools = Object.keys(tools);
   }
@@ -191,15 +200,16 @@ async function loadWidget(config: Config) {
      </div>`,
   );
   let models: ModelList[] = [];
+  let tips: Tips | null;
   if (config.waifuPath) {
     const response = await fetch(config.waifuPath);
-    const result: Tips = await response.json();
-    models = result.models;
-    registerEventListener(result);
+    tips = await response.json();
+    models = tips.models;
+    registerEventListener(tips);
   }
   const model = await ModelManager.initCheck(config, models);
   await model.loadModel('');
-  registerTools(model, config);
+  registerTools(model, config, tips);
   if (config.drag) registerDrag();
   document.getElementById('waifu')!.style.bottom = '0';
 }

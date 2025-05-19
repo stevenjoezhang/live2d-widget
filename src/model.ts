@@ -300,7 +300,7 @@ class ModelManager {
   /**
    * Load a random texture for the current model.
    */
-  async loadRandTexture() {
+  async loadRandTexture(successMessage: string = '', failMessage: string = '') {
     const { modelId } = this;
     let noTextureAvailable = false;
     if (this.useCDN) {
@@ -330,9 +330,9 @@ class ModelManager {
       }
     }
     if (noTextureAvailable) {
-      showMessage('我还没有其他衣服呢！', 4000, 10);
+      showMessage(failMessage, 4000, 10);
     } else {
-      await this.loadModel('我的新衣服好看嘛？');
+      await this.loadModel(successMessage);
     }
   }
 
