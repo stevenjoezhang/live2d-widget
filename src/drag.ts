@@ -1,7 +1,6 @@
 function registerDrag() {
   const element = document.getElementById('waifu');
-  const canvas = document.getElementById('live2d');
-  if (!element || !canvas) return;
+  if (!element) return;
   let winWidth = window.innerWidth,
     winHeight = window.innerHeight;
   const imgWidth = element.offsetWidth,
@@ -12,6 +11,7 @@ function registerDrag() {
       // 右键，直接返回，不处理
       return;
     }
+    const canvas = document.getElementById('live2d');
     if (event.target !== canvas) return;
     event.preventDefault()
     // 记录光标在图片按下时的坐标
