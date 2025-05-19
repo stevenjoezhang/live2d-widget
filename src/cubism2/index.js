@@ -129,13 +129,13 @@ class Cubism2Model {
 
     // 4. 清理 WebGL 资源（如有）
     if (this.gl) {
-      // 手动释放纹理、缓冲区等
+      // 通过 resetCanvas 实现
     }
 
     // 5. 清空引用，辅助GC
     this.canvas = null;
     this.gl = null;
-    this.live2DMgr = null;
+    // this.live2DMgr = null;
     this.dragMgr = null;
     this.viewMatrix = null;
     this.projMatrix = null;

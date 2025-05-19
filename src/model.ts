@@ -169,9 +169,11 @@ class ModelManager {
         this.cubism2model = new Cubism2Model();
       }
       if (this.currentModelVersion === 3) {
-        ;
+        (this.cubism5model as any).release();
+        // 回收 WebGL 资源
+        this.resetCanvas();
       }
-      if (!this.cubism2model.gl) {
+      if (this.currentModelVersion === 3 || !this.cubism2model.gl) {
         await this.cubism2model.init('live2d', modelSettingPath, modelSetting);
       } else {
         await this.cubism2model.changeModelWithJSON(modelSettingPath, modelSetting);
@@ -189,7 +191,7 @@ class ModelManager {
         // 回收 WebGL 资源
         this.resetCanvas();
       }
-      if (!this.cubism5model.subdelegates.at(0)) {
+      if (this.currentModelVersion === 2 || !this.cubism5model.subdelegates.at(0)) {
         this.cubism5model.initialize();
         this.cubism5model.changeModel(modelSettingPath);
         this.cubism5model.run();

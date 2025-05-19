@@ -1,4 +1,4 @@
-/* global ResizeObserver, document, requestAnimationFrame */
+/* global document, window */
 
 import { LAppDelegate } from '@demo/lappdelegate.js';
 import { LAppSubdelegate } from '@demo/lappsubdelegate.js';
@@ -47,7 +47,12 @@ class AppSubdelegate extends LAppSubdelegate {
     this._view.initialize(this);
     this._view._gear = {
       render: () => {},
-      isHit: () => {}
+      isHit: () => {},
+      release: () => {}
+    };
+    this._view._back = {
+      render: () => {},
+      release: () => {}
     };
     // this._view.initializeSprite();
 
@@ -56,7 +61,7 @@ class AppSubdelegate extends LAppSubdelegate {
     this._live2dManager._subdelegate = this;
 
     // 监听画布大小变化，实现响应式自适应
-    this._resizeObserver = new ResizeObserver(
+    this._resizeObserver = new window.ResizeObserver(
       (entries, observer) =>
         this.resizeObserverCallback.call(this, entries, observer)
     );
@@ -130,9 +135,43 @@ export class AppDelegate extends LAppDelegate {
       }
 
       // 递归调用，实现动画循环
-      requestAnimationFrame(loop);
+      this._drawFrameId = window.requestAnimationFrame(loop);
     };
     loop();
+  }
+
+  stop() {
+    if (this._drawFrameId) {
+      window.cancelAnimationFrame(this._drawFrameId);
+      this._drawFrameId = null;
+    }
+  }
+
+  release() {
+    this.stop();
+    this.releaseEventListener();
+    this._subdelegates.clear();
+
+    this._cubismOption = null;
+  }
+
+  releaseEventListener() {
+    document.removeEventListener('pointerdown', this.pointBeganEventListener, {
+      passive: true
+    });
+    this.pointBeganEventListener = null;
+    document.removeEventListener('pointermove', this.pointMovedEventListener, {
+      passive: true
+    });
+    this.pointMovedEventListener = null;
+    document.removeEventListener('pointerup', this.pointEndedEventListener, {
+      passive: true
+    });
+    this.pointEndedEventListener = null;
+    document.removeEventListener('pointercancel', this.pointCancelEventListener, {
+      passive: true
+    });
+    this.pointCancelEventListener = null;
   }
 
   /**
