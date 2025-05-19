@@ -80,8 +80,7 @@ class ModelManager {
 
   /**
    * 创建一个 Model 实例。
-   * @param {Object} config - 配置选项。
-   * @param {string} [config.cdnPath] - CDN 路径。
+   * @param {Config} config - 配置选项
    */
   constructor(config: Config) {
     let { apiPath, cdnPath } = config;
@@ -134,6 +133,10 @@ class ModelManager {
     return this._modelTexturesId;
   }
 
+  resetCanvas() {
+    document.getElementById('waifu-canvas').innerHTML = '<canvas id="live2d" width="800" height="800"></canvas>';
+  }
+
   async fetchWithCache(url: string) {
     let result;
     if (url in this.modelJSONCache) {
@@ -165,7 +168,7 @@ class ModelManager {
         const { default: Cubism2Model } = await import('./cubism2/index.js');
         this.cubism2model = new Cubism2Model();
       }
-      if (this.currentModelVersion != 3) {
+      if (this.currentModelVersion === 3) {
         ;
       }
       if (!this.cubism2model.gl) {
@@ -181,6 +184,11 @@ class ModelManager {
       await loadExternalResource(this.cubism5Path, 'js');
       const { AppDelegate: Cubism5Model} = await import('./cubism5/index.js');
       this.cubism5model = new (Cubism5Model as any)();
+      if (this.currentModelVersion === 2) {
+        this.cubism2model.destroy();
+        // 回收 WebGL 资源
+        this.resetCanvas();
+      }
       if (!this.cubism5model.subdelegates.at(0)) {
         this.cubism5model.initialize();
         this.cubism5model.changeModel(modelSettingPath);
@@ -209,8 +217,6 @@ class ModelManager {
 
   /**
    * 加载指定模型。
-   * @param {number} modelId - 模型 ID。
-   * @param {number} modelTexturesId - 模型材质 ID。
    * @param {string} message - 加载消息。
    */
   async loadModel(message: string) {
@@ -245,7 +251,6 @@ class ModelManager {
       }
       const modelName = randomSelection(this.modelList.models[modelId]);
       const modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
-      const textureCache = await this.loadTextureCache(modelName);
       const modelSetting = await this.fetchWithCache(modelSettingPath);
       const version = this.checkModelVersion(modelSetting);
       if (version === 2) {
@@ -270,9 +275,9 @@ class ModelManager {
       if (!this.modelList) {
         this.modelList = await this.loadModelList();
       }
-      const index = ++modelId >= this.modelList.models.length ? 0 : modelId;
-      this.modelId = index;
-      await this.loadModel(this.modelList.messages[index]);
+      modelId = (modelId + 1) % this.modelList.models.length;
+      this.modelId = modelId;
+      await this.loadModel(this.modelList.messages[modelId]);
     }
   }
 }

@@ -182,7 +182,9 @@ async function loadWidget(config: Config) {
     'beforeend',
     `<div id="waifu">
        <div id="waifu-tips"></div>
-       <canvas id="live2d" width="800" height="800"></canvas>
+       <div id="waifu-canvas">
+         <canvas id="live2d" width="800" height="800"></canvas>
+       </div>
        <div id="waifu-tool"></div>
      </div>`,
   );

@@ -154,7 +154,11 @@ export class AppDelegate extends LAppDelegate {
     // 针对每个画布创建 subdelegate，并完成初始化
     for (let i = 0; i < this._canvases.getSize(); i++) {
       const subdelegate = new AppSubdelegate();
-      subdelegate.initialize(this._canvases.at(i));
+      const result = subdelegate.initialize(this._canvases.at(i));
+      if (!result) {
+        logger.error('Failed to initialize AppSubdelegate');
+        return;
+      }
       this._subdelegates.pushBack(subdelegate);
     }
 

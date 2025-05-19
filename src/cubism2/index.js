@@ -24,25 +24,28 @@ class Cubism2Model {
 
     this.lastMouseX = 0;
     this.lastMouseY = 0;
+
+    this._boundMouseEvent = this.mouseEvent.bind(this);
+    this._boundTouchEvent = this.touchEvent.bind(this);
   }
 
   initL2dCanvas(canvasId) {
     this.canvas = document.getElementById(canvasId);
 
     if (this.canvas.addEventListener) {
-      this.canvas.addEventListener('mousewheel', this.mouseEvent.bind(this), false);
-      this.canvas.addEventListener('click', this.mouseEvent.bind(this), false);
+      this.canvas.addEventListener('mousewheel', this._boundMouseEvent, false);
+      this.canvas.addEventListener('click', this._boundMouseEvent, false);
 
-      this.canvas.addEventListener('mousedown', this.mouseEvent.bind(this), false);
-      this.canvas.addEventListener('mousemove', this.mouseEvent.bind(this), false);
+      this.canvas.addEventListener('mousedown', this._boundMouseEvent, false);
+      this.canvas.addEventListener('mousemove', this._boundMouseEvent, false);
 
-      this.canvas.addEventListener('mouseup', this.mouseEvent.bind(this), false);
-      this.canvas.addEventListener('mouseout', this.mouseEvent.bind(this), false);
-      this.canvas.addEventListener('contextmenu', this.mouseEvent.bind(this), false);
+      this.canvas.addEventListener('mouseup', this._boundMouseEvent, false);
+      this.canvas.addEventListener('mouseout', this._boundMouseEvent, false);
+      this.canvas.addEventListener('contextmenu', this._boundMouseEvent, false);
 
-      this.canvas.addEventListener('touchstart', this.touchEvent.bind(this), false);
-      this.canvas.addEventListener('touchend', this.touchEvent.bind(this), false);
-      this.canvas.addEventListener('touchmove', this.touchEvent.bind(this), false);
+      this.canvas.addEventListener('touchstart', this._boundTouchEvent, false);
+      this.canvas.addEventListener('touchend', this._boundTouchEvent, false);
+      this.canvas.addEventListener('touchmove', this._boundTouchEvent, false);
     }
   }
 
@@ -81,7 +84,7 @@ class Cubism2Model {
     this.deviceToScreen.multScale(2 / width, -2 / width);
 
     // https://stackoverflow.com/questions/26783586/canvas-todataurl-returns-blank-image
-    this.gl = this.canvas.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true });
+    this.gl = this.canvas.getContext('webgl2', { premultipliedAlpha: true, preserveDrawingBuffer: true });
     if (!this.gl) {
       logger.error('Failed to create WebGL context.');
       return;
@@ -96,19 +99,55 @@ class Cubism2Model {
     this.startDraw();
   }
 
+  destroy() {
+    // 1. 解绑canvas事件
+    if (this.canvas) {
+      this.canvas.removeEventListener('mousewheel', this._boundMouseEvent, false);
+      this.canvas.removeEventListener('click', this._boundMouseEvent, false);
+      this.canvas.removeEventListener('mousedown', this._boundMouseEvent, false);
+      this.canvas.removeEventListener('mousemove', this._boundMouseEvent, false);
+      this.canvas.removeEventListener('mouseup', this._boundMouseEvent, false);
+      this.canvas.removeEventListener('mouseout', this._boundMouseEvent, false);
+      this.canvas.removeEventListener('contextmenu', this._boundMouseEvent, false);
+
+      this.canvas.removeEventListener('touchstart', this._boundTouchEvent, false);
+      this.canvas.removeEventListener('touchend', this._boundTouchEvent, false);
+      this.canvas.removeEventListener('touchmove', this._boundTouchEvent, false);
+    }
+
+    // 2. 停止动画
+    if (this._drawFrameId) {
+      window.cancelAnimationFrame(this._drawFrameId);
+      this._drawFrameId = null;
+    }
+    this.isDrawStart = false;
+
+    // 3. 释放 Live2D 相关资源
+    if (this.live2DMgr && typeof this.live2DMgr.release === 'function') {
+      this.live2DMgr.release();
+    }
+
+    // 4. 清理 WebGL 资源（如有）
+    if (this.gl) {
+      // 手动释放纹理、缓冲区等
+    }
+
+    // 5. 清空引用，辅助GC
+    this.canvas = null;
+    this.gl = null;
+    this.live2DMgr = null;
+    this.dragMgr = null;
+    this.viewMatrix = null;
+    this.projMatrix = null;
+    this.deviceToScreen = null;
+  }
+
   startDraw() {
     if (!this.isDrawStart) {
       this.isDrawStart = true;
       const tick = () => {
         this.draw();
-
-        const requestAnimationFrame =
-          window.requestAnimationFrame ||
-          window.mozRequestAnimationFrame ||
-          window.webkitRequestAnimationFrame ||
-          window.msRequestAnimationFrame;
-
-        requestAnimationFrame(tick, this.canvas);
+        this._drawFrameId = window.requestAnimationFrame(tick, this.canvas);
       };
       tick();
     }
