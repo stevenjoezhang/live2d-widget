@@ -9,9 +9,15 @@ import type Cubism2Model from './cubism2/index.js';
 import type { AppDelegate as Cubism5Model } from './cubism5/index.js';
 import logger, { LogLevel } from './logger.js';
 
-interface ModelList {
+interface ModelListCDN {
   messages: string[];
   models: string | string[];
+}
+
+interface ModelList {
+  name: string;
+  paths: string[];
+  message: string;
 }
 
 interface Config {
@@ -72,28 +78,31 @@ class ModelManager {
   private readonly cubism5Path: string;
   private _modelId: number;
   private _modelTexturesId: number;
-  private modelList: ModelList | null = null;
+  private modelList: ModelListCDN | null = null;
   private cubism2model: Cubism2Model | undefined;
   private cubism5model: Cubism5Model | undefined;
   private currentModelVersion: number;
   private loading: boolean;
   private modelJSONCache: Record<string, any>;
+  private models: ModelList[];
 
   /**
    * Create a Model instance.
    * @param {Config} config - Configuration options
    */
-  constructor(config: Config) {
+  constructor(config: Config, models: ModelList[] = []) {
     let { apiPath, cdnPath } = config;
     const { cubism2Path, cubism5Path } = config;
-    const useCDN = true;
+    let useCDN = false;
     if (typeof cdnPath === 'string') {
       if (!cdnPath.endsWith('/')) cdnPath += '/';
+      useCDN = true;
     } else if (typeof apiPath === 'string') {
       if (!apiPath.endsWith('/')) apiPath += '/';
       cdnPath = apiPath;
+      useCDN = true;
       logger.warn('apiPath option is deprecated. Please use cdnPath instead.');
-    } else {
+    } else if (!models.length) {
       throw 'Invalid initWidget argument!';
     }
     let modelId: number = parseInt(localStorage.getItem('modelId') as string, 10);
@@ -104,7 +113,7 @@ class ModelManager {
       modelTexturesId = 0;
     }
     if (isNaN(modelId)) {
-      modelId = config.modelId ?? (useCDN ? 0 : 1);
+      modelId = config.modelId ?? 0;
     }
     this.useCDN = useCDN;
     this.cdnPath = cdnPath || '';
@@ -115,6 +124,7 @@ class ModelManager {
     this.currentModelVersion = 0;
     this.loading = false;
     this.modelJSONCache = {};
+    this.models = models;
   }
 
   public set modelId(modelId: number) {
@@ -218,7 +228,7 @@ class ModelManager {
   /**
    * Load the model list.
    */
-  async loadModelList(): Promise<ModelList> {
+  async loadModelList(): Promise<ModelListCDN> {
     const response = await fetch(`${this.cdnPath}model_list.json`);
     const modelList = await response.json();
     return modelList;
@@ -234,21 +244,36 @@ class ModelManager {
    * @param {string} message - Loading message.
    */
   async loadModel(message: string) {
-    const { modelId, modelTexturesId } = this;
     if (this.useCDN) {
       if (!this.modelList) {
         this.modelList = await this.loadModelList();
       }
-      const modelName = randomSelection(this.modelList.models[modelId]);
+      if (this.modelId >= this.modelList.models.length) {
+        this.modelId = 0;
+      }
+      const modelName = randomSelection(this.modelList.models[this.modelId]);
       const modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
       const modelSetting = await this.fetchWithCache(modelSettingPath);
       const version = this.checkModelVersion(modelSetting);
       if (version === 2) {
         const textureCache = await this.loadTextureCache(modelName);
-        let textures = textureCache[modelTexturesId];
+        if (this.modelTexturesId >= textureCache.length) {
+          this.modelTexturesId = 0;
+        }
+        let textures = textureCache[this.modelTexturesId];
         if (typeof textures === 'string') textures = [textures];
         modelSetting.textures = textures;
       }
+      await this.loadLive2D(modelSettingPath, modelSetting);
+    } else {
+      if (this.modelId >= this.models.length) {
+        this.modelId = 0;
+      }
+      if (this.modelTexturesId >= this.models[this.modelId].paths.length) {
+        this.modelTexturesId = 0;
+      }
+      const modelSettingPath = this.models[this.modelId].paths[this.modelTexturesId];
+      const modelSetting = await this.fetchWithCache(modelSettingPath);
       await this.loadLive2D(modelSettingPath, modelSetting);
     }
     showMessage(message, 4000, 10);
@@ -276,6 +301,12 @@ class ModelManager {
       }
       await this.loadLive2D(modelSettingPath, modelSetting);
       showMessage('我的新衣服好看嘛？', 4000, 10);
+    } else {
+      this.modelTexturesId = Math.floor(Math.random() * this.models[modelId].paths.length);
+      const modelSettingPath = this.models[modelId].paths[this.modelTexturesId];
+      const modelSetting = await this.fetchWithCache(modelSettingPath);
+      await this.loadLive2D(modelSettingPath, modelSetting);
+      showMessage('我的新衣服好看嘛？', 4000, 10);
     }
   }
 
@@ -283,17 +314,18 @@ class ModelManager {
    * Load the next character's model.
    */
   async loadNextModel() {
-    let { modelId } = this;
     this.modelTexturesId = 0;
     if (this.useCDN) {
       if (!this.modelList) {
         this.modelList = await this.loadModelList();
       }
-      modelId = (modelId + 1) % this.modelList.models.length;
-      this.modelId = modelId;
-      await this.loadModel(this.modelList.messages[modelId]);
+      this.modelId = (this.modelId + 1) % this.modelList.models.length;
+      await this.loadModel(this.modelList.messages[this.modelId]);
+    } else {
+      this.modelId = (this.modelId + 1) % this.models.length;
+      await this.loadModel(this.models[this.modelId].message);
     }
   }
 }
 
-export { ModelManager, Config };
+export { ModelManager, Config, ModelList };

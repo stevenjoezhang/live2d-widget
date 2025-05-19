@@ -3,7 +3,7 @@
  * @module widget
  */
 
-import { ModelManager, Config } from './model.js';
+import { ModelManager, Config, ModelList } from './model.js';
 import { showMessage, welcomeMessage, Time } from './message.js';
 import { randomSelection } from './utils.js';
 import tools from './tools.js';
@@ -65,6 +65,7 @@ interface Tips {
     date: string;
     text: string | string[];
   }[];
+  models: ModelList[];
 }
 
 function registerTools(model: ModelManager, config: Config) {
@@ -188,15 +189,17 @@ async function loadWidget(config: Config) {
        <div id="waifu-tool"></div>
      </div>`,
   );
-  const model = new ModelManager(config);
+  let models: ModelList[] = [];
+  if (config.waifuPath) {
+    const response = await fetch(config.waifuPath);
+    const result: Tips = await response.json();
+    models = result.models;
+    registerEventListener(result);
+  }
+  const model = new ModelManager(config, models);
   await model.loadModel('');
   registerTools(model, config);
   if (config.drag) registerDrag();
-  if (config.waifuPath) {
-    const response = await fetch(config.waifuPath);
-    const result = await response.json();
-    registerEventListener(result);
-  }
   document.getElementById('waifu')!.style.bottom = '0';
 }
 
