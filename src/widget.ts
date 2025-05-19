@@ -9,6 +9,7 @@ import { randomSelection } from './utils.js';
 import tools from './tools.js';
 import logger from './logger.js';
 import registerDrag from './drag.js';
+import { fa_child } from './icons.js';
 
 interface Tips {
   /**
@@ -216,7 +217,7 @@ function initWidget(config: string | Config) {
   document.body.insertAdjacentHTML(
     'beforeend',
     `<div id="waifu-toggle">
-       <span>看板娘</span>
+       ${fa_child}
      </div>`,
   );
   const toggle = document.getElementById('waifu-toggle');
