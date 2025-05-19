@@ -76,6 +76,7 @@ class ModelManager {
   private cubism2model: Cubism2Model | undefined;
   private cubism5model: Cubism5Model | undefined;
   private currentModelVersion: number;
+  private loading: boolean;
   private modelJSONCache: Record<string, any>;
 
   /**
@@ -112,6 +113,7 @@ class ModelManager {
     this._modelId = modelId;
     this._modelTexturesId = modelTexturesId;
     this.currentModelVersion = 0;
+    this.loading = false;
     this.modelJSONCache = {};
   }
 
@@ -157,50 +159,60 @@ class ModelManager {
   }
 
   async loadLive2D(modelSettingPath: string, modelSetting: object) {
-    const version = this.checkModelVersion(modelSetting);
-    if (version === 2) {
-      if (!this.cubism2model) {
-        if (!this.cubism2Path) {
-          logger.error('No cubism2Path set, cannot load Cubism 2 Core.')
+    if (this.loading) {
+      logger.warn('Still loading. Abort.');
+      return;
+    }
+    this.loading = true;
+    try {
+      const version = this.checkModelVersion(modelSetting);
+      if (version === 2) {
+        if (!this.cubism2model) {
+          if (!this.cubism2Path) {
+            logger.error('No cubism2Path set, cannot load Cubism 2 Core.')
+            return;
+          }
+          await loadExternalResource(this.cubism2Path, 'js');
+          const { default: Cubism2Model } = await import('./cubism2/index.js');
+          this.cubism2model = new Cubism2Model();
+        }
+        if (this.currentModelVersion === 3) {
+          (this.cubism5model as any).release();
+          // Recycle WebGL resources
+          this.resetCanvas();
+        }
+        if (this.currentModelVersion === 3 || !this.cubism2model.gl) {
+          await this.cubism2model.init('live2d', modelSettingPath, modelSetting);
+        } else {
+          await this.cubism2model.changeModelWithJSON(modelSettingPath, modelSetting);
+        }
+      } else {
+        if (!this.cubism5Path) {
+          logger.error('No cubism5Path set, cannot load Cubism 5 Core.')
           return;
         }
-        await loadExternalResource(this.cubism2Path, 'js');
-        const { default: Cubism2Model } = await import('./cubism2/index.js');
-        this.cubism2model = new Cubism2Model();
+        await loadExternalResource(this.cubism5Path, 'js');
+        const { AppDelegate: Cubism5Model } = await import('./cubism5/index.js');
+        this.cubism5model = new (Cubism5Model as any)();
+        if (this.currentModelVersion === 2) {
+          this.cubism2model.destroy();
+          // Recycle WebGL resources
+          this.resetCanvas();
+        }
+        if (this.currentModelVersion === 2 || !this.cubism5model.subdelegates.at(0)) {
+          this.cubism5model.initialize();
+          this.cubism5model.changeModel(modelSettingPath);
+          this.cubism5model.run();
+        } else {
+          this.cubism5model.changeModel(modelSettingPath);
+        }
       }
-      if (this.currentModelVersion === 3) {
-        (this.cubism5model as any).release();
-        // Recycle WebGL resources
-        this.resetCanvas();
-      }
-      if (this.currentModelVersion === 3 || !this.cubism2model.gl) {
-        await this.cubism2model.init('live2d', modelSettingPath, modelSetting);
-      } else {
-        await this.cubism2model.changeModelWithJSON(modelSettingPath, modelSetting);
-      }
-    } else {
-      if (!this.cubism5Path) {
-        logger.error('No cubism5Path set, cannot load Cubism 5 Core.')
-        return;
-      }
-      await loadExternalResource(this.cubism5Path, 'js');
-      const { AppDelegate: Cubism5Model} = await import('./cubism5/index.js');
-      this.cubism5model = new (Cubism5Model as any)();
-      if (this.currentModelVersion === 2) {
-        this.cubism2model.destroy();
-        // Recycle WebGL resources
-        this.resetCanvas();
-      }
-      if (this.currentModelVersion === 2 || !this.cubism5model.subdelegates.at(0)) {
-        this.cubism5model.initialize();
-        this.cubism5model.changeModel(modelSettingPath);
-        this.cubism5model.run();
-      } else {
-        this.cubism5model.changeModel(modelSettingPath);
-      }
+      logger.info(`Model ${modelSettingPath} (Cubism version ${version}) loaded`);
+      this.currentModelVersion = version;
+    } catch (err) {
+      console.error('loadLive2D failed', err);
     }
-    logger.info(`Model ${modelSettingPath} (Cubism version ${version}) loaded`);
-    this.currentModelVersion = version;
+    this.loading = false;
   }
 
   /**
