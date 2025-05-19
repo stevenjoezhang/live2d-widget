@@ -5,7 +5,7 @@
 
 import { showMessage } from './message.js';
 import { randomSelection, loadExternalResource } from './utils.js';
-import type Cubism2Model from './live2d/index.js';
+import type Cubism2Model from './cubism2/index.js';
 import type { AppDelegate as Cubism5Model } from './cubism5/index.js';
 import logger, { LogLevel } from './logger.js';
 
@@ -162,13 +162,16 @@ class ModelManager {
           return;
         }
         await loadExternalResource(this.cubism2Path, 'js');
-        const { default: Cubism2Model } = await import('./live2d/index.js');
+        const { default: Cubism2Model } = await import('./cubism2/index.js');
         this.cubism2model = new Cubism2Model();
       }
+      if (this.currentModelVersion != 3) {
+        ;
+      }
       if (!this.cubism2model.gl) {
-        await this.cubism2model?.init('live2d', modelSettingPath, modelSetting);
+        await this.cubism2model.init('live2d', modelSettingPath, modelSetting);
       } else {
-        await this.cubism2model?.changeModelWithJSON(modelSettingPath, modelSetting);
+        await this.cubism2model.changeModelWithJSON(modelSettingPath, modelSetting);
       }
     } else {
       if (!this.cubism5Path) {
@@ -186,7 +189,8 @@ class ModelManager {
         this.cubism5model.changeModel(modelSettingPath);
       }
     }
-    logger.info(`Model ${modelSettingPath} loaded`);
+    logger.info(`Model ${modelSettingPath} (Cubism version ${version}) loaded`);
+    this.currentModelVersion = version;
   }
 
   /**
@@ -217,18 +221,21 @@ class ModelManager {
       }
       const modelName = randomSelection(this.modelList.models[modelId]);
       const modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
-      const textureCache = await this.loadTextureCache(modelName);
       const modelSetting = await this.fetchWithCache(modelSettingPath);
-      let textures = textureCache[modelTexturesId];
-      if (typeof textures === 'string') textures = [textures];
-      modelSetting.textures = textures;
+      const version = this.checkModelVersion(modelSetting);
+      if (version === 2) {
+        const textureCache = await this.loadTextureCache(modelName);
+        let textures = textureCache[modelTexturesId];
+        if (typeof textures === 'string') textures = [textures];
+        modelSetting.textures = textures;
+      }
       await this.loadLive2D(modelSettingPath, modelSetting);
     }
     showMessage(message, 4000, 10);
   }
 
   /**
-   * 加载随机材质的模型。
+   * 为当前模型加载随机材质。
    */
   async loadRandTexture() {
     const { modelId } = this;
@@ -240,17 +247,21 @@ class ModelManager {
       const modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
       const textureCache = await this.loadTextureCache(modelName);
       const modelSetting = await this.fetchWithCache(modelSettingPath);
-      this.modelTexturesId = Math.floor(Math.random() * textureCache.length);
-      let textures = textureCache[this.modelTexturesId];
-      if (typeof textures === 'string') textures = [textures];
-      modelSetting.textures = textures;
+      const version = this.checkModelVersion(modelSetting);
+      if (version === 2) {
+        const textureCache = await this.loadTextureCache(modelName);
+        this.modelTexturesId = Math.floor(Math.random() * textureCache.length);
+        let textures = textureCache[this.modelTexturesId];
+        if (typeof textures === 'string') textures = [textures];
+        modelSetting.textures = textures;
+      }
       await this.loadLive2D(modelSettingPath, modelSetting);
       showMessage('我的新衣服好看嘛？', 4000, 10);
     }
   }
 
   /**
-   * 加载其他模型。
+   * 加载下一个角色的模型。
    */
   async loadNextModel() {
     let { modelId } = this;

@@ -5,7 +5,7 @@ import MatrixStack from './utils/MatrixStack.js';
 import LAppLive2DManager from './LAppLive2DManager.js';
 import logger from '../logger.js';
 
-class Model {
+class Cubism2Model {
   constructor() {
     this.live2DMgr = new LAppLive2DManager();
 
@@ -311,4 +311,4 @@ class Model {
   }
 }
 
-export default Model;
+export default Cubism2Model;

@@ -18,28 +18,18 @@ function findCubismDir() {
 
 const cubismDir = findCubismDir();
 
-function banner() {
-  return {
-    name: 'banner',
-
-    renderChunk(code, chunk, outputOptions = {}) {
-      return (
-        `/*!
- * Live2D Widget
- * https://github.com/stevenjoezhang/live2d-widget
- */
-` + code
-      );
-    },
-  };
-}
-
 export default {
   input: 'build/waifu-tips.js',
   output: {
     dir: 'dist/',
     format: 'esm',
     chunkFileNames: 'chunk/[name].js',
+    sourcemap: true,
+    banner: `/*!
+ * Live2D Widget
+ * https://github.com/stevenjoezhang/live2d-widget
+ */
+`
   },
   plugins: [
     alias({
@@ -54,7 +44,6 @@ export default {
         }
       ]
     }),
-    banner(),
     terser(),
   ],
   context: 'this',

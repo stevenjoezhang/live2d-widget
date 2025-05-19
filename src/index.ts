@@ -5,7 +5,7 @@
 
 export { default as registerDrag } from './drag.js';
 export { default as logger, LogLevel } from './logger.js';
-export { default as Model } from './live2d/index.js';
+export { default as Cubism2Model } from './cubism2/index.js';
 export { default as tools, Tools } from './tools.js';
 
 export * from './message.js';
