@@ -271,9 +271,9 @@ class ModelManager {
 
   /**
    * Load the specified model.
-   * @param {string} message - Loading message.
+   * @param {string | string[]} message - Loading message.
    */
-  async loadModel(message: string) {
+  async loadModel(message: string | string[]) {
     let modelSettingPath, modelSetting;
     if (this.useCDN) {
       let modelName = this.modelList.models[this.modelId];
@@ -300,7 +300,7 @@ class ModelManager {
   /**
    * Load a random texture for the current model.
    */
-  async loadRandTexture(successMessage: string = '', failMessage: string = '') {
+  async loadRandTexture(successMessage: string | string[] = '', failMessage: string | string[] = '') {
     const { modelId } = this;
     let noTextureAvailable = false;
     if (this.useCDN) {

@@ -29,7 +29,7 @@ interface Tools {
      * Callback function for the tool.
      * @type {() => void}
      */
-    callback: () => void;
+    callback: (message: any) => void;
   };
 }
 
@@ -80,8 +80,8 @@ const tools: Tools = {
   },
   photo: {
     icon: fa_camera_retro,
-    callback: () => {
-      showMessage('照好了嘛，是不是很可爱呢？', 6000, 9);
+    callback: (message: string | string[]) => {
+      showMessage(message, 6000, 9);
       const canvas = document.getElementById('live2d') as HTMLCanvasElement;
       if (!canvas) return;
       const imageUrl = canvas.toDataURL();
@@ -104,9 +104,9 @@ const tools: Tools = {
   },
   quit: {
     icon: fa_xmark,
-    callback: () => {
+    callback: (message: string | string[]) => {
       localStorage.setItem('waifu-display', Date.now().toString());
-      showMessage('愿你有一天能与重要的人重逢。', 2000, 11);
+      showMessage(message, 2000, 11);
       const waifu = document.getElementById('waifu');
       if (!waifu) return;
       waifu.style.bottom = '-500px';

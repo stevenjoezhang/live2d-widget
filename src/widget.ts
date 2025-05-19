@@ -38,6 +38,8 @@ interface Tips {
     visibilitychange: string;
     changeSuccess: string;
     changeFail: string;
+    photo: string;
+    goodbye: string;
   };
   /**
    * Time configuration.
@@ -81,6 +83,8 @@ function registerTools(model: ModelManager, config: Config, tips: Tips) {
     }
     model.loadRandTexture(successMessage, failMessage);
   };
+  tools.photo.callback = tools.photo.callback.bind(null, tips.message.photo);
+  tools.quit.callback = tools.quit.callback.bind(null, tips.message.goodbye);
   if (!Array.isArray(config.tools)) {
     config.tools = Object.keys(tools);
   }
@@ -119,7 +123,7 @@ function registerEventListener(tips: Tips) {
       userActionTimer = null;
     } else if (!userActionTimer) {
       userActionTimer = setInterval(() => {
-        showMessage(randomSelection(messageArray) as string, 6000, 9);
+        showMessage(messageArray, 6000, 9);
       }, 20000);
     }
   }, 1000);
