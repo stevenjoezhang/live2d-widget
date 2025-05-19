@@ -100,7 +100,7 @@ class Cubism2Model {
   }
 
   destroy() {
-    // 1. 解绑canvas事件
+    // 1. Unbind canvas events
     if (this.canvas) {
       this.canvas.removeEventListener('mousewheel', this._boundMouseEvent, false);
       this.canvas.removeEventListener('click', this._boundMouseEvent, false);
@@ -115,24 +115,24 @@ class Cubism2Model {
       this.canvas.removeEventListener('touchmove', this._boundTouchEvent, false);
     }
 
-    // 2. 停止动画
+    // 2. Stop animation
     if (this._drawFrameId) {
       window.cancelAnimationFrame(this._drawFrameId);
       this._drawFrameId = null;
     }
     this.isDrawStart = false;
 
-    // 3. 释放 Live2D 相关资源
+    // 3. Release Live2D related resources
     if (this.live2DMgr && typeof this.live2DMgr.release === 'function') {
       this.live2DMgr.release();
     }
 
-    // 4. 清理 WebGL 资源（如有）
+    // 4. Clean up WebGL resources (if any)
     if (this.gl) {
-      // 通过 resetCanvas 实现
+      // Implemented via resetCanvas
     }
 
-    // 5. 清空引用，辅助GC
+    // 5. Clear references to assist GC
     this.canvas = null;
     this.gl = null;
     // this.live2DMgr = null;

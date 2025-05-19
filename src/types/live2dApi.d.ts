@@ -1,66 +1,66 @@
 /**
- * @file 定义 Live2D API 的类型。
+ * @file Define types for Live2D API.
  * @module types/live2dApi
  */
 declare namespace Live2D {
   /**
-   * 初始化Live2D运行环境。
+   * Initialize the Live2D runtime environment.
    */
   export function init(): void;
   /**
-   * 设置WebGL上下文
-   * @param gl WebGL渲染上下文
+   * Set the WebGL context
+   * @param gl WebGL rendering context
    */
   export function setGL(gl: WebGLRenderingContext): void;
 }
 
 /**
- * Live2D 模型相关的静态类。
+ * Static class related to Live2D models.
  */
 declare class Live2DModelWebGL {
   /**
-   * 从二进制缓冲区加载Live2D模型
-   * @param buf 模型文件的ArrayBuffer数据
+   * Load a Live2D model from a binary buffer
+   * @param buf ArrayBuffer data of the model file
    */
   static loadModel(buf: ArrayBuffer): Live2DModelWebGL;
 
   /**
-   * 绑定纹理到模型上
-   * @param index 纹理序号
-   * @param texture WebGL纹理对象
+   * Bind a texture to the model
+   * @param index Texture index
+   * @param texture WebGL texture object
    */
   setTexture(index: number, texture: WebGLTexture): void;
 
   /**
-   * 返回模型画布宽度
+   * Return the canvas width of the model
    */
   getCanvasWidth(): number;
 
   /**
-   * 设置模型的变换矩阵
-   * @param matrix 4x4矩阵数组
+   * Set the transformation matrix of the model
+   * @param matrix 4x4 matrix array
    */
   setMatrix(matrix: number[]): void;
 
   /**
-   * 设置参数值（如动画参数）
-   * @param paramName 参数名称
-   * @param value 参数值
+   * Set parameter values (e.g., animation parameters)
+   * @param paramName Parameter name
+   * @param value Parameter value
    */
   setParamFloat(paramName: string, value: number): void;
 
   /**
-   * 刷新模型内部数据
+   * Refresh the internal data of the model
    */
   update(): void;
 
   /**
-   * 绘制当前帧
+   * Draw the current frame
    */
   draw(): void;
 
   /**
-   * 当前是否为预乘Alpha模式
+   * Whether the current mode is premultiplied alpha
    */
   isPremultipliedAlpha?(): boolean;
 }

@@ -7,21 +7,21 @@ import { LAppModel } from '@demo/lappmodel.js';
 import { LAppPal } from '@demo/lapppal';
 import logger from '../logger.js';
 
-// 自定义的子委托类，负责 Canvas 相关的初始化和渲染管理
+// Custom subdelegate class, responsible for Canvas-related initialization and rendering management
 class AppSubdelegate extends LAppSubdelegate {
   /**
-   * 初始化应用所需资源。
-   * @param {HTMLCanvasElement} canvas 传入的画布对象
+   * Initialize resources required by the application.
+   * @param {HTMLCanvasElement} canvas The canvas object passed in
    */
   initialize(canvas) {
-    // 初始化 WebGL 管理器，失败则返回
+    // Initialize WebGL manager, return false if failed
     if (!this._glManager.initialize(canvas)) {
       return false;
     }
 
     this._canvas = canvas;
 
-    // 画布尺寸设置，支持自动和指定尺寸
+    // Canvas size setting, supports auto and specified size
     if (LAppDefine.CanvasSize === 'auto') {
       this.resizeCanvas();
     } else {
@@ -29,21 +29,21 @@ class AppSubdelegate extends LAppSubdelegate {
       canvas.height = LAppDefine.CanvasSize.height;
     }
 
-    // 设置纹理管理器使用的 GL 管理器
+    // Set the GL manager for the texture manager
     this._textureManager.setGlManager(this._glManager);
 
     const gl = this._glManager.getGl();
 
-    // 若帧缓冲对象未初始化，获取当前的帧缓冲绑定
+    // If the framebuffer object is not initialized, get the current framebuffer binding
     if (!this._frameBuffer) {
       this._frameBuffer = gl.getParameter(gl.FRAMEBUFFER_BINDING);
     }
 
-    // 启用混合模式以实现透明效果
+    // Enable blend mode for transparency
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-    // 初始化视图（AppView）
+    // Initialize the view (AppView)
     this._view.initialize(this);
     this._view._gear = {
       render: () => {},
@@ -56,11 +56,11 @@ class AppSubdelegate extends LAppSubdelegate {
     };
     // this._view.initializeSprite();
 
-    // Live2D 管理器与当前 subdelegate 关联
+    // Associate Live2D manager with the current subdelegate
     // this._live2dManager.initialize(this);
     this._live2dManager._subdelegate = this;
 
-    // 监听画布大小变化，实现响应式自适应
+    // Listen for canvas size changes for responsive adaptation
     this._resizeObserver = new window.ResizeObserver(
       (entries, observer) =>
         this.resizeObserverCallback.call(this, entries, observer)
@@ -71,7 +71,7 @@ class AppSubdelegate extends LAppSubdelegate {
   }
 
   /**
-   * 画布大小变化时重新调整并重新初始化视图
+   * Adjust and reinitialize the view when the canvas size changes
    */
   onResize() {
     this.resizeCanvas();
@@ -80,15 +80,15 @@ class AppSubdelegate extends LAppSubdelegate {
   }
 
   /**
-   * 渲染主循环，定期被调用以更新画面
+   * Main render loop, called periodically to update the screen
    */
   update() {
-    // 检查 WebGL 上下文是否丢失，若丢失则不再渲染
+    // Check if the WebGL context is lost, if so, stop rendering
     if (this._glManager.getGl().isContextLost()) {
       return;
     }
 
-    // 若标记需要调整尺寸，则调用 onResize
+    // If resize is needed, call onResize
     if (this._needResize) {
       this.onResize();
       this._needResize = false;
@@ -96,45 +96,45 @@ class AppSubdelegate extends LAppSubdelegate {
 
     const gl = this._glManager.getGl();
 
-    // 初始化画布为全透明
+    // Initialize the canvas as fully transparent
     gl.clearColor(0.0, 0.0, 0.0, 0.0);
 
-    // 开启深度测试，保证模型遮挡关系正确
+    // Enable depth test to ensure correct model occlusion
     gl.enable(gl.DEPTH_TEST);
 
-    // 设定深度函数，近处物体覆盖远处
+    // Set depth function so nearer objects cover farther ones
     gl.depthFunc(gl.LEQUAL);
 
-    // 清除颜色和深度缓冲区
+    // Clear color and depth buffers
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.clearDepth(1.0);
 
-    // 再次开启混合模式，保证透明度正常
+    // Enable blend mode again to ensure transparency
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-    // 渲染视图内容
+    // Render the view content
     this._view.render();
   }
 }
 
-// 应用主委托类，负责管理主循环、画布与模型切换等全局逻辑
+// Main application delegate class, responsible for managing the main loop, canvas, model switching, and other global logic
 export class AppDelegate extends LAppDelegate {
   /**
-   * 启动主循环。
+   * Start the main loop.
    */
   run() {
-    // 主循环函数，负责更新时间与所有 subdelegate
+    // Main loop function, responsible for updating time and all subdelegates
     const loop = () => {
-      // 更新时间
+      // Update time
       LAppPal.updateTime();
 
-      // 遍历所有 subdelegate，调用 update 进行渲染
+      // Iterate all subdelegates and call update for rendering
       for (let i = 0; i < this._subdelegates.getSize(); i++) {
         this._subdelegates.at(i).update();
       }
 
-      // 递归调用，实现动画循环
+      // Recursive call for animation loop
       this._drawFrameId = window.requestAnimationFrame(loop);
     };
     loop();
@@ -175,22 +175,22 @@ export class AppDelegate extends LAppDelegate {
   }
 
   /**
-   * 创建画布并初始化所有 Subdelegate
+   * Create canvas and initialize all Subdelegates
    */
   initializeSubdelegates() {
-    // 预留空间以提升性能
+    // Reserve space to improve performance
     this._canvases.prepareCapacity(LAppDefine.CanvasNum);
     this._subdelegates.prepareCapacity(LAppDefine.CanvasNum);
 
-    // 获取页面中的 live2d 画布元素
+    // Get the live2d canvas element from the page
     const canvas = document.getElementById('live2d');
     this._canvases.pushBack(canvas);
 
-    // 设置画布样式尺寸，保持与实际尺寸一致
+    // Set canvas style size to match actual size
     canvas.style.width = canvas.width;
     canvas.style.height = canvas.height;
 
-    // 针对每个画布创建 subdelegate，并完成初始化
+    // For each canvas, create a subdelegate and complete initialization
     for (let i = 0; i < this._canvases.getSize(); i++) {
       const subdelegate = new AppSubdelegate();
       const result = subdelegate.initialize(this._canvases.at(i));
@@ -201,7 +201,7 @@ export class AppDelegate extends LAppDelegate {
       this._subdelegates.pushBack(subdelegate);
     }
 
-    // 检查每个 subdelegate 的 WebGL 上下文是否丢失
+    // Check if the WebGL context of each subdelegate is lost
     for (let i = 0; i < LAppDefine.CanvasNum; i++) {
       if (this._subdelegates.at(i).isContextLost()) {
         logger.error(
@@ -212,22 +212,22 @@ export class AppDelegate extends LAppDelegate {
   }
 
   /**
-   * 切换模型
-   * @param {string} modelSettingPath 模型设置文件路径
+   * Switch model
+   * @param {string} modelSettingPath Path to the model setting file
    */
   changeModel(modelSettingPath) {
     const segments = modelSettingPath.split('/');
     const modelJsonName = segments.pop();
     const modelPath = segments.join('/') + '/';
-    // 获取当前的 Live2D 管理器
+    // Get the current Live2D manager
     const live2dManager = this._subdelegates.at(0).getLive2DManager();
-    // 释放所有旧模型
+    // Release all old models
     live2dManager.releaseAllModel();
-    // 新建模型实例，设置 subdelegate 并加载资源
+    // Create a new model instance, set subdelegate and load resources
     const instance = new LAppModel();
     instance.setSubdelegate(live2dManager._subdelegate);
     instance.loadAssets(modelPath, modelJsonName);
-    // 将新模型加入到模型列表
+    // Add the new model to the model list
     live2dManager._models.pushBack(instance);
   }
 

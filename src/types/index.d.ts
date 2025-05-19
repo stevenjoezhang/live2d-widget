@@ -1,5 +1,5 @@
 /**
- * @file 匯出所有類型定義。
+ * @file Export all type definitions.
  * @module types/index
  */
 export * from './live2dApi';

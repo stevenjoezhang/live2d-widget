@@ -1,5 +1,5 @@
 /**
- * @file 主模块。
+ * @file Main module.
  * @module index
  */
 

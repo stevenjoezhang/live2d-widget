@@ -1,20 +1,20 @@
 /**
- * @file 定义全局 window 对象的类型。
+ * @file Define the type of the global window object.
  * @module types/window
  */
 interface Window {
   /**
-   * 小行星游戏类。
+   * Asteroids game class.
    * @type {any}
    */
   Asteroids: any;
    /**
-   * 小行星游戏玩家数组。
+   * Asteroids game player array.
    * @type {any[]}
    */
   ASTEROIDSPLAYERS: any[];
   /**
-   * 初始化看板娘小部件的函数。
+   * Function to initialize the Live2D widget.
    * @type {(config: Config) => void}
    */
   initWidget: (config: Config) => void;

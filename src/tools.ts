@@ -1,5 +1,5 @@
 /**
- * @file 包含看板娘工具的配置和函数。
+ * @file Contains the configuration and functions for waifu tools.
  * @module tools
  */
 
@@ -16,17 +16,17 @@ import { showMessage } from './message.js';
 
 interface Tools {
   /**
-   * 工具的键值对，键为工具的名称。
+   * Key-value pairs of tools, where the key is the tool name.
    * @type {string}
    */
   [key: string]: {
     /**
-     * 工具的图标，通常为 SVG 字符串。
+     * Icon of the tool, usually an SVG string.
      * @type {string}
      */
     icon: string;
     /**
-     * 工具的回调函数。
+     * Callback function for the tool.
      * @type {() => void}
      */
     callback: () => void;
@@ -34,10 +34,10 @@ interface Tools {
 }
 
 /**
- * 显示一句一言。
+ * Show a hitokoto (one-liner).
  */
 async function showHitokoto() {
-  // 增加 hitokoto.cn 的 API
+  // Add hitokoto.cn API
   const response = await fetch('https://v1.hitokoto.cn');
   const result = await response.json();
   const text = `这句一言来自 <span>「${result.from}」</span>，是 <span>${result.creator}</span> 在 hitokoto.cn 投稿的。`;
@@ -48,7 +48,7 @@ async function showHitokoto() {
 }
 
 /**
- * 看板娘工具配置。
+ * Waifu tools configuration.
  * @type {Tools}
  */
 const tools: Tools = {

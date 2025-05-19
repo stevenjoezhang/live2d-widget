@@ -1,5 +1,5 @@
 /**
- * @file 包含显示看板娘消息的函数。
+ * @file Contains functions for displaying waifu messages.
  * @module message
  */
 
@@ -7,12 +7,12 @@ import { randomSelection } from './utils.js';
 
 type Time = {
   /**
-   * 时间段，格式为 "HH-HH"，例如 "00-06" 表示 0 点到 6 点。
+   * Time period, format is "HH-HH", e.g. "00-06" means from 0 to 6 o'clock.
    * @type {string}
    */
   hour: string;
   /**
-   * 在该时间段显示的消息。
+   * Message to display during this time period.
    * @type {string}
    */
   text: string;
@@ -21,10 +21,10 @@ type Time = {
 let messageTimer: NodeJS.Timeout | null = null;
 
 /**
- * 显示看板娘消息。
- * @param {string | string[]} text - 消息文本或文本数组。
- * @param {number} timeout - 消息显示的超时时间（毫秒）。
- * @param {number} priority - 消息的优先级。
+ * Display waifu message.
+ * @param {string | string[]} text - Message text or array of texts.
+ * @param {number} timeout - Timeout for message display (ms).
+ * @param {number} priority - Priority of the message.
  */
 function showMessage(
   text: string | string[],
@@ -53,13 +53,13 @@ function showMessage(
 }
 
 /**
- * 根据时间显示欢迎消息。
- * @param {Time} time - 时间消息配置。
- * @returns {string} 欢迎消息。
+ * Show welcome message based on time.
+ * @param {Time} time - Time message configuration.
+ * @returns {string} Welcome message.
  */
 function welcomeMessage(time: Time): string {
   if (location.pathname === '/') {
-    // 如果是主页
+    // If on the homepage
     for (const { hour, text } of time) {
       const now = new Date(),
         after = hour.split('-')[0],

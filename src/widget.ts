@@ -1,5 +1,5 @@
 /**
- * @file 包含初始化看板娘小部件的函数。
+ * @file Contains functions for initializing the waifu widget.
  * @module widget
  */
 
@@ -12,37 +12,37 @@ import registerDrag from './drag.js';
 
 interface Tips {
   /**
-   * 默认消息配置。
+   * Default message configuration.
    */
   message: {
     /**
-     * 默认消息数组。
+     * Default message array.
      * @type {string[]}
      */
     default: string[];
     /**
-     * 控制台消息。
+     * Console message.
      * @type {string}
      */
     console: string;
     /**
-     * 复制消息。
+     * Copy message.
      * @type {string}
      */
     copy: string;
     /**
-     * 可见性更改消息。
+     * Visibility change message.
      * @type {string}
      */
     visibilitychange: string;
   };
   /**
-   * 时间配置。
+   * Time configuration.
    * @type {Time}
    */
   time: Time;
   /**
-   * 鼠标悬停消息配置。
+   * Mouseover message configuration.
    * @type {Array<{selector: string, text: string | string[]}>}
    */
   mouseover: {
@@ -50,7 +50,7 @@ interface Tips {
     text: string | string[];
   }[];
   /**
-   * 点击消息配置。
+   * Click message configuration.
    * @type {Array<{selector: string, text: string | string[]}>}
    */
   click: {
@@ -58,7 +58,7 @@ interface Tips {
     text: string | string[];
   }[];
   /**
-   * 季节消息配置。
+   * Season message configuration.
    * @type {Array<{date: string, text: string | string[]}>}
    */
   seasons: {
@@ -90,8 +90,8 @@ function registerTools(model: ModelManager, config: Config) {
 }
 
 /**
- * 注册事件监听器。
- * @param {Tips} tips - 结果配置。
+ * Register event listeners.
+ * @param {Tips} tips - Result configuration.
  */
 function registerEventListener(tips: Tips) {
   // Detect user activity and display messages when idle
@@ -172,8 +172,8 @@ function registerEventListener(tips: Tips) {
 }
 
 /**
- * 加载看板娘小部件。
- * @param {Config} config - 看板娘配置。
+ * Load the waifu widget.
+ * @param {Config} config - Waifu configuration.
  */
 async function loadWidget(config: Config) {
   localStorage.removeItem('waifu-display');
@@ -201,8 +201,8 @@ async function loadWidget(config: Config) {
 }
 
 /**
- * 初始化看板娘小部件。
- * @param {string | Config} config - 看板娘配置或配置路径。
+ * Initialize the waifu widget.
+ * @param {string | Config} config - Waifu configuration or configuration path.
  */
 function initWidget(config: string | Config) {
   if (typeof config === 'string') {

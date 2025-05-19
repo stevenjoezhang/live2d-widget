@@ -1,5 +1,5 @@
 /**
- * @file 包含看板娘模型加载和管理相关的类。
+ * @file Contains classes related to waifu model loading and management.
  * @module model
  */
 
@@ -16,54 +16,54 @@ interface ModelList {
 
 interface Config {
   /**
-   * 看板娘配置文件的路径。
+   * Path to the waifu configuration file.
    * @type {string}
    */
   waifuPath: string;
   /**
-   * API 的路径，如果需要使用 API 加载模型。
+   * Path to the API, if you need to load models via API.
    * @type {string | undefined}
    */
   apiPath?: string;
   /**
-   * CDN 的路径，如果需要使用 CDN 加载模型。
+   * Path to the CDN, if you need to load models via CDN.
    * @type {string | undefined}
    */
   cdnPath?: string;
   /**
-   * Cubism 2 Core 的路径，如果需要加载 Cubism 2 模型。
+   * Path to Cubism 2 Core, if you need to load Cubism 2 models.
    * @type {string | undefined}
    */
   cubism2Path?: string;
   /**
-   * Cubism 5 Core 的路径，如果需要加载 Cubism 3 及之后的模型。
+   * Path to Cubism 5 Core, if you need to load Cubism 3 and later models.
    * @type {string | undefined}
    */
   cubism5Path?: string;
   /**
-   * 默认模型的 id。
+   * Default model id.
    * @type {string | undefined}
    */
   modelId?: number;
   /**
-   * 需要显示的工具列表。
+   * List of tools to display.
    * @type {string[] | undefined}
    */
   tools?: string[];
   /**
-   * 支持拖动看板娘。
+   * Support for dragging the waifu.
    * @type {boolean | undefined}
    */
   drag?: boolean;
   /**
-   * 日志的等级。
+   * Log level.
    * @type {LogLevel | undefined}
    */
   logLevel?: LogLevel;
 }
 
 /**
- * 看板娘模型类，负责加载和管理模型。
+ * Waifu model class, responsible for loading and managing models.
  */
 class ModelManager {
   public readonly useCDN: boolean;
@@ -79,8 +79,8 @@ class ModelManager {
   private modelJSONCache: Record<string, any>;
 
   /**
-   * 创建一个 Model 实例。
-   * @param {Config} config - 配置选项
+   * Create a Model instance.
+   * @param {Config} config - Configuration options
    */
   constructor(config: Config) {
     let { apiPath, cdnPath } = config;
@@ -170,7 +170,7 @@ class ModelManager {
       }
       if (this.currentModelVersion === 3) {
         (this.cubism5model as any).release();
-        // 回收 WebGL 资源
+        // Recycle WebGL resources
         this.resetCanvas();
       }
       if (this.currentModelVersion === 3 || !this.cubism2model.gl) {
@@ -188,7 +188,7 @@ class ModelManager {
       this.cubism5model = new (Cubism5Model as any)();
       if (this.currentModelVersion === 2) {
         this.cubism2model.destroy();
-        // 回收 WebGL 资源
+        // Recycle WebGL resources
         this.resetCanvas();
       }
       if (this.currentModelVersion === 2 || !this.cubism5model.subdelegates.at(0)) {
@@ -204,7 +204,7 @@ class ModelManager {
   }
 
   /**
-   * 加载模型列表。
+   * Load the model list.
    */
   async loadModelList(): Promise<ModelList> {
     const response = await fetch(`${this.cdnPath}model_list.json`);
@@ -218,8 +218,8 @@ class ModelManager {
   }
 
   /**
-   * 加载指定模型。
-   * @param {string} message - 加载消息。
+   * Load the specified model.
+   * @param {string} message - Loading message.
    */
   async loadModel(message: string) {
     const { modelId, modelTexturesId } = this;
@@ -243,7 +243,7 @@ class ModelManager {
   }
 
   /**
-   * 为当前模型加载随机材质。
+   * Load a random texture for the current model.
    */
   async loadRandTexture() {
     const { modelId } = this;
@@ -268,7 +268,7 @@ class ModelManager {
   }
 
   /**
-   * 加载下一个角色的模型。
+   * Load the next character's model.
    */
   async loadNextModel() {
     let { modelId } = this;

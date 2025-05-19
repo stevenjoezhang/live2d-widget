@@ -5,47 +5,47 @@ function registerDrag() {
     winHeight = window.innerHeight;
   const imgWidth = element.offsetWidth,
     imgHeight = element.offsetHeight;
-  // 在待拖拽的元素上绑定鼠标按下事件
+  // Bind mousedown event to the element to be dragged
   element.addEventListener('mousedown', event => {
     if (event.button === 2) {
-      // 右键，直接返回，不处理
+      // Right mouse button, just return, do not handle
       return;
     }
     const canvas = document.getElementById('live2d');
     if (event.target !== canvas) return;
-    event.preventDefault()
-    // 记录光标在图片按下时的坐标
+    event.preventDefault();
+    // Record the coordinates of the cursor when pressing down on the image
     const _offsetX = event.offsetX,
       _offsetY = event.offsetY;
-    // 绑定鼠标移动事件
+    // Bind mousemove event
     document.onmousemove = event => {
-      // 获取光标在可视窗口中的坐标
+      // Get the coordinates of the cursor in the viewport
       const _x = event.clientX,
         _y = event.clientY;
-      // 计算拖动的图片的定位的位置
+      // Calculate the position of the dragged image
       let _left = _x - _offsetX,
         _top = _y - _offsetY;
-      // 判断是否在窗口范围内
-      if (_top < 0) { // 上
+      // Check if within the window range
+      if (_top < 0) { // Top
         _top = 0;
-      } else if (_top >= winHeight - imgHeight) { // 下
+      } else if (_top >= winHeight - imgHeight) { // Bottom
         _top = winHeight - imgHeight;
       }
-      if (_left < 0) { // 左
+      if (_left < 0) { // Left
         _left = 0;
-      } else if (_left >= winWidth - imgWidth) { // 右
+      } else if (_left >= winWidth - imgWidth) { // Right
         _left = winWidth - imgWidth;
       }
-      // 设置拖动过程中元素的定位
+      // Set the position of the element during dragging
       element.style.top = _top + 'px';
       element.style.left = _left + 'px';
     }
-    // 绑定鼠标弹起事件
+    // Bind mouseup event
     document.onmouseup = () => {
       document.onmousemove = null;
     }
   });
-  // 当浏览器的窗口大小被改变时重设宽高
+  // Reset width and height when the browser window size changes
   window.onresize = () => {
     winWidth = window.innerWidth;
     winHeight = window.innerHeight;
