@@ -12,7 +12,7 @@ import LAppDefine from './LAppDefine.js';
 import MatrixStack from './utils/MatrixStack.js';
 import LAppLive2DManager from './LAppLive2DManager.js';
 import logger from '../logger.js';
-class Model {
+class Cubism2Model {
     constructor() {
         this.live2DMgr = new LAppLive2DManager();
         this.isDrawStart = false;
@@ -26,20 +26,22 @@ class Model {
         this.oldLen = 0;
         this.lastMouseX = 0;
         this.lastMouseY = 0;
+        this._boundMouseEvent = this.mouseEvent.bind(this);
+        this._boundTouchEvent = this.touchEvent.bind(this);
     }
     initL2dCanvas(canvasId) {
         this.canvas = document.getElementById(canvasId);
         if (this.canvas.addEventListener) {
-            this.canvas.addEventListener('mousewheel', this.mouseEvent.bind(this), false);
-            this.canvas.addEventListener('click', this.mouseEvent.bind(this), false);
-            this.canvas.addEventListener('mousedown', this.mouseEvent.bind(this), false);
-            this.canvas.addEventListener('mousemove', this.mouseEvent.bind(this), false);
-            this.canvas.addEventListener('mouseup', this.mouseEvent.bind(this), false);
-            this.canvas.addEventListener('mouseout', this.mouseEvent.bind(this), false);
-            this.canvas.addEventListener('contextmenu', this.mouseEvent.bind(this), false);
-            this.canvas.addEventListener('touchstart', this.touchEvent.bind(this), false);
-            this.canvas.addEventListener('touchend', this.touchEvent.bind(this), false);
-            this.canvas.addEventListener('touchmove', this.touchEvent.bind(this), false);
+            this.canvas.addEventListener('mousewheel', this._boundMouseEvent, false);
+            this.canvas.addEventListener('click', this._boundMouseEvent, false);
+            this.canvas.addEventListener('mousedown', this._boundMouseEvent, false);
+            this.canvas.addEventListener('mousemove', this._boundMouseEvent, false);
+            this.canvas.addEventListener('mouseup', this._boundMouseEvent, false);
+            this.canvas.addEventListener('mouseout', this._boundMouseEvent, false);
+            this.canvas.addEventListener('contextmenu', this._boundMouseEvent, false);
+            this.canvas.addEventListener('touchstart', this._boundTouchEvent, false);
+            this.canvas.addEventListener('touchend', this._boundTouchEvent, false);
+            this.canvas.addEventListener('touchmove', this._boundTouchEvent, false);
         }
     }
     init(canvasId, modelSettingPath, modelSetting) {
@@ -63,7 +65,7 @@ class Model {
             this.deviceToScreen = new L2DMatrix44();
             this.deviceToScreen.multTranslate(-width / 2.0, -height / 2.0);
             this.deviceToScreen.multScale(2 / width, -2 / width);
-            this.gl = this.canvas.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true });
+            this.gl = this.canvas.getContext('webgl2', { premultipliedAlpha: true, preserveDrawingBuffer: true });
             if (!this.gl) {
                 logger.error('Failed to create WebGL context.');
                 return;
@@ -74,16 +76,42 @@ class Model {
             this.startDraw();
         });
     }
+    destroy() {
+        if (this.canvas) {
+            this.canvas.removeEventListener('mousewheel', this._boundMouseEvent, false);
+            this.canvas.removeEventListener('click', this._boundMouseEvent, false);
+            this.canvas.removeEventListener('mousedown', this._boundMouseEvent, false);
+            this.canvas.removeEventListener('mousemove', this._boundMouseEvent, false);
+            this.canvas.removeEventListener('mouseup', this._boundMouseEvent, false);
+            this.canvas.removeEventListener('mouseout', this._boundMouseEvent, false);
+            this.canvas.removeEventListener('contextmenu', this._boundMouseEvent, false);
+            this.canvas.removeEventListener('touchstart', this._boundTouchEvent, false);
+            this.canvas.removeEventListener('touchend', this._boundTouchEvent, false);
+            this.canvas.removeEventListener('touchmove', this._boundTouchEvent, false);
+        }
+        if (this._drawFrameId) {
+            window.cancelAnimationFrame(this._drawFrameId);
+            this._drawFrameId = null;
+        }
+        this.isDrawStart = false;
+        if (this.live2DMgr && typeof this.live2DMgr.release === 'function') {
+            this.live2DMgr.release();
+        }
+        if (this.gl) {
+        }
+        this.canvas = null;
+        this.gl = null;
+        this.dragMgr = null;
+        this.viewMatrix = null;
+        this.projMatrix = null;
+        this.deviceToScreen = null;
+    }
     startDraw() {
         if (!this.isDrawStart) {
             this.isDrawStart = true;
             const tick = () => {
                 this.draw();
-                const requestAnimationFrame = window.requestAnimationFrame ||
-                    window.mozRequestAnimationFrame ||
-                    window.webkitRequestAnimationFrame ||
-                    window.msRequestAnimationFrame;
-                requestAnimationFrame(tick, this.canvas);
+                this._drawFrameId = window.requestAnimationFrame(tick, this.canvas);
             };
             tick();
         }
@@ -250,4 +278,4 @@ class Model {
         return this.deviceToScreen.transformY(deviceY);
     }
 }
-export default Model;
+export default Cubism2Model;

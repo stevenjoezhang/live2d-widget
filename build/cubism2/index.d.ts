@@ -1,19 +1,23 @@
-export default Model;
-declare class Model {
+export default Cubism2Model;
+declare class Cubism2Model {
     live2DMgr: LAppLive2DManager;
     isDrawStart: boolean;
     gl: any;
-    canvas: HTMLElement | null;
-    dragMgr: L2DTargetPoint | null;
-    viewMatrix: L2DViewMatrix | null;
-    projMatrix: L2DMatrix44 | null;
-    deviceToScreen: L2DMatrix44 | null;
+    canvas: HTMLElement;
+    dragMgr: L2DTargetPoint;
+    viewMatrix: L2DViewMatrix;
+    projMatrix: L2DMatrix44;
+    deviceToScreen: L2DMatrix44;
     drag: boolean;
     oldLen: number;
     lastMouseX: number;
     lastMouseY: number;
+    _boundMouseEvent: any;
+    _boundTouchEvent: any;
     initL2dCanvas(canvasId: any): void;
     init(canvasId: any, modelSettingPath: any, modelSetting: any): Promise<void>;
+    destroy(): void;
+    _drawFrameId: number;
     startDraw(): void;
     draw(): void;
     changeModel(modelSettingPath: any): Promise<void>;

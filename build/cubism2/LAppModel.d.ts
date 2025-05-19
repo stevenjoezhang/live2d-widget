@@ -1,7 +1,7 @@
 export default LAppModel;
 declare class LAppModel extends L2DBaseModel {
     modelHomeDir: string;
-    modelSetting: ModelSettingJson | null;
+    modelSetting: ModelSettingJson;
     tmpMatrix: any[];
     loadJSON(callback: any): void;
     loadModelSetting(modelSettingPath: any, modelSetting: any): Promise<void>;

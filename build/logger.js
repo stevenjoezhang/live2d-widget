@@ -12,22 +12,22 @@ class Logger {
     }
     error(message, ...args) {
         if (this.shouldLog('error')) {
-            console.error('[Live2d Widget][ERROR]', message, ...args);
+            console.error('[Live2D Widget][ERROR]', message, ...args);
         }
     }
     warn(message, ...args) {
         if (this.shouldLog('warn')) {
-            console.warn('[Live2d Widget][WARN ]', message, ...args);
+            console.warn('[Live2D Widget][WARN ]', message, ...args);
         }
     }
     info(message, ...args) {
         if (this.shouldLog('info')) {
-            console.log('[Live2d Widget][INFO ]', message, ...args);
+            console.log('[Live2D Widget][INFO ]', message, ...args);
         }
     }
     trace(message, ...args) {
         if (this.shouldLog('trace')) {
-            console.log('[Live2d Widget][TRACE]', message, ...args);
+            console.log('[Live2D Widget][TRACE]', message, ...args);
         }
     }
 }

@@ -1,7 +1,12 @@
 import { LogLevel } from './logger.js';
-interface ModelList {
+interface ModelListCDN {
     messages: string[];
     models: string | string[];
+}
+interface ModelList {
+    name: string;
+    paths: string[];
+    message: string;
 }
 interface Config {
     waifuPath: string;
@@ -22,21 +27,25 @@ declare class ModelManager {
     private _modelId;
     private _modelTexturesId;
     private modelList;
-    private model;
-    private modelInitialized;
+    private cubism2model;
+    private cubism5model;
+    private currentModelVersion;
+    private loading;
     private modelJSONCache;
-    constructor(config: Config);
+    private models;
+    constructor(config: Config, models?: ModelList[]);
     set modelId(modelId: number);
     get modelId(): number;
     set modelTexturesId(modelTexturesId: number);
     get modelTexturesId(): number;
+    resetCanvas(): void;
     fetchWithCache(url: string): Promise<any>;
     checkModelVersion(modelSetting: any): 2 | 3;
-    loadLive2d(modelSettingPath: string, modelSetting: object): Promise<void>;
-    loadModelList(): Promise<ModelList>;
+    loadLive2D(modelSettingPath: string, modelSetting: object): Promise<void>;
+    loadModelList(): Promise<ModelListCDN>;
     loadTextureCache(modelName: string): Promise<any[]>;
     loadModel(message: string): Promise<void>;
     loadRandTexture(): Promise<void>;
     loadNextModel(): Promise<void>;
 }
-export { ModelManager, Config };
+export { ModelManager, Config, ModelList };

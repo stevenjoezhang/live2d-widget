@@ -52,9 +52,9 @@ function registerEventListener(tips) {
     }, 1000);
     showMessage(welcomeMessage(tips.time), 7000, 11);
     window.addEventListener('mouseover', (event) => {
-        var _a;
+        var _b;
         for (let { selector, text } of tips.mouseover) {
-            if (!((_a = event.target) === null || _a === void 0 ? void 0 : _a.closest(selector)))
+            if (!((_b = event.target) === null || _b === void 0 ? void 0 : _b.closest(selector)))
                 continue;
             if (lastHoverElement === selector)
                 return;
@@ -66,9 +66,9 @@ function registerEventListener(tips) {
         }
     });
     window.addEventListener('click', (event) => {
-        var _a;
+        var _b;
         for (let { selector, text } of tips.click) {
-            if (!((_a = event.target) === null || _a === void 0 ? void 0 : _a.closest(selector)))
+            if (!((_b = event.target) === null || _b === void 0 ? void 0 : _b.closest(selector)))
                 continue;
             text = randomSelection(text);
             text = text.replace('{text}', event.target.innerText);
@@ -106,25 +106,29 @@ function loadWidget(config) {
         sessionStorage.removeItem('waifu-text');
         document.body.insertAdjacentHTML('beforeend', `<div id="waifu">
        <div id="waifu-tips"></div>
-       <canvas id="live2d" width="800" height="800"></canvas>
+       <div id="waifu-canvas">
+         <canvas id="live2d" width="800" height="800"></canvas>
+       </div>
        <div id="waifu-tool"></div>
      </div>`);
-        const model = new ModelManager(config);
+        let models = [];
+        if (config.waifuPath) {
+            const response = yield fetch(config.waifuPath);
+            const result = yield response.json();
+            models = result.models;
+            registerEventListener(result);
+        }
+        const model = new ModelManager(config, models);
         yield model.loadModel('');
         registerTools(model, config);
         if (config.drag)
             registerDrag();
-        if (config.waifuPath) {
-            const response = yield fetch(config.waifuPath);
-            const result = yield response.json();
-            registerEventListener(result);
-        }
         document.getElementById('waifu').style.bottom = '0';
     });
 }
 function initWidget(config) {
     if (typeof config === 'string') {
-        logger.error('Your config for Live2d initWidget is outdated. Please refer to https://github.com/stevenjoezhang/live2d-widget/blob/master/dist/autoload.js');
+        logger.error('Your config for Live2D initWidget is outdated. Please refer to https://github.com/stevenjoezhang/live2d-widget/blob/master/dist/autoload.js');
         return;
     }
     logger.setLevel(config.logLevel);

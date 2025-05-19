@@ -1,4 +1,4 @@
-import { Config } from './model.js';
+import { Config, ModelList } from './model.js';
 import { Time } from './message.js';
 interface Tips {
     message: {
@@ -20,6 +20,7 @@ interface Tips {
         date: string;
         text: string | string[];
     }[];
+    models: ModelList[];
 }
 declare function initWidget(config: string | Config): void;
 export { initWidget, Tips };

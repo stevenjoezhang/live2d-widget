@@ -1,8 +1,8 @@
 export default LAppLive2DManager;
 declare class LAppLive2DManager {
-    model: LAppModel | null;
+    model: LAppModel;
     reloading: boolean;
-    getModel(): LAppModel | null;
+    getModel(): LAppModel;
     releaseModel(gl: any): void;
     changeModel(gl: any, modelSettingPath: any): Promise<any>;
     changeModelWithJSON(gl: any, modelSettingPath: any, modelSetting: any): Promise<void>;

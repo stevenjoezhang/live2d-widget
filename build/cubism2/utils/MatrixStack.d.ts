@@ -8,7 +8,7 @@ declare class MatrixStack {
     static multMatrix(matNew: any): void;
 }
 declare namespace MatrixStack {
-    let depth: number | undefined;
+    let depth: number;
     let matrixStack: number[];
     let currentMatrix: number[];
     let tmp: any[];

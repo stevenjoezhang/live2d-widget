@@ -1,9 +1,9 @@
 export class L2DBaseModel {
     live2DModel: any;
-    modelMatrix: L2DModelMatrix | null;
+    modelMatrix: L2DModelMatrix;
     eyeBlink: any;
-    physics: L2DPhysics | null;
-    pose: L2DPose | null;
+    physics: L2DPhysics;
+    pose: L2DPose;
     initialized: boolean;
     updating: boolean;
     alpha: number;
@@ -21,7 +21,7 @@ export class L2DBaseModel {
     motions: {};
     expressions: {};
     isTexLoaded: boolean;
-    getModelMatrix(): L2DModelMatrix | null;
+    getModelMatrix(): L2DModelMatrix;
     setAlpha(a: any): void;
     getAlpha(): number;
     isInitialized(): boolean;

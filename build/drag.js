@@ -1,7 +1,6 @@
 function registerDrag() {
     const element = document.getElementById('waifu');
-    const canvas = document.getElementById('live2d');
-    if (!element || !canvas)
+    if (!element)
         return;
     let winWidth = window.innerWidth, winHeight = window.innerHeight;
     const imgWidth = element.offsetWidth, imgHeight = element.offsetHeight;
@@ -9,6 +8,7 @@ function registerDrag() {
         if (event.button === 2) {
             return;
         }
+        const canvas = document.getElementById('live2d');
         if (event.target !== canvas)
             return;
         event.preventDefault();
