@@ -6,7 +6,7 @@
 import { ModelManager, Config, ModelList } from './model.js';
 import { showMessage, welcomeMessage, Time } from './message.js';
 import { randomSelection } from './utils.js';
-import tools from './tools.js';
+import { ToolsManager } from './tools.js';
 import logger from './logger.js';
 import registerDrag from './drag.js';
 import { fa_child } from './icons.js';
@@ -73,38 +73,6 @@ interface Tips {
     text: string | string[];
   }[];
   models: ModelList[];
-}
-
-function registerTools(model: ModelManager, config: Config, tips: Tips) {
-  tools['switch-model'].callback = () => model.loadNextModel();
-  tools['switch-texture'].callback = () => {
-    let successMessage = '', failMessage = '';
-    if (tips) {
-      successMessage = tips.message.changeSuccess;
-      failMessage = tips.message.changeFail;
-    }
-    model.loadRandTexture(successMessage, failMessage);
-  };
-  tools.hitokoto.callback = tools.hitokoto.callback.bind(null, tips.message.hitokoto);
-  tools.photo.callback = tools.photo.callback.bind(null, tips.message.photo);
-  tools.quit.callback = tools.quit.callback.bind(null, tips.message.goodbye);
-  if (!Array.isArray(config.tools)) {
-    config.tools = Object.keys(tools);
-  }
-  for (const toolName of config.tools!) {
-    if (tools[toolName]) {
-      const { icon, callback } = tools[toolName];
-      document
-        .getElementById('waifu-tool')!
-        .insertAdjacentHTML(
-          'beforeend',
-          `<span id="waifu-tool-${toolName}">${icon}</span>`,
-        );
-      document
-        .getElementById(`waifu-tool-${toolName}`)!
-        .addEventListener('click', callback);
-    }
-  }
 }
 
 /**
@@ -216,7 +184,7 @@ async function loadWidget(config: Config) {
   }
   const model = await ModelManager.initCheck(config, models);
   await model.loadModel('');
-  registerTools(model, config, tips);
+  new ToolsManager(model, config, tips).registerTools();
   if (config.drag) registerDrag();
   document.getElementById('waifu')!.style.bottom = '0';
 }
