@@ -40,6 +40,8 @@ interface Tips {
     changeFail: string;
     photo: string;
     goodbye: string;
+    hitokoto: string;
+    welcome: string;
   };
   /**
    * Time configuration.
@@ -83,6 +85,7 @@ function registerTools(model: ModelManager, config: Config, tips: Tips) {
     }
     model.loadRandTexture(successMessage, failMessage);
   };
+  tools.hitokoto.callback = tools.hitokoto.callback.bind(null, tips.message.hitokoto);
   tools.photo.callback = tools.photo.callback.bind(null, tips.message.photo);
   tools.quit.callback = tools.quit.callback.bind(null, tips.message.goodbye);
   if (!Array.isArray(config.tools)) {
@@ -127,7 +130,7 @@ function registerEventListener(tips: Tips) {
       }, 20000);
     }
   }, 1000);
-  showMessage(welcomeMessage(tips.time), 7000, 11);
+  showMessage(welcomeMessage(tips.time, tips.message.welcome), 7000, 11);
   window.addEventListener('mouseover', (event) => {
     // eslint-disable-next-line prefer-const
     for (let { selector, text } of tips.mouseover) {

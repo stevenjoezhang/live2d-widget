@@ -57,7 +57,7 @@ function showMessage(
  * @param {Time} time - Time message configuration.
  * @returns {string} Welcome message.
  */
-function welcomeMessage(time: Time): string {
+function welcomeMessage(time: Time, template: string): string {
   if (location.pathname === '/') {
     // If on the homepage
     for (const { hour, text } of time) {
@@ -72,7 +72,7 @@ function welcomeMessage(time: Time): string {
       }
     }
   }
-  const text = `欢迎阅读<span>「${document.title.split(' - ')[0]}」</span>`;
+  const text = i18n(template, document.title);
   let from;
   if (document.referrer !== '') {
     const referrer = new URL(document.referrer),
@@ -91,4 +91,11 @@ function welcomeMessage(time: Time): string {
   return text;
 }
 
-export { showMessage, welcomeMessage, Time };
+function i18n(template, ...args) {
+  return template.replace(/\$(\d+)/g, (_, idx) => {
+    const i = parseInt(idx, 10) - 1;
+    return args[i] ?? '';
+  });
+}
+
+export { showMessage, welcomeMessage, i18n, Time };

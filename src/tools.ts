@@ -12,7 +12,7 @@ import {
   fa_info_circle,
   fa_xmark
 } from './icons.js';
-import { showMessage } from './message.js';
+import { showMessage, i18n } from './message.js';
 
 interface Tools {
   /**
@@ -34,27 +34,22 @@ interface Tools {
 }
 
 /**
- * Show a hitokoto (one-liner).
- */
-async function showHitokoto() {
-  // Add hitokoto.cn API
-  const response = await fetch('https://v1.hitokoto.cn');
-  const result = await response.json();
-  const text = `这句一言来自 <span>「${result.from}」</span>，是 <span>${result.creator}</span> 在 hitokoto.cn 投稿的。`;
-  showMessage(result.hitokoto, 6000, 9);
-  setTimeout(() => {
-    showMessage(text, 4000, 9);
-  }, 6000);
-}
-
-/**
  * Waifu tools configuration.
  * @type {Tools}
  */
 const tools: Tools = {
   hitokoto: {
     icon: fa_comment,
-    callback: showHitokoto,
+    callback: async (template: string) => {
+      // Add hitokoto.cn API
+      const response = await fetch('https://v1.hitokoto.cn');
+      const result = await response.json();
+      const text = i18n(template, result.from, result.creator);
+      showMessage(result.hitokoto, 6000, 9);
+      setTimeout(() => {
+        showMessage(text, 4000, 9);
+      }, 6000);
+    },
   },
   asteroids: {
     icon: fa_paper_plane,
