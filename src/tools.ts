@@ -6,8 +6,8 @@
 import {
   fa_comment,
   fa_paper_plane,
-  fa_user_circle,
   fa_street_view,
+  fa_shirt,
   fa_camera_retro,
   fa_info_circle,
   fa_xmark
@@ -74,11 +74,11 @@ class ToolsManager {
         }
       },
       'switch-model': {
-        icon: fa_user_circle,
+        icon: fa_street_view,
         callback: () => model.loadNextModel()
       },
       'switch-texture': {
-        icon: fa_street_view,
+        icon: fa_shirt,
         callback: () => {
           let successMessage = '', failMessage = '';
           if (tips) {
