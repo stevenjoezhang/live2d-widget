@@ -4,7 +4,7 @@
 ![](https://forthebadge.com/images/badges/made-with-typescript.svg)
 ![](https://forthebadge.com/images/badges/uses-css.svg)
 ![](https://forthebadge.com/images/badges/contains-cat-gifs.svg)
-![](https://forthebadge.com/images/badges/powered-by-responsibility.svg)
+![](https://forthebadge.com/images/badges/powered-by-electricity.svg)
 ![](https://forthebadge.com/images/badges/makes-people-smile.svg)
 
 [中文](README.md)
@@ -104,9 +104,7 @@ To load forked repository via jsDelivr, the usage method becomes:
 <script src="https://fastly.jsdelivr.net/gh/username/live2d-widget@latest/autoload.js"></script>
 ```
 
-Replace `username` with your GitHub username. To ensure the content of the CDN is refreshed correctly, you need to create a new git tag and push it to the GitHub repository. Otherwise, `@latest` in the URL will still point to the previous version. Additionally, CDN itself has caching, so the changes may take some time to take effect. Relevant documentation:
-- [Git Basics - Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
-- [Managing releases in a repository](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
+Replace `username` with your GitHub username. To ensure the content of the CDN is refreshed correctly, you need to create a new git tag and push it to the GitHub repository. Otherwise, `@latest` in the URL will still point to the previous version. Additionally, CDN itself has caching, so the changes may take some time to take effect.
 
 ### Using Cloudflare Pages
 

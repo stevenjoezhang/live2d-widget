@@ -139,14 +139,13 @@ body {
 	<label for="pass" class="sr-only">密码</label>
 	<input type="password" name="pass" class="form-control" placeholder="密码" required>
 	<div class="checkbox mb-4">
-		<label>
-			<input type="checkbox" value="remember-me"> 记住我
-		</label>
+		<input class="form-check-input me-1" type="checkbox" value="remember-me" id="remember-me">
+		<label class="form-check-label" for="remember-me">记住我</label>
 	</div>
 	<div class="d-grid">
 		<button class="btn btn-lg btn-primary" type="submit">登录</button>
 	</div>
-	<p class="mt-5 mb-3 text-muted">Copyleft &copy; Mimi 2019</p>
+	<p class="mt-5 mb-3 text-muted">Copyleft &copy; Mimi <span id="year"></span></p>
 </form>
 <script type="module">
 /*
@@ -168,32 +167,40 @@ body {
  */
 import { Cubism2Model } from "../build/index.js";
 document.getElementById("text").innerHTML = `<span style="color: cyan;">MIMI</span><span style="color: white;">POWERED</span>`.repeat(10);
+document.getElementById("year").innerText = new Date().getFullYear();
 window.addEventListener("load", () => {
 	if (!CSS.supports("clip-path", "circle(120px at center)")) {
 		document.getElementById("stage").innerHTML = '<img src="./screenshots/screenshot-1.png">';
 		return;
 	}
 
+	const coverPosition = pos => document.getElementById("cover").style.bottom = pos;
+
 	const apiPath = "https://live2d.fghrsh.net/api";
-	let state = 0, loading = false, modelInitialized = false;
+	let state = 0, loading = false;
 	const model = new Cubism2Model();
 	const modelId = 1;
 	let modelTexturesId = 0;
 	loadModel();
 
+	function setState(newState) {
+		state = newState;
+		if (state === 0) coverPosition("10%");
+		else if (state === 1) coverPosition("20%");
+		else if (state === 2) coverPosition("80%");
+	}
+
 	async function loadModel() {
 		const modelSettingPath = `${apiPath}/get/?id=${modelId}-${modelTexturesId}`;
 		const response = await fetch(modelSettingPath);
 		const modelSetting = await response.json();
-		if (!modelInitialized) {
-			modelInitialized = true;
+		if (!model.gl) {
 			await model.init('live2d', modelSettingPath, modelSetting);
 		} else {
 			await model.changeModelWithJSON(modelSettingPath, modelSetting);
 		}
 		console.log("live2d", `模型 ${modelId}-${modelTexturesId} 加载完成`);
-		coverPosition("80%");
-		state = 2;
+		setState(2);
 	}
 
 	async function loadRandModel() {
@@ -201,12 +208,7 @@ window.addEventListener("load", () => {
 		const result = await response.json();
 		modelTexturesId = result.textures.id;
 		await loadModel();
-		coverPosition("80%");
-		state = 2;
-	}
-
-	function coverPosition(pos) {
-		document.getElementById("cover").style.bottom = pos;
+		setState(2);
 	}
 
 	document.getElementById("info").addEventListener("click", () => {
@@ -220,33 +222,29 @@ window.addEventListener("load", () => {
 	document.getElementById("refresh").addEventListener("click", async () => {
 		if (loading) return;
 		loading = true;
-		state = 0;
-		coverPosition("10%");
+		setState(0);
 		await loadRandModel();
 		loading = false;
 	});
 
 	document.getElementById("handle").addEventListener("click", () => {
 		if (state === 1) {
-			state = 2;
-			coverPosition("80%");
+			setState(2);
 		}
 		else if (state === 2) {
-			state = 1;
-			coverPosition("20%");
+			setState(1);
 		}
 	});
 
 	document.querySelector("input[type=password]").addEventListener("focus", () => {
 		if (state === 2) {
-			state = 1;
-			coverPosition("20%");
+			setState(1);
 		}
 	});
+
 	document.querySelector("input[type=password]").addEventListener("blur", () => {
 		if (state === 1) {
-			state = 2;
-			coverPosition("80%");
+			setState(2);
 		}
 	});
 });
