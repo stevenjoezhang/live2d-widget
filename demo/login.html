@@ -166,7 +166,7 @@ body {
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  */
-import { Model } from "../build/index.js";
+import { Cubism2Model } from "../build/index.js";
 document.getElementById("text").innerHTML = `<span style="color: cyan;">MIMI</span><span style="color: white;">POWERED</span>`.repeat(10);
 window.addEventListener("load", () => {
 	if (!CSS.supports("clip-path", "circle(120px at center)")) {
@@ -176,7 +176,7 @@ window.addEventListener("load", () => {
 
 	const apiPath = "https://live2d.fghrsh.net/api";
 	let state = 0, loading = false, modelInitialized = false;
-	const model = new Model();
+	const model = new Cubism2Model();
 	const modelId = 1;
 	let modelTexturesId = 0;
 	loadModel();
