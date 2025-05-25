@@ -7,7 +7,7 @@
 	font-size: 12px;
 	left: 0;
 	margin-left: -100px;
-	padding: 5px 2px 5px 5px;
+	padding: 5px 0 5px 5px;
 	position: fixed;
 	transition: margin-left 1s;
 	width: 60px;
@@ -105,6 +105,12 @@
 
 #waifu-tool svg:hover {
 	fill: #0684bd; /* #34495e */
+}
+
+#waifu-toggle svg {
+	fill: #fff;
+	height: 25px;
+	margin-right: -5px;
 }
 
 @keyframes shake {

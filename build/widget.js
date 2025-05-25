@@ -10,27 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { ModelManager } from './model.js';
 import { showMessage, welcomeMessage } from './message.js';
 import { randomSelection } from './utils.js';
-import tools from './tools.js';
+import { ToolsManager } from './tools.js';
 import logger from './logger.js';
 import registerDrag from './drag.js';
-function registerTools(model, config) {
-    tools['switch-model'].callback = () => model.loadNextModel();
-    tools['switch-texture'].callback = () => model.loadRandTexture();
-    if (!Array.isArray(config.tools)) {
-        config.tools = Object.keys(tools);
-    }
-    for (const toolName of config.tools) {
-        if (tools[toolName]) {
-            const { icon, callback } = tools[toolName];
-            document
-                .getElementById('waifu-tool')
-                .insertAdjacentHTML('beforeend', `<span id="waifu-tool-${toolName}">${icon}</span>`);
-            document
-                .getElementById(`waifu-tool-${toolName}`)
-                .addEventListener('click', callback);
-        }
-    }
-}
+import { fa_child } from './icons.js';
 function registerEventListener(tips) {
     let userAction = false;
     let userActionTimer;
@@ -46,11 +29,11 @@ function registerEventListener(tips) {
         }
         else if (!userActionTimer) {
             userActionTimer = setInterval(() => {
-                showMessage(randomSelection(messageArray), 6000, 9);
+                showMessage(messageArray, 6000, 9);
             }, 20000);
         }
     }, 1000);
-    showMessage(welcomeMessage(tips.time), 7000, 11);
+    showMessage(welcomeMessage(tips.time, tips.message.welcome, tips.message.referrer), 7000, 11);
     window.addEventListener('mouseover', (event) => {
         var _b;
         for (let { selector, text } of tips.mouseover) {
@@ -112,15 +95,16 @@ function loadWidget(config) {
        <div id="waifu-tool"></div>
      </div>`);
         let models = [];
+        let tips;
         if (config.waifuPath) {
             const response = yield fetch(config.waifuPath);
-            const result = yield response.json();
-            models = result.models;
-            registerEventListener(result);
+            tips = yield response.json();
+            models = tips.models;
+            registerEventListener(tips);
         }
-        const model = new ModelManager(config, models);
+        const model = yield ModelManager.initCheck(config, models);
         yield model.loadModel('');
-        registerTools(model, config);
+        new ToolsManager(model, config, tips).registerTools();
         if (config.drag)
             registerDrag();
         document.getElementById('waifu').style.bottom = '0';
@@ -133,7 +117,7 @@ function initWidget(config) {
     }
     logger.setLevel(config.logLevel);
     document.body.insertAdjacentHTML('beforeend', `<div id="waifu-toggle">
-       <span>看板娘</span>
+       ${fa_child}
      </div>`);
     const toggle = document.getElementById('waifu-toggle');
     toggle === null || toggle === void 0 ? void 0 : toggle.addEventListener('click', () => {

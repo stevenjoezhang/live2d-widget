@@ -1,8 +1,4 @@
 import { LogLevel } from './logger.js';
-interface ModelListCDN {
-    messages: string[];
-    models: string | string[];
-}
 interface ModelList {
     name: string;
     paths: string[];
@@ -33,7 +29,8 @@ declare class ModelManager {
     private loading;
     private modelJSONCache;
     private models;
-    constructor(config: Config, models?: ModelList[]);
+    private constructor();
+    static initCheck(config: Config, models?: ModelList[]): Promise<ModelManager>;
     set modelId(modelId: number);
     get modelId(): number;
     set modelTexturesId(modelTexturesId: number);
@@ -42,10 +39,9 @@ declare class ModelManager {
     fetchWithCache(url: string): Promise<any>;
     checkModelVersion(modelSetting: any): 2 | 3;
     loadLive2D(modelSettingPath: string, modelSetting: object): Promise<void>;
-    loadModelList(): Promise<ModelListCDN>;
     loadTextureCache(modelName: string): Promise<any[]>;
-    loadModel(message: string): Promise<void>;
-    loadRandTexture(): Promise<void>;
+    loadModel(message: string | string[]): Promise<void>;
+    loadRandTexture(successMessage?: string | string[], failMessage?: string | string[]): Promise<void>;
     loadNextModel(): Promise<void>;
 }
 export { ModelManager, Config, ModelList };

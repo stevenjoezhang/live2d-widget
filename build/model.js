@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { showMessage } from './message.js';
-import { randomSelection, loadExternalResource } from './utils.js';
+import { loadExternalResource, randomOtherOption } from './utils.js';
 import logger from './logger.js';
 class ModelManager {
     constructor(config, models = []) {
@@ -51,6 +51,44 @@ class ModelManager {
         this.modelJSONCache = {};
         this.models = models;
     }
+    static initCheck(config_1) {
+        return __awaiter(this, arguments, void 0, function* (config, models = []) {
+            const model = new ModelManager(config, models);
+            if (model.useCDN) {
+                const response = yield fetch(`${model.cdnPath}model_list.json`);
+                model.modelList = yield response.json();
+                if (model.modelId >= model.modelList.models.length) {
+                    model.modelId = 0;
+                }
+                const modelName = model.modelList.models[model.modelId];
+                if (Array.isArray(modelName)) {
+                    if (model.modelTexturesId >= modelName.length) {
+                        model.modelTexturesId = 0;
+                    }
+                }
+                else {
+                    const modelSettingPath = `${model.cdnPath}model/${modelName}/index.json`;
+                    const modelSetting = yield model.fetchWithCache(modelSettingPath);
+                    const version = model.checkModelVersion(modelSetting);
+                    if (version === 2) {
+                        const textureCache = yield model.loadTextureCache(modelName);
+                        if (model.modelTexturesId >= textureCache.length) {
+                            model.modelTexturesId = 0;
+                        }
+                    }
+                }
+            }
+            else {
+                if (model.modelId >= model.models.length) {
+                    model.modelId = 0;
+                }
+                if (model.modelTexturesId >= model.models[model.modelId].paths.length) {
+                    model.modelTexturesId = 0;
+                }
+            }
+            return model;
+        });
+    }
     set modelId(modelId) {
         this._modelId = modelId;
         localStorage.setItem('modelId', modelId.toString());
@@ -76,7 +114,12 @@ class ModelManager {
             }
             else {
                 const response = yield fetch(url);
-                result = yield response.json();
+                try {
+                    result = yield response.json();
+                }
+                catch (_b) {
+                    result = null;
+                }
                 this.modelJSONCache[url] = result;
             }
             return result;
@@ -148,86 +191,79 @@ class ModelManager {
             this.loading = false;
         });
     }
-    loadModelList() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const response = yield fetch(`${this.cdnPath}model_list.json`);
-            const modelList = yield response.json();
-            return modelList;
-        });
-    }
     loadTextureCache(modelName) {
         return __awaiter(this, void 0, void 0, function* () {
             const textureCache = yield this.fetchWithCache(`${this.cdnPath}model/${modelName}/textures.cache`);
-            return textureCache;
+            return textureCache || [];
         });
     }
     loadModel(message) {
         return __awaiter(this, void 0, void 0, function* () {
+            let modelSettingPath, modelSetting;
             if (this.useCDN) {
-                if (!this.modelList) {
-                    this.modelList = yield this.loadModelList();
+                let modelName = this.modelList.models[this.modelId];
+                if (Array.isArray(modelName)) {
+                    modelName = modelName[this.modelTexturesId];
                 }
-                if (this.modelId >= this.modelList.models.length) {
-                    this.modelId = 0;
-                }
-                const modelName = randomSelection(this.modelList.models[this.modelId]);
-                const modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
-                const modelSetting = yield this.fetchWithCache(modelSettingPath);
+                modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
+                modelSetting = yield this.fetchWithCache(modelSettingPath);
                 const version = this.checkModelVersion(modelSetting);
                 if (version === 2) {
                     const textureCache = yield this.loadTextureCache(modelName);
-                    if (this.modelTexturesId >= textureCache.length) {
-                        this.modelTexturesId = 0;
-                    }
                     let textures = textureCache[this.modelTexturesId];
                     if (typeof textures === 'string')
                         textures = [textures];
                     modelSetting.textures = textures;
                 }
-                yield this.loadLive2D(modelSettingPath, modelSetting);
             }
             else {
-                if (this.modelId >= this.models.length) {
-                    this.modelId = 0;
-                }
-                if (this.modelTexturesId >= this.models[this.modelId].paths.length) {
-                    this.modelTexturesId = 0;
-                }
-                const modelSettingPath = this.models[this.modelId].paths[this.modelTexturesId];
-                const modelSetting = yield this.fetchWithCache(modelSettingPath);
-                yield this.loadLive2D(modelSettingPath, modelSetting);
+                modelSettingPath = this.models[this.modelId].paths[this.modelTexturesId];
+                modelSetting = yield this.fetchWithCache(modelSettingPath);
             }
+            yield this.loadLive2D(modelSettingPath, modelSetting);
             showMessage(message, 4000, 10);
         });
     }
     loadRandTexture() {
-        return __awaiter(this, void 0, void 0, function* () {
+        return __awaiter(this, arguments, void 0, function* (successMessage = '', failMessage = '') {
             const { modelId } = this;
+            let noTextureAvailable = false;
             if (this.useCDN) {
-                if (!this.modelList) {
-                    this.modelList = yield this.loadModelList();
+                const modelName = this.modelList.models[modelId];
+                if (Array.isArray(modelName)) {
+                    this.modelTexturesId = randomOtherOption(modelName.length, this.modelTexturesId);
                 }
-                const modelName = randomSelection(this.modelList.models[modelId]);
-                const modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
-                const modelSetting = yield this.fetchWithCache(modelSettingPath);
-                const version = this.checkModelVersion(modelSetting);
-                if (version === 2) {
-                    const textureCache = yield this.loadTextureCache(modelName);
-                    this.modelTexturesId = Math.floor(Math.random() * textureCache.length);
-                    let textures = textureCache[this.modelTexturesId];
-                    if (typeof textures === 'string')
-                        textures = [textures];
-                    modelSetting.textures = textures;
+                else {
+                    const modelSettingPath = `${this.cdnPath}model/${modelName}/index.json`;
+                    const modelSetting = yield this.fetchWithCache(modelSettingPath);
+                    const version = this.checkModelVersion(modelSetting);
+                    if (version === 2) {
+                        const textureCache = yield this.loadTextureCache(modelName);
+                        if (textureCache.length <= 1) {
+                            noTextureAvailable = true;
+                        }
+                        else {
+                            this.modelTexturesId = randomOtherOption(textureCache.length, this.modelTexturesId);
+                        }
+                    }
+                    else {
+                        noTextureAvailable = true;
+                    }
                 }
-                yield this.loadLive2D(modelSettingPath, modelSetting);
-                showMessage('我的新衣服好看嘛？', 4000, 10);
             }
             else {
-                this.modelTexturesId = Math.floor(Math.random() * this.models[modelId].paths.length);
-                const modelSettingPath = this.models[modelId].paths[this.modelTexturesId];
-                const modelSetting = yield this.fetchWithCache(modelSettingPath);
-                yield this.loadLive2D(modelSettingPath, modelSetting);
-                showMessage('我的新衣服好看嘛？', 4000, 10);
+                if (this.models[modelId].paths.length === 1) {
+                    noTextureAvailable = true;
+                }
+                else {
+                    this.modelTexturesId = randomOtherOption(this.models[modelId].paths.length, this.modelTexturesId);
+                }
+            }
+            if (noTextureAvailable) {
+                showMessage(failMessage, 4000, 10);
+            }
+            else {
+                yield this.loadModel(successMessage);
             }
         });
     }
@@ -235,9 +271,6 @@ class ModelManager {
         return __awaiter(this, void 0, void 0, function* () {
             this.modelTexturesId = 0;
             if (this.useCDN) {
-                if (!this.modelList) {
-                    this.modelList = yield this.loadModelList();
-                }
                 this.modelId = (this.modelId + 1) % this.modelList.models.length;
                 yield this.loadModel(this.modelList.messages[this.modelId]);
             }

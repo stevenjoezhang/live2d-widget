@@ -6,6 +6,13 @@ interface Tips {
         console: string;
         copy: string;
         visibilitychange: string;
+        changeSuccess: string;
+        changeFail: string;
+        photo: string;
+        goodbye: string;
+        hitokoto: string;
+        welcome: string;
+        referrer: string;
     };
     time: Time;
     mouseover: {
