@@ -28,6 +28,13 @@ function loadExternalResource(url, type) {
 // 加载 live2d.min.js waifu.css waifu-tips.js
 // 如果担心手机上显示效果不佳，可以通过 `if (screen.width >= 768)` 来判断是否加载
 (async () => {
+  const OriginalImage = window.Image;
+  window.Image = function(...args) {
+    const img = new OriginalImage(...args);
+    img.crossOrigin = "anonymous";
+    return img;
+  };
+  window.Image.prototype = OriginalImage.prototype;
   await Promise.all([
     loadExternalResource(live2d_path + 'waifu.css', 'css'),
     loadExternalResource(live2d_path + 'waifu-tips.js', 'js')
@@ -35,7 +42,7 @@ function loadExternalResource(url, type) {
   // 配置选项的具体用法见 README.md
   initWidget({
     waifuPath: live2d_path + 'waifu-tips.json',
-    cdnPath: 'https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/',
+    // cdnPath: 'https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/',
     cubism2Path: live2d_path + 'live2d.min.js',
     cubism5Path: 'https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js',
     tools: ['hitokoto', 'asteroids', 'switch-model', 'switch-texture', 'photo', 'info', 'quit'],
@@ -45,9 +52,8 @@ function loadExternalResource(url, type) {
 })();
 
 console.log(`\n%cLive2D%cWidget%c\n`, 'padding: 8px; background: #cd3e45; font-weight: bold; font-size: large; color: white;', 'padding: 8px; background: #ff5450; font-size: large; color: #eee;', '');
-console.log(`
-Source: https://github.com/stevenjoezhang/live2d-widget
 
+/*
 く__,.ヘヽ.        /  ,ー､ 〉
          ＼ ', !-─‐-i  /  /´
          ／｀ｰ'       L/／｀ヽ､
@@ -65,4 +71,4 @@ Source: https://github.com/stevenjoezhang/live2d-widget
             ﾚ'ヽL__|___i,___,ンﾚ|ノ
                 ﾄ-,/  |___./
                 'ｰ'    !_,.:
-`);
+*/

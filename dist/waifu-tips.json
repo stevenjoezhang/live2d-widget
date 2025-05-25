@@ -250,6 +250,51 @@
     "default": ["好久不见，日子过得好快呢……", "大坏蛋！你都多久没理人家了呀，嘤嘤嘤～", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口！", "记得把小家加入收藏夹哦！"],
     "console": "哈哈，你打开了控制台，是想要看看我的小秘密吗？",
     "copy": "你都复制了些什么呀，转载要记得加上出处哦！",
-    "visibilitychange": "哇，你终于回来了～"
-  }
+    "visibilitychange": "哇，你终于回来了～",
+    "changeSuccess": "我的新衣服好看嘛？",
+    "changeFail": "我还没有其他衣服呢！",
+    "photo": "照好了嘛，是不是很可爱呢？",
+    "goodbye": "愿你有一天能与重要的人重逢。",
+    "hitokoto": "这句一言来自 <span>「$1」</span>，是 <span>$2</span> 在 hitokoto.cn 投稿的。",
+    "welcome": "欢迎阅读<span>「$1」</span>",
+    "referrer": "Hello！来自 <span>$1</span> 的朋友"
+  },
+  "models": [{
+    "name": "Potion-Maker/Pio",
+    "paths": ["https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/Potion-Maker/Pio/index.json"],
+    "message": "来自 Potion Maker 的 Pio 酱 ~"
+  }, {
+    "name": "Potion-Maker/Tia",
+    "paths": ["https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/Potion-Maker/Tia/index.json"],
+    "message": "来自 Potion Maker 的 Tia 酱 ~"
+  }, {
+    "name": "HyperdimensionNeptunia",
+    "paths": [
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/neptune_classic/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/nepnep/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/neptune_santa/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/nepmaid/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/nepswim/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/noir_classic/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/noir/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/noir_santa/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/noireswim/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/blanc_classic/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/blanc_normal/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/blanc_swimwear/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/vert_classic/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/vert_normal/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/vert_swimwear/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/nepgear/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/nepgear_extra/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/nepgearswim/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/histoire/index.json",
+      "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/model/HyperdimensionNeptunia/histoirenohover"
+    ],
+    "message": "Nep! Nep! 超次元游戏：海王星 系列"
+  }, {
+    "name": "Hiyori",
+    "paths": ["https://fastly.jsdelivr.net/gh/Live2D/CubismWebSamples/Samples/Resources/Hiyori/Hiyori.model3.json"],
+    "message": "是 Hiyori 哦 ~"
+  }]
 }
