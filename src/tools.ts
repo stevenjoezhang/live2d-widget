@@ -121,12 +121,11 @@ class ToolsManager {
           showMessage(message, 2000, 11);
           const waifu = document.getElementById('waifu');
           if (!waifu) return;
-          waifu.style.bottom = '-500px';
+          waifu.classList.remove('waifu-active');
           setTimeout(() => {
-            waifu.style.display = 'none';
+            waifu.classList.add('waifu-hidden');
             const waifuToggle = document.getElementById('waifu-toggle');
-            if (!waifuToggle) return;
-            waifuToggle.classList.add('waifu-toggle-active');
+            waifuToggle?.classList.add('waifu-toggle-active');
           }, 3000);
         }
       }
@@ -137,18 +136,19 @@ class ToolsManager {
     if (!Array.isArray(this.config.tools)) {
       this.config.tools = Object.keys(this.tools);
     }
-    for (const toolName of this.config.tools!) {
+    for (const toolName of this.config.tools) {
       if (this.tools[toolName]) {
         const { icon, callback } = this.tools[toolName];
+        const element = document.createElement('span');
+        element.id = `waifu-tool-${toolName}`;
+        element.innerHTML = icon;
         document
-          .getElementById('waifu-tool')!
-          .insertAdjacentHTML(
+          .getElementById('waifu-tool')
+          ?.insertAdjacentElement(
             'beforeend',
-            `<span id="waifu-tool-${toolName}">${icon}</span>`,
+            element,
           );
-        document
-          .getElementById(`waifu-tool-${toolName}`)!
-          .addEventListener('click', callback);
+        element.addEventListener('click', callback);
       }
     }
   }

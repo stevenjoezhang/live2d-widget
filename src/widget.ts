@@ -187,7 +187,7 @@ async function loadWidget(config: Config) {
   await model.loadModel('');
   new ToolsManager(model, config, tips).registerTools();
   if (config.drag) registerDrag();
-  document.getElementById('waifu')!.style.bottom = '0';
+  document.getElementById('waifu')?.classList.add('waifu-active');
 }
 
 /**
@@ -208,15 +208,15 @@ function initWidget(config: string | Config) {
   );
   const toggle = document.getElementById('waifu-toggle');
   toggle?.addEventListener('click', () => {
-    toggle!.classList.remove('waifu-toggle-active');
+    toggle?.classList.remove('waifu-toggle-active');
     if (toggle?.getAttribute('first-time')) {
       loadWidget(config as Config);
       toggle?.removeAttribute('first-time');
     } else {
       localStorage.removeItem('waifu-display');
-      document.getElementById('waifu')!.style.display = '';
+      document.getElementById('waifu')?.classList.remove('waifu-hidden');
       setTimeout(() => {
-        document.getElementById('waifu')!.style.bottom = '0';
+        document.getElementById('waifu')?.classList.add('waifu-active');
       }, 0);
     }
   });
