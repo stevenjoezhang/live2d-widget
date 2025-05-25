@@ -57,7 +57,7 @@ function showMessage(
  * @param {Time} time - Time message configuration.
  * @returns {string} Welcome message.
  */
-function welcomeMessage(time: Time, template: string): string {
+function welcomeMessage(time: Time, welcomeTemplate: string, referrerTemplate: string): string {
   if (location.pathname === '/') {
     // If on the homepage
     for (const { hour, text } of time) {
@@ -72,26 +72,16 @@ function welcomeMessage(time: Time, template: string): string {
       }
     }
   }
-  const text = i18n(template, document.title);
-  let from;
+  const text = i18n(welcomeTemplate, document.title);
   if (document.referrer !== '') {
-    const referrer = new URL(document.referrer),
-      domain = referrer.hostname.split('.')[1];
-    const domains = {
-      baidu: '百度',
-      so: '360搜索',
-      google: '谷歌搜索',
-    } as const;
+    const referrer = new URL(document.referrer);
     if (location.hostname === referrer.hostname) return text;
-
-    if (domain in domains) from = domains[domain as keyof typeof domains];
-    else from = referrer.hostname;
-    return `Hello！来自 <span>${from}</span> 的朋友<br>${text}`;
+    return `${i18n(referrerTemplate, referrer.hostname)}<br>${text}`;
   }
   return text;
 }
 
-function i18n(template, ...args) {
+function i18n(template: string, ...args: string[]) {
   return template.replace(/\$(\d+)/g, (_, idx) => {
     const i = parseInt(idx, 10) - 1;
     return args[i] ?? '';

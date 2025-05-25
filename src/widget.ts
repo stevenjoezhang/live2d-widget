@@ -42,6 +42,7 @@ interface Tips {
     goodbye: string;
     hitokoto: string;
     welcome: string;
+    referrer: string;
   };
   /**
    * Time configuration.
@@ -98,7 +99,7 @@ function registerEventListener(tips: Tips) {
       }, 20000);
     }
   }, 1000);
-  showMessage(welcomeMessage(tips.time, tips.message.welcome), 7000, 11);
+  showMessage(welcomeMessage(tips.time, tips.message.welcome, tips.message.referrer), 7000, 11);
   window.addEventListener('mouseover', (event) => {
     // eslint-disable-next-line prefer-const
     for (let { selector, text } of tips.mouseover) {
