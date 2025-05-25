@@ -1,13 +1,15 @@
 {
   "name": "live2d-widgets",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0-rc.3",
   "description": "Live2D widget for web pages",
   "main": "build/index.js",
   "files": [
     "build",
+    "!build/CubismSdkForWeb*",
     "demo",
     "dist",
     "src",
+    "!src/CubismSdkForWeb*",
     "README.en.md"
   ],
   "types": "build/index.d.ts",
@@ -35,13 +37,13 @@
     "@fortawesome/fontawesome-free": "6.7.2"
   },
   "devDependencies": {
-    "@eslint/js": "9.26.0",
-    "@rollup/plugin-alias": "^5.1.1",
+    "@eslint/js": "9.27.0",
+    "@rollup/plugin-alias": "5.1.1",
     "@rollup/plugin-terser": "0.4.4",
-    "@types/node": "22.15.14",
-    "eslint": "9.26.0",
-    "rollup": "4.40.2",
+    "@types/node": "22.15.21",
+    "eslint": "9.27.0",
+    "rollup": "4.41.1",
     "typescript": "5.8.3",
-    "typescript-eslint": "8.32.0"
+    "typescript-eslint": "8.32.1"
   }
 }
