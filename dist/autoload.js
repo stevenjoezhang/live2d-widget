@@ -25,9 +25,9 @@ function loadExternalResource(url, type) {
   });
 }
 
-// 加载 live2d.min.js waifu.css waifu-tips.js
 // 如果担心手机上显示效果不佳，可以通过 `if (screen.width >= 768)` 来判断是否加载
 (async () => {
+  // 避免图片资源跨域问题
   const OriginalImage = window.Image;
   window.Image = function(...args) {
     const img = new OriginalImage(...args);
@@ -35,6 +35,7 @@ function loadExternalResource(url, type) {
     return img;
   };
   window.Image.prototype = OriginalImage.prototype;
+  // 加载 waifu.css waifu-tips.js
   await Promise.all([
     loadExternalResource(live2d_path + 'waifu.css', 'css'),
     loadExternalResource(live2d_path + 'waifu-tips.js', 'js')
