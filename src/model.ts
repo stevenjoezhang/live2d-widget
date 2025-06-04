@@ -189,8 +189,8 @@ class ModelManager {
     if (url in this.modelJSONCache) {
       result = this.modelJSONCache[url];
     } else {
-      const response = await fetch(url);
       try {
+        const response = await fetch(url);
         result = await response.json();
       } catch {
         result = null;
