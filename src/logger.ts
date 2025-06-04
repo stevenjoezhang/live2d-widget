@@ -31,13 +31,13 @@ class Logger {
 
   warn(message: string, ...args: any[]) {
     if (this.shouldLog('warn')) {
-      console.warn('[Live2D Widget][WARN ]', message, ...args);
+      console.warn('[Live2D Widget][WARN]', message, ...args);
     }
   }
 
   info(message: string, ...args: any[]) {
     if (this.shouldLog('info')) {
-      console.log('[Live2D Widget][INFO ]', message, ...args);
+      console.log('[Live2D Widget][INFO]', message, ...args);
     }
   }
 
