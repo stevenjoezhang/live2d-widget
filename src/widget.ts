@@ -43,6 +43,8 @@ interface Tips {
     hitokoto: string;
     welcome: string;
     referrer: string;
+    hoverBody: string;
+    tapBody: string;
   };
   /**
    * Time configuration.
@@ -85,6 +87,21 @@ function registerEventListener(tips: Tips) {
   let userAction = false;
   let userActionTimer: any;
   const messageArray = tips.message.default;
+  tips.seasons.forEach(({ date, text }) => {
+    const now = new Date(),
+      after = date.split('-')[0],
+      before = date.split('-')[1] || after;
+    if (
+      Number(after.split('/')[0]) <= now.getMonth() + 1 &&
+      now.getMonth() + 1 <= Number(before.split('/')[0]) &&
+      Number(after.split('/')[1]) <= now.getDate() &&
+      now.getDate() <= Number(before.split('/')[1])
+    ) {
+      text = randomSelection(text);
+      text = (text as string).replace('{year}', String(now.getFullYear()));
+      messageArray.push(text);
+    }
+  });
   let lastHoverElement: any;
   window.addEventListener('mousemove', () => (userAction = true));
   window.addEventListener('keydown', () => (userAction = true));
@@ -99,7 +116,7 @@ function registerEventListener(tips: Tips) {
       }, 20000);
     }
   }, 1000);
-  showMessage(welcomeMessage(tips.time, tips.message.welcome, tips.message.referrer), 7000, 11);
+
   window.addEventListener('mouseover', (event) => {
     // eslint-disable-next-line prefer-const
     for (let { selector, text } of tips.mouseover) {
@@ -128,23 +145,16 @@ function registerEventListener(tips: Tips) {
       return;
     }
   });
-  tips.seasons.forEach(({ date, text }) => {
-    const now = new Date(),
-      after = date.split('-')[0],
-      before = date.split('-')[1] || after;
-    if (
-      Number(after.split('/')[0]) <= now.getMonth() + 1 &&
-      now.getMonth() + 1 <= Number(before.split('/')[0]) &&
-      Number(after.split('/')[1]) <= now.getDate() &&
-      now.getDate() <= Number(before.split('/')[1])
-    ) {
-      text = randomSelection(text);
-      text = (text as string).replace('{year}', String(now.getFullYear()));
-      messageArray.push(text);
-    }
+  window.addEventListener('live2d:hoverbody', () => {
+    const text = randomSelection(tips.message.hoverBody);
+    showMessage(text, 4000, 8, false);
+  });
+  window.addEventListener('live2d:tapbody', () => {
+    const text = randomSelection(tips.message.tapBody);
+    showMessage(text, 4000, 9);
   });
 
-  const devtools = () => { };
+  const devtools = () => {};
   console.log('%c', devtools);
   devtools.toString = () => {
     showMessage(tips.message.console, 6000, 9);
@@ -164,7 +174,7 @@ function registerEventListener(tips: Tips) {
  */
 async function loadWidget(config: Config) {
   localStorage.removeItem('waifu-display');
-  sessionStorage.removeItem('waifu-text');
+  sessionStorage.removeItem('waifu-message-priority');
   document.body.insertAdjacentHTML(
     'beforeend',
     `<div id="waifu">
@@ -182,6 +192,7 @@ async function loadWidget(config: Config) {
     tips = await response.json();
     models = tips.models;
     registerEventListener(tips);
+    showMessage(welcomeMessage(tips.time, tips.message.welcome, tips.message.referrer), 7000, 11);
   }
   const model = await ModelManager.initCheck(config, models);
   await model.loadModel('');

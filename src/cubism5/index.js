@@ -7,6 +7,8 @@ import { LAppModel } from '@demo/lappmodel.js';
 import { LAppPal } from '@demo/lapppal';
 import logger from '../logger.js';
 
+LAppPal.printMessage = () => {};
+
 // Custom subdelegate class, responsible for Canvas-related initialization and rendering management
 class AppSubdelegate extends LAppSubdelegate {
   /**
