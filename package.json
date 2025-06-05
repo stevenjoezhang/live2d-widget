@@ -1,6 +1,6 @@
 {
   "name": "live2d-widgets",
-  "version": "1.0.0-rc.3",
+  "version": "1.0.0-rc.4",
   "description": "Live2D widget for web pages",
   "main": "build/index.js",
   "files": [
