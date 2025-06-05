@@ -352,7 +352,7 @@ class LAppModel extends L2DBaseModel {
 
     logger.trace('Expression : ' + name);
 
-    this.expressionManager.startMotion(motion, false);
+    this.expressionManager?.startMotion(motion, false);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -374,6 +374,18 @@ class LAppModel extends L2DBaseModel {
 
   hitTest(id, testX, testY) {
     const len = this.modelSetting.getHitAreaNum();
+    if (len == 0) {
+      const hitAreasCustom = this.modelSetting.getHitAreaCustom();
+      if (hitAreasCustom) {
+        const x = hitAreasCustom[id + '_x'];
+        const y = hitAreasCustom[id + '_y'];
+
+        if (testX > Math.min(...x) && testX < Math.max(...x) &&
+            testY > Math.min(...y) && testY < Math.max(...y)) {
+          return true;
+        }
+      }
+    }
     for (let i = 0; i < len; i++) {
       if (id == this.modelSetting.getHitAreaName(i)) {
         const drawID = this.modelSetting.getHitAreaID(i);
