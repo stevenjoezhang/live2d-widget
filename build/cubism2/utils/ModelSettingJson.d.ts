@@ -5,6 +5,7 @@ declare class ModelSettingJson {
     MODEL: string;
     TEXTURES: string;
     HIT_AREAS: string;
+    HIT_AREAS_CUSTOM: string;
     PHYSICS: string;
     POSE: string;
     EXPRESSIONS: string;
@@ -23,6 +24,7 @@ declare class ModelSettingJson {
     getModelFile(): any;
     getTextureNum(): any;
     getHitAreaNum(): any;
+    getHitAreaCustom(): any;
     getHitAreaID(n: any): any;
     getHitAreaName(n: any): any;
     getPhysicsFile(): any;

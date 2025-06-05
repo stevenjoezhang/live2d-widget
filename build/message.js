@@ -1,21 +1,25 @@
 import { randomSelection } from './utils.js';
 let messageTimer = null;
-function showMessage(text, timeout, priority) {
+function showMessage(text, timeout, priority, override = true) {
+    let currentPriority = parseInt(sessionStorage.getItem('waifu-message-priority'), 10);
+    if (isNaN(currentPriority)) {
+        currentPriority = 0;
+    }
     if (!text ||
-        (sessionStorage.getItem('waifu-text') &&
-            Number(sessionStorage.getItem('waifu-text')) > priority))
+        (override && currentPriority > priority) ||
+        (!override && currentPriority >= priority))
         return;
     if (messageTimer) {
         clearTimeout(messageTimer);
         messageTimer = null;
     }
     text = randomSelection(text);
-    sessionStorage.setItem('waifu-text', String(priority));
+    sessionStorage.setItem('waifu-message-priority', String(priority));
     const tips = document.getElementById('waifu-tips');
     tips.innerHTML = text;
     tips.classList.add('waifu-tips-active');
     messageTimer = setTimeout(() => {
-        sessionStorage.removeItem('waifu-text');
+        sessionStorage.removeItem('waifu-message-priority');
         tips.classList.remove('waifu-tips-active');
     }, timeout);
 }

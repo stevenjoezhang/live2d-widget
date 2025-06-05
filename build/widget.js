@@ -18,6 +18,17 @@ function registerEventListener(tips) {
     let userAction = false;
     let userActionTimer;
     const messageArray = tips.message.default;
+    tips.seasons.forEach(({ date, text }) => {
+        const now = new Date(), after = date.split('-')[0], before = date.split('-')[1] || after;
+        if (Number(after.split('/')[0]) <= now.getMonth() + 1 &&
+            now.getMonth() + 1 <= Number(before.split('/')[0]) &&
+            Number(after.split('/')[1]) <= now.getDate() &&
+            now.getDate() <= Number(before.split('/')[1])) {
+            text = randomSelection(text);
+            text = text.replace('{year}', String(now.getFullYear()));
+            messageArray.push(text);
+        }
+    });
     let lastHoverElement;
     window.addEventListener('mousemove', () => (userAction = true));
     window.addEventListener('keydown', () => (userAction = true));
@@ -33,7 +44,6 @@ function registerEventListener(tips) {
             }, 20000);
         }
     }, 1000);
-    showMessage(welcomeMessage(tips.time, tips.message.welcome, tips.message.referrer), 7000, 11);
     window.addEventListener('mouseover', (event) => {
         var _b;
         for (let { selector, text } of tips.mouseover) {
@@ -59,16 +69,13 @@ function registerEventListener(tips) {
             return;
         }
     });
-    tips.seasons.forEach(({ date, text }) => {
-        const now = new Date(), after = date.split('-')[0], before = date.split('-')[1] || after;
-        if (Number(after.split('/')[0]) <= now.getMonth() + 1 &&
-            now.getMonth() + 1 <= Number(before.split('/')[0]) &&
-            Number(after.split('/')[1]) <= now.getDate() &&
-            now.getDate() <= Number(before.split('/')[1])) {
-            text = randomSelection(text);
-            text = text.replace('{year}', String(now.getFullYear()));
-            messageArray.push(text);
-        }
+    window.addEventListener('live2d:hoverbody', () => {
+        const text = randomSelection(tips.message.hoverBody);
+        showMessage(text, 4000, 8, false);
+    });
+    window.addEventListener('live2d:tapbody', () => {
+        const text = randomSelection(tips.message.tapBody);
+        showMessage(text, 4000, 9);
     });
     const devtools = () => { };
     console.log('%c', devtools);
@@ -85,8 +92,9 @@ function registerEventListener(tips) {
 }
 function loadWidget(config) {
     return __awaiter(this, void 0, void 0, function* () {
+        var _b;
         localStorage.removeItem('waifu-display');
-        sessionStorage.removeItem('waifu-text');
+        sessionStorage.removeItem('waifu-message-priority');
         document.body.insertAdjacentHTML('beforeend', `<div id="waifu">
        <div id="waifu-tips"></div>
        <div id="waifu-canvas">
@@ -101,13 +109,14 @@ function loadWidget(config) {
             tips = yield response.json();
             models = tips.models;
             registerEventListener(tips);
+            showMessage(welcomeMessage(tips.time, tips.message.welcome, tips.message.referrer), 7000, 11);
         }
         const model = yield ModelManager.initCheck(config, models);
         yield model.loadModel('');
         new ToolsManager(model, config, tips).registerTools();
         if (config.drag)
             registerDrag();
-        document.getElementById('waifu').style.bottom = '0';
+        (_b = document.getElementById('waifu')) === null || _b === void 0 ? void 0 : _b.classList.add('waifu-active');
     });
 }
 function initWidget(config) {
@@ -121,16 +130,18 @@ function initWidget(config) {
      </div>`);
     const toggle = document.getElementById('waifu-toggle');
     toggle === null || toggle === void 0 ? void 0 : toggle.addEventListener('click', () => {
-        toggle.classList.remove('waifu-toggle-active');
+        var _b;
+        toggle === null || toggle === void 0 ? void 0 : toggle.classList.remove('waifu-toggle-active');
         if (toggle === null || toggle === void 0 ? void 0 : toggle.getAttribute('first-time')) {
             loadWidget(config);
             toggle === null || toggle === void 0 ? void 0 : toggle.removeAttribute('first-time');
         }
         else {
             localStorage.removeItem('waifu-display');
-            document.getElementById('waifu').style.display = '';
+            (_b = document.getElementById('waifu')) === null || _b === void 0 ? void 0 : _b.classList.remove('waifu-hidden');
             setTimeout(() => {
-                document.getElementById('waifu').style.bottom = '0';
+                var _b;
+                (_b = document.getElementById('waifu')) === null || _b === void 0 ? void 0 : _b.classList.add('waifu-active');
             }, 0);
         }
     });

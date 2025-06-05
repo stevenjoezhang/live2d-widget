@@ -231,9 +231,10 @@ class LAppModel extends L2DBaseModel {
         }
     }
     setExpression(name) {
+        var _b;
         const motion = this.expressions[name];
         logger.trace('Expression : ' + name);
-        this.expressionManager.startMotion(motion, false);
+        (_b = this.expressionManager) === null || _b === void 0 ? void 0 : _b.startMotion(motion, false);
     }
     draw(gl) {
         MatrixStack.push();
@@ -245,6 +246,17 @@ class LAppModel extends L2DBaseModel {
     }
     hitTest(id, testX, testY) {
         const len = this.modelSetting.getHitAreaNum();
+        if (len == 0) {
+            const hitAreasCustom = this.modelSetting.getHitAreaCustom();
+            if (hitAreasCustom) {
+                const x = hitAreasCustom[id + '_x'];
+                const y = hitAreasCustom[id + '_y'];
+                if (testX > Math.min(...x) && testX < Math.max(...x) &&
+                    testY > Math.min(...y) && testY < Math.max(...y)) {
+                    return true;
+                }
+            }
+        }
         for (let i = 0; i < len; i++) {
             if (id == this.modelSetting.getHitAreaName(i)) {
                 const drawID = this.modelSetting.getHitAreaID(i);

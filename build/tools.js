@@ -90,31 +90,30 @@ class ToolsManager {
                     const waifu = document.getElementById('waifu');
                     if (!waifu)
                         return;
-                    waifu.style.bottom = '-500px';
+                    waifu.classList.remove('waifu-active');
                     setTimeout(() => {
-                        waifu.style.display = 'none';
+                        waifu.classList.add('waifu-hidden');
                         const waifuToggle = document.getElementById('waifu-toggle');
-                        if (!waifuToggle)
-                            return;
-                        waifuToggle.classList.add('waifu-toggle-active');
+                        waifuToggle === null || waifuToggle === void 0 ? void 0 : waifuToggle.classList.add('waifu-toggle-active');
                     }, 3000);
                 }
             }
         };
     }
     registerTools() {
+        var _b;
         if (!Array.isArray(this.config.tools)) {
             this.config.tools = Object.keys(this.tools);
         }
         for (const toolName of this.config.tools) {
             if (this.tools[toolName]) {
                 const { icon, callback } = this.tools[toolName];
-                document
-                    .getElementById('waifu-tool')
-                    .insertAdjacentHTML('beforeend', `<span id="waifu-tool-${toolName}">${icon}</span>`);
-                document
-                    .getElementById(`waifu-tool-${toolName}`)
-                    .addEventListener('click', callback);
+                const element = document.createElement('span');
+                element.id = `waifu-tool-${toolName}`;
+                element.innerHTML = icon;
+                (_b = document
+                    .getElementById('waifu-tool')) === null || _b === void 0 ? void 0 : _b.insertAdjacentElement('beforeend', element);
+                element.addEventListener('click', callback);
             }
         }
     }

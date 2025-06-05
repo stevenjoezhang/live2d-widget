@@ -4,6 +4,7 @@ import * as LAppDefine from '@demo/lappdefine.js';
 import { LAppModel } from '@demo/lappmodel.js';
 import { LAppPal } from '@demo/lapppal';
 import logger from '../logger.js';
+LAppPal.printMessage = () => { };
 class AppSubdelegate extends LAppSubdelegate {
     initialize(canvas) {
         if (!this._glManager.initialize(canvas)) {
@@ -85,23 +86,69 @@ export class AppDelegate extends LAppDelegate {
         this._subdelegates.clear();
         this._cubismOption = null;
     }
+    transformOffset(e) {
+        const subdelegate = this._subdelegates.at(0);
+        const rect = subdelegate.getCanvas().getBoundingClientRect();
+        const localX = e.pageX - rect.left;
+        const localY = e.pageY - rect.top;
+        const posX = localX * window.devicePixelRatio;
+        const posY = localY * window.devicePixelRatio;
+        const x = subdelegate._view.transformViewX(posX);
+        const y = subdelegate._view.transformViewY(posY);
+        return {
+            x, y
+        };
+    }
+    onMouseMove(e) {
+        const lapplive2dmanager = this._subdelegates.at(0).getLive2DManager();
+        const { x, y } = this.transformOffset(e);
+        const model = lapplive2dmanager._models.at(0);
+        lapplive2dmanager.onDrag(x, y);
+        lapplive2dmanager.onTap(x, y);
+        if (model.hitTest(LAppDefine.HitAreaNameBody, x, y)) {
+            window.dispatchEvent(new Event('live2d:hoverbody'));
+        }
+    }
+    onMouseEnd(e) {
+        const lapplive2dmanager = this._subdelegates.at(0).getLive2DManager();
+        const { x, y } = this.transformOffset(e);
+        lapplive2dmanager.onDrag(0.0, 0.0);
+        lapplive2dmanager.onTap(x, y);
+    }
+    onTap(e) {
+        const lapplive2dmanager = this._subdelegates.at(0).getLive2DManager();
+        const { x, y } = this.transformOffset(e);
+        const model = lapplive2dmanager._models.at(0);
+        if (model.hitTest(LAppDefine.HitAreaNameBody, x, y)) {
+            window.dispatchEvent(new Event('live2d:tapbody'));
+        }
+    }
+    initializeEventListener() {
+        this.mouseMoveEventListener = this.onMouseMove.bind(this);
+        this.mouseEndedEventListener = this.onMouseEnd.bind(this);
+        this.tapEventListener = this.onTap.bind(this);
+        document.addEventListener('mousemove', this.mouseMoveEventListener, {
+            passive: true
+        });
+        document.addEventListener('mouseout', this.mouseEndedEventListener, {
+            passive: true
+        });
+        document.addEventListener('pointerdown', this.tapEventListener, {
+            passive: true
+        });
+    }
     releaseEventListener() {
-        document.removeEventListener('pointerdown', this.pointBeganEventListener, {
+        document.removeEventListener('mousemove', this.mouseMoveEventListener, {
             passive: true
         });
-        this.pointBeganEventListener = null;
-        document.removeEventListener('pointermove', this.pointMovedEventListener, {
+        this.mouseMoveEventListener = null;
+        document.removeEventListener('mouseout', this.mouseEndedEventListener, {
             passive: true
         });
-        this.pointMovedEventListener = null;
-        document.removeEventListener('pointerup', this.pointEndedEventListener, {
+        this.mouseEndedEventListener = null;
+        document.removeEventListener('pointerdown', this.tapEventListener, {
             passive: true
         });
-        this.pointEndedEventListener = null;
-        document.removeEventListener('pointercancel', this.pointCancelEventListener, {
-            passive: true
-        });
-        this.pointCancelEventListener = null;
     }
     initializeSubdelegates() {
         this._canvases.prepareCapacity(LAppDefine.CanvasNum);

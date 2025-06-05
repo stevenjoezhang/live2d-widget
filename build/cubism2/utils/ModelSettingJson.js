@@ -6,6 +6,7 @@ class ModelSettingJson {
         this.MODEL = 'model';
         this.TEXTURES = 'textures';
         this.HIT_AREAS = 'hit_areas';
+        this.HIT_AREAS_CUSTOM = 'hit_areas_custom';
         this.PHYSICS = 'physics';
         this.POSE = 'pose';
         this.EXPRESSIONS = 'expressions';
@@ -45,6 +46,9 @@ class ModelSettingJson {
         if (this.json[this.HIT_AREAS] == null)
             return 0;
         return this.json[this.HIT_AREAS].length;
+    }
+    getHitAreaCustom() {
+        return this.json[this.HIT_AREAS_CUSTOM];
     }
     getHitAreaID(n) {
         if (this.json[this.HIT_AREAS] == null ||

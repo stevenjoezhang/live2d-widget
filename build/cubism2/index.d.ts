@@ -8,10 +8,7 @@ declare class Cubism2Model {
     viewMatrix: L2DViewMatrix;
     projMatrix: L2DMatrix44;
     deviceToScreen: L2DMatrix44;
-    drag: boolean;
     oldLen: number;
-    lastMouseX: number;
-    lastMouseY: number;
     _boundMouseEvent: any;
     _boundTouchEvent: any;
     initL2dCanvas(canvasId: any): void;

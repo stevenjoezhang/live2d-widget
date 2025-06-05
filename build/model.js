@@ -113,8 +113,8 @@ class ModelManager {
                 result = this.modelJSONCache[url];
             }
             else {
-                const response = yield fetch(url);
                 try {
+                    const response = yield fetch(url);
                     result = yield response.json();
                 }
                 catch (_b) {

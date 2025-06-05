@@ -13,6 +13,8 @@ interface Tips {
         hitokoto: string;
         welcome: string;
         referrer: string;
+        hoverBody: string;
+        tapBody: string;
     };
     time: Time;
     mouseover: {
