@@ -297,7 +297,6 @@ class LAppModel extends L2DBaseModel {
     const motionName = this.modelSetting.getMotionFile(name, no);
 
     if (motionName == null || motionName == '') {
-      logger.error('Failed to motion.');
       return;
     }
 
