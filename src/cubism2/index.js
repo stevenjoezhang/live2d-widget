@@ -247,7 +247,7 @@ class Cubism2Model {
   }
 
   followPointer(event) {
-    const rect = event.target.getBoundingClientRect();
+    const rect = this.canvas.getBoundingClientRect();
 
     const { vx, vy } = normalizePoint(event.clientX, event.clientY, rect.left + rect.width / 2, rect.top + rect.height / 2, window.innerWidth, window.innerHeight);
 

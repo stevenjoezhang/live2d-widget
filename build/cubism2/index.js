@@ -174,7 +174,7 @@ class Cubism2Model {
         }
     }
     modelTurnHead(event) {
-        var _b;
+        var _a;
         const rect = this.canvas.getBoundingClientRect();
         const { vx, vy } = normalizePoint(event.clientX, event.clientY, rect.left + rect.width / 2, rect.top + rect.height / 2, window.innerWidth, window.innerHeight);
         logger.trace('onMouseDown device( x:' +
@@ -188,13 +188,13 @@ class Cubism2Model {
             ')');
         this.dragMgr.setPoint(vx, vy);
         this.live2DMgr.tapEvent(vx, vy);
-        if ((_b = this.live2DMgr) === null || _b === void 0 ? void 0 : _b.model.hitTest(LAppDefine.HIT_AREA_BODY, vx, vy)) {
+        if ((_a = this.live2DMgr) === null || _a === void 0 ? void 0 : _a.model.hitTest(LAppDefine.HIT_AREA_BODY, vx, vy)) {
             window.dispatchEvent(new Event('live2d:tapbody'));
         }
     }
     followPointer(event) {
-        var _b;
-        const rect = event.target.getBoundingClientRect();
+        var _a;
+        const rect = this.canvas.getBoundingClientRect();
         const { vx, vy } = normalizePoint(event.clientX, event.clientY, rect.left + rect.width / 2, rect.top + rect.height / 2, window.innerWidth, window.innerHeight);
         logger.trace('onMouseMove device( x:' +
             event.clientX +
@@ -206,7 +206,7 @@ class Cubism2Model {
             vy +
             ')');
         this.dragMgr.setPoint(vx, vy);
-        if ((_b = this.live2DMgr) === null || _b === void 0 ? void 0 : _b.model.hitTest(LAppDefine.HIT_AREA_BODY, vx, vy)) {
+        if ((_a = this.live2DMgr) === null || _a === void 0 ? void 0 : _a.model.hitTest(LAppDefine.HIT_AREA_BODY, vx, vy)) {
             window.dispatchEvent(new Event('live2d:hoverbody'));
         }
     }
