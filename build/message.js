@@ -44,9 +44,9 @@ function welcomeMessage(time, welcomeTemplate, referrerTemplate) {
 }
 function i18n(template, ...args) {
     return template.replace(/\$(\d+)/g, (_, idx) => {
-        var _a;
+        var _b;
         const i = parseInt(idx, 10) - 1;
-        return (_a = args[i]) !== null && _a !== void 0 ? _a : '';
+        return (_b = args[i]) !== null && _b !== void 0 ? _b : '';
     });
 }
 export { showMessage, welcomeMessage, i18n };

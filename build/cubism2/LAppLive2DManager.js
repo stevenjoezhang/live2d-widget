@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 import { Live2DFramework } from './Live2DFramework.js';
 import LAppModel from './LAppModel.js';
 import PlatformManager from './PlatformManager.js';
@@ -28,39 +19,35 @@ class LAppLive2DManager {
             this.model = null;
         }
     }
-    changeModel(gl, modelSettingPath) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return new Promise((resolve, reject) => {
-                if (this.reloading)
-                    return;
-                this.reloading = true;
-                const oldModel = this.model;
-                const newModel = new LAppModel();
-                newModel.load(gl, modelSettingPath, () => {
-                    if (oldModel) {
-                        oldModel.release(gl);
-                    }
-                    this.model = newModel;
-                    this.reloading = false;
-                    resolve();
-                });
-            });
-        });
-    }
-    changeModelWithJSON(gl, modelSettingPath, modelSetting) {
-        return __awaiter(this, void 0, void 0, function* () {
+    async changeModel(gl, modelSettingPath) {
+        return new Promise((resolve, reject) => {
             if (this.reloading)
                 return;
             this.reloading = true;
             const oldModel = this.model;
             const newModel = new LAppModel();
-            yield newModel.loadModelSetting(modelSettingPath, modelSetting);
-            if (oldModel) {
-                oldModel.release(gl);
-            }
-            this.model = newModel;
-            this.reloading = false;
+            newModel.load(gl, modelSettingPath, () => {
+                if (oldModel) {
+                    oldModel.release(gl);
+                }
+                this.model = newModel;
+                this.reloading = false;
+                resolve();
+            });
         });
+    }
+    async changeModelWithJSON(gl, modelSettingPath, modelSetting) {
+        if (this.reloading)
+            return;
+        this.reloading = true;
+        const oldModel = this.model;
+        const newModel = new LAppModel();
+        await newModel.loadModelSetting(modelSettingPath, modelSetting);
+        if (oldModel) {
+            oldModel.release(gl);
+        }
+        this.model = newModel;
+        this.reloading = false;
     }
     setDrag(x, y) {
         if (this.model) {

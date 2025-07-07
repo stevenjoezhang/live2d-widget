@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 import { ModelManager } from './model.js';
 import { showMessage, welcomeMessage } from './message.js';
 import { randomSelection } from './utils.js';
@@ -45,9 +36,9 @@ function registerEventListener(tips) {
         }
     }, 1000);
     window.addEventListener('mouseover', (event) => {
-        var _a;
+        var _b;
         for (let { selector, text } of tips.mouseover) {
-            if (!((_a = event.target) === null || _a === void 0 ? void 0 : _a.closest(selector)))
+            if (!((_b = event.target) === null || _b === void 0 ? void 0 : _b.closest(selector)))
                 continue;
             if (lastHoverElement === selector)
                 return;
@@ -59,9 +50,9 @@ function registerEventListener(tips) {
         }
     });
     window.addEventListener('click', (event) => {
-        var _a;
+        var _b;
         for (let { selector, text } of tips.click) {
-            if (!((_a = event.target) === null || _a === void 0 ? void 0 : _a.closest(selector)))
+            if (!((_b = event.target) === null || _b === void 0 ? void 0 : _b.closest(selector)))
                 continue;
             text = randomSelection(text);
             text = text.replace('{text}', event.target.innerText);
@@ -90,34 +81,32 @@ function registerEventListener(tips) {
             showMessage(tips.message.visibilitychange, 6000, 9);
     });
 }
-function loadWidget(config) {
-    return __awaiter(this, void 0, void 0, function* () {
-        var _a;
-        localStorage.removeItem('waifu-display');
-        sessionStorage.removeItem('waifu-message-priority');
-        document.body.insertAdjacentHTML('beforeend', `<div id="waifu">
+async function loadWidget(config) {
+    var _b;
+    localStorage.removeItem('waifu-display');
+    sessionStorage.removeItem('waifu-message-priority');
+    document.body.insertAdjacentHTML('beforeend', `<div id="waifu">
        <div id="waifu-tips"></div>
        <div id="waifu-canvas">
          <canvas id="live2d" width="800" height="800"></canvas>
        </div>
        <div id="waifu-tool"></div>
      </div>`);
-        let models = [];
-        let tips;
-        if (config.waifuPath) {
-            const response = yield fetch(config.waifuPath);
-            tips = yield response.json();
-            models = tips.models;
-            registerEventListener(tips);
-            showMessage(welcomeMessage(tips.time, tips.message.welcome, tips.message.referrer), 7000, 11);
-        }
-        const model = yield ModelManager.initCheck(config, models);
-        yield model.loadModel('');
-        new ToolsManager(model, config, tips).registerTools();
-        if (config.drag)
-            registerDrag();
-        (_a = document.getElementById('waifu')) === null || _a === void 0 ? void 0 : _a.classList.add('waifu-active');
-    });
+    let models = [];
+    let tips;
+    if (config.waifuPath) {
+        const response = await fetch(config.waifuPath);
+        tips = await response.json();
+        models = tips.models;
+        registerEventListener(tips);
+        showMessage(welcomeMessage(tips.time, tips.message.welcome, tips.message.referrer), 7000, 11);
+    }
+    const model = await ModelManager.initCheck(config, models);
+    await model.loadModel('');
+    new ToolsManager(model, config, tips).registerTools();
+    if (config.drag)
+        registerDrag();
+    (_b = document.getElementById('waifu')) === null || _b === void 0 ? void 0 : _b.classList.add('waifu-active');
 }
 function initWidget(config) {
     if (typeof config === 'string') {
@@ -130,7 +119,7 @@ function initWidget(config) {
      </div>`);
     const toggle = document.getElementById('waifu-toggle');
     toggle === null || toggle === void 0 ? void 0 : toggle.addEventListener('click', () => {
-        var _a;
+        var _b;
         toggle === null || toggle === void 0 ? void 0 : toggle.classList.remove('waifu-toggle-active');
         if (toggle === null || toggle === void 0 ? void 0 : toggle.getAttribute('first-time')) {
             loadWidget(config);
@@ -138,10 +127,10 @@ function initWidget(config) {
         }
         else {
             localStorage.removeItem('waifu-display');
-            (_a = document.getElementById('waifu')) === null || _a === void 0 ? void 0 : _a.classList.remove('waifu-hidden');
+            (_b = document.getElementById('waifu')) === null || _b === void 0 ? void 0 : _b.classList.remove('waifu-hidden');
             setTimeout(() => {
-                var _a;
-                (_a = document.getElementById('waifu')) === null || _a === void 0 ? void 0 : _a.classList.add('waifu-active');
+                var _b;
+                (_b = document.getElementById('waifu')) === null || _b === void 0 ? void 0 : _b.classList.add('waifu-active');
             }, 0);
         }
     });

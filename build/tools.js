@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 import { fa_comment, fa_paper_plane, fa_street_view, fa_shirt, fa_camera_retro, fa_info_circle, fa_xmark } from './icons.js';
 import { showMessage, i18n } from './message.js';
 class ToolsManager {
@@ -15,16 +6,16 @@ class ToolsManager {
         this.tools = {
             hitokoto: {
                 icon: fa_comment,
-                callback: () => __awaiter(this, void 0, void 0, function* () {
-                    const response = yield fetch('https://v1.hitokoto.cn');
-                    const result = yield response.json();
+                callback: async () => {
+                    const response = await fetch('https://v1.hitokoto.cn');
+                    const result = await response.json();
                     const template = tips.message.hitokoto;
                     const text = i18n(template, result.from, result.creator);
                     showMessage(result.hitokoto, 6000, 9);
                     setTimeout(() => {
                         showMessage(text, 4000, 9);
                     }, 6000);
-                })
+                }
             },
             asteroids: {
                 icon: fa_paper_plane,
@@ -101,7 +92,7 @@ class ToolsManager {
         };
     }
     registerTools() {
-        var _a;
+        var _b;
         if (!Array.isArray(this.config.tools)) {
             this.config.tools = Object.keys(this.tools);
         }
@@ -111,8 +102,8 @@ class ToolsManager {
                 const element = document.createElement('span');
                 element.id = `waifu-tool-${toolName}`;
                 element.innerHTML = icon;
-                (_a = document
-                    .getElementById('waifu-tool')) === null || _a === void 0 ? void 0 : _a.insertAdjacentElement('beforeend', element);
+                (_b = document
+                    .getElementById('waifu-tool')) === null || _b === void 0 ? void 0 : _b.insertAdjacentElement('beforeend', element);
                 element.addEventListener('click', callback);
             }
         }
