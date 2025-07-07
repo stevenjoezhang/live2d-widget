@@ -17,7 +17,8 @@
   "scripts": {
     "build": "tsc && rollup -c rollup.config.js",
     "build-dev": "rollup -c rollup.config.js -w",
-    "eslint": "eslint src/"
+    "eslint": "eslint src/",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
