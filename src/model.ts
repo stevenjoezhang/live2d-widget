@@ -285,9 +285,12 @@ class ModelManager {
       const version = this.checkModelVersion(modelSetting);
       if (version === 2) {
         const textureCache = await this.loadTextureCache(modelName);
-        let textures = textureCache[this.modelTexturesId];
-        if (typeof textures === 'string') textures = [textures];
-        modelSetting.textures = textures;
+        // this.loadTextureCache may return an empty array
+        if (textureCache.length > 0) {
+          let textures = textureCache[this.modelTexturesId];
+          if (typeof textures === 'string') textures = [textures];
+          modelSetting.textures = textures;
+        }
       }
     } else {
       modelSettingPath = this.models[this.modelId].paths[this.modelTexturesId];
