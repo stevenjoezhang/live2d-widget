@@ -191,9 +191,7 @@ class ModelManager {
             modelSetting = await this.fetchWithCache(modelSettingPath);
             const version = this.checkModelVersion(modelSetting);
             if (version === 2) {
-                console.log("BEFORE");
                 const textureCache = await this.loadTextureCache(modelName);
-                console.log("AFTER", textureCache);
                 if (textureCache.length > 0) {
                     let textures = textureCache[this.modelTexturesId];
                     if (typeof textures === 'string')

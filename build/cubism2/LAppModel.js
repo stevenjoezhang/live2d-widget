@@ -180,7 +180,6 @@ class LAppModel extends L2DBaseModel {
     startMotion(name, no, priority) {
         const motionName = this.modelSetting.getMotionFile(name, no);
         if (motionName == null || motionName == '') {
-            logger.error('Failed to motion.');
             return;
         }
         if (priority == LAppDefine.PRIORITY_FORCE) {
