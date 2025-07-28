@@ -5,7 +5,7 @@
 
 // Recommended to use absolute path for live2d_path parameter
 // live2d_path 参数建议使用绝对路径
-const live2d_path = 'https://cdn.jsdmirror.com/npm/live2d-widgets@1.0.0-rc.6/dist/';
+const live2d_path = 'https://cdn.jsdmirror.com/gh/SDCOM-0415/live2d-widget@master/dist/';
 // const live2d_path = '/dist/';
 
 // Method to encapsulate asynchronous resource loading
