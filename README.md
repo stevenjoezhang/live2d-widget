@@ -30,7 +30,7 @@
 如果你是小白，或者只需要最基础的功能，那么只用将这一行代码加入 html 页面的 `head` 或 `body` 中，即可加载看板娘：
 
 ```html
-<script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
+<script src="https://cdn.jsdmirror.com/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
 ```
 
 添加代码的位置取决于你的网站的构建方式。例如，如果你使用的是 [Hexo](https://hexo.io)，那么需要在主题的模版文件中添加以上代码。对于用各种模版引擎生成的页面，修改方法类似。  
@@ -45,9 +45,9 @@
 
 | 选项 | 类型 | 默认值 | 说明 |
 | - | - | - | - |
-| `waifuPath` | `string` | `https://fastly.jsdelivr.net/npm/live2d-widgets@1/dist/waifu-tips.json` | 看板娘资源路径，可自行修改 |
-| `cdnPath` | `string` | `https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/` | CDN 路径 |
-| `cubism2Path` | `string` | `https://fastly.jsdelivr.net/npm/live2d-widgets@1/dist/live2d.min.js` | Cubism 2 Core 路径 |
+| `waifuPath` | `string` | `https://cdn.jsdmirror.com/npm/live2d-widgets@1/dist/waifu-tips.json` | 看板娘资源路径，可自行修改 |
+| `cdnPath` | `string` | `https://cdn.jsdmirror.com/gh/fghrsh/live2d_api/` | CDN 路径 |
+| `cubism2Path` | `string` | `https://cdn.jsdmirror.com/npm/live2d-widgets@1/dist/live2d.min.js` | Cubism 2 Core 路径 |
 | `cubism5Path` | `string` | `https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js` | Cubism 5 Core 路径 |
 | `modelId` | `number` | `0` | 默认模型 id |
 | `tools` | `string[]` | 见 `autoload.js` | 加载的小工具按钮 |
@@ -100,7 +100,7 @@ npm run build
 如果要通过 jsDelivr 加载 Fork 后的仓库，使用方法对应地变为
 
 ```html
-<script src="https://fastly.jsdelivr.net/gh/username/live2d-widget@latest/autoload.js"></script>
+<script src="https://cdn.jsdmirror.com/gh/username/live2d-widget@latest/autoload.js"></script>
 ```
 
 将此处的 `username` 替换为你的 GitHub 用户名。为了使 CDN 的内容正常刷新，需要创建新的 git tag 并推送至 GitHub 仓库中，否则此处的 `@latest` 仍然指向更新前的文件。此外 CDN 本身存在缓存，因此改动可能需要一定的时间生效。
