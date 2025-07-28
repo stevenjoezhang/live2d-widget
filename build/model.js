@@ -3,7 +3,7 @@ import { loadExternalResource, randomOtherOption } from './utils.js';
 import logger from './logger.js';
 class ModelManager {
     constructor(config, models = []) {
-        var _b;
+        var _a;
         this.modelList = null;
         let { apiPath, cdnPath } = config;
         const { cubism2Path, cubism5Path } = config;
@@ -29,7 +29,7 @@ class ModelManager {
             modelTexturesId = 0;
         }
         if (isNaN(modelId)) {
-            modelId = (_b = config.modelId) !== null && _b !== void 0 ? _b : 0;
+            modelId = (_a = config.modelId) !== null && _a !== void 0 ? _a : 0;
         }
         this.useCDN = useCDN;
         this.cdnPath = cdnPath || '';
@@ -105,7 +105,7 @@ class ModelManager {
                 const response = await fetch(url);
                 result = await response.json();
             }
-            catch (_b) {
+            catch (_a) {
                 result = null;
             }
             this.modelJSONCache[url] = result;

@@ -219,10 +219,10 @@ class LAppModel extends L2DBaseModel {
         }
     }
     setExpression(name) {
-        var _b;
+        var _a;
         const motion = this.expressions[name];
         logger.trace('Expression : ' + name);
-        (_b = this.expressionManager) === null || _b === void 0 ? void 0 : _b.startMotion(motion, false);
+        (_a = this.expressionManager) === null || _a === void 0 ? void 0 : _a.startMotion(motion, false);
     }
     draw(gl) {
         MatrixStack.push();
