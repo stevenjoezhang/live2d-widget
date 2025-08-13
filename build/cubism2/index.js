@@ -204,7 +204,7 @@ class Cubism2Model {
             if (e.wheelDelta > 0)
                 this.modelScaling(1.1);
             else
-                this.modelScaling(1);
+                this.modelScaling(0.9);
         }
         else if (e.type == 'click' || e.type == 'contextmenu') {
             this.modelTurnHead(e);
