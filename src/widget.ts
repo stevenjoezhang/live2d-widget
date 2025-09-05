@@ -43,8 +43,8 @@ interface Tips {
     hitokoto: string;
     welcome: string;
     referrer: string;
-    hoverBody: string;
-    tapBody: string;
+    hoverBody: string | string[];
+    tapBody: string | string[];
   };
   /**
    * Time configuration.
