@@ -61,9 +61,11 @@ function showMessage(
 /**
  * Show welcome message based on time.
  * @param {Time} time - Time message configuration.
+ * @param {string} [welcomeTemplate] - Welcome message template.
+ * @param {string} [referrerTemplate] - Referrer message template.
  * @returns {string} Welcome message.
  */
-function welcomeMessage(time: Time, welcomeTemplate: string, referrerTemplate: string): string {
+function welcomeMessage(time: Time, welcomeTemplate?: string, referrerTemplate?: string): string {
   if (location.pathname === '/') {
     // If on the homepage
     for (const { hour, text } of time) {
@@ -78,13 +80,13 @@ function welcomeMessage(time: Time, welcomeTemplate: string, referrerTemplate: s
       }
     }
   }
+  if (!welcomeTemplate) return '';
   const text = i18n(welcomeTemplate, document.title);
-  if (document.referrer !== '') {
-    const referrer = new URL(document.referrer);
-    if (location.hostname === referrer.hostname) return text;
-    return `${i18n(referrerTemplate, referrer.hostname)}<br>${text}`;
-  }
-  return text;
+  if (document.referrer === '' || !referrerTemplate) return text;
+
+  const referrer = new URL(document.referrer);
+  if (location.hostname === referrer.hostname) return text;
+  return `${i18n(referrerTemplate, referrer.hostname)}<br>${text}`;
 }
 
 function i18n(template: string, ...args: string[]) {

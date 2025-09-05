@@ -33,14 +33,15 @@ function welcomeMessage(time, welcomeTemplate, referrerTemplate) {
             }
         }
     }
+    if (!welcomeTemplate)
+        return '';
     const text = i18n(welcomeTemplate, document.title);
-    if (document.referrer !== '') {
-        const referrer = new URL(document.referrer);
-        if (location.hostname === referrer.hostname)
-            return text;
-        return `${i18n(referrerTemplate, referrer.hostname)}<br>${text}`;
-    }
-    return text;
+    if (document.referrer === '' || !referrerTemplate)
+        return text;
+    const referrer = new URL(document.referrer);
+    if (location.hostname === referrer.hostname)
+        return text;
+    return `${i18n(referrerTemplate, referrer.hostname)}<br>${text}`;
 }
 function i18n(template, ...args) {
     return template.replace(/\$(\d+)/g, (_, idx) => {
