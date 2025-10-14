@@ -14,7 +14,7 @@ jobs:
         with:
           repository: hexojs/hexo-starter
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
       - name: Install Dependencies
         run: npm install
       - name: Test
