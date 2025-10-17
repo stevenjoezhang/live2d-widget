@@ -41,7 +41,7 @@
     "@eslint/js": "9.27.0",
     "@rollup/plugin-alias": "5.1.1",
     "@rollup/plugin-terser": "0.4.4",
-    "@types/node": "22.15.21",
+    "@types/node": "22.18.11",
     "eslint": "9.27.0",
     "rollup": "4.41.1",
     "typescript": "5.8.3",
