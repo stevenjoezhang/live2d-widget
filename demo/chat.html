@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>看板娘聊天平台</title>
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css">
+<script src="../dist/live2d.min.js"></script>
+<style>
+html, body {
+	height: 100%;
+}
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #f5f5f5;
+}
+#waifu {
+	bottom: 0;
+	left: 0;
+	line-height: 0;
+	margin-bottom: -10px;
+	position: fixed;
+	transform: translateY(3px);
+	transition: transform .3s ease-in-out, bottom 3s ease-in-out;
+	z-index: 1;
+}
+#waifu:hover {
+	transform: translateY(0);
+}
+#waifu-tips {
+	animation: shake 50s ease-in-out 5s infinite;
+	background-color: rgba(236, 217, 188, .5);
+	border: 1px solid rgba(224, 186, 140, .62);
+	border-radius: 12px;
+	box-shadow: 0 3px 15px 2px rgba(191, 158, 118, .2);
+	font-size: 14px;
+	line-height: 24px;
+	margin: -100px 20px;
+	min-height: 70px;
+	overflow: hidden;
+	padding: 5px 10px;
+	position: absolute;
+	text-overflow: ellipsis;
+	transition: opacity 1s;
+	width: 250px;
+	word-break: break-all;
+}
+#waifu-tips.waifu-tips-active {
+	opacity: 1;
+	transition: opacity .2s;
+}
+#waifu-tips span {
+	color: #0099cc;
+}
+#live2d {
+	cursor: grab;
+	height: 300px;
+	position: relative;
+	width: 300px;
+}
+#live2d:active {
+	cursor: grabbing;
+}
+textarea {
+	background-color: transparent;
+    border: none;
+	width: 100%;
+	resize: none;
+	min-height: 100px;
+}
+textarea:focus {
+  outline: none;
+}
+</style>
+</head>
+<body>
+	<div id="waifu">
+		<div id="waifu-tips"><textarea id="text" disabled="true"></textarea></div>
+		<canvas id="live2d" width="800" height="800"></canvas>
+	</div>
+<script type="module">
+/*
+ * _(:з」∠)_
+ * Created by Shuqiao Zhang in 2025.
+ * https://zhangshuqiao.org
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ */
+import { Cubism2Model } from "../build/index.js";
+
+class ChatManager {
+	constructor() {
+		this.apiUrl = null;
+		this.apiKey = null;
+		this.conversationHistory = [];
+		this.systemPrompt = '请扮演Potion Maker中的Pio，在接下来的对话中，使用萌萌哒的语气回答问题。';
+	}
+
+	async create() {
+		// 提示用户输入API URL和Key
+		this.apiUrl = prompt("请输入大模型API URL (例如: https://api.openai.com/v1/chat/completions):");
+		if (!this.apiUrl) {
+			return "呜呜~ 你没有输入API URL呢，Pio无法开始对话啦~";
+		}
+
+		this.apiKey = prompt("请输入API Key:");
+		if (!this.apiKey) {
+			return "呜呜~ 你没有输入API Key呢，Pio无法开始对话啦~";
+		}
+
+		// 初始化对话历史，添加系统提示词
+		this.conversationHistory = [
+			{
+				role: "system",
+				content: this.systemPrompt
+			}
+		];
+
+		return "嗨~ 我是Pio哦！有什么可以帮助你的吗？(按Enter发送消息)";
+	}
+
+	async message(content) {
+		if (!this.apiUrl || !this.apiKey) {
+			return "呜呜~ API配置不完整，请刷新页面重新配置~";
+		}
+
+		// 添加用户消息到历史
+		this.conversationHistory.push({
+			role: "user",
+			content: content
+		});
+
+		try {
+			const response = await fetch(this.apiUrl, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${this.apiKey}`
+				},
+				body: JSON.stringify({
+					messages: this.conversationHistory,
+					temperature: 0.7,
+					max_tokens: 1000
+				})
+			});
+
+			if (!response.ok) {
+				throw new Error(`API请求失败: ${response.status} ${response.statusText}`);
+			}
+
+			const data = await response.json();
+			const assistantMessage = data.choices[0].message.content;
+
+			// 添加助手回复到历史
+			this.conversationHistory.push({
+				role: "assistant",
+				content: assistantMessage
+			});
+
+			return assistantMessage;
+		} catch (error) {
+			console.error("API调用出错:", error);
+			return `呜呜~ 出错了呢: ${error.message}`;
+		}
+	}
+}
+
+window.addEventListener("load", async () => {
+	"use strict";
+
+	const apiPath = "https://live2d.fghrsh.net/api";
+	const text = document.getElementById("text");
+	const manager = new ChatManager();
+	let state = 0, loading = false,
+		modelId = localStorage.getItem("modelId"),
+		modelTexturesId = localStorage.getItem("modelTexturesId");
+	if (modelId === null) {
+		modelId = 1;
+		modelTexturesId = 53;
+	}
+	const model = new Cubism2Model();
+	await loadModel(modelId, modelTexturesId);
+
+	async function loadModel(modelId, modelTexturesId) {
+		localStorage.setItem("modelId", modelId);
+		if (modelTexturesId === undefined) modelTexturesId = 0;
+		localStorage.setItem("modelTexturesId", modelTexturesId);
+		const modelSettingPath = `${apiPath}/get/?id=${modelId}-${modelTexturesId}`;
+		const response = await fetch(modelSettingPath);
+		const modelSetting = await response.json();
+		if (!model.gl) {
+			await model.init('live2d', modelSettingPath, modelSetting);
+		} else {
+			await model.changeModelWithJSON(modelSettingPath, modelSetting);
+		}
+		console.log("live2d", `模型 ${modelId}-${modelTexturesId} 加载完成`);
+		setTimeout(() => {
+			state = 2;
+		}, 2000);
+	}
+
+	text.addEventListener("keydown", async (e) => {
+		if (e.code === "Enter") {
+			e.preventDefault();
+			let content = text.value;
+			if (content === "") return;
+			console.log(content);
+			text.disabled = true;
+			text.value = await manager.message(content);
+			text.disabled = false;
+		}
+	});
+
+	const message = await manager.create();
+	text.value = message;
+	text.disabled = false;
+});
+</script>
+</body>
+</html>
