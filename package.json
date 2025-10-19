@@ -38,11 +38,11 @@
     "@fortawesome/fontawesome-free": "6.7.2"
   },
   "devDependencies": {
-    "@eslint/js": "9.27.0",
+    "@eslint/js": "9.38.0",
     "@rollup/plugin-alias": "5.1.1",
     "@rollup/plugin-terser": "0.4.4",
     "@types/node": "22.18.11",
-    "eslint": "9.27.0",
+    "eslint": "9.38.0",
     "rollup": "4.41.1",
     "typescript": "5.8.3",
     "typescript-eslint": "8.32.1"
