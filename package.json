@@ -44,7 +44,7 @@
     "@types/node": "22.18.11",
     "eslint": "9.38.0",
     "rollup": "4.52.5",
-    "typescript": "5.8.3",
+    "typescript": "5.9.3",
     "typescript-eslint": "8.46.1"
   }
 }
