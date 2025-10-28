@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@eslint/js": "9.38.0",
-    "@rollup/plugin-alias": "5.1.1",
+    "@rollup/plugin-alias": "6.0.0",
     "@rollup/plugin-terser": "0.4.4",
     "@types/node": "22.18.11",
     "eslint": "9.38.0",
