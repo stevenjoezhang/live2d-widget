@@ -45,6 +45,6 @@
     "eslint": "9.38.0",
     "rollup": "4.60.4",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.46.1"
+    "typescript-eslint": "8.59.4"
   }
 }
