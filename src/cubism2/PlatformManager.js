@@ -89,9 +89,6 @@ class PlatformManager {
 
       model.setTexture(no, texture);
 
-      // テクスチャオブジェクトを解放
-      texture = null;
-
       if (typeof callback == 'function') callback();
     };
 

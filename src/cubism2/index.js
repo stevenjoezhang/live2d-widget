@@ -9,7 +9,7 @@ function normalizePoint(x, y, x0, y0, w, h) {
   const dx = x - x0;
   const dy = y - y0;
 
-  let targetX = 0, targetY = 0;
+  let targetX, targetY;
 
   if (dx >= 0) {
     targetX = dx / (w - x0);
