@@ -5,7 +5,7 @@
 
 import { ModelManager, Config, ModelList } from './model.js';
 import { showMessage, welcomeMessage, Time } from './message.js';
-import { randomSelection } from './utils.js';
+import { randomSelection, escapeHtml } from './utils.js';
 import { ToolsManager } from './tools.js';
 import logger from './logger.js';
 import registerDrag from './drag.js';
@@ -128,7 +128,7 @@ function registerEventListener(tips: Tips) {
       text = randomSelection(text);
       text = (text as string).replace(
         '{text}',
-        (event.target as HTMLElement).innerText,
+        escapeHtml((event.target as HTMLElement).innerText),
       );
       showMessage(text, 4000, 8);
       return;
@@ -141,7 +141,7 @@ function registerEventListener(tips: Tips) {
       text = randomSelection(text);
       text = (text as string).replace(
         '{text}',
-        (event.target as HTMLElement).innerText,
+        escapeHtml((event.target as HTMLElement).innerText),
       );
       showMessage(text, 4000, 8);
       return;

@@ -3,7 +3,7 @@
  * @module message
  */
 
-import { randomSelection } from './utils.js';
+import { randomSelection, escapeHtml } from './utils.js';
 
 type Time = {
   /**
@@ -84,9 +84,13 @@ function welcomeMessage(time: Time, welcomeTemplate?: string, referrerTemplate?:
   const text = i18n(welcomeTemplate, document.title);
   if (document.referrer === '' || !referrerTemplate) return text;
 
-  const referrer = new URL(document.referrer);
-  if (location.hostname === referrer.hostname) return text;
-  return `${i18n(referrerTemplate, referrer.hostname)}<br>${text}`;
+  try {
+    const referrer = new URL(document.referrer);
+    if (location.hostname === referrer.hostname) return text;
+    return `${i18n(referrerTemplate, escapeHtml(referrer.hostname))}<br>${text}`;
+  } catch {
+    return text;
+  }
 }
 
 function i18n(template: string, ...args: string[]) {

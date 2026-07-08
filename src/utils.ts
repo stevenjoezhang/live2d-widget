@@ -43,4 +43,20 @@ function loadExternalResource(url: string, type: string): Promise<string> {
   });
 }
 
-export { randomSelection, loadExternalResource, randomOtherOption };
+/**
+ * Escape HTML special characters to prevent XSS attacks.
+ * @param {string} str - The string to escape.
+ * @returns {string} The escaped string safe for innerHTML insertion.
+ */
+function escapeHtml(str: string): string {
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;',
+  };
+  return str.replace(/[&<>"']/g, c => map[c]);
+}
+
+export { randomSelection, loadExternalResource, randomOtherOption, escapeHtml };

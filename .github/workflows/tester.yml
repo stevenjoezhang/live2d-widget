@@ -11,8 +11,6 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v6
-        with:
-          repository: hexojs/hexo-starter
       - name: Use Node.js
         uses: actions/setup-node@v6
       - name: Install Dependencies

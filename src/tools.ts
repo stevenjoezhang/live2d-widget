@@ -13,6 +13,8 @@ import {
   fa_xmark
 } from './icons.js';
 import { showMessage, i18n } from './message.js';
+import { escapeHtml } from './utils.js';
+import logger from './logger.js';
 import type { Config, ModelManager } from './model.js';
 import type { Tips } from './widget.js';
 
@@ -50,15 +52,18 @@ class ToolsManager {
       hitokoto: {
         icon: fa_comment,
         callback: async () => {
-          // Add hitokoto.cn API
-          const response = await fetch('https://v1.hitokoto.cn');
-          const result = await response.json();
-          const template = tips.message.hitokoto;
-          const text = i18n(template, result.from, result.creator);
-          showMessage(result.hitokoto, 6000, 9);
-          setTimeout(() => {
-            showMessage(text, 4000, 9);
-          }, 6000);
+          try {
+            const response = await fetch('https://v1.hitokoto.cn');
+            const result = await response.json();
+            const template = tips.message.hitokoto;
+            const text = i18n(template, escapeHtml(result.from), escapeHtml(result.creator));
+            showMessage(escapeHtml(result.hitokoto), 6000, 9);
+            setTimeout(() => {
+              showMessage(text, 4000, 9);
+            }, 6000);
+          } catch (err) {
+            logger.error('Failed to fetch hitokoto:', err);
+          }
         }
       },
       asteroids: {
