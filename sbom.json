@@ -1,0 +1,720 @@
+{
+    "artifacts": [
+        {
+            "id": "54c362a22c772f33",
+            "name": "@fortawesome/fontawesome-free",
+            "version": "7.2.0",
+            "type": "npm",
+            "foundBy": "javascript-lock-cataloger",
+            "locations": [
+                {
+                    "path": "/package-lock.json",
+                    "accessPath": "/package-lock.json",
+                    "annotations": {
+                        "evidence": "primary"
+                    }
+                }
+            ],
+            "licenses": [
+                {
+                    "value": "(CC-BY-4.0 AND OFL-1.1 AND MIT)",
+                    "spdxExpression": "(CC-BY-4.0 AND OFL-1.1 AND MIT)",
+                    "type": "declared",
+                    "urls": [],
+                    "locations": [
+                        {
+                            "path": "/package-lock.json",
+                            "accessPath": "/package-lock.json",
+                            "annotations": {
+                                "evidence": "primary"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "language": "javascript",
+            "cpes": [
+                {
+                    "cpe": "cpe:2.3:a:\\@fortawesome\\/fontawesome-free:\\@fortawesome\\/fontawesome-free:7.2.0:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:\\@fortawesome\\/fontawesome-free:\\@fortawesome\\/fontawesome_free:7.2.0:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:\\@fortawesome\\/fontawesome_free:\\@fortawesome\\/fontawesome-free:7.2.0:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:\\@fortawesome\\/fontawesome_free:\\@fortawesome\\/fontawesome_free:7.2.0:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:\\@fortawesome\\/fontawesome:\\@fortawesome\\/fontawesome-free:7.2.0:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:\\@fortawesome\\/fontawesome:\\@fortawesome\\/fontawesome_free:7.2.0:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                }
+            ],
+            "purl": "pkg:npm/%40fortawesome/fontawesome-free@7.2.0",
+            "metadataType": "javascript-npm-package-lock-entry",
+            "metadata": {
+                "resolved": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-7.2.0.tgz",
+                "integrity": "sha512-3DguDv/oUE+7vjMeTSOjCSG+KeawgVQOHrKRnvUuqYh1mfArrh7s+s8hXW3e4RerBA1+Wh+hBqf8sJNpqNrBWg==",
+                "dependencies": null
+            }
+        },
+        {
+            "id": "c0d46464cb7bf4bb",
+            "name": "actions/checkout",
+            "version": "v6",
+            "type": "github-action",
+            "foundBy": "github-actions-usage-cataloger",
+            "locations": [
+                {
+                    "path": "/.github/workflows/linter.yml",
+                    "accessPath": "/.github/workflows/linter.yml",
+                    "annotations": {
+                        "evidence": "primary"
+                    }
+                }
+            ],
+            "licenses": [],
+            "language": "",
+            "cpes": [
+                {
+                    "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                }
+            ],
+            "purl": "pkg:github/actions/checkout@v6",
+            "metadataType": "github-actions-use-statement",
+            "metadata": {
+                "value": "actions/checkout@v6"
+            }
+        },
+        {
+            "id": "5d411955202933b4",
+            "name": "actions/checkout",
+            "version": "v6",
+            "type": "github-action",
+            "foundBy": "github-actions-usage-cataloger",
+            "locations": [
+                {
+                    "path": "/.github/workflows/tester.yml",
+                    "accessPath": "/.github/workflows/tester.yml",
+                    "annotations": {
+                        "evidence": "primary"
+                    }
+                }
+            ],
+            "licenses": [],
+            "language": "",
+            "cpes": [
+                {
+                    "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                }
+            ],
+            "purl": "pkg:github/actions/checkout@v6",
+            "metadataType": "github-actions-use-statement",
+            "metadata": {
+                "value": "actions/checkout@v6"
+            }
+        },
+        {
+            "id": "464f122b55ef688d",
+            "name": "actions/setup-node",
+            "version": "v6",
+            "type": "github-action",
+            "foundBy": "github-actions-usage-cataloger",
+            "locations": [
+                {
+                    "path": "/.github/workflows/linter.yml",
+                    "accessPath": "/.github/workflows/linter.yml",
+                    "annotations": {
+                        "evidence": "primary"
+                    }
+                }
+            ],
+            "licenses": [],
+            "language": "",
+            "cpes": [
+                {
+                    "cpe": "cpe:2.3:a:actions\\/setup-node:actions\\/setup-node:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:actions\\/setup-node:actions\\/setup_node:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:actions\\/setup_node:actions\\/setup-node:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:actions\\/setup_node:actions\\/setup_node:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:actions\\/setup:actions\\/setup-node:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:actions\\/setup:actions\\/setup_node:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                }
+            ],
+            "purl": "pkg:github/actions/setup-node@v6",
+            "metadataType": "github-actions-use-statement",
+            "metadata": {
+                "value": "actions/setup-node@v6"
+            }
+        },
+        {
+            "id": "515433f675d63292",
+            "name": "actions/setup-node",
+            "version": "v6",
+            "type": "github-action",
+            "foundBy": "github-actions-usage-cataloger",
+            "locations": [
+                {
+                    "path": "/.github/workflows/tester.yml",
+                    "accessPath": "/.github/workflows/tester.yml",
+                    "annotations": {
+                        "evidence": "primary"
+                    }
+                }
+            ],
+            "licenses": [],
+            "language": "",
+            "cpes": [
+                {
+                    "cpe": "cpe:2.3:a:actions\\/setup-node:actions\\/setup-node:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:actions\\/setup-node:actions\\/setup_node:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:actions\\/setup_node:actions\\/setup-node:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:actions\\/setup_node:actions\\/setup_node:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:actions\\/setup:actions\\/setup-node:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:actions\\/setup:actions\\/setup_node:v6:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                }
+            ],
+            "purl": "pkg:github/actions/setup-node@v6",
+            "metadataType": "github-actions-use-statement",
+            "metadata": {
+                "value": "actions/setup-node@v6"
+            }
+        },
+        {
+            "id": "96137d6f169f8d83",
+            "name": "live2d-widgets",
+            "version": "1.0.1",
+            "type": "npm",
+            "foundBy": "javascript-lock-cataloger",
+            "locations": [
+                {
+                    "path": "/package-lock.json",
+                    "accessPath": "/package-lock.json",
+                    "annotations": {
+                        "evidence": "primary"
+                    }
+                }
+            ],
+            "licenses": [
+                {
+                    "value": "GPL-3.0-or-later",
+                    "spdxExpression": "GPL-3.0-or-later",
+                    "type": "declared",
+                    "urls": [],
+                    "locations": [
+                        {
+                            "path": "/package-lock.json",
+                            "accessPath": "/package-lock.json",
+                            "annotations": {
+                                "evidence": "primary"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "language": "javascript",
+            "cpes": [
+                {
+                    "cpe": "cpe:2.3:a:live2d-widgets:live2d-widgets:1.0.1:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:live2d-widgets:live2d_widgets:1.0.1:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:live2d_widgets:live2d-widgets:1.0.1:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:live2d_widgets:live2d_widgets:1.0.1:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:live2d:live2d-widgets:1.0.1:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                },
+                {
+                    "cpe": "cpe:2.3:a:live2d:live2d_widgets:1.0.1:*:*:*:*:*:*:*",
+                    "source": "syft-generated"
+                }
+            ],
+            "purl": "pkg:npm/live2d-widgets@1.0.1",
+            "metadataType": "javascript-npm-package-lock-entry",
+            "metadata": {
+                "resolved": "",
+                "integrity": "",
+                "dependencies": {
+                    "@fortawesome/fontawesome-free": "7.2.0"
+                }
+            }
+        }
+    ],
+    "artifactRelationships": [
+        {
+            "parent": "464f122b55ef688d",
+            "child": "3723029c2a117320",
+            "type": "evident-by",
+            "metadata": {
+                "kind": "primary"
+            }
+        },
+        {
+            "parent": "515433f675d63292",
+            "child": "52d84ed8acc50e55",
+            "type": "evident-by",
+            "metadata": {
+                "kind": "primary"
+            }
+        },
+        {
+            "parent": "54c362a22c772f33",
+            "child": "96137d6f169f8d83",
+            "type": "dependency-of"
+        },
+        {
+            "parent": "54c362a22c772f33",
+            "child": "fd71c2238fc07657",
+            "type": "evident-by",
+            "metadata": {
+                "kind": "primary"
+            }
+        },
+        {
+            "parent": "5d411955202933b4",
+            "child": "52d84ed8acc50e55",
+            "type": "evident-by",
+            "metadata": {
+                "kind": "primary"
+            }
+        },
+        {
+            "parent": "96137d6f169f8d83",
+            "child": "fd71c2238fc07657",
+            "type": "evident-by",
+            "metadata": {
+                "kind": "primary"
+            }
+        },
+        {
+            "parent": "c0d46464cb7bf4bb",
+            "child": "3723029c2a117320",
+            "type": "evident-by",
+            "metadata": {
+                "kind": "primary"
+            }
+        },
+        {
+            "parent": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+            "child": "464f122b55ef688d",
+            "type": "contains"
+        },
+        {
+            "parent": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+            "child": "515433f675d63292",
+            "type": "contains"
+        },
+        {
+            "parent": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+            "child": "54c362a22c772f33",
+            "type": "contains"
+        },
+        {
+            "parent": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+            "child": "5d411955202933b4",
+            "type": "contains"
+        },
+        {
+            "parent": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+            "child": "96137d6f169f8d83",
+            "type": "contains"
+        },
+        {
+            "parent": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+            "child": "c0d46464cb7bf4bb",
+            "type": "contains"
+        }
+    ],
+    "files": [
+        {
+            "id": "3723029c2a117320",
+            "location": {
+                "path": "/.github/workflows/linter.yml"
+            },
+            "metadata": {
+                "mode": 644,
+                "type": "RegularFile",
+                "userID": 0,
+                "groupID": 0,
+                "mimeType": "text/plain",
+                "size": 266
+            },
+            "digests": [
+                {
+                    "algorithm": "sha1",
+                    "value": "af00857258d5198d93df35a9d1e32a066f39d230"
+                },
+                {
+                    "algorithm": "sha256",
+                    "value": "e9c31b9b6cac16550ff42515c29365d7a39abb6b3d9cffdd2427a5c81a1bce53"
+                }
+            ]
+        },
+        {
+            "id": "52d84ed8acc50e55",
+            "location": {
+                "path": "/.github/workflows/tester.yml"
+            },
+            "metadata": {
+                "mode": 644,
+                "type": "RegularFile",
+                "userID": 0,
+                "groupID": 0,
+                "mimeType": "text/plain",
+                "size": 408
+            },
+            "digests": [
+                {
+                    "algorithm": "sha1",
+                    "value": "c0bf6445541148947932adf3e4eb1408b4841214"
+                },
+                {
+                    "algorithm": "sha256",
+                    "value": "437f8138730cfe70882a53da8c9bd9df321aaaea019825e8776176d332a5c6a3"
+                }
+            ]
+        },
+        {
+            "id": "a7252fc1c61dadb3",
+            "location": {
+                "path": "/node_modules/@rollup/rollup-linux-x64-gnu/rollup.linux-x64-gnu.node"
+            },
+            "executable": {
+                "format": "elf",
+                "hasExports": true,
+                "hasEntrypoint": true,
+                "importedLibraries": [
+                    "libgcc_s.so.1",
+                    "librt.so.1",
+                    "libpthread.so.0",
+                    "libm.so.6",
+                    "libc.so.6",
+                    "ld-linux-x86-64.so.2"
+                ],
+                "elfSecurityFeatures": {
+                    "symbolTableStripped": true,
+                    "stackCanary": true,
+                    "nx": true,
+                    "relRO": "full",
+                    "pie": false,
+                    "dso": true,
+                    "safeStack": false
+                }
+            },
+            "unknowns": [
+                "unknowns-labeler: no package identified in executable file"
+            ]
+        },
+        {
+            "id": "fd71c2238fc07657",
+            "location": {
+                "path": "/package-lock.json"
+            },
+            "metadata": {
+                "mode": 644,
+                "type": "RegularFile",
+                "userID": 0,
+                "groupID": 0,
+                "mimeType": "application/json",
+                "size": 65850
+            },
+            "digests": [
+                {
+                    "algorithm": "sha1",
+                    "value": "28f07801efd4b7b87ff91e001003e279eba1cb0d"
+                },
+                {
+                    "algorithm": "sha256",
+                    "value": "069cd9da016ae8d67619c6dfc431c89a199bf4fb33398731f5dde4ab297bb1d5"
+                }
+            ]
+        }
+    ],
+    "source": {
+        "id": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+        "name": ".",
+        "version": "",
+        "type": "directory",
+        "metadata": {
+            "path": "."
+        }
+    },
+    "distro": {},
+    "descriptor": {
+        "name": "syft",
+        "version": "1.44.0",
+        "configuration": {
+            "catalogers": {
+                "requested": {
+                    "default": [
+                        "directory",
+                        "file"
+                    ]
+                },
+                "used": [
+                    "alpm-db-cataloger",
+                    "apk-db-cataloger",
+                    "binary-classifier-cataloger",
+                    "cargo-auditable-binary-cataloger",
+                    "cocoapods-cataloger",
+                    "conan-cataloger",
+                    "conda-meta-cataloger",
+                    "dart-pubspec-cataloger",
+                    "dart-pubspec-lock-cataloger",
+                    "deb-archive-cataloger",
+                    "dotnet-deps-binary-cataloger",
+                    "dotnet-packages-lock-cataloger",
+                    "dpkg-db-cataloger",
+                    "elf-binary-package-cataloger",
+                    "elixir-mix-lock-cataloger",
+                    "erlang-otp-application-cataloger",
+                    "erlang-rebar-lock-cataloger",
+                    "file-content-cataloger",
+                    "file-digest-cataloger",
+                    "file-executable-cataloger",
+                    "file-metadata-cataloger",
+                    "gguf-cataloger",
+                    "github-action-workflow-usage-cataloger",
+                    "github-actions-usage-cataloger",
+                    "go-module-binary-cataloger",
+                    "go-module-file-cataloger",
+                    "graalvm-native-image-cataloger",
+                    "haskell-cataloger",
+                    "homebrew-cataloger",
+                    "java-archive-cataloger",
+                    "java-gradle-lockfile-cataloger",
+                    "java-jvm-cataloger",
+                    "java-pom-cataloger",
+                    "javascript-lock-cataloger",
+                    "linux-kernel-cataloger",
+                    "lua-rock-cataloger",
+                    "nix-cataloger",
+                    "opam-cataloger",
+                    "pe-binary-package-cataloger",
+                    "php-composer-lock-cataloger",
+                    "php-interpreter-cataloger",
+                    "php-pear-serialized-cataloger",
+                    "portage-cataloger",
+                    "python-installed-package-cataloger",
+                    "python-package-cataloger",
+                    "r-package-cataloger",
+                    "rpm-archive-cataloger",
+                    "rpm-db-cataloger",
+                    "ruby-gemfile-cataloger",
+                    "ruby-gemspec-cataloger",
+                    "rust-cargo-lock-cataloger",
+                    "snap-cataloger",
+                    "swift-package-manager-cataloger",
+                    "swipl-pack-cataloger",
+                    "terraform-lock-cataloger",
+                    "wordpress-plugins-cataloger"
+                ]
+            },
+            "data-generation": {
+                "generate-cpes": true
+            },
+            "files": {
+                "content": {
+                    "globs": null,
+                    "skip-files-above-size": 0
+                },
+                "hashers": [
+                    "sha-1",
+                    "sha-256"
+                ],
+                "selection": "owned-by-package"
+            },
+            "licenses": {
+                "coverage": 75,
+                "include-content": "none"
+            },
+            "packages": {
+                "binary": [
+                    "python-binary",
+                    "python-binary-lib",
+                    "pypy-binary-lib",
+                    "go-binary",
+                    "julia-binary",
+                    "helm",
+                    "redis-binary",
+                    "valkey-binary",
+                    "nodejs-binary",
+                    "busybox-binary",
+                    "util-linux-binary",
+                    "haproxy-binary",
+                    "perl-binary",
+                    "php-composer-binary",
+                    "httpd-binary",
+                    "memcached-binary",
+                    "traefik-binary",
+                    "arangodb-binary",
+                    "postgresql-binary",
+                    "mysql-binary",
+                    "mysql-binary",
+                    "mysql-binary",
+                    "xtrabackup-binary",
+                    "mariadb-binary",
+                    "rust-standard-library-linux",
+                    "rust-standard-library-macos",
+                    "ruby-binary",
+                    "erlang-binary",
+                    "erlang-alpine-binary",
+                    "erlang-library",
+                    "swipl-binary",
+                    "dart-binary",
+                    "deno-binary",
+                    "haskell-ghc-binary",
+                    "haskell-cabal-binary",
+                    "haskell-stack-binary",
+                    "consul-binary",
+                    "hashicorp-vault-binary",
+                    "nginx-binary",
+                    "bash-binary",
+                    "openssl-binary",
+                    "openldap-search-binary",
+                    "qt-qtbase-lib",
+                    "gcc-binary",
+                    "fluent-bit-binary",
+                    "wordpress-cli-binary",
+                    "curl-binary",
+                    "lighttpd-binary",
+                    "proftpd-binary",
+                    "zstd-binary",
+                    "xz-binary",
+                    "gzip-binary",
+                    "sqlcipher-binary",
+                    "jq-binary",
+                    "chrome-binary",
+                    "ffmpeg-binary",
+                    "ffmpeg-library",
+                    "ffmpeg-library",
+                    "elixir-binary",
+                    "elixir-library",
+                    "istio-binary",
+                    "istio-binary",
+                    "grafana-binary",
+                    "grafana-binary",
+                    "envoy-binary",
+                    "mongodb-binary",
+                    "java-binary",
+                    "java-jdb-binary"
+                ],
+                "dotnet": {
+                    "dep-packages-must-claim-dll": true,
+                    "dep-packages-must-have-dll": false,
+                    "exclude-project-references": true,
+                    "propagate-dll-claims-to-parents": true,
+                    "relax-dll-claims-when-bundling-detected": true
+                },
+                "golang": {
+                    "local-mod-cache-dir": "/root/go/pkg/mod",
+                    "local-vendor-dir": "",
+                    "main-module-version": {
+                        "from-build-settings": true,
+                        "from-contents": false,
+                        "from-ld-flags": true
+                    },
+                    "proxies": [
+                        "https://proxy.golang.org",
+                        "direct"
+                    ],
+                    "search-local-mod-cache-licenses": false,
+                    "search-local-vendor-licenses": false,
+                    "search-remote-licenses": false,
+                    "use-packages-lib": true
+                },
+                "java-archive": {
+                    "include-indexed-archives": true,
+                    "include-unindexed-archives": false,
+                    "maven-base-url": "https://repo1.maven.org/maven2",
+                    "maven-localrepository-dir": "/root/.m2/repository",
+                    "max-parent-recursive-depth": 0,
+                    "resolve-transitive-dependencies": false,
+                    "use-maven-localrepository": false,
+                    "use-network": false
+                },
+                "javascript": {
+                    "include-dev-dependencies": false,
+                    "npm-base-url": "https://registry.npmjs.org",
+                    "search-remote-licenses": false
+                },
+                "linux-kernel": {
+                    "catalog-modules": true
+                },
+                "nix": {
+                    "capture-owned-files": false
+                },
+                "python": {
+                    "guess-unpinned-requirements": false,
+                    "pypi-base-url": "https://pypi.org/pypi",
+                    "search-remote-licenses": false
+                }
+            },
+            "relationships": {
+                "exclude-binary-packages-with-file-ownership-overlap": true,
+                "package-file-ownership": true,
+                "package-file-ownership-overlap": true
+            },
+            "search": {
+                "scope": "squashed"
+            }
+        }
+    },
+    "schema": {
+        "version": "16.1.3",
+        "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-16.1.3.json"
+    }
+}
