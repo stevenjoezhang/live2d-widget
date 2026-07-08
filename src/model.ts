@@ -266,8 +266,9 @@ class ModelManager {
       this.currentModelVersion = version;
     } catch (err) {
       console.error('loadLive2D failed', err);
+    } finally {
+      this.loading = false;
     }
-    this.loading = false;
   }
 
   async loadTextureCache(modelName: string): Promise<any[]> {

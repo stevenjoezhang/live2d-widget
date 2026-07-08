@@ -307,7 +307,7 @@ class LAppModel extends L2DBaseModel {
       this.physics.updateParam(this.live2DModel);
     }
 
-    if (this.lipSync == null) {
+    if (this.lipSync) {
       this.live2DModel.setParamFloat('PARAM_MOUTH_OPEN_Y', this.lipSyncValue);
     }
 
@@ -323,6 +323,7 @@ class LAppModel extends L2DBaseModel {
     for (const name in this.expressions) {
       tmp.push(name);
     }
+    if (tmp.length === 0) return;
 
     const no = Math.floor(Math.random() * tmp.length);
 
@@ -418,6 +419,7 @@ class LAppModel extends L2DBaseModel {
   }
 
   hitTest(id: string, testX: number, testY: number): boolean {
+    if (!this.modelSetting) return false;
     const len = this.modelSetting.getHitAreaNum();
     if (len == 0) {
       const hitAreasCustom = this.modelSetting.getHitAreaCustom();
