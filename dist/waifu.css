@@ -76,6 +76,21 @@
 	color: #0099cc;
 }
 
+#waifu-ask {
+	background: none;
+	border: 0;
+	border-bottom: 1px solid rgba(224, 186, 140, .62);
+	color: inherit;
+	font: inherit;
+	outline: 0;
+	padding: 0;
+	width: 100%;
+}
+
+#waifu-tips:not(.waifu-tips-active) #waifu-ask {
+	visibility: hidden;
+}
+
 #live2d {
 	cursor: grab;
 	height: 300px;

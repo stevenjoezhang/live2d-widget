@@ -43,6 +43,9 @@ interface Tips {
     photo: string;
     goodbye: string;
     hitokoto: string;
+    ask?: string;
+    askWaiting?: string;
+    askFail?: string;
     welcome: string;
     referrer: string;
     hoverBody: string | string[];

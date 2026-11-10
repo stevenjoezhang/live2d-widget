@@ -8,6 +8,7 @@ import { loadExternalResource, randomOtherOption } from './utils.js';
 import type Cubism2Model from './cubism2/index.js';
 import type { AppDelegate as Cubism5Model } from './cubism5/index.js';
 import logger, { LogLevel } from './logger.js';
+import type { AskConfig } from './ask.js';
 
 interface ModelListCDN {
   messages: string[];
@@ -56,6 +57,12 @@ interface Config {
    * @type {string[] | undefined}
    */
   tools?: string[];
+  /**
+   * Configuration of the "ask" tool, which answers questions about the current page.
+   * The tool is only available when a key is set.
+   * @type {AskConfig | undefined}
+   */
+  ask?: AskConfig;
   /**
    * Support for dragging the waifu.
    * @type {boolean | undefined}

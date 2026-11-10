@@ -51,9 +51,32 @@
 | `cubism5Path` | `string` | `https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js` | Cubism 5 Core 路径 |
 | `modelId` | `number` | `0` | 默认模型 id |
 | `tools` | `string[]` | 见 `autoload.js` | 加载的小工具按钮 |
+| `ask` | `object` | - | 让访客向看板娘提问当前页面的内容，见[页面问答](#页面问答) |
 | `drag` | `boolean` | `false` | 支持拖动看板娘 |
 | `showToggleAfterQuit` | `boolean` | `true` | 点击关闭后是否显示重新唤起按钮；若设为 `false`，则会永久关闭，直到清除本地存储 |
 | `logLevel` | `string` | `error` | 日志等级，支持 `error`，`warn`，`info`，`trace` |
+
+### 页面问答
+
+设置 `ask` 选项后，访客可以向看板娘提问当前页面的内容：点击问号按钮，在对话框里输入问题，回答会显示在对话框中。启用方法是设置 key，并把 `'ask'` 加入 `tools`。工具栏放得下七个按钮，建议用它替换一个不需要的按钮。
+
+```js
+initWidget({
+  // ...
+  tools: ['ask', 'hitokoto', 'switch-model', 'switch-texture', 'photo', 'info', 'quit'],
+  ask: { key: 'your-site-key' },
+});
+```
+
+| 选项 | 类型 | 默认值 | 说明 |
+| - | - | - | - |
+| `key` | `string` | - | 站点 key，必填 |
+| `endpoint` | `string` | `https://onetagai.com/v1/ask` | 回答问题的接口地址 |
+| `system` | `string` | - | 对回答的要求，例如看板娘的人设 |
+
+默认由 [OneTag AI](https://onetagai.com) 回答。它的 key 是可以公开的站点 key，有用量硬上限，本来就是给前端代码用的：免费 key 用完即停，不会产生费用。问题和页面文字会发送到该接口。如果想用自己的后端，把 `endpoint` 设为接受同样 JSON（`{ key, prompt, system, input }`）并返回 `{ text }` 的地址即可。
+
+输入框提示、等待和失败时的文案对应 `waifu-tips.json` 中 `message` 下的 `ask`、`askWaiting`、`askFail`。
 
 ## 模型仓库
 

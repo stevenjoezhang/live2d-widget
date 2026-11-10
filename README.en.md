@@ -51,9 +51,32 @@ You can refer to the source code of `dist/autoload.js` to see the available conf
 | `cubism5Path` | `string` | `https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js` | Path to Cubism 5 Core |
 | `modelId` | `number` | `0` | Default model id |
 | `tools` | `string[]` | see `autoload.js` | Buttons of the loaded tools |
+| `ask` | `object` | - | Let visitors ask the widget about the current page, see [Ask](#ask) |
 | `drag` | `boolean` | `false` | Make the widget draggable |
 | `showToggleAfterQuit` | `boolean` | `true` | Whether to show the toggle button after quitting; if `false`, quitting permanently disables the widget until local storage is cleared |
 | `logLevel` | `string` | `error` | Log level: `error`, `warn`, `info`, `trace` |
+
+### Ask
+
+With the `ask` option, visitors can ask the widget about the page they are reading: a question mark button opens an input in the dialog box, and the answer is shown there. To enable it, set a key and add `'ask'` to `tools`. The tool column has room for seven buttons, so put it in place of one you do not need.
+
+```js
+initWidget({
+  // ...
+  tools: ['ask', 'hitokoto', 'switch-model', 'switch-texture', 'photo', 'info', 'quit'],
+  ask: { key: 'your-site-key' },
+});
+```
+
+| Option | Type | Default Value | Description |
+| ------ | ---- | ------------- | ----------- |
+| `key` | `string` | - | Site key, required |
+| `endpoint` | `string` | `https://onetagai.com/v1/ask` | Endpoint that answers the questions |
+| `system` | `string` | - | Instructions for the answer, e.g. the persona of your character |
+
+By default the questions are answered by [OneTag AI](https://onetagai.com). Its key is a public site key with a hard usage cap, made to be used in front-end code: a free key stops at the cap and nothing is billed. The question and the text of the page are sent to the endpoint. To use your own backend instead, set `endpoint` to a URL that accepts the same JSON (`{ key, prompt, system, input }`) and returns `{ text }`.
+
+The texts of the input and of the waiting and failure messages are `ask`, `askWaiting` and `askFail` in the `message` section of `waifu-tips.json`.
 
 ## Model Repository
 

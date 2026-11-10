@@ -5,6 +5,7 @@
 
 import {
   fa_comment,
+  fa_circle_question,
   fa_paper_plane,
   fa_street_view,
   fa_shirt,
@@ -13,6 +14,7 @@ import {
   fa_xmark
 } from './icons.js';
 import { showMessage, i18n } from './message.js';
+import { showAsk } from './ask.js';
 import type { Config, ModelManager } from './model.js';
 import type { Tips } from './widget.js';
 
@@ -142,11 +144,19 @@ class ToolsManager {
         }
       }
     };
+    const { ask } = config;
+    if (ask?.key) {
+      this.tools.ask = {
+        icon: fa_circle_question,
+        callback: () => showAsk(ask, tips)
+      };
+    }
   }
 
   registerTools() {
     if (!Array.isArray(this.config.tools)) {
-      this.config.tools = Object.keys(this.tools);
+      // The ask tool is opt-in and has to be listed explicitly.
+      this.config.tools = Object.keys(this.tools).filter(name => name !== 'ask');
     }
     for (const toolName of this.config.tools) {
       if (this.tools[toolName]) {
